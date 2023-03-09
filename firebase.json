@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/amitnginx",
+    "public": "dist/amit2.0",
     "ignore": [
       "firebase.json",
       "**/.*",
