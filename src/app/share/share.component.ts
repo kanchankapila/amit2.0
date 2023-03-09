@@ -1231,7 +1231,7 @@ else if(this.fnomsg.includes("Short Buildup")){
    
    
   if(currentDateTime === '03:40'){
-     this.http.get('https://amitkapila.netlify.app/.netlify/functions/tlrefresh').subscribe(data5 => {
+     this.http.get('https://stockinsights.netlify.app/.netlify/functions/tlrefresh').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });

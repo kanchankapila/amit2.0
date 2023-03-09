@@ -13,7 +13,7 @@ export class DataapiService {
 
         // baseurl = "http://localhost:3000/api"
       // baseurl = "https://amitv2.herokuapp.com/api"
-      baseurl = "https://amitkapila.netlify.app/"
+      baseurl = "https://stockinsights.netlify.app/"
 
 
   stock: any;
@@ -44,42 +44,42 @@ export class DataapiService {
     return this.http.post(this.baseurl + '/nsepostdata2',eqsymbol1) 
   }
   getnsedataniftyoi() {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/node-fetch1')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/node-fetch1')
   }
   getnsedatabniftyoi() {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/node-fetch2')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/node-fetch2')
   }
   // getnteodscreeners(ntoptions) {
   //   return this.http.post(this.baseurl + '/nteodscreeners',ntoptions)
   // console.log(ntoptions)
   // }
   getopstrastockpcr(eqsymbol) {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/opstrafetchstockpcr?eqsymbol='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/opstrafetchstockpcr?eqsymbol='+eqsymbol)
   }
   getnteodscreeners(ntoptions) {
     
-    return this.http.post('https://amitkapila.netlify.app/.netlify/functions/ntscreeners',ntoptions)
+    return this.http.post('https://stockinsights.netlify.app/.netlify/functions/ntscreeners',ntoptions)
   
   }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/news?bqnames='+bqnames+'&dateday5='+dateday5+'&datetoday='+datetoday)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/news?bqnames='+bqnames+'&dateday5='+dateday5+'&datetoday='+datetoday)
   
   }
   getetstockscorescreeners(selectedValue,filter,order) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/etstockscorescreeners?selectedvalue='+selectedValue+'&filter='+filter+'&order='+order)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/etstockscorescreeners?selectedvalue='+selectedValue+'&filter='+filter+'&order='+order)
   
   }
   getetpredefinedfilters(selectedValue,filter,order) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/etpredefinedFilters?selectedvalue='+selectedValue+'&filter='+filter+'&order='+order)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/etpredefinedFilters?selectedvalue='+selectedValue+'&filter='+filter+'&order='+order)
   
   }
  
   gettlindexparams(indexid,duration) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/trendlyneindex?indexid='+indexid+'&duration='+duration)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/trendlyneindex?indexid='+indexid+'&duration='+duration)
   
   }
   getkite1(timeframe,eqsymbol){
@@ -87,26 +87,26 @@ export class DataapiService {
   }
   getkotakhealthscore(stock) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/KotakHealthScoreRead?stock='+stock)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/KotakHealthScoreRead?stock='+stock)
     
   }
   getmongotest(eqsymbol) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/mongotest?eqsymbol='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/mongotest?eqsymbol='+eqsymbol)
     
   }
   getopstrarefresh() {
    
-    return this.http.get('http://amitkapila.netlify.app/.netlify/functions/opstrarefresh')
+    return this.http.get('http://stockinsights.netlify.app/.netlify/functions/opstrarefresh')
     
   }
   getkotaksectorview(sector) {
     
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/KotakSectorRead?sector='+sector)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/KotakSectorRead?sector='+sector)
   }
   
   test(){
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/node-fetch') 
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/node-fetch') 
   }
   getkitestockreports(){
     return this.http.get(this.baseurl + '/kitestockreports')
@@ -135,13 +135,13 @@ export class DataapiService {
   }
   
   getntstock1yr(eqsymbol) {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/ntstock1yr?eqsymbol='+eqsymbol) 
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntstock1yr?eqsymbol='+eqsymbol) 
   }
   getetindicesdata() {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/etallindices') 
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/etallindices') 
   }
   getetallsectorsdata() {
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/etallsectors') 
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/etallsectors') 
   }
  
   nsedataadvdec(){
@@ -252,34 +252,34 @@ export class DataapiService {
  
   getntstockpcrdetails(eqsymbol) {
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/ntstockpcrdetails?eqsymbol='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntstockpcrdetails?eqsymbol='+eqsymbol)
   }
   getntstockdetails(eqsymbol) {
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/ntstockdetails?eqsymbol='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntstockdetails?eqsymbol='+eqsymbol)
   }
   getmmdata(stockid){
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/mmdata?stockid='+stockid)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/mmdata?stockid='+stockid)
   }
   
   
 
   refreshtl() {
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/tlrefresh')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/tlrefresh')
   }
   getntniftypcrdetails() {
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/ntniftypcr')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntniftypcr')
   }
   getntbankniftypcrdetails() {
  
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/ntbankniftypcr')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntbankniftypcr')
   }
   
   getntglobal(){
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/globalstocks')
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/globalstocks')
   }
 
   
@@ -290,16 +290,16 @@ export class DataapiService {
   }
   gettrendlyne3fetch(tlid,tlname,eqsymbol) {
 
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/chrometrendlyne?tlid='+tlid+'&tlname='+tlname+'&eqsymbol='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/chrometrendlyne?tlid='+tlid+'&tlname='+tlname+'&eqsymbol='+eqsymbol)
   }
  
   gettrendlyne2fetch(tlid) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/trendlyne2?tlid='+tlid)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/trendlyne2?tlid='+tlid)
   }
   getopstrafetchstockpcr(eqsymbol) {
    
-    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/opstrafetchstockpcr?stock='+eqsymbol)
+    return this.http.get('https://stockinsights.netlify.app/.netlify/functions/opstrafetchstockpcr?stock='+eqsymbol)
   }
  
 
