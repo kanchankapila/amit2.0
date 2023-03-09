@@ -1,0 +1,22 @@
+[build]
+command="npm run build"
+
+base="/"
+
+[[redirects]]
+from="/*"
+to="/index.html"
+status=200
+
+[[plugins]]
+package = "netlify-plugin-chromium"
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[edge_functions]]
+function = "hello"
+path = "/test"

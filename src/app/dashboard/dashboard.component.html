@@ -1,0 +1,76 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="col-lg-13 col-xs-6 grid-margin stretch-card">
+    <div class="content card">
+      
+      <h4 class="mb-4">Global Markets</h4>
+      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+        <div fxFlex="11" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket trackBy: trackByFunction1">
+      <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+      [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
+                'bg-gradient-bear':0 > tile.text3 ,
+                 'bg-gradient-warning':tile.text3 == 0}">&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text1}}<br>&nbsp;{{tile.text3}}%<br>&nbsp;{{tile.text4}}
+      </mat-card>
+     
+    </div>
+  </div>
+  </div>
+  </div>
+<div fxLayout="row" fxLayout.xs="column" >
+    
+    
+       
+<div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [xaxis]="chartOptions.xaxis"
+      [stroke]="chartOptions.stroke"
+      [fill]="chartOptions.fill"
+      [yaxis]="chartOptions.yaxis"
+      [title]="chartOptions.title"
+      [tooltip]="chartOptions.tooltip"
+      
+    ></apx-chart>
+  </div>
+
+
+  <div id="chart2">
+    <apx-chart
+      [series]="chartOptions2.series"
+      [chart]="chartOptions2.chart"
+      [labels]="chartOptions2.labels"
+      [fill]="chartOptions2.fill"
+      [responsive]="chartOptions2.responsive"
+    ></apx-chart>
+  </div>
+
+<div id="chart1">
+    <apx-chart
+      [series]="chartOptions1.series"
+      [chart]="chartOptions1.chart"
+      [dataLabels]="chartOptions1.dataLabels"
+      [plotOptions]="chartOptions1.plotOptions"
+      [xaxis]="chartOptions1.xaxis"
+      [stroke]="chartOptions1.stroke"
+      [fill]="chartOptions1.fill"
+      [yaxis]="chartOptions1.yaxis"
+      [title]="chartOptions1.title"
+      [tooltip]="chartOptions1.tooltip"
+    
+    ></apx-chart>
+
+
+</div>
+
+</div>
+
+

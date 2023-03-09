@@ -1,0 +1,446 @@
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="col-lg-13 col-xs-6 grid-margin stretch-card">
+  <div class="content card">
+    
+    <h4 class="mb-4">Global Markets</h4>
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="11" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket trackBy: trackByFunction1">
+    <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+    [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
+              'bg-gradient-bear':0 > tile.text3 ,
+               'bg-gradient-warning':tile.text3 == 0}">&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text1}}<br>&nbsp;{{tile.text3}}%<br>&nbsp;{{tile.text4}}
+    </mat-card>
+   
+  </div>
+</div>
+</div>
+</div>
+<div fxLayout="row" fxLayout.xs="column" >
+
+  <div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body" >
+     
+        <div class="table-responsive">
+      
+         
+          <canvas baseChart  [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType" [options]="advdecChartOptions"></canvas>
+  
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+    <div class="card">
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions5.series"
+    [chart]="chartOptions5.chart"
+    [dataLabels]="chartOptions5.dataLabels"
+    [plotOptions]="chartOptions5.plotOptions"
+    [title]="chartOptions5.title"
+    [legend]="chartOptions5.legend"
+  ></apx-chart>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+  <div class="card">
+<div class="chart2" id="chart2">
+  <apx-chart
+    [series]="chartOptions2.series"
+    [chart]="chartOptions2.chart"
+    [labels]="chartOptions2.labels"
+    [fill]="chartOptions2.fill"
+    [responsive]="chartOptions2.responsive"
+  ></apx-chart>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div fxLayout="row" fxLayout.xs="column" >
+  
+  
+  <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+    <div class="card">   
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions6.series"
+    [chart]="chartOptions6.chart"
+    [dataLabels]="chartOptions6.dataLabels"
+    [plotOptions]="chartOptions6.plotOptions"
+    [xaxis]="chartOptions6.xaxis"
+    [stroke]="chartOptions6.stroke"
+    [fill]="chartOptions6.fill"
+    [yaxis]="chartOptions6.yaxis"
+    [title]="chartOptions6.title"
+    [tooltip]="chartOptions6.tooltip"
+    
+  ></apx-chart>
+</div>
+</div>
+</div>
+<div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+  <div class="card">
+<div class="chart1"  id="chart1">
+  <apx-chart
+    [series]="chartOptions1.series"
+    [chart]="chartOptions1.chart"
+    [dataLabels]="chartOptions1.dataLabels"
+    [plotOptions]="chartOptions1.plotOptions"
+    [xaxis]="chartOptions1.xaxis"
+    [stroke]="chartOptions1.stroke"
+    [fill]="chartOptions1.fill"
+    [yaxis]="chartOptions1.yaxis"
+    [title]="chartOptions1.title"
+    [tooltip]="chartOptions1.tooltip"
+  
+  ></apx-chart>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="moversvolume" label="Active by Volume" [(ngModel)]="selectedValue" (onClick)="onClick6($event)" ></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="moversvalue" label="Active by Value" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="onlybuyer" label="Only Buyers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="onlyseller" label="Only Sellers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="fallfromhigh" label="Fall from High" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="recoveryfromlow" label="Rise from Low" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+
+  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+     
+   <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of screener trackBy: trackByFunction3">
+       
+  <div class="scene">
+    <div class="card">
+      <div class="card__face card__face--front text-blue type1-regular textcenter grid-margin stretch-card"
+      [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+      'bg-gradient-bear':0 > tile.text4 ,
+      'bg-gradient-warning':tile.text4 === 0}">{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;({{tile.text4}})%<br>Volume:{{tile.text11}}K
+      <div style="text-align: center;">
+      </div>
+          </div>
+          <div class="card__face card__face--back text-blue type1-regular  textcenter grid-margin stretch-card"
+          [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+          'bg-gradient-bear':0 > tile.text4 ,
+          'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
+          <div style="text-align: center;">
+          </div>   
+        </div>
+    
+    </div>
+    
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <p>Pre-Defined Filters</p>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="VALUE_STOCKS,marketCapValue,desc" label="Value Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_DIVIDEND_YIELD,dividendYield,desc" label="HighDividendYield" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="MID_CAP_GROWTH_STOCKS,marketCapValue,desc" label="Mid-cap Growth Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="ATTRACTIVE_BLUECHIPS,marketCapValue,desc" label="Attractive Bluechips" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="FII_BUYING,percentageScrrFiiChange,desc" label="Stocks with FII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_BUYING,percentageScrrDiiChange,desc" label="Stocks with DII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="FII_SELLING,percentageScrrFiiChange,desc" label="Stocks with FII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="GARP,marketCapValue,desc" label="Growth at Reasonable Price" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+
+  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+     
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of pdstocks trackBy: trackByFunction2">
+       
+  <div class="scene">
+    <div class="card">
+      <div class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
+      >{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+      <div style="text-align: center;">
+      </div>
+          </div>
+          <div class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular  textcenter grid-margin stretch-card"
+          >Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+          <div style="text-align: center;">
+          </div>
+         </div>
+    
+    </div>
+    
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <p>Stock Score Filters</p>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_DOWNGRADE,avgScoreChange1m,desc" label="Score Downgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_UPGRADE,rvScore,desc" label="Score Upgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="TOP_SCORE_COMPANIES,analystScore,desc" label="Top Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_IMPROVEMENT,avgScoreChange1m,desc" label="Score Improvement" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_UPSIDE_POTENTIAL,rvScore,desc" label="High Upside Potential" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="LOW_SCORE_COMPANIES,rvScore,desc" label="Low Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_DOWNSIDE_STOCKS,rvScore,desc" label="High Downside Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="STRONG_MOMENTUM_STOCKS,rvScore,desc" label="Strong Momentum Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+ 
+  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+     
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of ssstocks trackBy: trackByFunction4 ">
+       
+  <div class="scene">
+    <div class="card">
+      <div class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
+      >{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+      <div style="text-align: center;">
+      </div>
+          </div>
+          <div class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular  textcenter grid-margin stretch-card"
+          >Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+          <div style="text-align: center;">
+          </div>
+         </div>
+    
+    </div>
+    
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+     
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of screenerhourly trackBy: trackByFunction3">
+       
+  <div class="scene">
+      <div class="card">
+        <div class="card__face card__face--front text-blue type1-regular textcenter grid-margin stretch-card"
+        [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+        'bg-gradient-bear':0 > tile.text4 ,
+        'bg-gradient-warning':tile.text4 === 0}">{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;({{tile.text4}})%<br><br>Above from Low:{{tile.text7}}({{tile.text8}})%<br>Low from High:{{tile.text9}}({{tile.text10}})%<br>Volume:{{tile.text11}}K
+          <div style="text-align: center;">
+     </div>
+        </div>
+            <div class="card__face card__face--back text-blue type1-regular  textcenter grid-margin stretch-card"
+            [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+            'bg-gradient-bear':0 > tile.text4 ,
+            'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
+              <div style="text-align: center;">
+     </div>
+            </div>
+      
+      </div>
+      
+    </div>
+  
+  </div>
+  </div>
+  </div>
+  </div> 
+   -->
+
+
+  <div fxLayout="row" fxLayout.xs="column">
+    
+  <div class="page-content " >
+    <h2 style="color: green">Top Gainers</h2>
+    <div class="bg-gradient-bull shadow-sm p-3">
+                      
+      <p-radioButton name="groupname" value="gainers,intraday,desc,1d" label="1 Day" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="gainers,7days,desc,1w" label="1 Week" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="gainers,1month,desc,1m" label="1 Month" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="gainers,3month,desc,3m" label="3 Month" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="gainers,6month,desc,6m" label="6 Month" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="gainers,1year,desc,1y" label="1 year" [(ngModel)]="selectedValueGainers" (onClick)="onClick($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,09-00,10-00" label="9-10" [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,10-00,11-00" label="10-11" [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,11-00,12-00" label="11-12"  [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,12-00,13-00" label="12-13"  [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,13-00,14-00" label="13-14" [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,14-00,15-00" label="14-15" [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers,15-00,16-00" label="15-16"  [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+      <p-radioButton name="groupname" value="hourlygainers,desc,gainers" label="Current Hour"  [(ngModel)]="selectedValueGainers" (onClick)="onClick1($event)"></p-radioButton>
+   
+    </div>
+   
+  
+    <p-table
+    
+    [responsive]="true"
+      [value]="tableDataGainers"
+      [scrollable]="true"
+      responsiveLayout="stack" 
+      scrollWidth="flex"
+      scrollHeight="flex"
+      >
+  
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="text1" >Company Name <p-sortIcon field="text1"></p-sortIcon>
+             <p-columnFilter type="text" field="text1" display="menu"></p-columnFilter> 
+          </th>
+          <th pSortableColumn="text2" >Current Price <p-sortIcon field="text2"></p-sortIcon>
+          </th>
+          <th pSortableColumn="text3" >open <p-sortIcon field="text3"></p-sortIcon></th>
+          <th pSortableColumn="text4" >Change% <p-sortIcon field="text4"></p-sortIcon></th>
+          <th pSortableColumn="text5" >52 high <p-sortIcon field="text5"></p-sortIcon></th>
+          <th pSortableColumn="text6" >52 low <p-sortIcon field="text6"></p-sortIcon></th>
+          <th pSortableColumn="text11">Volume <p-sortIcon field="text11"></p-sortIcon></th>
+          
+        </tr>
+      </ng-template>
+  
+      <ng-template
+        pTemplate="body"
+        let-rowData="rowData"
+        let-Gainers sortMode="multiple"
+        >
+        
+        <tr>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text1 }}
+          </td>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text2 }}
+          </td>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text3 }}
+          </td>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text4 }}%
+          </td>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text5 }}
+          </td>
+          <td class="bg-gradient-bull">
+            {{ Gainers.text6 }}
+          </td>
+         
+          <td class="bg-gradient-bull">
+            {{ Gainers.text11 }}K
+          </td>
+         
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="table-container ">
+
+  <div class="page-content" >
+    <h2 style="color: red">Top Losers</h2>
+  <div class="bg-gradient-bear shadow-sm p-3">
+                       
+    <p-radioButton name="groupname" value="losers,intraday,asc,1d" label="1 Day" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="losers,7days,asc,1w" label="1 Week" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="losers,1month,asc,1m" label="1 Month" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="losers,3month,asc,3m" label="3 Month" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="losers,6month,asc,6m" label="6 Month" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="losers,1year,asc,1y" label="1 year" [(ngModel)]="selectedValueLosers" (onClick)="onClick2($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,09-00,10-00" label="9-10" [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,10-00,11-00" label="10-11" [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,11-00,12-00" label="11-12"  [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,12-00,13-00" label="12-13"  [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,13-00,14-00" label="13-14" [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,14-00,15-00" label="14-15" [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers,15-00,16-00" label="15-16"  [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+    <p-radioButton name="groupname" value="hourlylosers,asc,losers" label="Current Hour"  [(ngModel)]="selectedValueLosers" (onClick)="onClick3($event)"></p-radioButton>
+  
+  </div>
+
+  
+  <p-table
+
+  [value]="tableDataLosers"
+  [scrollable]="true"
+  scrollWidth="flex"
+  scrollHeight="flex"
+  >
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="text1" >Company Name <p-sortIcon field="text1"></p-sortIcon>
+        <p-columnFilter type="text" field="text1" display="menu"></p-columnFilter> 
+      </th>
+      <th pSortableColumn="text2" >Current Price <p-sortIcon field="text2"></p-sortIcon>
+      </th>
+      <th pSortableColumn="text3" >open <p-sortIcon field="text3"></p-sortIcon></th>
+      <th pSortableColumn="text4" >Change% <p-sortIcon field="text4"></p-sortIcon></th>
+      <th pSortableColumn="text5" >52 high <p-sortIcon field="text5"></p-sortIcon></th>
+      <th pSortableColumn="text6" >52 low <p-sortIcon field="text6"></p-sortIcon></th>
+      <th pSortableColumn="text11" >Volume <p-sortIcon field="text11"></p-sortIcon></th>
+      
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-rowData="rowData"
+    let-Losers sortMode="multiple">
+    
+    <tr>
+      <td class="bg-gradient-bear">
+        {{ Losers.text1 }}
+      </td>
+      <td class="bg-gradient-bear">
+        {{ Losers.text2 }}
+      </td>
+      <td class="bg-gradient-bear">
+        {{ Losers.text3 }}
+      </td>
+      <td class="bg-gradient-bear">
+        {{ Losers.text4 }}%
+      </td>
+      <td class="bg-gradient-bear">
+        {{ Losers.text5 }}
+      </td>
+      <td class="bg-gradient-bear">
+        {{ Losers.text6 }}
+      </td>
+     
+      <td class="bg-gradient-bear">
+        {{ Losers.text11 }}K
+      </td>
+     
+    </tr>
+  </ng-template>
+</p-table>
+
+</div>
+</div>
+</div>
+
