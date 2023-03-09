@@ -1,0 +1,219 @@
+.scene {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  perspective: 800px;
+
+  .card {
+    position: relative;
+    width: 180px;
+    height: 150px;
+    color: white;
+    // cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    text-align:center;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+
+    &:hover {
+      transform: rotateY(0.5turn);
+    }
+
+    .card__face {
+      position: absolute;
+      
+      width: 100%;
+      height: 100%;
+     
+      text-align:center;
+      border-radius: 3px;
+      backface-visibility: hidden;
+      transition: 1s ease-in-out;
+      // -webkit-box-reflect: below 0
+        // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+
+      img {
+        width: 240px;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      &--back {
+        transform: rotateY(0.5turn);
+      }
+    }
+  }
+}
+@media (max-width: 320px) {
+.scene {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  perspective: 800px;
+
+  .card {
+    position: relative;
+    width: 75px;
+    height: 90px;
+    color: white;
+    // cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+
+    &:hover {
+      transform: rotateY(0.5turn);
+    }
+
+    .card__face {
+      position: absolute;
+      
+      width: 100%;
+      height: 100%;
+     
+      text-align:center;
+      border-radius: 3px;
+      backface-visibility: hidden;
+      transition: 1s ease-in-out;
+      // -webkit-box-reflect: below 0
+        // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+
+      img {
+        width: 240px;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      &--back {
+        transform: rotateY(0.5turn);
+      }
+    }
+  }
+}}
+.textcenter{
+  text-align: center;
+  
+}
+.mat-checkbox .mat-checkbox-frame {
+  transform: scale(2);
+}
+
+.mat-checkbox-checked .mat-checkbox-background {
+  transform: scale(2);
+}
+mat-checkbox ::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;}
+.InsideContent1 {
+    display: block;
+  }
+.InsideContent{
+    display:flex;
+    align-items: flex-start;
+  }
+  .mat-checkbox-layout { white-space: normal !important; }
+  .cardbear1{
+    width:200px;
+    height:200px;
+    margin-right:10px;
+    text-align:center;
+    border-radius:15%;
+  }
+  .cardbear{
+    width:auto;
+    height:auto;
+    margin-right:5px;
+    text-align:center;
+    
+  }
+  .mat-checkbox .mat-checkbox-frame {
+    transform: scale(6);
+}
+  .cardbear2{
+    width:auto;
+    height:auto;
+    margin-right:5px;
+    text-align:center;
+    
+  }
+  .cardbear3{
+    width:auto;
+    height:auto;
+    margin-right:5px;
+    text-align:center;
+    
+  }
+  @media(max-width:320px){
+    :host ::ng-deep .mat-checkbox .mat-checkbox-inner-container {
+      width: 30px;
+      height: 30px;
+  }
+    :host ::ng-deep .pButton {
+      width: 1rem;
+      font-size: 1px;
+    }
+    :host ::ng-deep .btn {
+      width: 10rem;
+      font-size: 10px;
+    }
+    :host ::ng-deep .btn1 {
+      width: 3rem;
+      font-size: 5px;
+    }
+    
+    :host ::ng-deep .p-dropdown {
+      width: 10rem;
+      
+    }
+    :host ::ng-deep .cardbear {
+      width: auto;
+      height:auto;
+      font-size: xx-small;
+      
+    }
+    :host ::ng-deep .cardbear3 {
+      width: auto;
+      height:auto;
+      font-size: xx-small;
+      
+    }
+    :host ::ng-deep .cardbear2 {
+      width: auto;
+      height:auto;
+      font-size: xx-small;
+      
+    }}
+
+    .poster {
+      height:200px;
+      width:133px;
+      padding-bottom:40px;
+    }
+    
+    .block {
+      
+      width: auto;
+      height:auto;
+      margin-bottom:2px;
+      margin-right:2px;
+      font-size:x-small;
+    }
+    
+    .tan {
+      background-color: tan;
+    }
+    .brown {
+      background-color: brown;
+    }
+    .grey {
+      background-color: grey;
+    }
+    .cornflowerblue {
+      background-color: cornflowerblue;
+    }
+    
+    .sample {
+      font-size: 10px;
+      color:red;
+      margin-bottom:2px;
+    }

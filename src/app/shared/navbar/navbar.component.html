@@ -1,0 +1,180 @@
+
+
+<nav class="navbar py-8 default-layout-navbar col-md-13 col-xs-3  p-0 fixed-top d-flex flex-row">
+  
+ 
+  <div class="navbar-menu-wrapper d-flex align-items-stretch">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="toggleSidebar()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+    
+      
+    <div class="InsideContent1">
+      <div class="InsideContent">
+    <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true" [itemSize]="31"
+    [filter]="true" (onChange)='selectEvent(item)'>
+    
+     </p-dropdown>  
+     <button pButton type="button" (click)="navigatescreeners()" icon="pi pi-arrow-up" label="Screeners" class="p-button-raised p-button-success p-button-outlined pButton"></button>
+     <button pButton type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down" label="Links" class="p-button-raised p-button-danger p-button-outlined pButton"></button>
+    </div>
+        
+        <div class="InsideContent1">
+        <div class="InsideContent">
+        <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Actions" class="p-button-raised p-button-success p-button-outlined pButton"></button>
+        <button pButton type="button" (click)="navigatedashboard()" icon="pi pi-arrow-up" label="Dashboard" class="p-button-raised p-button-help p-button-outlined pButton"></button>
+        <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left" label=" News" class="p-button-raised p-button-warning p-button-outlined pButton"></button>
+        
+        <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up" label="Websites" class="p-button-raised p-button-help p-button-outlined pButton"></button>
+       
+      </div>
+      <div class="InsideContent">
+      <div class="col-md-8 col-xs-6 ">
+        <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
+         
+          <div class="card-body">
+            
+            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+            <div 
+             
+            
+             [ngClass]="{'bg-gradient-success ' : tile.text4 > 0 ,'bg-gradient-danger': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt">&nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}
+         
+            </div>
+            <div class="InsideContent">
+            <!-- <div [ngClass]="{'font-green' : tile.text1 >= 1.2 ,'font-red': 0.80 > tile.text1 ,'font-yellow': 1.2 > tile.text1 && tile.text1 > 0.80 }" *ngFor="let tile of pcrnsenifty">{{tile.text1| number : '1.2-2'}}</div>
+  -->
+            <div>{{pcrnsenifty1}}</div>
+            <!-- <div class="font-green">&nbsp;&nbsp;{{this.n50optionssupport}}</div>
+            <div class="font-red">&nbsp;&nbsp;{{this.n50optionsresistance}}</div>     -->
+          </div>
+            <h6 class="card-text"></h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-xs-6">
+        <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatebanknifty()">
+          <div class="card-body">
+            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
+           
+            <div [ngClass]="{'bg-gradient-success ' : tile.text4 > 0 ,'bg-gradient-danger ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>
+            
+            <div class="InsideContent">
+            <div>{{pcrnsebnifty1}}</div>
+            <!-- <div [ngClass]="{'font-green' : tile.text1 >= 1.2 ,'font-red': 0.80 > tile.text1 ,'font-yellow': 1.2 > tile.text1 && tile.text1 > 0.80 }" *ngFor="let tile of pcrnsebnifty">{{tile.text1| number : '1.2-2'}}</div>
+            <div class="font-green">&nbsp;&nbsp;{{this.bnoptionssupport}}</div>
+            <div class="font-red">&nbsp;&nbsp;{{this.bnoptionsresistance}}</div> -->
+          </div>
+            <h6 class="card-text"></h6>
+          </div>
+        </div>
+      </div>
+      
+        <div class="col-md-8 col-xs-6">
+          <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatepnifty()">
+            <div class="card-body">
+              <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+              
+              <div [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcpniftyrt">&nbsp;Pharma NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>
+              <h6 class="card-text"></h6>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+      
+    </div>
+    </div>
+   
+   
+      
+    
+ 
+    <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="-1">
+      <h1 style="font-weight:normal">Actions</h1>
+      
+     
+      <br>
+      
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <p-button type="button" (click)="visibleSidebar1 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+      <br>
+     
+      
+      
+    </p-sidebar>
+
+    <p-sidebar [(visible)]="visibleSidebar2" [fullScreen]="true" [baseZIndex]="-1">
+      <h1 style="font-weight:normal">News</h1>
+      <div class="InsideContent newsframe row card-group" >
+        
+      <p-card class="col-4" *ngFor="let news of newscard " header={{news.text1}} subheader={{news.text4}} [style]="{width: '400px',margin: '5px'}" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+            <img alt="Card" src={{news.text3}}>
+        </ng-template>
+        <p>{{news.text5}}</p>
+       
+        <a href={{news.text2}} target="_blank" rel="noopener noreferer">{{news.text2}}</a>
+        
+        
+    
+    </p-card>
+    </div>
+      
+      
+     
+    </p-sidebar>
+    
+    <p-sidebar [(visible)]="visibleSidebar3" [style]="{height:'80em'}" position="top" [baseZIndex]="-1">
+      <h1 style="font-weight:normal">Links</h1>
+      <a class="nav-link waves-light" mdbWavesEffect href="/Analytics" target="_blank">Analytics</a>
+      <a class="nav-link waves-light" mdbWavesEffect href="/Treemaps" target="_blank">TreeMaps</a>
+         <a class="nav-link waves-light" mdbWavesEffect href="/Homepage" target="_blank">Homepage</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Screeners" target="_blank">Screeners</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Sectors" target="_blank">Sectors</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Recos" target="_blank">Recos</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Portfolio" target="_blank">Portfolio</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Screeners/daily" target="_blank">PScore/MCData</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Futures" target="_blank">Futures</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Options" target="_blank">Options</a>
+        <a class="nav-link waves-light" mdbWavesEffect href="/Watchlist" target="_blank">Watchlist</a>
+    </p-sidebar>
+    
+    <p-sidebar [(visible)]="visibleSidebar4" [style]="{height:'38em'}" position="bottom" [baseZIndex]="-1">
+      <h1 style="font-weight:normal">Important Websites</h1>
+      <a class="nav-link waves-light" mdbWavesEffect href="https://www.nseindia.com/" target="_blank">NSE India</a>
+    </p-sidebar>
+    
+    <p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+      <h1 style="font-weight:normal">Full Screen Sidebar</h1>
+      
+    </p-sidebar>
+    
+      
+    
+    
+         
+    
+  
+      
+     
+        
+    
+    
+    
+   
+   
+    
+ 
+    
+  
+  </div>
+</nav>
