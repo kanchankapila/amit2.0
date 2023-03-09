@@ -2,7 +2,7 @@
 
 # compiled output
 /dist*
-/dist/amit2.0/*
+/dist/amitnginx/*
 /dist-server
 /.env
 /tmp
