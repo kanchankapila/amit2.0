@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-
+import * as schedule from "node-schedule";
 import { DataapiService } from '../../dataapi.service'
 import { HttpClient} from "@angular/common/http";
 interface Gainers {
@@ -241,6 +241,7 @@ export class HomepageComponent implements OnInit {
   public indicesdecperc: Array<number> = [];
   public sectorsadvperc: Array<number> = [];
   public sectorsname: Array<string> = [];
+  baseurl:any;
   public sectorsdecperc: Array<number> = [];
   // @ViewChild("chart") chart: ChartComponent;
   @ViewChild("chart1") chart1: ChartComponent;
@@ -263,11 +264,19 @@ export class HomepageComponent implements OnInit {
    public tooltipSettings: object
    
    screen:any;
+   job = schedule.scheduleJob("1 15 * * *", this.refreshtl);
   
   tableDataGainers: Gainers[] = [];
   tableDataLosers: Losers[] = [];
   cols: any[] = [];
-  constructor(private http: HttpClient,private dataApi: DataapiService) { }
+  constructor(private http: HttpClient,private dataApi: DataapiService) {
+    if (window.location.hostname === "localhost") {
+      this.baseurl = "http://localhost:9999"
+    } else {
+      this.baseurl = "https://stockinsights.netlify.app"
+    } 
+
+   }
   selectedValue: string;
   selectedValueGainers: string;
   selectedValueLosers: string;
@@ -425,6 +434,17 @@ export class HomepageComponent implements OnInit {
     this.ReadMore3 = !this.ReadMore3; //not equal to condition
     this.visible3 = !this.visible3
   }
+  refreshtl() {
+ 
+    this.http.get(this.baseurl+'/.netlify/functions/tlrefresh').subscribe(data5 => {
+     let nestedItems = Object.keys(data5).map(key => {
+       return data5[key];
+     });
+     console.log(nestedItems)
+ // this.dataApi.getopstrarefresh();
+   console.log("TLrefresh is hit")
+ });
+  }; 
   getadvdec1() {
    
     this.http.get<any>('https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true').subscribe(data5 => {

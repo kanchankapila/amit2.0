@@ -7,7 +7,7 @@ const opstra = async (eqsymbol) => {
   try {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
-   console.log(jsessionid)
+   
     const response = await fetch("https://opstra.definedge.com/api/futures/pcr/chart/"+eqsymbol, {
         "headers": {
           "accept": "application/json, text/plain, */*",
@@ -35,10 +35,10 @@ const opstra = async (eqsymbol) => {
     const data = await response.json();
     let compressedData = JSON.stringify({ data });
     compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
-    process.env.trendlyne3 = compressedData;
+    process.env.opstra = compressedData;
     return {
       statusCode: 200,
-      body: process.env.trendlyne3,
+      body: process.env.opstra,
     };
   } catch (error) {
     console.error(error);
@@ -56,7 +56,7 @@ const handler = async (event) => {
   await opstra( eqsymbol);
   return {
     statusCode: 200,
-    body: process.env.trendlyne3,
+    body: process.env.opstra,
   };
 };
 

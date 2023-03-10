@@ -71,6 +71,7 @@
     "ng2-charts": "^4.1.1",
     "ngx-echarts": "^15.0.1",
     "node-fetch": "^2.6.9",
+    "node-schedule": "^2.1.1",
     "nodemon": "^2.0.20",
     "npm": "^9.6.0",
     "primeicons": "^6.0.1",
