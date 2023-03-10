@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
+import * as schedule from "node-schedule";
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
@@ -122,7 +123,8 @@ public width: string = Browser.isDevice ? '100%' : '30%';
  public startAngle: number = Browser.isDevice ? 62 : 0 ;
 
  public titlesh: string = 'Shareholdings';
-
+  job = schedule.scheduleJob("1 30 * * *", this.opstrarefresh);
+  
 public markerpv: Object = {
     dataLabel: {
         visible: true,
@@ -162,10 +164,18 @@ public titlepv: string = 'Volume Analysis';
   public visible: Boolean = false;
   public visible1: Boolean = false;
   public visible2: Boolean = false;
+  baseurl:any
 
   
-  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) { }
+  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
+    if (window.location.hostname === "localhost") {
+      this.baseurl = "http://localhost:9999"
+    } else {
+      this.baseurl = "https://stockinsights.netlify.app"
+    } 
+   }
   selectedValue: string;
+
   ngAfterViewInit() {
     RadioButton.prototype.select = function () {
       if (!this.disabled) {
@@ -642,6 +652,7 @@ public titlepv: string = 'Volume Analysis';
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
    await Promise.all([
+    this.wtest(),
     this.mongotest(this.eqsymbol),
     this.getmcpricevolume(this.mcsymbol),
     this.getetshareholding(this.stockid),
@@ -681,7 +692,7 @@ public titlepv: string = 'Volume Analysis';
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
      setInterval(() => {this.opstrarefresh()},60000);
-     setInterval(() => {this.tlrefresh()},60000);
+     
     
   }
 
@@ -725,7 +736,15 @@ showMaximizableDialog4() {
     };
      })
   }
-onClick(event) {
+  wtest()
+{
+  this.dataApi.windowtest();
+}
+
+// 
+
+
+  onClick(event) {
   this.gettlstockparams(this.indexid,this.selectedValue)
   
 }
@@ -737,12 +756,8 @@ async mongotest(eqsymbol) {
     console.log(nestedItems)
   });
 }
-async opstrarefresh() {
-  let currentDateTime =this.datePipe.transform((new Date), 'hh:mm');
-  
-    console.log(currentDateTime);
-   
-  if(currentDateTime == '03:35'){
+ opstrarefresh() {
+ 
      this.http.get('http://localhost:9999/.netlify/functions/opstrarefresh').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -752,7 +767,7 @@ async opstrarefresh() {
     console.log("Opstrarefresh is hit")
   });
    };
-}
+
     
  
 
@@ -1223,29 +1238,7 @@ else if(this.fnomsg.includes("Short Buildup")){
   //   });
   // }
  
-   async tlrefresh(){
-
-     let currentDateTime =this.datePipe.transform((new Date), 'hh:mm');
-  
-    console.log(currentDateTime);
    
-   
-  if(currentDateTime === '03:40'){
-     this.http.get('https://stockinsights.netlify.app/.netlify/functions/tlrefresh').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems);
- 
-    console.log("TLrefresh is hit")
-  
-    
-   
-
-   
-
-  });
-}}   
       
       
  async getmmdata(stockid) {
