@@ -42,12 +42,12 @@ exports.handler = async (event,context,callback) => {
      
         if (cookie[val].name == '.trendlyne'){
           process.env.trnd=cookie[val].value
-         console.log( process.env.trnd)
+        
        }}
        for (let val in cookie){
        if (cookie[val].name == 'csrftoken'){
          process.env.csrf=cookie[val].value
-        console.log( process.env.csrf)
+      
       }
     }
    

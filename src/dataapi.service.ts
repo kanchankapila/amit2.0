@@ -12,10 +12,7 @@ export class DataapiService {
   public href: string = "";
   
 
-        // baseurl = "http://localhost:3000/api"
-      // baseurl = "https://amitv2.herokuapp.com/api"
-      // baseurl = "https://stockinsights.netlify.app/"
-
+    
 baseurl:any;
   stock: any;
   dbname: any;
@@ -37,13 +34,7 @@ baseurl:any;
     }
  
   }
-  windowtest(){
-    if (window.location.hostname === "localhost") {
-      this.baseurl = "http://localhost:9999"
-    } else {
-      this.baseurl = "https://amitkapila.netlify.app"
-    }
-  }
+ 
   
  
 
@@ -102,14 +93,10 @@ baseurl:any;
     return this.http.get(this.baseurl+'/.netlify/functions/KotakHealthScoreRead?stock='+stock)
     
   }
-  getmongotest(eqsymbol) {
-   
-    return this.http.get(this.baseurl+'/.netlify/functions/mongotest?eqsymbol='+eqsymbol)
-    
-  }
+ 
   getopstrarefresh() {
    
-    return this.http.get('http://amitkapila.netlify.app/.netlify/functions/opstrarefresh')
+    return this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh')
     
   }
   getkotaksectorview(sector) {

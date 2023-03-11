@@ -3,13 +3,13 @@ const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnif
  
 const fetch = require('node-fetch')
 
-const opstra = async (eqsymbol) => {
+const opstra1 = async (eqsymbol) => {
   try {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
-    // process.env.jsess= jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
-    
-    const response = await fetch("https://opstra.definedge.com/api/futures/pcr/chart/"+eqsymbol, {
+   
+  //  console.log(process.env.jsess['jsessionid'])
+    const response1 = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
         "headers": {
           "accept": "application/json, text/plain, */*",
           "accept-language": "en-US,en;q=0.9",
@@ -29,17 +29,17 @@ const opstra = async (eqsymbol) => {
        
       )
      
-    if (!response.ok) {
-      return { statusCode: response.status, body: response.statusText };
+    if (!response1.ok) {
+      return { statusCode: response1.status, body: response1.statusText };
     }
    
-    const data = await response.json();
-    let compressedData = JSON.stringify({ data });
-    compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
-    process.env.opstra =compressedData;
+    const data1 = await response1.json();
+    let compressedData1 = JSON.stringify({ data1 });
+    compressedData1 = compressedData1.replace(/\s/g, ""); // this line removes whitespace 
+    process.env.opstra1 = compressedData1;
     return {
       statusCode: 200,
-      body: process.env.opstra,
+      body: process.env.opstra1,
     };
   } catch (error) {
     console.error(error);
@@ -48,17 +48,17 @@ const opstra = async (eqsymbol) => {
       body: JSON.stringify({ msg: error.message }),
     };
   } finally {
-      await client1.close();
+    await client1.close();  
   }
 };
 const handler = async (event) => {
   const { eqsymbol } = event.queryStringParameters;
-  await opstra( eqsymbol);
- 
+
+  await opstra1( eqsymbol);
   // 
   return {
     statusCode: 200,
-    body:process.env.opstra
+    body:process.env.opstra1
   };
 };
 

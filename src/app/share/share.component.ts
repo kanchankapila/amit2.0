@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
-import * as schedule from "node-schedule";
+// import * as schedule  from "node-schedule"
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
@@ -123,8 +123,9 @@ public width: string = Browser.isDevice ? '100%' : '30%';
  public startAngle: number = Browser.isDevice ? 62 : 0 ;
 
  public titlesh: string = 'Shareholdings';
-  job = schedule.scheduleJob("1 30 * * *", this.opstrarefresh);
+    // job = schedule.scheduleJob("0 25 18 * * *", this.opstrarefresh);
   
+ 
 public markerpv: Object = {
     dataLabel: {
         visible: true,
@@ -616,13 +617,13 @@ public titlepv: string = 'Volume Analysis';
     this.date = new Date();
     
     this.todayepoch = Math.floor(this.date.getTime() / 1000);
-    // console.log(this.todayepoch)
+   
     
     this.yesterday = (new Date(this.date.getFullYear(), this.date.getMonth(), new Date().getDate() - 1))
     this.yearback = (new Date(this.date.getFullYear(), this.date.getMonth(), new Date().getDate() - 365))
     this.yesterdayepoch = Math.floor(this.yesterday.getTime() / 1000);
     this.yearbackepoch= Math.floor(this.yearback.getTime()/1000);
-  //  console.log(this.yearbackepoch) 
+
     this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
   
     this.lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
@@ -652,8 +653,8 @@ public titlepv: string = 'Volume Analysis';
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
    await Promise.all([
-    this.wtest(),
-    this.mongotest(this.eqsymbol),
+    
+    
     this.getmcpricevolume(this.mcsymbol),
     this.getetshareholding(this.stockid),
     this.gettrendlynestocks2(this.tlid),
@@ -691,7 +692,7 @@ public titlepv: string = 'Volume Analysis';
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
-     setInterval(() => {this.opstrarefresh()},60000);
+      setInterval(() => {this.opstrarefresh()},86400000);
      
     
   }
@@ -727,7 +728,7 @@ showMaximizableDialog4() {
         return data5[key];
       });
       this.tlindexparam.length=0;
-      // console.log(nestedItems);
+      
 
       for(let val in nestedItems[0].body.parameters){
         if(nestedItems[0].body.parameters[val].hasOwnProperty('name')){
@@ -736,29 +737,19 @@ showMaximizableDialog4() {
     };
      })
   }
-  wtest()
-{
-  this.dataApi.windowtest();
-}
 
-// 
+
+
 
 
   onClick(event) {
   this.gettlstockparams(this.indexid,this.selectedValue)
   
 }
-async mongotest(eqsymbol) {
-  this.dataApi.getmongotest(eqsymbol).subscribe(data => {
-    let nestedItems = Object.keys(data).map(key => {
-      return data[key];
-    });
-    console.log(nestedItems)
-  });
-}
+
  opstrarefresh() {
  
-     this.http.get('http://localhost:9999/.netlify/functions/opstrarefresh').subscribe(data5 => {
+     this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -776,7 +767,7 @@ async mongotest(eqsymbol) {
       let nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
-      console.log(nestedItems)
+     
       if(nestedItems[0].length != 0){
       this.divscore.push({ text1: nestedItems[0][0].DividendScore, text2: "Dividend" })
        
@@ -958,7 +949,6 @@ async mongotest(eqsymbol) {
     
       if (response.ok) {
         const insight = await response.json();
-        // console.log(insight['data']['insightData'])
         if(insight['data']['insightData']['price'].hasOwnProperty('5')){
         this.dealsmsg.length=0;
        this.dealsmsg.push({text1:insight['data']['insightData']['price'][5]['shortDesc'],text2:insight['data']['insightData']['price'][5]['color']})
@@ -1043,8 +1033,7 @@ else if(this.fnomsg.includes("Short Buildup")){
  
   async getmcstockohlc1yr(eqsymbol,yearbackepoch,todayepoch) {
     try {
-        // console.log('https://priceapi.moneycontrol.com/techCharts/indianMarket/stock/history?symbol='+this.eqsymbol+'&resolution=1D&from='+this.yearbackepoch+'&to='+this.todayepoch)
-      const response = await fetch('https://priceapi.moneycontrol.com/techCharts/indianMarket/stock/history?symbol='+this.eqsymbol+'&resolution=1D&from='+this.yearbackepoch+'&to='+this.todayepoch+'&countback=365&currencyCode=INR', {
+        const response = await fetch('https://priceapi.moneycontrol.com/techCharts/indianMarket/stock/history?symbol='+this.eqsymbol+'&resolution=1D&from='+this.yearbackepoch+'&to='+this.todayepoch+'&countback=365&currencyCode=INR', {
         method: 'GET',
         headers: {
          
@@ -1067,7 +1056,7 @@ else if(this.fnomsg.includes("Short Buildup")){
    
     
       this.data1=this.stockohlc1yr
-    //  console.log(this.data1)
+
     
       }
     
@@ -1775,13 +1764,13 @@ else if(this.fnomsg.includes("Short Buildup")){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-   
+   console.log(nestedItems)
        this.dataValues.length=0;  
         this.stockhcdate1.length=0; 
        
-      for (let val in nestedItems[5]) {
+      for (let val in nestedItems[6]) {
        
-        this.stockhcdate1.push({x:(new Date(nestedItems[5][val]["time"] * 1000).toUTCString()),y:(nestedItems[5][val]["value"])})     
+        this.stockhcdate1.push({x:(new Date(nestedItems[6][val]["time"] * 1000).toUTCString()),y:(nestedItems[6][val]["value"])})     
       }
       
       

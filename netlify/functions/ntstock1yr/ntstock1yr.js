@@ -11,7 +11,7 @@ const ntstock1yrfetch = async (eqsymbol,event, context,callback) => {
     }
     const data = await response.json()
   
-    process.env.data2=JSON.stringify({data});
+    process.env.data8=JSON.stringify({data});
     return {
       statusCode: 200,
       body: JSON.stringify({data}),
@@ -36,7 +36,7 @@ const handler = async (event) => {
 
  return {
    statusCode: 200,
-   body: process.env.data2,
+   body: process.env.data8,
   
  
  };

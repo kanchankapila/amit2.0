@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import * as schedule from "node-schedule";
+// import * as schedule from "node-schedule";
 import { DataapiService } from '../../dataapi.service'
 import { HttpClient} from "@angular/common/http";
 interface Gainers {
@@ -264,7 +264,7 @@ export class HomepageComponent implements OnInit {
    public tooltipSettings: object
    
    screen:any;
-   job = schedule.scheduleJob("1 15 * * *", this.refreshtl);
+  //  job = schedule.scheduleJob("0 40 13 * * 6", this.refreshtl());
   
   tableDataGainers: Gainers[] = [];
   tableDataLosers: Losers[] = [];
@@ -349,6 +349,7 @@ export class HomepageComponent implements OnInit {
     setInterval(() => { this.getetsectors() }, 30000);
     setInterval(() => { this.getglobal() }, 30000);
     setInterval(() => { this.getadvdec() }, 30000);
+    setInterval(() => { this.refreshtl() }, 432000000);
    
   //  this.getetscreeners(this.selectedValue)
  

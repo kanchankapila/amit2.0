@@ -34,7 +34,7 @@ const { MongoClient } = require('mongodb');
       }
       const data = await response.json(response.body.data)
      
-      process.env.data1 = (JSON.stringify(data)).replace("[", "").replace("]", "");
+      process.env.data3 = (JSON.stringify(data)).replace("[", "").replace("]", "");
       await client.db('KotakHealthScore').collection("KotakHealthScore").deleteMany(); 
       await client.db('KotakHealthScore').collection("KotakHealthScore").insertOne(data[i]) 
      for (i in data){
@@ -49,7 +49,7 @@ const { MongoClient } = require('mongodb');
   
       return {
         statusCode: 200,
-        body:process.env.data1,
+        body:process.env.data3,
         
        
       }  
