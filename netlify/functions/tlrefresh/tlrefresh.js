@@ -1,9 +1,9 @@
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
+import { schedule } from '@netlify/functions'
+const handler =  async function(event,context,callback)  {
 
-exports.handler = async (event,context,callback) => {
-  
     let browser = null
     console.log('spawning chrome headless')
     try {
@@ -99,3 +99,5 @@ exports.handler = async (event,context,callback) => {
       }
     }
   };
+
+  exports.handler = schedule("@hourly", handler);
