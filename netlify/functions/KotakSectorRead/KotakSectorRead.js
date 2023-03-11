@@ -16,7 +16,7 @@ const KotakSector = async (sector,event, context) => {
     const response = await client.db('KotakScore').collection("KotakScore").find({ SectorId : sector  }).toArray(); 
     
    
-    process.env.data1 = JSON.stringify({ response });
+    process.env.data5 = JSON.stringify({ response });
     
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
@@ -52,7 +52,7 @@ const handler = async (event) => {
 
  return {
    statusCode: 200,
-   body: process.env.data1,
+   body: process.env.data5,
   
  
  };

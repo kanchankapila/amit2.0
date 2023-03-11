@@ -38,10 +38,10 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
     const data = await response.json();
     let compressedData = JSON.stringify({ data });
     compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
-    process.env.trendlyne3 = compressedData;
+    process.env.trendlyne = compressedData;
     return {
       statusCode: 200,
-      body: process.env.trendlyne3,
+      body: process.env.trendlyne,
     };
   } catch (error) {
     console.error(error);
@@ -59,7 +59,7 @@ const handler = async (event) => {
   await trendlyne(tlid, tlname, eqsymbol);
   return {
     statusCode: 200,
-    body: process.env.trendlyne3,
+    body: process.env.trendlyne,
   };
 };
 

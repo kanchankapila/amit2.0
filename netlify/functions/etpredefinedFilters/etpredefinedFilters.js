@@ -33,7 +33,7 @@ const qs=require('querystring')
       return { statusCode: response.status, body: response.statusText }
     }
     const data = await response.json()
-   console.log(data)
+   
     process.env.data2 = JSON.stringify({ data })
     
     return {
@@ -56,19 +56,3 @@ const qs=require('querystring')
     }
   }
 }
-// const handler = async (event) => {
- 
-//   const ntoptions = (event.queryStringParameters.ntoptions);
-  
-//      console.log((ntoptions))
- 
-  
-//   await ntfetch(ntoptions);
-//  return {
-//    statusCode: 200,
-//    body: process.env.data1,
-  
- 
-//  };
-// };
-// module.exports = { handler }

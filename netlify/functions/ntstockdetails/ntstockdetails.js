@@ -30,7 +30,7 @@ const fetch = require('node-fetch')
       return { statusCode: response.status, body: response.statusText }
     }
     const data = await response.json()
-    process.env.data1=JSON.stringify({data})
+    process.env.data9=JSON.stringify({data})
     return {
       statusCode: 200,
       body: JSON.stringify({data}),
@@ -56,7 +56,7 @@ const handler = async (event) => {
 
  return {
    statusCode: 200,
-   body: process.env.data1,
+   body: process.env.data9,
   
  
  };

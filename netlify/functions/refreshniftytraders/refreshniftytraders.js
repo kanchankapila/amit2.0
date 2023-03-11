@@ -34,7 +34,7 @@ const qs=require('querystring')
     }
     const data1 = await response.json()
   
-    process.env.data1 = (data1['resultData']['token'])
+    process.env.data11 = (data1['resultData']['token'])
     
     return {
       statusCode: 200,
@@ -44,7 +44,7 @@ const qs=require('querystring')
         /* Required for cookies, authorization headers with HTTPS */
         "Access-Control-Allow-Credentials": true
       },
-      body:process.env.data1 ,
+      body:process.env.data11 ,
      }
   } catch (error) {
     // output to netlify function log
@@ -56,25 +56,4 @@ const qs=require('querystring')
     }
   }
 }
-
-
-// const handler = async (event) => {
- 
-//   const ntoptions = (event.queryStringParameters.ntoptions);
-  
-//      console.log((ntoptions))
- 
-  
-//   await ntfetch(ntoptions);
-
-//  return {
-//    statusCode: 200,
-//    body: process.env.data1,
-  
- 
-//  };
-// };
-
-// module.exports = { handler }
-
 
