@@ -59,6 +59,9 @@ baseurl:any;
   getopstrastockpcr(eqsymbol) {
     return this.http.get(this.baseurl+'/.netlify/functions/opstrafetchstockpcr?eqsymbol='+eqsymbol)
   }
+  getopstrastockpcrintra(eqsymbol) {
+    return this.http.get(this.baseurl+'/.netlify/functions/opstrafetchstockpcrintra?eqsymbol='+eqsymbol)
+  }
   getnteodscreeners(ntoptions) {
     
     return this.http.post(this.baseurl+'/.netlify/functions/ntscreeners',ntoptions)
