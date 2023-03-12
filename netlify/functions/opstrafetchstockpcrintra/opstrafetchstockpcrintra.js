@@ -3,13 +3,12 @@ const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnif
  
 const fetch = require('node-fetch')
 
-const opstra1 = async (eqsymbol) => {
+const opstraintra = async (eqsymbol) => {
   try {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
-   
-  //  console.log(process.env.jsess['jsessionid'])
-    const response1 = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
+   console.log(jsessionid)
+  const response = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
         "headers": {
           "accept": "application/json, text/plain, */*",
           "accept-language": "en-US,en;q=0.9",
@@ -29,13 +28,13 @@ const opstra1 = async (eqsymbol) => {
        
       )
      
-    if (!response1.ok) {
-      return { statusCode: response1.status, body: response1.statusText };
+    if (!response.ok) {
+      return { statusCode: response.status, body: response.statusText };
     }
    
-    const data1 = await response1.json();
+    const data1 = await response.json();
     let compressedData1 = JSON.stringify({ data1 });
-    compressedData1 = compressedData1.replace(/\s/g, ""); // this line removes whitespace 
+     compressedData1 = compressedData1.replace(/\s/g, ""); // this line removes whitespace 
     process.env.opstra1 = compressedData1;
     return {
       statusCode: 200,
@@ -54,7 +53,7 @@ const opstra1 = async (eqsymbol) => {
 const handler = async (event) => {
   const { eqsymbol } = event.queryStringParameters;
 
-  await opstra1( eqsymbol);
+  await opstraintra( eqsymbol);
   // 
   return {
     statusCode: 200,

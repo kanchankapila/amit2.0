@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
-// import * as schedule  from "node-schedule"
+
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
@@ -96,6 +96,9 @@ export interface sectorstockdetailstile { text1: any; text2: any; text3: any; te
 export interface stockpcrtile { text1: any; text2: any; }
 export interface maxpaintile { text1: any; text2: any; }
 export interface tlindexparamtile{text1: string;text2: string;text3: string;}
+
+
+
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -123,8 +126,7 @@ public width: string = Browser.isDevice ? '100%' : '30%';
  public startAngle: number = Browser.isDevice ? 62 : 0 ;
 
  public titlesh: string = 'Shareholdings';
-    // job = schedule.scheduleJob("0 25 18 * * *", this.opstrarefresh);
-  
+   
  
 public markerpv: Object = {
     dataLabel: {
@@ -166,6 +168,7 @@ public titlepv: string = 'Volume Analysis';
   public visible1: Boolean = false;
   public visible2: Boolean = false;
   baseurl:any
+  
 
   
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
@@ -215,6 +218,17 @@ public titlepv: string = 'Volume Analysis';
   public stock1mLabels: Array<any> = [];
   public stock1mData: Array<any> = [];
   public stock3mdata: Array<number> = [];
+ 
+  public opstrastockpcrdata: Array<number> = [];
+
+  public opstrastockpcrintradata: Array<number> = [];
+  public opstrastockpcrData: Array<any> = [];
+  public opstrastockLabels: any;
+  public opstrastockintraLabels: any;
+  public opstrastockpcrLabels: Array<any> = [];
+  public opstrastockpcrintraLabels: Array<any> = [];
+  public opstrastockpcrintraData: Array<any> = [];
+
   public stock3mLabels: Array<any> = [];
   public stock3mData: Array<any> = [];
   public stock6mdata: Array<number> = [];
@@ -350,6 +364,7 @@ public titlepv: string = 'Volume Analysis';
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
   dscore: dscoretile[] = [];
+  
   previousclose: Array<number> = [];
   pclose:any;
   volscore: volscoretile[] = [];
@@ -661,6 +676,7 @@ public titlepv: string = 'Volume Analysis';
     //this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol),
     this.getopstrastockpcr(this.eqsymbol),
+    this.getopstrastockpcrintra(this.eqsymbol),
     // this.getzerodha(),
     // this.getkotak(),
     this.gettlstockparams(this.tlid,this.duration),
@@ -1072,8 +1088,46 @@ else if(this.fnomsg.includes("Short Buildup")){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+    
+      this.opstrastockpcrdata.length=0;
+       this.opstrastockpcrLabels.length=0;
+      for(let val in nestedItems[0]['data']){
+        this.opstrastockpcrdata.push(nestedItems[0]['data'][val][2]);
+        this.opstrastockpcrLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
+
+      }
+      console.log(this.opstrastockpcrdata)
+      console.log(this.opstrastockpcrLabels)
     });
+    this.opstrastockpcrData = [{
+      label: 'Price',
+      data: this.opstrastockpcrdata,
+      borderWidth: 1,
+      fill: false
+    }];
+    this.opstrastockLabels = this.opstrastockpcrLabels;
+  }
+  getopstrastockpcrintra(eqsymbol) {
+    this.dataApi.getopstrastockpcrintra(this.eqsymbol).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+
+      this.opstrastockpcrintradata.length=0;
+      this.opstrastockpcrintraLabels.length=0;
+      for(let val in nestedItems[0]['data']){
+        this.opstrastockpcrintradata.push(nestedItems[0]['data'][val][2]);
+        this.opstrastockpcrintraLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
+     
+      }
+       });
+    this.opstrastockpcrintraData = [{
+      label: 'Price',
+      data: this.opstrastockpcrintradata,
+      borderWidth: 1,
+      fill: false
+    }];
+    this.opstrastockintraLabels = this.opstrastockpcrintraLabels;
   }
   getntstock1yr(eqsymbol) {
     this.stockohlc.length = 0;

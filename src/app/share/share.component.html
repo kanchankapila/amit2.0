@@ -160,8 +160,8 @@
     
  <br>
  <br>
-<div fxLayout="row wrap" fxLayoutGap="10px" class=" col-lg-6 col-xs-3 text-center text-white">
-<div style="text-transform: uppercase;font-weight:bold;" fxFlex="15" fxFlex.lg="15%" fxFlex.xs="30%" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
+<div fxLayout="row wrap" fxLayoutGap="10px" class="col-lg-8 col-xs-3 text-center text-white">
+<div style="text-transform: uppercase;font-weight:bold;" fxFlex="20" fxFlex.lg="20%" fxFlex.xs="30%" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
   '  bg-gradient-bear ': 0.80 > tile.text2,
   '  bg-gradient-bull ': tile.text1 > 0.80,
   '  bg-gradient-warning ': tile.text1 == 0.80}"><br>{{tile.text1}}<br>{{tile.text2}}
@@ -631,6 +631,40 @@ NR7:{{nr7}}
          
       </e-series-collection>
   </ejs-chart> 
+  <div fxLayout="row" fxLayout.xs="column">
+  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body" *ngIf="opstrastockpcrData">
+       
+      
+        <h4 class="text-black text-center">EOD PCR</h4>
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:400px" class="table" [datasets]="opstrastockpcrData" [labels]="opstrastockLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+    
+    </div>
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body" *ngIf="opstrastockpcrintraData">
+       
+      
+        <h4 class="text-black text-center">Intraday PCR</h4>
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:400px" class="table" [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+    
+    </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
   <div fxLayout="row" fxLayout.xs="column">
     <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
       <div class="card">

@@ -264,7 +264,6 @@ export class HomepageComponent implements OnInit {
    public tooltipSettings: object
    
    screen:any;
-  //  job = schedule.scheduleJob("0 40 13 * * 6", this.refreshtl());
   
   tableDataGainers: Gainers[] = [];
   tableDataLosers: Losers[] = [];
