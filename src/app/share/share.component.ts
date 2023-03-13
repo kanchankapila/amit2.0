@@ -1818,16 +1818,19 @@ else if(this.fnomsg.includes("Short Buildup")){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-   console.log(nestedItems)
+  
        this.dataValues.length=0;  
         this.stockhcdate1.length=0; 
+        if(nestedItems[5][0].hasOwnProperty('value') ){
+      for (let val in nestedItems[5]) {
        
+        this.stockhcdate1.push({x:(new Date(nestedItems[5][val]["time"] * 1000).toUTCString()),y:(nestedItems[5][val]["value"])})     
+      }
+    } else  if(nestedItems[6][0].hasOwnProperty('value') ){
       for (let val in nestedItems[6]) {
        
         this.stockhcdate1.push({x:(new Date(nestedItems[6][val]["time"] * 1000).toUTCString()),y:(nestedItems[6][val]["value"])})     
-      }
-      
-      
+      }}
     
 
  
