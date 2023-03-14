@@ -9,6 +9,7 @@
 <br>
 <br>
 <br>
+
 <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
   <div class="content card">
     
@@ -43,7 +44,7 @@
 
   <div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
     <div class="card">
-<div id="chart">
+<div id="chart"  *ngIf="chartOptions5">
   <apx-chart
     [series]="chartOptions5.series"
     [chart]="chartOptions5.chart"
@@ -58,13 +59,7 @@
 <div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
   <div class="card">
 <div class="chart2" id="chart2">
-  <apx-chart
-    [series]="chartOptions2.series"
-    [chart]="chartOptions2.chart"
-    [labels]="chartOptions2.labels"
-    [fill]="chartOptions2.fill"
-    [responsive]="chartOptions2.responsive"
-  ></apx-chart>
+
 </div>
 </div>
 </div>
@@ -77,7 +72,7 @@
   
   <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
     <div class="card">   
-<div id="chart">
+<div id="chart"  *ngIf="chartOptions6">
   <apx-chart
     [series]="chartOptions6.series"
     [chart]="chartOptions6.chart"
@@ -96,7 +91,7 @@
 </div>
 <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
   <div class="card">
-<div class="chart1"  id="chart1">
+<div class="chart1"  id="chart1"  *ngIf="chartOptions1">
   <apx-chart
     [series]="chartOptions1.series"
     [chart]="chartOptions1.chart"
