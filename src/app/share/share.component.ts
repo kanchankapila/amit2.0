@@ -19,13 +19,55 @@ import * as mcindex from '../lists/mcsectorlist'
 
 import {  ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 
-import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
-
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
+type ApexXAxis = {
+  type?: "category" | "datetime" | "numeric";
+  categories?: any;
+  labels?: {
+    style?: {
+      colors?: string | string[];
+      fontSize?: string;
+    };
+  };
+};
+export type ChartOptions2 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  grid: ApexGrid;
+  colors: string[];
+  legend: ApexLegend;
+  title:ApexTitleSubtitle;
+};
+export type ChartOptions3 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  grid: ApexGrid;
+  colors: string[];
+  legend: ApexLegend;
+  title:ApexTitleSubtitle;
+};
 export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xaxis: ApexXAxis; yaxis: ApexYAxis; plotOptions: ApexPlotOptions; dataLabels: ApexDataLabels; stroke: ApexStroke; };
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
 export interface stockDatatiles { x: number; open: any; high: any; low: any; close: any; volume: any; }
-
+// export type ChartOptions2 = {
+//   series: ApexAxisChartSeries;
+//   chart: ApexChart;
+//   dataLabels: ApexDataLabels;
+//   plotOptions: ApexPlotOptions;
+//   yaxis: ApexYAxis;
+//   xaxis: ApexXAxis;
+//   colors: string[];
+//   legend: ApexLegend;
+// };
 
 export interface mcaptile { text1: string; text2: string; text3: string; }
 export interface nptile { text1: string; text2: string; text3: string; }
@@ -150,10 +192,14 @@ public legendpv: Object = {
 
   // custom code end
 public titlepv: string = 'Volume Analysis';
+
   visibleSidebar5;
   res;
   @ViewChild("chart") chart: ChartComponent;
- 
+  // @ViewChild("chart2") chart2: ChartComponent;
+  public chartOptions2: Partial<ChartOptions2>;
+  public chartOptions3: Partial<ChartOptions3>;
+  public chartOptions: Partial<ChartOptions>;
   // The Dialog shows within the target element.
   public targetElement;
 
@@ -463,8 +509,8 @@ public titlepv: string = 'Volume Analysis';
   positive: positivetile[] = [];
   negative: negativetile[] = [];
   neutral: neutraltile[] = [];
-  stockema: stockematile[] = [];
-  stocksma: stocksmatile[] = [];
+   stockema: Array<number> = [];
+   stocksma: Array<number> = [];
   stockdetails1: stockdetailstile[] = [];
   sectorstockdetails1: sectorstockdetailstile[] = [];
   public data1: Object[] = [];
@@ -579,6 +625,7 @@ public titlepv: string = 'Volume Analysis';
   kstmsg: any
   mamsg: any
   macdmsg: any
+  pcurrent:any
   obvmsg: any
   rsimsg: any
   stockname: any
@@ -668,8 +715,8 @@ public titlepv: string = 'Volume Analysis';
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
    await Promise.all([
-    
-    
+    this.getstockmaema(this.eqsymbol,this.mcsymbol),
+    this.getstocktoday(this.mcsymbol, this.eqsymbol),
     this.getmcpricevolume(this.mcsymbol),
     this.getetshareholding(this.stockid),
     this.gettrendlynestocks2(this.tlid),
@@ -683,7 +730,7 @@ public titlepv: string = 'Volume Analysis';
     this.gettrendlynestocksti(this.tlid),
     this.getkotakview(this.eqsymbol),
     this.getmcstockinsight(this.mcsymbol),
-    
+    this.getmcstockrealtime(this.mcsymbol),
     this.getshare1m(this.eqsymbol),
     this.getmmdata(this.stockid),
     this.getshare6m(this.eqsymbol),
@@ -693,10 +740,10 @@ public titlepv: string = 'Volume Analysis';
     this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday),
     this.getntstockdetails(this.eqsymbol),
     this.getntstockpcrdetails(this.eqsymbol),
-    this.getmcstockrealtime(this.mcsymbol),
-    this.getstocktoday(this.mcsymbol, this.eqsymbol),
+    
+    
     this.getstocktoday1(this.mcsymbol),
-    this.getstockmaema(this.eqsymbol),
+  
     this.getstocksentiments(this.mcsymbol),
     this.getntstockdetails(this.eqsymbol),
     // this.gettrendlynestocks1(this.tlid, this.eqsymbol, this.tlname)
@@ -704,7 +751,7 @@ public titlepv: string = 'Volume Analysis';
    )
     //  this.getmcstocktodayohlc(this.mcsymbol)
     // this.getetsharetoday(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol, this.eqsymbol) }, 30000);
+    // setInterval(() => { this.getstocktoday(this.mcsymbol, this.eqsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
@@ -1012,7 +1059,7 @@ else if(this.fnomsg.includes("Short Buildup")){
       if (response.ok) {
         const result1 = await response.json();
        
-       
+        // this.pcurrent=result1.data['pricecurrent'];
       this.stockdetails1.length = 0;
       await this.stockdetails1.push({ text1: result1.data['SC_FULLNM'], text2: result1.data['pricechange'], text3: result1.data['pricepercentchange'], text4: result1.data['pricecurrent'],text5: result1.data['52H'],text6: result1.data['52L'],text7: result1.data['upper_circuit_limit'],text8: result1.data['lower_circuit_limit'] })
     
@@ -1239,9 +1286,7 @@ else if(this.fnomsg.includes("Short Buildup")){
         },
         xaxis: {
           type: "datetime",
-          axisBorder: {
-            offsetX: 13
-          }
+          
         },
         yaxis: {
           labels: {
@@ -1884,7 +1929,7 @@ this.stockhcdate1.map((value: number, index: number) => {
    getstocktoday(mcsymbol,eqsymbol) {
    
     
-    this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
+     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -2065,16 +2110,300 @@ this.stockhcdate1.map((value: number, index: number) => {
   }
   
  
-  getstockmaema(eqsymbol) {
+  async getstockmaema(eqsymbol,mcsymbol) {
+    try {
+      const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/"+this.mcsymbol, {
+        method: 'GET',
+        headers: {
+         
+        }
+      });
+    
+      if (response.ok) {
+        const result2 = await response.json();
+       
+        this.pcurrent=result2.data['pricecurrent'];
+      
+     
+    }
+  } catch (err) {
+    console.error(err);
+  }
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+     console.log(this.pcurrent)
+       this.stockema.length = 0;
+      // this.stocksma.length = 0;
+      this.stockema.push(nestedItems[10].toFixed(2),nestedItems[5].toFixed(2),nestedItems[7].toFixed(2),nestedItems[9].toFixed(2),nestedItems[11].toFixed(2),nestedItems[6].toFixed(2),nestedItems[8].toFixed(2),this.pcurrent )
+      this.stocksma.push(nestedItems[37].toFixed(2),nestedItems[32].toFixed(2),nestedItems[34].toFixed(2),nestedItems[36].toFixed(2),nestedItems[38].toFixed(2),nestedItems[33].toFixed(2),nestedItems[35].toFixed(2),this.pcurrent)
      
-      this.stockema.length = 0;
-      this.stocksma.length = 0;
-      this.stockema.push({ text1: nestedItems[10], text2: nestedItems[5], text3: nestedItems[7], text4: nestedItems[9], text5: nestedItems[11], text6: nestedItems[6], text7: nestedItems[8] })
-      this.stocksma.push({ text1: nestedItems[37], text2: nestedItems[32], text3: nestedItems[34], text4: nestedItems[36], text5: nestedItems[38], text6: nestedItems[33], text7: nestedItems[35] })
+    
+     this.chartOptions2 = {
+      series: [
+        {
+          name: "EMA",
+          data: this.stockema,
+        }
+      ],
+      chart: {
+        height: 250,
+        type: "bar",
+        events: {
+          click: function(chart, w, e) {
+            // console.log(chart, w, e)
+          }
+        }
+      },title: {
+        text: 'EMA'
+      },
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FEB019",
+        "#FF4560",
+        "#775DD0",
+        "#546E7A",
+        "#26a69a",
+        "#D10CE8"
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: "75%",
+          distributed: true,
+          
+          
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontSize: '10px',
+          colors: ['#000000']}
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        show: false
+      },
+      xaxis: {
+        categories: [
+          ["EMA5"],
+          ["EMA10"],
+          ["EMA20"],
+          
+          ["EMA30"],
+          ["EMA50"],
+          ["EMA100"],
+          ["EMA200"],
+          ["Current Price"]
+        ],
+        labels: {
+          style: {
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FEB019",
+              "#FF4560",
+              "#775DD0",
+              "#546E7A",
+              "#26a69a",
+              "#D10CE8"
+            ],
+            fontSize: "12px"
+          }
+        }
+      }
+    };
+  
+     
+    this.chartOptions3 = {
+      series: [
+        {
+          name: "EMA",
+          data: this.stocksma,
+        }
+      ],
+      chart: {
+        height: 250,
+        type: "bar",
+        events: {
+          click: function(chart, w, e) {
+            // console.log(chart, w, e)
+          }
+        }
+      },title: {
+        text: 'SMA'
+      },
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FEB019",
+        "#FF4560",
+        "#775DD0",
+        "#546E7A",
+        "#26a69a",
+        "#D10CE8"
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: "75%",
+          distributed: true,
+          
+          
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontSize: '10px',
+          colors: ['#000000']}
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        show: false
+      },
+      xaxis: {
+        categories: [
+          ["sMA5"],
+          ["SMA10"],
+          ["SMA20"],
+          
+          ["SMA30"],
+          ["SMA50"],
+          ["SMA100"],
+          ["SMA200"],
+          ["Current Price"]
+        ],
+        labels: {
+          style: {
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FEB019",
+              "#FF4560",
+              "#775DD0",
+              "#546E7A",
+              "#26a69a",
+              "#D10CE8"
+            ],
+            fontSize: "12px"
+          }
+        }
+      }
+    };
+  
+      // this.chartOptions2 = {
+      //   series: [
+      //     {
+      //       name: "Inflation",
+      //       data: this.stockema
+      //     }
+      //   ],
+      //   chart: {
+      //     height: 350,
+      //     type: "bar"
+      //   },
+      //   plotOptions: {
+      //     bar: {
+      //       dataLabels: {
+      //         position: "top" // top, center, bottom
+      //       }
+      //     }
+      //   },
+      //   dataLabels: {
+      //     enabled: true,
+      //     formatter: function(val) {
+      //         return (val.toString()).slice(0,5)
+            
+      //     },
+      //     offsetY: -20,
+      //     style: {
+      //       fontSize: "12px",
+      //       colors: [
+      //         "#008FFB",
+              
+      //       ],
+      //     }
+      //   },
+  
+      //   xaxis: {
+      //     categories: [
+      //       "Jan",
+      //       "Feb",
+      //       "Mar",
+      //       "Apr",
+           
+      //     ],
+      //     position: "top",
+      //     labels: {
+      //       offsetY: -18
+      //     },
+      //     axisBorder: {
+      //       show: false
+      //     },
+      //     axisTicks: {
+      //       show: false
+      //     },
+      //     crosshairs: {
+      //       fill: {
+      //         type: "gradient",
+      //         gradient: {
+      //           colorFrom: "#D8E3F0",
+      //           colorTo: "#BED1E6",
+      //           stops: [0, 100],
+      //           opacityFrom: 0.4,
+      //           opacityTo: 0.5
+      //         }
+      //       }
+      //     },
+      //     tooltip: {
+      //       enabled: true,
+      //       offsetY: -35
+      //     }
+      //   },
+      //   fill: {
+      //     type: "gradient",
+      //     gradient: {
+      //       shade: "light",
+      //       type: "horizontal",
+      //       shadeIntensity: 0.25,
+      //       // gradientToColors: undefined,
+      //       // inverseColors: true,
+      //       // opacityFrom: 1,
+      //       // opacityTo: 1,
+      //       // stops: [50, 0, 100, 100]
+      //     }
+      //   },
+      //   yaxis: {
+      //     axisBorder: {
+      //       show: false
+      //     },
+      //     axisTicks: {
+      //       show: false
+      //     },
+      //     labels: {
+      //       show: false,
+      //       formatter: function(val) {
+      //         return val.toFixed(2);
+      //       }
+      //     }
+      //   },
+      //   title: {
+      //     text: "Monthly Inflation in Argentina, 2002",
+      //     // floating: 0,
+      //     offsetY: 320,
+      //     align: "center",
+      //     style: {
+      //       color: "#444"
+      //     }
+      //   }
+      // };
+    
     }, err => {
       console.log(err)
     })

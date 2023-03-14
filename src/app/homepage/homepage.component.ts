@@ -60,6 +60,7 @@ export type ChartOptions2 = {
   fill: ApexFill;
   responsive: ApexResponsive[];
   labels: any;
+  colors: string[];
 };
 export interface globalmarkettiles {
 
@@ -90,6 +91,7 @@ import {  ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 
 
 import {RadioButton} from 'primeng/radiobutton';
+import ApexCharts from 'apexcharts';
 
 
 export type ChartOptions5 = {
@@ -236,6 +238,9 @@ export class HomepageComponent implements OnInit {
   //@ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions5: Partial<ChartOptions5>;
+  public chartOptions6:Partial<ChartOptions1>;
+  public chartOptions1: Partial<ChartOptions1>;
+  public chartOptions2: Partial<ChartOptions2>;
   public indicesadvperc: Array<number> = [];
   public indicesname: Array<string> = [];
   public indicesdecperc: Array<number> = [];
@@ -246,10 +251,7 @@ export class HomepageComponent implements OnInit {
   // @ViewChild("chart") chart: ChartComponent;
   @ViewChild("chart1") chart1: ChartComponent;
   @ViewChild("chart2") chart2: ChartComponent;
-  
-  public chartOptions6:ChartOptions1;
-   public chartOptions1: ChartOptions1;
-   public chartOptions2: ChartOptions2;
+
    mcadvvalue: Array<any> = [];
    mcdecvalue: any
    user: string;
@@ -461,42 +463,20 @@ export class HomepageComponent implements OnInit {
        
       }
      
-      
-      
-      this.chartOptions2 = {
-        series: this.mcadvvalue1,
+      var options = {
         chart: {
-          type: "donut",
-          
+          type: 'donut',
         },
-        fill: {
-          type: "gradient",
-          colors:['#2dde98',"#fd5c63"],
-        },
-        
-        labels: ["Advance", "Decline"],
-       
-        responsive: [
-          {
-            breakpoint: 424,
-            options: {
-              chart: {
-                width: 700,
-              },
-              legend: {
-                position: 'bottom',
-              }
-            }
-          }
-        ]
-      };
+        series: this.mcadvvalue1,
+        labels: ["Advance","Decline"],
+        colors: ["#32cd32",
+        "#ff4040"]
+      }
+      
+      var chart = new ApexCharts(document.querySelector("#chart2"), options);
+      chart.render();
+      
     
-    
-  
-  
-    
-  
-     
      
     }, err => {
       console.log(err)

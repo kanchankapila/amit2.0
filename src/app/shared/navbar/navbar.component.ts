@@ -474,9 +474,7 @@ export class NavbarComponent implements OnInit {
   navigatepnifty() {
     this.window.open("/pharmanifty", "_blank") 
   }
-  navigatedashboard() {
-    this.window.open("/dashboard", "_blank") 
-  }
+  
   // chartink() {
   //   console.log("chartink start")
   //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
