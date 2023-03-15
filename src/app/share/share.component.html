@@ -923,19 +923,44 @@ NR7:{{nr7}}
         <h4 class="text-black text-center">Intraday PCR</h4>
         
           <div style="display:flex" >
-           
-        <canvas *ngIf="opstrastockpcrintraData" baseChart  [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
+         
+        <canvas baseChart  [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
-          
+        
     </div>
   
   </div>
 </div>
   </div>
 </div>
-
-
-
+<div fxLayout="row" fxLayout.xs="column">
+<div id="chart"  *ngIf="chartOptions4">
+  <apx-chart
+    [series]="chartOptions4.series"
+    [chart]="chartOptions4.chart"
+    
+    
+    [xaxis]="chartOptions4.xaxis"
+   
+   
+    [title]="chartOptions4.title"
+    [stroke]="chartOptions4.stroke"
+  ></apx-chart>
+  <div id="chart"  *ngIf="chartOptions5">
+    <apx-chart
+      [series]="chartOptions5.series"
+      [chart]="chartOptions5.chart"
+      
+      
+      [xaxis]="chartOptions5.xaxis"
+     
+     
+      [title]="chartOptions5.title"
+      [stroke]="chartOptions5.stroke"
+    ></apx-chart>
+  
+</div>
+</div>
    
 
      

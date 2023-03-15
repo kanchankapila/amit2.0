@@ -61,7 +61,7 @@ baseurl:any;
     return this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh1?eqsymbol='+eqsymbol)
   }
   getopstrastockpcrintra(eqsymbol) {
-    return this.http.get(this.baseurl+'/.netlify/functions/opstrafetchstockpcrintra?eqsymbol='+eqsymbol)
+    return this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh2?eqsymbol='+eqsymbol)
   }
   getnteodscreeners(ntoptions) {
     

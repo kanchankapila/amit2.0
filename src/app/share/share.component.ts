@@ -67,6 +67,19 @@ export type ChartOptions4 = {
   title:ApexTitleSubtitle;
   stroke: ApexStroke;
 };
+export type ChartOptions5 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  grid: ApexGrid;
+  colors: string[];
+  legend: ApexLegend;
+  title:ApexTitleSubtitle;
+  stroke: ApexStroke;
+};
 export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xaxis: ApexXAxis; yaxis: ApexYAxis; plotOptions: ApexPlotOptions; dataLabels: ApexDataLabels; stroke: ApexStroke; };
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
@@ -214,6 +227,7 @@ public titlepv: string = 'Volume Analysis';
   public chartOptions3: Partial<ChartOptions3>;
   public chartOptions: Partial<ChartOptions>;
   public chartOptions4: Partial<ChartOptions4>;
+  public chartOptions5: Partial<ChartOptions5>;
   // The Dialog shows within the target element.
   public targetElement;
 
@@ -780,8 +794,8 @@ public titlepv: string = 'Volume Analysis';
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
       setInterval(() => {this.opstrarefresh()},86400000);
-      setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
-      setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},30000);
+       setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
+      setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
      
     
   }
@@ -1170,8 +1184,7 @@ else if(this.fnomsg.includes("Short Buildup")){
        this.opstrastockpcrLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
 
       }
-      console.log(this.opstrastockpcrdata)
-      console.log(this.opstrastockpcrLabels)
+     
     });
     this.chartOptions4 = {
      series: [{
@@ -1181,7 +1194,7 @@ else if(this.fnomsg.includes("Short Buildup")){
        type: 'line',
      },
      stroke: { width: [4, 4] },
-     title : { text: 'Stock Price Trend', align: 'left' },
+     title : { text: 'EOD PCR', align: 'left' },
      legend: { position: 'top' },
      xaxis: { categories: this.opstrastockpcrLabels },    
    
@@ -1217,7 +1230,8 @@ else if(this.fnomsg.includes("Short Buildup")){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
+      console.log(this.opstrastockpcrintradata)
+      console.log(this.opstrastockpcrintraLabels)
       this.opstrastockpcrintradata.length=0;
       this.opstrastockpcrintraLabels.length=0;
       for(let val in nestedItems[0]['data']){
@@ -1226,6 +1240,24 @@ else if(this.fnomsg.includes("Short Buildup")){
      
       }
        });
+       this.chartOptions5 = {
+        series: [{
+          data: this.opstrastockpcrintradata
+        }],
+        chart: {
+          type: 'line',
+        },
+        stroke: { width: [4, 4] },
+        title : { text: 'Intra PCR', align: 'left' },
+        legend: { position: 'top' },
+        xaxis: { categories: this.opstrastockpcrintraLabels },    
+      
+       //  plotOptions: {
+       //      bar: {
+       //          colors: ['#b364ff', '#45cb85', '#11aefe','#ffbc11','#d62020','#520CE8']
+       //      }
+       //  }
+      };
     this.opstrastockpcrintraData = [{
       label: 'Price',
       data: this.opstrastockpcrintradata,
