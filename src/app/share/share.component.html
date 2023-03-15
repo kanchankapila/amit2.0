@@ -681,42 +681,6 @@ NR7:{{nr7}}
       </e-series-collection>
   </ejs-chart> 
   
-  <div class="col-lg-11 col-xs-5 grid-margin  stretch-card">
-    <div class="card">
-      <div class="card-body">
-       
-      
-        <h4 class="text-black text-center">EOD PCR</h4>
-        <div class="table-responsive">
-          <div style="display:flex" >
-            <ng-container *ngIf="opstrastockpcrChartData">
-            <canvas baseChart  [data]="opstrastockpcrChartData" [options]="stockChartOptions" [type]="stockChartType"
-            [options]="stockChartOptions"></canvas>
-          </ng-container>
-    
-    </div>
-    </div>
-  </div>
-</div>
-  </div>
-  <div class="col-lg-11 col-xs-5 grid-margin  stretch-card">
-    <div class="card">
-      <div class="card-body" >
-       
-      
-        <h4 class="text-black text-center">Intraday PCR</h4>
-        
-          <div style="display:flex" >
-            <ng-container *ngIf="opstrastockpcrintraData">
-        <canvas baseChart  [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
-          [options]="stockChartOptions"></canvas>
-            </ng-container>
-    </div>
-  
-  </div>
-</div>
-  </div>
-
   <div fxLayout="row" fxLayout.xs="column">
     <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
       <div class="card">
@@ -932,7 +896,43 @@ NR7:{{nr7}}
     </div>
   </p-tabPanel>
 </p-tabView>
-
+<div fxLayout="row" fxLayout.xs="column">
+  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
+    <div class="card" >
+      <div class="card-body " *ngIf="chartOptions4">
+       
+      
+        <h4 class="text-black text-center">EOD PCR</h4>
+        <div class="table-responsive" *ngIf="opstrastockpcrChartData">
+          <div style="display:flex" >
+            
+            <canvas baseChart  [data]="opstrastockpcrChartData" [options]="stockChartOptions" [type]="stockChartType"
+            [options]="stockChartOptions"></canvas>
+    
+    
+    </div>  
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body" >
+       
+      
+        <h4 class="text-black text-center">Intraday PCR</h4>
+        
+          <div style="display:flex" >
+           
+        <canvas *ngIf="opstrastockpcrintraData" baseChart  [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+          
+    </div>
+  
+  </div>
+</div>
+  </div>
+</div>
 
 
 

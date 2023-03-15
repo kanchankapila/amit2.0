@@ -14,11 +14,12 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
  
       // setup
       browser = await puppeteer.launch({
-             args: chromium.args,
-           
+              // args: chromium.args,
+             args: ['--no-sandbox'],
         executablePath: executablePath,
          headless:chromium.headless,
           ignoreHTTPSErrors: true,
+          timeout:0
            
       })
       page = await browser.newPage();
@@ -33,8 +34,8 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
       
       // Use page cache when loading page.
       await page.type('#username', 'amit.kapila.2009@gmail.com');
-    
-      await page.type('#password', process.env.OPSTRA_PASSWORD);
+    console.log(process.env.OPSTRA_PASSWORD)
+      await page.type('#password', 'Angular789\n');
  
    
      cookie= await page.cookies()
@@ -60,7 +61,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
          
-          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid['jsessionid']}; _gat=1;`, 
+          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid}; _gat=1;`, 
             
         },
         "body": null,
@@ -98,6 +99,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
       }
      
       const data = await response.json();
+      console.log(data)
       let compressedData = JSON.stringify({ data });
       compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
       process.env.opstra1 =compressedData;
@@ -112,7 +114,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
         body: JSON.stringify({ msg: error.message }),
       };
     } finally {
-        
+       await browser.close
     }
   };
   const handler = async (event) => {
@@ -122,7 +124,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
     // 
     return {
       statusCode: 200,
-      body:process.env.opstra
+      body:process.env.opstra1
     };
   };
   
