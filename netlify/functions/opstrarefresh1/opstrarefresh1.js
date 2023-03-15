@@ -3,52 +3,25 @@ const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
 const fetch = require('node-fetch')
-
+const { MongoClient } = require('mongodb');
+const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnifiedTopology: true });
 const opstrafetch = async (eqsymbol,event,context,callback) => {
   
-    let browser = null
-    console.log('spawning chrome headless')
-    try {
-      const start = Date.now();
-      // const executablePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
-      // setup
-      browser = await puppeteer.launch({
-              // args: chromium.args,
-             args: ['--no-sandbox'],
-        executablePath: executablePath,
-         headless:chromium.headless,
-          ignoreHTTPSErrors: true,
-          timeout:0
-           
-      })
-      page = await browser.newPage();
-      await page.setCacheEnabled(true)
-      
-      const targetUrl = 'https://opstra.definedge.com/ssologin'
-      await page.goto(targetUrl, {
-        waitUntil: ["domcontentloaded"]
-      })
- 
-     
-      
-      // Use page cache when loading page.
-      await page.type('#username', 'amit.kapila.2009@gmail.com');
-    console.log(process.env.OPSTRA_PASSWORD)
-      await page.type('#password', process.env.OPSTRA_PASSWORD);
- 
-   
-     cookie= await page.cookies()
     
-    console.log(cookie)
+      
+  
+    try {
+      await client1.connect();
+      const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
+ 
+     
+      
+   console.log(jsessionid);
+    
+
    
      
-    for (let val in cookie){
-     
-        if (cookie[val].name == 'JSESSIONID'){
-          jsessionid=cookie[val].value
-         console.log(jsessionid)
-       }}
+   
        
        const response = await fetch("https://opstra.definedge.com/api/futures/pcr/chart/"+eqsymbol, {
         "headers": {
@@ -61,39 +34,14 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
          
-          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid}; _gat=1;`, 
+          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid['jsessionid']}; _gat=1;`, 
             
         },
         "body": null,
         "method": "GET"
       }
        )
-      // const data = {
-      //   "collection": "cookie",
-      //   "database": "Opstracookie",
-      //   "dataSource": "Cluster0",
-      //   "filter":{},
-      //   "update":{$set: {
-      //     "jsessionid":  process.env.jsessionid,
-          
-      //     "time": start
-      //   }},
-      //   "upsert":true
-      //   };
-      //   const config = {
-      //     method: 'post',
-      //     url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Access-Control-Request-Headers': '*',
-      //       'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
-      //       'Accept': 'application/ejson'
-      //     },
-      //     data,
-      // };
-      // const result = await axios(config);
-            
-      // return response data
+  
       if (!response.ok) {
         return { statusCode: response.status, body: response.statusText };
       }
@@ -114,7 +62,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
         body: JSON.stringify({ msg: error.message }),
       };
     } finally {
-       await browser.close
+       await client1.close
     }
   };
   const handler = async (event) => {

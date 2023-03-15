@@ -793,7 +793,7 @@ public titlepv: string = 'Volume Analysis';
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
-      setInterval(() => {this.opstrarefresh()},86400000);
+      setInterval(() => {this.opstrarefresh()},60000);
        setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
       setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
      
