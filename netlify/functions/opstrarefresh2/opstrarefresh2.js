@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer-core')
 const axios = require('axios');
 const fetch = require('node-fetch')
 
-const opstrafetch = async (eqsymbol,event,context,callback) => {
+const opstrafetch2 = async (eqsymbol,event,context,callback) => {
   
     let browser = null
     console.log('spawning chrome headless')
@@ -50,7 +50,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
          console.log(jsessionid)
        }}
        
-       const response = await fetch("https://opstra.definedge.com/api/futures/pcr/chart/"+eqsymbol, {
+       const response = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
         "headers": {
           "accept": "application/json, text/plain, */*",
           "accept-language": "en-US,en;q=0.9",
@@ -61,7 +61,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
          
-          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid}; _gat=1;`, 
+          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid['jsessionid']}; _gat=1;`, 
             
         },
         "body": null,
@@ -102,10 +102,10 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
       console.log(data)
       let compressedData = JSON.stringify({ data });
       compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
-      process.env.opstra1 =compressedData;
+      process.env.opstra2 =compressedData;
       return {
         statusCode: 200,
-        body: process.env.opstra1,
+        body: process.env.opstra2,
       };
     } catch (error) {
       console.error(error);
@@ -119,12 +119,12 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
   };
   const handler = async (event) => {
     const { eqsymbol } = event.queryStringParameters;
-    await opstrafetch( eqsymbol);
+    await opstrafetch2( eqsymbol);
    
     // 
     return {
       statusCode: 200,
-      body:process.env.opstra1
+      body:process.env.opstra2
     };
   };
   
