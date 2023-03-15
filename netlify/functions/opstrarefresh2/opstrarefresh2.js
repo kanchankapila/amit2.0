@@ -1,54 +1,26 @@
 
+
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
 const fetch = require('node-fetch')
-
+const { MongoClient } = require('mongodb');
+const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnifiedTopology: true });
 const opstrafetch2 = async (eqsymbol,event,context,callback) => {
   
-    let browser = null
-    console.log('spawning chrome headless')
-    try {
-      const start = Date.now();
-      //  const executablePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
-      // setup
-      browser = await puppeteer.launch({
-              // args: chromium.args,
-             args: ['--no-sandbox'],
-        executablePath: executablePath,
-         headless:chromium.headless,
-          ignoreHTTPSErrors: true,
-          timeout:0
-           
-      })
-      page = await browser.newPage();
-      await page.setCacheEnabled(true)
-      
-      const targetUrl = 'https://opstra.definedge.com/ssologin'
-      await page.goto(targetUrl, {
-        waitUntil: ["domcontentloaded"]
-      })
- 
-     
-      
-      // Use page cache when loading page.
-      await page.type('#username', 'amit.kapila.2009@gmail.com');
-    console.log(process.env.OPSTRA_PASSWORD)
-      await page.type('#password', process.env.OPSTRA_PASSWORD);
- 
-   
-     cookie= await page.cookies()
     
-    console.log(cookie)
+      
+  
+    try {
+      await client1.connect();
+      const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
+ 
+     
+      
+   console.log(jsessionid);
+
+  
    
-     
-    for (let val in cookie){
-     
-        if (cookie[val].name == 'JSESSIONID'){
-          jsessionid=cookie[val].value
-         console.log(jsessionid)
-       }}
        
        const response = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
         "headers": {
