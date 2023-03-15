@@ -10,8 +10,8 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
     console.log('spawning chrome headless')
     try {
       const start = Date.now();
-      // const executablePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+      //  const executablePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
       // setup
       browser = await puppeteer.launch({
               // args: chromium.args,
@@ -35,7 +35,7 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
       // Use page cache when loading page.
       await page.type('#username', 'amit.kapila.2009@gmail.com');
     console.log(process.env.OPSTRA_PASSWORD)
-      await page.type('#password', 'Angular789\n');
+      await page.type('#password', process.env.OPSTRA_PASSWORD);
  
    
      cookie= await page.cookies()
@@ -61,7 +61,7 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
          
-          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid['jsessionid']}; _gat=1;`, 
+          "cookie": `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741;JSESSIONID=${jsessionid}; _gat=1;`, 
             
         },
         "body": null,

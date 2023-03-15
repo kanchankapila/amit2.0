@@ -11,7 +11,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
     try {
       const start = Date.now();
       // const executablePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
       // setup
       browser = await puppeteer.launch({
               // args: chromium.args,
@@ -35,7 +35,7 @@ const opstrafetch = async (eqsymbol,event,context,callback) => {
       // Use page cache when loading page.
       await page.type('#username', 'amit.kapila.2009@gmail.com');
     console.log(process.env.OPSTRA_PASSWORD)
-      await page.type('#password', 'Angular789\n');
+      await page.type('#password', process.env.OPSTRA_PASSWORD);
  
    
      cookie= await page.cookies()
