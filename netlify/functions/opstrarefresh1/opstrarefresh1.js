@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer-core')
 const axios = require('axios');
 const fetch = require('node-fetch')
 
-const opstrafetch = async (event,context,callback) => {
+const opstrafetch = async (eqsymbol,event,context,callback) => {
   
     let browser = null
     console.log('spawning chrome headless')

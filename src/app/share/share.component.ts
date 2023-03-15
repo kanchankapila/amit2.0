@@ -584,6 +584,8 @@ public titlepv: string = 'Volume Analysis';
   public DelivChartType: ChartType = 'bar';
   public stockChartData1y: ChartConfiguration['data']
   public macdChartData: ChartConfiguration['data']
+  public opstrastockpcrChartData: ChartConfiguration['data']
+  
   public rsiChartData: ChartConfiguration['data']
   public maChartData: ChartConfiguration['data']
   public bbChartData: ChartConfiguration['data']
@@ -715,8 +717,15 @@ public titlepv: string = 'Volume Analysis';
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
    await Promise.all([
+
     this.getstockmaema(this.eqsymbol,this.mcsymbol),
+
     this.getstocktoday(this.mcsymbol, this.eqsymbol),
+    this.getopstrastockpcr(this.eqsymbol),
+
+    this.getopstrastockpcrintra(this.eqsymbol),
+    
+
     this.getmcpricevolume(this.mcsymbol),
     this.getetshareholding(this.stockid),
     this.gettrendlynestocks2(this.tlid),
@@ -1146,6 +1155,16 @@ else if(this.fnomsg.includes("Short Buildup")){
       console.log(this.opstrastockpcrdata)
       console.log(this.opstrastockpcrLabels)
     });
+    this.opstrastockpcrChartData = {
+      datasets: [
+        {
+          label: 'macd',
+          data: this.opstrastockpcrdata
+        }
+       ],
+      labels: this.opstrastockpcrLabels
+    };
+   
     this.opstrastockpcrData = [{
       label: 'Price',
       data: this.opstrastockpcrdata,
