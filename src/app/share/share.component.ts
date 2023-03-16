@@ -1198,11 +1198,7 @@ else if(this.fnomsg.includes("Short Buildup")){
      legend: { position: 'top' },
      xaxis: { categories: this.opstrastockpcrLabels },    
    
-    //  plotOptions: {
-    //      bar: {
-    //          colors: ['#b364ff', '#45cb85', '#11aefe','#ffbc11','#d62020','#520CE8']
-    //      }
-    //  }
+  
    };
    
  
@@ -1956,16 +1952,18 @@ else if(this.fnomsg.includes("Short Buildup")){
   
        this.dataValues.length=0;  
         this.stockhcdate1.length=0; 
-        if(nestedItems[5][0].hasOwnProperty('value') ){
+        if(nestedItems[6][0].hasOwnProperty('value') ){
+          for (let val in nestedItems[6]) {
+           
+            this.stockhcdate1.push({x:(new Date(nestedItems[6][val]["time"] * 1000).toUTCString()),y:(nestedItems[6][val]["value"])})     
+          }}
+        else if(nestedItems[5][0].hasOwnProperty('value') ){
       for (let val in nestedItems[5]) {
        
-        this.stockhcdate1.push({x:(new Date(nestedItems[5][val]["time"] * 1000).toUTCString()),y:(nestedItems[5][val]["value"])})     
+        this.stockhcdate1.push({x:(new Date(nestedItems[5][val]["time"] * 1000).toUTCString()),y:(nestedItems[5][val]["value"])})  
+           
       }
-    } else  if(nestedItems[6][0].hasOwnProperty('value') ){
-      for (let val in nestedItems[6]) {
-       
-        this.stockhcdate1.push({x:(new Date(nestedItems[6][val]["time"] * 1000).toUTCString()),y:(nestedItems[6][val]["value"])})     
-      }}
+    }  
     
 
  
@@ -2016,14 +2014,14 @@ this.stockhcdate1.map((value: number, index: number) => {
 })
 }
 
-   getstocktoday(mcsymbol,eqsymbol) {
+   async getstocktoday(mcsymbol,eqsymbol) {
    
     
      this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
- 
+ console.log(nestedItems)
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
      

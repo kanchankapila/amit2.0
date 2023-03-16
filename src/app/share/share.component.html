@@ -140,7 +140,7 @@
     <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
       <div class="content card">
     <div class=" grid-margin stretch-card">
-      <div class="content  container">
+      <div class="content  ">
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
         <div fxFlex="20" fxFlex.xs="50%" fxFlex.sm="100%" *ngFor="let news of newscard" >
           <p-card >
@@ -184,8 +184,8 @@
   </div>
   <div fxLayout="row" fxLayout.xs="column">
   <div class="scene col-lg-13 col-xs-6 ">
-    <div class="card22 text-center content  container "*ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
-      <div class="card22__face card22__face--front text-center type1-bold " [ngClass]="{ 
+    <div class="card22 text-center   "*ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
+      <div class="card22__face card22__face--front text-center type1-bold  content" [ngClass]="{ 
         'bg-gradient-bull text-center text-green': tile.text3 > 0,
         'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
         'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
@@ -202,7 +202,7 @@
 </div>
         
       </div>
-      <div class="card22__face card22__face--back type1-bold " [ngClass]="{ 
+      <div class="card22__face card22__face--back type1-bold  content" [ngClass]="{ 
         'bg-gradient-bull text-center text-green': tile.text3 > 0,
         'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
         'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
@@ -228,8 +228,8 @@ Lower Circuit:{{tile.text8}}<br>
 <br>
 <br>
 <div class="scene" >
-  <div class="card22 content  container">
-<div class="card22__face card22__face--front text-center type1-bold ">
+  <div class="card22 content  ">
+<div class="card22__face card22__face--front text-center type1-bold card content">
   
   <div id="chart"  *ngIf="chartOptions2">
     <apx-chart
@@ -249,7 +249,7 @@ Lower Circuit:{{tile.text8}}<br>
   
 </div>
 
-  <div class="card22__face card22__face--back text-center type1-bold ">
+  <div class="card22__face card22__face--back text-center type1-bold card content">
     <div id="chart"  *ngIf="chartOptions3">
       <apx-chart
         [series]="chartOptions3.series"
@@ -270,11 +270,39 @@ Lower Circuit:{{tile.text8}}<br>
 </div>
 
 </div>
-<div class="scene" *ngIf="datapv">
-  <div class="card22 content  container">
-<div class="card22__face card22__face--front text-center type1-bold ">
+
+<div class="scene">
+  <div class="card22 text-center text-white ">
+    <div  class=" card22__face card22__face--front type1-bold card  content " >
+         <h4 class="text-black text-center">Stock Today with S/R</h4>
+            <div class="table-responsive" >
+            <div style="display:flex" >
+      <canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
+        [options]="lineChartOptions"></canvas>
+            </div>
+            </div>
+
+
+    </div>
+ 
   
-      <ejs-chart  style='display:block;  ' [chartArea]='chartArea'   id='chartcontainer' [primaryXAxis]='primaryXAxispv'
+  
+<div  class="card22__face card22__face--back type1-bold  card content " >
+      <h4 class="text-black text-center">Stock Today </h4>
+      <div class="table-responsive" >
+        <div style="display:flex" >
+      <canvas baseChart style="min-height:250px" class="table"  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType"
+        [options]="stockChartOptions"></canvas>
+        </div>
+      </div>
+</div>
+</div>
+</div>
+<div class="scene" *ngIf="datapv">
+  <div class="card22 content  ">
+<div class="card22__face card22__face--front text-center type1-bold card content">
+  
+      <ejs-chart  style='display:block;  ' [chartArea]='chartArea'   id='chart' [primaryXAxis]='primaryXAxispv'
           [primaryYAxis]='primaryYAxispv' [title]='titlepv'  >
           <e-series-collection>
               <e-series [dataSource]='datapv' type='Bar' xName='Day' yName='cvol' name='Current Volume' columnSpacing=0.1> </e-series>
@@ -285,8 +313,8 @@ Lower Circuit:{{tile.text8}}<br>
   
 </div>
 
-  <div class="card22__face card22__face--back text-center type1-bold ">
-  <ejs-accumulationchart  id="container" #pie style='display:block;  ' [legendSettings]="legendSettingssh" [tooltip]="tooltipsh"
+  <div class="card22__face card22__face--back text-center type1-bold card content">
+  <ejs-accumulationchart  id="" #pie style='display:block;  ' [legendSettings]="legendSettingssh" [tooltip]="tooltipsh"
       [title]="titlesh" [enableBorderOnMouseMove]='false' >
       <e-accumulation-series-collection>
           <e-accumulation-series *ngIf="datash" name='Project' [dataSource]='datash' xName='DataLabelMappingName' yName='value' [startAngle]="startAngle" innerRadius="40%" [radius]="radius"
@@ -448,62 +476,7 @@ NR7:{{nr7}}
                       'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
           </mat-card>
         </div>
-        <!-- <div class="table-responsive pt-3">
-          <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFunction30" >
-            <thead>
-              <tr>
-               
-               <th>
-                  E5
-                </th>
-                <th>
-                  E10
-                </th>
-                <th>
-                  E20
-                </th>
-                <th>
-                  E30
-                </th>
-                <th>
-                  E50
-                </th>
-                <th>
-                  E100
-                </th>
-                <th>
-                  E200
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="table-success">
-                <td>
-                 {{tile.text1| number : '1.0-0'}} 
-                </td>
-                <td>
-                  {{tile.text2| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text3| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text4| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text5| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text6| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text7| number : '1.0-0'}} 
-                 </td>
-              </tr>
-              
-            </tbody>
-          </table>
-        </div> -->
+       
          
         </div>
       </div>
@@ -524,63 +497,7 @@ NR7:{{nr7}}
                       'bg-gradient-warning':tile.text1 === 'Neutral'}">{{tile.text2}}<br>{{tile.text1}}
           </mat-card>
         </div>
-        <!-- <div class="table-responsive pt-3">
-          <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFunction31" >
-            <thead>
-              <tr>
-               
-               <th>
-                  S5
-                </th>
-                <th>
-                  S10
-                </th>
-                <th>
-                  S20
-                </th>
-                <th>
-                  S30
-                </th>
-                <th>
-                  S50
-                </th>
-                <th>
-                  S100
-                </th>
-                <th>
-                  S200
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="table-success">
-                <td>
-                 {{tile.text1| number : '1.0-0'}} 
-                </td>
-                <td>
-                  {{tile.text2| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text3| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text4| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text5| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text6| number : '1.0-0'}} 
-                 </td>
-                 <td>
-                  {{tile.text7| number : '1.0-0'}} 
-                 </td>
-              </tr>
-              
-            </tbody>
-          </table>
-        
-        </div>       -->
+      
         </div>
       </div>
       </div>
@@ -596,83 +513,130 @@ NR7:{{nr7}}
 
 
   <div fxLayout="row" fxLayout.xs="column">
-  <div class="col-lg-6 col-xs-6 grid-margin  stretch-card">
-    <div class="card">
-      <h4 class="text-black text-center">Delivery Percentage</h4>
-      <div class="table-responsive">
-        <div style="display:flex" >
-      <canvas baseChart style="min-height:250px" class="table" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType"
-        [options]="stockChartOptions"></canvas>
-    </div>
-  </div>
-</div>
-</div>
-  <div class="col-lg-6 col-xs-6 grid-margin  stretch-card">
-    <div class="card">
-      <h4 class="text-black text-center">Volume</h4>
-      <div class="table-responsive">
-        <div style="display:flex" >
-      <canvas baseChart style="min-height:250px" class="table" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType"
-        [options]="stockChartOptions"></canvas>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-
-
-<div class="control-section">
-  <div>
-    <div class="table-responsive">
-     
-      <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
-          [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
-          (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' >
-          <e-stockchart-series-collection>
-              <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
-              </e-stockchart-series>
-          </e-stockchart-series-collection>
-      </ejs-stockchart>
    
-  </div>
-  </div>
+
+<div class="scene">
+  <div class="card22 text-center text-white">
+    <div  class=" card22__face card22__face--front type1-bold card content" >
+         <h4 class="text-black text-center">Delivery Percentage</h4>
+            <div class="table-responsive" >
+            <div style="display:flex" >
+              <canvas baseChart style="min-height:250px" class="table" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType"
+              [options]="stockChartOptions"></canvas>
+            </div>
+            </div>
+
+
+    </div>
+ 
+  
+  
+<div  class="card22__face card22__face--back type1-bold card content" >
+      <h4 class="text-black text-center">Volume </h4>
+      <div class="table-responsive" >
+        <div style="display:flex" >
+          <canvas baseChart style="min-height:250px;min-width:400px" class="table" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+        </div>
+      </div>
 </div>
+</div>
+</div>
+
+
+<div class="scene  ">
+  <div class="card22 text-center text-white ">
+    <div  class=" card22__face card22__face--front  card content type1-bold  " >
+         <h4 class="text-black text-center">Intraday PCR</h4>
+          <div style="display:flex">
+           <canvas baseChart style="min-height:250px" [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
+            [options]="stockChartOptions"></canvas>
+          </div>
+    
+    </div>
+  
+  
+   
+        <div  class="card22__face card22__face--back type1-bold  card content " *ngIf="chartOptions4">
+              <h4 class="text-black text-center">EOD PCR</h4>
+                <div class="table-responsive" >
+                   <div style="display:flex" >
+                       <canvas baseChart style="min-height:250px" [data]="opstrastockpcrChartData" [options]="stockChartOptions" [type]="stockChartType"
+                       [options]="stockChartOptions"></canvas>
+      
+                   </div>  
+                </div>
+         </div>
+  </div>
+  
+</div>
+</div>
+
+
+<div class="scene1">
+  <div class="control-section">
+  
+     
+  <div class="card23 text-center text-white ">
+    <div  class=" card23__face card23__face--front  card content type1-bold  " >
+         <h4 class="text-black text-center">Chart</h4>
+         <div class="table-responsive" >
+          <div style="display:flex">
+            <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
+            [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+            (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' >
+            <e-stockchart-series-collection>
+                <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
+                </e-stockchart-series>
+            </e-stockchart-series-collection>
+        </ejs-stockchart>
+          </div>
+        </div>
+    
+    </div>
+ 
+ 
+  
+   
+        <div  class="card23__face card23__face--back type1-bold  card content"  *ngIf="chartOptions4">
+              <h4 class="text-black text-center">Candle Chart</h4>
+                <div class="table-responsive" >
+                   <div style="display:flex" >
+                    <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
+                    [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
+                    (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' >
+                    <e-stockchart-axes>
+                        <e-stockchart-axis rowIndex=1 name='yAxis1' opposedPosition=true labelPosition='Inside' tickPosition='Inside'>
+                        </e-stockchart-axis>
+                    </e-stockchart-axes>
+                    <e-stockchart-rows>
+                        <e-stockchart-row height=30%></e-stockchart-row>
+                        <e-stockchart-row height=70%></e-stockchart-row>
+                    </e-stockchart-rows>
+                    <e-stockchart-series-collection>
+                        <e-stockchart-series [dataSource]='data2' type='Candle' xName='x' yName='high' yAxisName='yAxis1' high='high'
+                            low='low'> </e-stockchart-series>
+                        <e-stockchart-series [dataSource]='data2' type='Column' xName='x' yName='volume' high='high' low='low'
+                            name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
+                    </e-stockchart-series-collection>
+                </ejs-stockchart>
+      
+                   </div>  
+                </div>
+         </div>
+  </div>
+</div> 
+</div>
+
 
 <p-tabView [scrollable]="true">
   <p-tabPanel header="Today">
    
    
-      <div class="control-section">
-        <div>
-          <div class="table-responsive">
-           
-            <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
-                [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
-                (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' >
-                <e-stockchart-axes>
-                    <e-stockchart-axis rowIndex=1 name='yAxis1' opposedPosition=true labelPosition='Inside' tickPosition='Inside'>
-                    </e-stockchart-axis>
-                </e-stockchart-axes>
-                <e-stockchart-rows>
-                    <e-stockchart-row height=30%></e-stockchart-row>
-                    <e-stockchart-row height=70%></e-stockchart-row>
-                </e-stockchart-rows>
-                <e-stockchart-series-collection>
-                    <e-stockchart-series [dataSource]='data2' type='Candle' xName='x' yName='high' yAxisName='yAxis1' high='high'
-                        low='low'> </e-stockchart-series>
-                    <e-stockchart-series [dataSource]='data2' type='Column' xName='x' yName='volume' high='high' low='low'
-                        name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
-                </e-stockchart-series-collection>
-            </ejs-stockchart>
    
-      </div>
-    </div>
-      </div>
-     
     
-    
-      <ejs-chart *ngIf="dataValues" style='display:block' id='chartcontainer1' [title]='title' [primaryXAxis]='primaryXAxis2' [primaryYAxis]='primaryYAxis2'
+    <div class="Content card">
+      <ejs-chart *ngIf="dataValues" style='display:block' id='chart1' [title]='title' [primaryXAxis]='primaryXAxis2' [primaryYAxis]='primaryYAxis2'
       [tooltip]='tooltip'  [chartArea]='chartArea'  >
       <e-series-collection>
           <e-series [dataSource]='dataValues' type='MultiColoredLine' xName='XValue' yName='YValue' name='Time' width=0.5 pointColorMapping='color'>
@@ -680,37 +644,12 @@ NR7:{{nr7}}
          
       </e-series-collection>
   </ejs-chart> 
-  
-  <div fxLayout="row" fxLayout.xs="column">
-    <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
-      <div class="card">
-        <div class="card-body" >
-        <h4 class="text-black text-center">Stock Today with S/R</h4>
-        <div class="table-responsive">
-          <div style="display:flex" >
-        <canvas baseChart style="min-height:400px" class="table"  [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
-          [options]="lineChartOptions"></canvas>
-      </div>
-    </div>
-  </div>
 </div>
-    </div>
-    
-    
-    <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
-      <div class="card">
-        <div class="card-body" >
-        <h4 class="text-black text-center">Stock Today </h4>
-        <div class="table-responsive">
-          <div style="display:flex" >
-        <canvas baseChart style="min-height:400px" class="table"  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType"
-          [options]="stockChartOptions"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
-  </div>
+
+
+
+
+
   
 </p-tabPanel>
 
@@ -882,12 +821,12 @@ NR7:{{nr7}}
         <h4 class="text-black text-center">Stock - 1 Year </h4>
         <div class="table-responsive">
           <div style="display:flex" >
-        <ng-container *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
-          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng-container>
-          <ng-container *ngIf="chartBarOptions">
+        <ng- *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
+          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng->
+          <ng- *ngIf="chartBarOptions">
         <apx-chart [series]="chartBarOptions.series" [chart]="chartBarOptions.chart" [xaxis]="chartBarOptions.xaxis"
           [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
-          [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng-container>
+          [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng->
       </div>
     </div>
   </div>
@@ -896,73 +835,9 @@ NR7:{{nr7}}
     </div>
   </p-tabPanel>
 </p-tabView>
-<div fxLayout="row" fxLayout.xs="column">
-  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
-    <div class="card" >
-      <div class="card-body " *ngIf="chartOptions4">
-       
-      
-        <h4 class="text-black text-center">EOD PCR</h4>
-        <div class="table-responsive" *ngIf="opstrastockpcrChartData">
-          <div style="display:flex" >
-            
-            <canvas baseChart  [data]="opstrastockpcrChartData" [options]="stockChartOptions" [type]="stockChartType"
-            [options]="stockChartOptions"></canvas>
-    
-    
-    </div>  
-    </div>
-  </div>
-</div>
-  </div>
-  <div class="col-lg-6 col-xs-5 grid-margin  stretch-card">
-    <div class="card">
-      <div class="card-body" >
-       
-      
-        <h4 class="text-black text-center">Intraday PCR</h4>
-        
-          <div style="display:flex" >
-         
-        <canvas baseChart  [datasets]="opstrastockpcrintraData" [labels]="opstrastockintraLabels" [type]="stockChartType"
-          [options]="stockChartOptions"></canvas>
-        
-    </div>
+
   
-  </div>
-</div>
-  </div>
-</div>
-<div fxLayout="row" fxLayout.xs="column">
-<div id="chart"  *ngIf="chartOptions4">
-  <apx-chart
-    [series]="chartOptions4.series"
-    [chart]="chartOptions4.chart"
-    
-    
-    [xaxis]="chartOptions4.xaxis"
-   
-   
-    [title]="chartOptions4.title"
-    [stroke]="chartOptions4.stroke"
-  ></apx-chart>
-</div>
-  <div id="chart"  *ngIf="chartOptions5">
-    <apx-chart
-      [series]="chartOptions5.series"
-      [chart]="chartOptions5.chart"
-      
-      
-      [xaxis]="chartOptions5.xaxis"
-     
-     
-      [title]="chartOptions5.title"
-      [stroke]="chartOptions5.stroke"
-    ></apx-chart>
-  
-</div>
-</div>
-   
+
 
      
  
@@ -970,7 +845,7 @@ NR7:{{nr7}}
 
 
 <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
-  <div class="content card container">
+  <div class="content card ">
     <h4 class="text-black text-center">Stocks in the same sector</h4>
     <div fxLayout="row wrap" fxLayoutGap="10px grid">
       <div fxFlex="15" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%" 
