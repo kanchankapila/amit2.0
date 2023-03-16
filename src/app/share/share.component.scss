@@ -35,10 +35,14 @@
       }
       
     }
-    .card22 {
+    
+   
+  }
+  
+  .card22 {
       position: relative;
-      width: 350px;
-      height:200px;
+      width: 370px;
+      height:300px;
       // text-align:center;
       // object-fit: cover;
       cursor: pointer;
@@ -72,8 +76,81 @@
       
     }
 
-   
-  }
+    .scene1{
+      width: 900px;
+      display: flex;
+      perspective: 800px;
+    
+      .card {
+        position: relative;
+        width: 125px;
+        height: 55px;
+        transition: 1s ease-in-out;
+        transform-style: preserve-3d;
+    
+        &:hover {
+          transform: rotateY(0.5turn);
+        }
+      .card-wrapper {
+          text-align: center;
+      }
+        .card__face {
+          position: absolute;
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          border-radius: 3px;
+          backface-visibility: hidden;
+          transition: 1s ease-in-out;
+          
+    
+          &--back {
+            transform: rotateY(0.5turn);
+          }
+        }
+        
+      }
+      
+     
+    }
+    
+    .card23 {
+        position: relative;
+        width: 370px;
+        height:400px;
+        // text-align:center;
+        // object-fit: cover;
+        cursor: pointer;
+        text-size-adjust:inherit;
+        transition: 1s ease-in-out;
+        transform-style: preserve-3d;
+    
+        &:hover {
+          transform: rotateY(0.5turn);
+        }
+    
+        .card23__face {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          
+          border-radius: 3px;
+          backface-visibility: hidden;
+          transition: 1s ease-in-out;
+          // object-fit: cover;
+          // -webkit-box-reflect: below 0
+            // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+    
+         
+    
+          &--back {
+            transform: rotateY(0.5turn);
+          }
+        }
+        
+      }
+  
   .marginbottom{
     margin-bottom:5px;
     margin-left:5px
@@ -81,6 +158,7 @@
   .text-center{
     text-align: center;
   }
+
 :host ::ng-deep .p-button {
   margin: 0 .1rem 0 0;
   min-width: 15rem;
