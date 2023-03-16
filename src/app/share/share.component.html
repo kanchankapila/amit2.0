@@ -821,12 +821,12 @@ NR7:{{nr7}}
         <h4 class="text-black text-center">Stock - 1 Year </h4>
         <div class="table-responsive">
           <div style="display:flex" >
-        <ng- *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
-          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng->
-          <ng- *ngIf="chartBarOptions">
+        <ng-container *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
+          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng-container>
+          <ng-container *ngIf="chartBarOptions">
         <apx-chart [series]="chartBarOptions.series" [chart]="chartBarOptions.chart" [xaxis]="chartBarOptions.xaxis"
           [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
-          [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng->
+          [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng-container>
       </div>
     </div>
   </div>
