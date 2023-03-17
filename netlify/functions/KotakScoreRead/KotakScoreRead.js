@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 
 
 
-const KotakHealthScore = async (stock,event, context) => {
+const KotakScore = async (stock,event, context) => {
   try {
     
  
@@ -47,7 +47,7 @@ const handler = async (event) => {
 
    const stock = (event.queryStringParameters.stock);
  
-  await KotakHealthScore(stock);
+  await KotakScore(stock);
   
 
  return {

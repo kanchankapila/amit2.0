@@ -1,4 +1,4 @@
-
+///Used for providing Sector Id for stocks in same sector in share.component.ts
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI);
 const fetch = require('node-fetch')

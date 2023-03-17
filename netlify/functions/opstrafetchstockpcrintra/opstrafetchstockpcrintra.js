@@ -7,7 +7,7 @@ const opstraintra = async (eqsymbol) => {
   try {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection("cookie").findOne({}, { projection: { _id: 0, jsessionid: 1 } }); 
-   console.log(jsessionid)
+   
   const response = await fetch("https://opstra.definedge.com/api/futures/pcrintra/chart/"+eqsymbol, {
         "headers": {
           "accept": "application/json, text/plain, */*",

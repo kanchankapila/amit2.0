@@ -866,7 +866,7 @@ showMaximizableDialog4() {
  
 
  async getkotakview(eqsymbol) {
-    this.dataApi.getkotakhealthscore(eqsymbol).subscribe(data => {
+    this.dataApi.getkotakscore(eqsymbol).subscribe(data => {
       let nestedItems = Object.keys(data).map(key => {
         return data[key];
       });

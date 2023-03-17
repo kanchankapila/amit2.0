@@ -397,3 +397,25 @@ cardpcr{
   margin-right:10px;
   display:inline-block;
 }
+@media screen and (max-width: 424px) {
+  .card23__face.card23__face--front {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  #stockChartDefault {
+    display: inline-block !important;
+  }
+
+  #StockChartCandle e-stockchart-row {
+    height: 20%;
+  }
+
+  #StockChartCandle e-stockchart-axis {
+    height: 10%;
+  }
+}

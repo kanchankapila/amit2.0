@@ -68,6 +68,11 @@ baseurl:any;
     return this.http.post(this.baseurl+'/.netlify/functions/ntscreeners',ntoptions)
   
   }
+  gettrendlynepostdvm(tlid){
+    console.log(tlid)
+
+    return this.http.post(this.baseurl+'/.netlify/functions/trendlyne3',tlid)
+  }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
     return this.http.get(this.baseurl+'/.netlify/functions/news?bqnames='+bqnames+'&dateday5='+dateday5+'&datetoday='+datetoday)
@@ -92,9 +97,9 @@ baseurl:any;
   getkite1(timeframe,eqsymbol){
     return this.http.get(this.baseurl + '/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
   }
-  getkotakhealthscore(stock) {
+  getkotakscore(stock) {
    
-    return this.http.get(this.baseurl+'/.netlify/functions/KotakHealthScoreRead?stock='+stock)
+    return this.http.get(this.baseurl+'/.netlify/functions/KotakScoreRead?stock='+stock)
     
   }
  
@@ -219,9 +224,7 @@ baseurl:any;
   getmccombine(mcsymbol){
     return this.http.post(this.baseurl + '/mccombine',mcsymbol)
   }
-  gettrendlynepostdvm(tlid){
-    return this.http.post(this.baseurl + '/trendlynepostdvm',tlid)
-  }
+  
   getmcmovingaveragesview(stockisin,dbname) {
     
     return this.http.get(this.baseurl + '/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)

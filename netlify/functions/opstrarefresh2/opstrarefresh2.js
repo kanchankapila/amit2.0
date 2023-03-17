@@ -17,7 +17,7 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
  
      
       
-   console.log(jsessionid);
+  
 
   
    
@@ -71,7 +71,7 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
       }
      
       const data = await response.json();
-      console.log(data)
+   
       let compressedData = JSON.stringify({ data });
       compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
       process.env.opstra2 =compressedData;

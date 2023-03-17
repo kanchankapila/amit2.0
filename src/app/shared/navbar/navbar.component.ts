@@ -528,6 +528,26 @@ export class NavbarComponent implements OnInit {
     }
     )
   }
+  gettrendlynepostdvm() {
+      console.log("trendlyne post durability/Volatility/Momentum score start")
+      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+      console.log('Date is' + this.datetoday)
+      var d = new Date();
+      console.log(d.getHours()+":"+d.getMinutes())
+      this.tlid.length=0;
+      for (let val in this.stock) {
+        this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+        
+      }
+     
+      this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
+  
+  
+      }, err => {
+        console.log(err)
+      }
+      )
+    }
   nsepostdata2() {
     console.log("eq sector combine start")
     for (let val in this.fnostock) {
