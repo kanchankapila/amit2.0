@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const qs=require('querystring')
-// const handler = async function () {
+
   exports.handler = async (event, context,callback) => {
     const ntoptions = (event.queryStringParameters.ntoptions);
   try {
@@ -92,23 +92,5 @@ const qs=require('querystring')
 }
 
 
-// const handler = async (event) => {
- 
-//   const ntoptions = (event.queryStringParameters.ntoptions);
-  
-//      console.log((ntoptions))
- 
-  
-//   await ntfetch(ntoptions);
-
-//  return {
-//    statusCode: 200,
-//    body: process.env.data1,
-  
- 
-//  };
-// };
-
-// module.exports = { handler }
 
 

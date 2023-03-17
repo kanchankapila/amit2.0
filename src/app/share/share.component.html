@@ -571,62 +571,52 @@ NR7:{{nr7}}
   
 </div>
 </div>
-
-
-<div class="scene1">
-  <div class="control-section">
-  
+<div class="control-section">
+  <div>
+    <div class="table-responsive">
      
-  <div class="card23 text-center text-white ">
-    <div  class=" card23__face card23__face--front  card content type1-bold  " >
-         <h4 class="text-black text-center">Chart</h4>
-         <div class="table-responsive" >
-          <div style="display:flex">
-            <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
-            [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
-            (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' >
-            <e-stockchart-series-collection>
-                <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
-                </e-stockchart-series>
+      <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
+          [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+          (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' >
+          <e-stockchart-series-collection>
+              <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
+              </e-stockchart-series>
             </e-stockchart-series-collection>
-        </ejs-stockchart>
-          </div>
+          </ejs-stockchart>
         </div>
-    
+      </div>
     </div>
+
+    <div class="control-section">
+      <div>
+        <div class="table-responsive">
+         
+          <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
+              [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
+              (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' >
+              <e-stockchart-axes>
+                  <e-stockchart-axis rowIndex=1 name='yAxis1' opposedPosition=true labelPosition='Inside' tickPosition='Inside'>
+                  </e-stockchart-axis>
+              </e-stockchart-axes>
+              <e-stockchart-rows>
+                  <e-stockchart-row height=30%></e-stockchart-row>
+                  <e-stockchart-row height=70%></e-stockchart-row>
+              </e-stockchart-rows>
+              <e-stockchart-series-collection>
+                  <e-stockchart-series [dataSource]='data2' type='Candle' xName='x' yName='high' yAxisName='yAxis1' high='high'
+                      low='low'> </e-stockchart-series>
+                  <e-stockchart-series [dataSource]='data2' type='Column' xName='x' yName='volume' high='high' low='low'
+                      name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
+              </e-stockchart-series-collection>
+          </ejs-stockchart>
  
- 
-  
-   
-        <div  class="card23__face card23__face--back type1-bold  card content"  *ngIf="chartOptions4">
-              <h4 class="text-black text-center">Candle Chart</h4>
-                <div class="table-responsive" >
-                   <div style="display:flex" >
-                    <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
-                    [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
-                    (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' >
-                    <e-stockchart-axes>
-                        <e-stockchart-axis rowIndex=1 name='yAxis1' opposedPosition=true labelPosition='Inside' tickPosition='Inside'>
-                        </e-stockchart-axis>
-                    </e-stockchart-axes>
-                    <e-stockchart-rows>
-                        <e-stockchart-row height=30%></e-stockchart-row>
-                        <e-stockchart-row height=70%></e-stockchart-row>
-                    </e-stockchart-rows>
-                    <e-stockchart-series-collection>
-                        <e-stockchart-series [dataSource]='data2' type='Candle' xName='x' yName='high' yAxisName='yAxis1' high='high'
-                            low='low'> </e-stockchart-series>
-                        <e-stockchart-series [dataSource]='data2' type='Column' xName='x' yName='volume' high='high' low='low'
-                            name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
-                    </e-stockchart-series-collection>
-                </ejs-stockchart>
-      
-                   </div>  
-                </div>
-         </div>
+    </div>
   </div>
-</div> 
-</div>
+    </div>
+   
+  
+  
+
 
 
 <p-tabView [scrollable]="true">

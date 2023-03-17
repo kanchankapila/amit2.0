@@ -38,14 +38,14 @@ exports.handler = async (event,context,callback) => {
    
      cookie= await page.cookies()
     
-    console.log(cookie)
+   
    
      
     for (let val in cookie){
      
         if (cookie[val].name == 'JSESSIONID'){
           process.env.jsessionid=cookie[val].value
-         console.log( process.env.jsessionid)
+         
        }}
        
     
