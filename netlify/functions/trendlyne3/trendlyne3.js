@@ -1,10 +1,11 @@
 const fetch = require('node-fetch')
 
-const trendlynefetch = async (tlid,event, context,callback) => {
+exports.handler = async (event, context,callback) => {
   try {
     
    
-    // const tlid = (event.queryStringParameters.tlid);
+    const tlid = (event.body);
+    console.log(tlid)
     const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + tlid + '/SMA/', {
       headers: { Accept: 'application/json' },
     })
@@ -32,20 +33,6 @@ const trendlynefetch = async (tlid,event, context,callback) => {
   }
 }
 
-const handler = async (event) => {
-  const tlid = (event.body);
-  console.log(tlid)
- 
- //  await chrome();
-  await trendlynefetch(tlid);
 
- return {
-   statusCode: 200,
-   body: process.env.data12,
-  
- 
- };
-};
-module.exports = { handler }
 
 

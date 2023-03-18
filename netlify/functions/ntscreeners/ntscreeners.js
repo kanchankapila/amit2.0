@@ -32,7 +32,7 @@ const qs=require('querystring')
     const data1 = await response1.json()
   
     process.env.data1 = (data1['resultData']['token'])
-    console.log(process.env.data1)
+    
    
     
     let args;
