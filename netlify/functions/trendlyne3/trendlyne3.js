@@ -1,18 +1,26 @@
 const fetch = require('node-fetch')
-
+const { MongoClient } = require('mongodb');
 const trendlyne = async (tlid,event, context,callback) => {
   try {
     
-   
+    const uri = 'mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority';
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    await client.connect();
+  
+    const db = client.db('DVM');
+    const collection = db.collection('DVM');
     
     url=JSON.parse(tlid)
+  
     const results=await Promise.all(url.map(async  url => {
       try{
-        console.log(url.tlid)
-        const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + url.tlid + '/SMA/', {
+        // console.log(url.tlid)
+        const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + url.tlid + '/SMA/?format=json', {
           headers: { Accept: 'application/json' },
         })
-        return{url,data: response.data};
+        const data1 = await response.json()
+        console.log(data1.body['stockData'])
+        return{url,data: data1};
       } catch(error){
         return{url,error:error.message}
       }
@@ -24,8 +32,17 @@ const trendlyne = async (tlid,event, context,callback) => {
       return { statusCode: results.status, body: results.statusText }
     }
    
-    const data = await results.json()
-    console.log(data)
+   
+    const data = {
+      ...obj,
+      output: data1,
+    };
+
+    const result = await collection.insertOne(data1);
+    results.push(result);
+  
+
+  
     // process.env.data12=JSON.stringify({data});
     return {
       statusCode: 200,
@@ -40,6 +57,7 @@ const trendlyne = async (tlid,event, context,callback) => {
       body: JSON.stringify({ msg: error.message }),
     }
   }
+   finally{await client.close();}
 }
 const handler = async (event) => {
   const tlid = event.body;
@@ -58,7 +76,6 @@ const handler = async (event) => {
 };
 
 module.exports = { handler };
-
 
 
 
