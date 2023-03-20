@@ -29,8 +29,11 @@ const trendlyne = async (tlid, event, context, callback) => {
         Time: urlEle.time,
         Name: urlEle.name,
         DurabilityScore: data1.body['stockData'][6],
+        DurabilityColor: data1.body['stockData'][9],
         VolatilityScore: data1.body['stockData'][7],
-        MomentumScore: data1.body['stockData'][8]
+        VolatilityColor: data1.body['stockData'][10],
+        MomentumScore: data1.body['stockData'][8],
+        MomentumColor: data1.body['stockData'][11]
       });
       // use axios.post method to make a post request which is more readable than doing it inside fetch.then() method
       await axios.post(
