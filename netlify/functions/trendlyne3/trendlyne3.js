@@ -6,8 +6,9 @@ const trendlyne = async (tlid,event, context,callback) => {
    
     
     url=JSON.parse(tlid)
-    const results=await Promise.all(tlids.map(async  url => {
+    const results=await Promise.all(url.map(async  url => {
       try{
+        console.log(url.tlid)
         const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + url.tlid + '/SMA/', {
           headers: { Accept: 'application/json' },
         })
@@ -17,15 +18,14 @@ const trendlyne = async (tlid,event, context,callback) => {
       }
     }));
    
-    // obj1=({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8]  })
-        
+    
     if (!results.ok) {
       // NOT res.status >= 200 && res.status < 300
-      return { statusCode: response.status, body: response.statusText }
+      return { statusCode: results.status, body: results.statusText }
     }
    
     const data = await results.json()
-  
+    console.log(data)
     // process.env.data12=JSON.stringify({data});
     return {
       statusCode: 200,
@@ -43,11 +43,17 @@ const trendlyne = async (tlid,event, context,callback) => {
 }
 const handler = async (event) => {
   const tlid = event.body;
- console.log("a="+typeof(tlid))
+ 
   await trendlyne(tlid);
   return{
     statusCode:200,
-    body:JSON.stringify(results)
+    body:JSON.stringify({
+    headers:
+      {
+      "Access-Control-Allow-Origin":'*',
+      "Access-Control-Allow-Credentials":true
+    }
+  })
   }
 };
 
