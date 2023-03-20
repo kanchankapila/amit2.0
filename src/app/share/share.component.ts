@@ -247,7 +247,7 @@ public titlepv: string = 'Volume Analysis';
   
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
     if (window.location.hostname === "localhost") {
-      this.baseurl = "http://localhost:9999"
+      this.baseurl = "http://localhost:8888"
     } else {
       this.baseurl = "https://stockinsights.netlify.app"
     } 
@@ -793,9 +793,9 @@ public titlepv: string = 'Volume Analysis';
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
-      setInterval(() => {this.opstrarefresh()},60000);
-       setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
-      setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
+      // setInterval(() => {this.opstrarefresh()},60000);
+      //  setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
+      // setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
      
     
   }
