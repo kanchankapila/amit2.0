@@ -1,10 +1,12 @@
 const fetch = require('node-fetch')
 const { MongoClient } = require('mongodb');
+const client = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+   
 const trendlyne = async (tlid,event, context,callback) => {
+  
   try {
     
-    const uri = 'mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority';
-    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    // const uri = 'mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority';
     await client.connect();
   
     const db = client.db('DVM');
@@ -57,7 +59,9 @@ const trendlyne = async (tlid,event, context,callback) => {
       body: JSON.stringify({ msg: error.message }),
     }
   }
-   finally{await client.close();}
+   finally{
+    await client.close();
+  }
 }
 const handler = async (event) => {
   const tlid = event.body;
