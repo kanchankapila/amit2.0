@@ -69,7 +69,7 @@ baseurl:any;
   
   }
   gettrendlynepostdvm(tlid){
-    console.log(tlid)
+    
 
     return this.http.post(this.baseurl+'/.netlify/functions/trendlyne3',tlid)
   }

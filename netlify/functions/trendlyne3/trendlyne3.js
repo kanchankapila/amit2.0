@@ -1,23 +1,32 @@
 const fetch = require('node-fetch')
 
-exports.handler = async (event, context,callback) => {
+const trendlyne = async (tlid,event, context,callback) => {
   try {
     
    
-    const tlid = (event.body);
-    console.log(tlid)
-    const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + tlid + '/SMA/', {
-      headers: { Accept: 'application/json' },
-    })
+    
+    url=JSON.parse(tlid)
+    const results=await Promise.all(tlids.map(async  url => {
+      try{
+        const response = await fetch('https://trendlyne.com/mapp/v1/stock/chart-data/' + url.tlid + '/SMA/', {
+          headers: { Accept: 'application/json' },
+        })
+        return{url,data: response.data};
+      } catch(error){
+        return{url,error:error.message}
+      }
+    }));
+   
     // obj1=({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8]  })
         
-    if (!response.ok) {
+    if (!results.ok) {
       // NOT res.status >= 200 && res.status < 300
       return { statusCode: response.status, body: response.statusText }
     }
-    const data = await response.json()
+   
+    const data = await results.json()
   
-    process.env.data12=JSON.stringify({data});
+    // process.env.data12=JSON.stringify({data});
     return {
       statusCode: 200,
       body: JSON.stringify({data}),
@@ -32,6 +41,17 @@ exports.handler = async (event, context,callback) => {
     }
   }
 }
+const handler = async (event) => {
+  const tlid = event.body;
+ console.log("a="+typeof(tlid))
+  await trendlyne(tlid);
+  return{
+    statusCode:200,
+    body:JSON.stringify(results)
+  }
+};
+
+module.exports = { handler };
 
 
 
