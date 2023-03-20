@@ -110,7 +110,7 @@ export class NavbarComponent implements OnInit {
   items: SelectItem[];
   item: string;
   eqsymbol1 = [];
-  tlid = [];
+  tlid : Array<any> = [];
   n50optionssupport: any;
   n50optionsresistance: any;
   bnoptionssupport: any;
@@ -539,7 +539,7 @@ export class NavbarComponent implements OnInit {
         this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
         
       }
-     
+     console.log("tlid="+(typeof(this.tlid)))
       this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
   
   
