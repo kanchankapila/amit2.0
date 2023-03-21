@@ -71,7 +71,7 @@ baseurl:any;
   gettrendlynepostdvm(tlid){
     
 
-    return this.http.post(this.baseurl+'/.netlify/functions/trendlyne3-background',tlid)
+    return this.http.post(this.baseurl+'/.netlify/functions/trendlyne3',tlid)
   }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
