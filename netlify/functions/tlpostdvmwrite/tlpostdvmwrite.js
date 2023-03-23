@@ -24,6 +24,7 @@ const trendlyne = async (tlid) => {
         }
       );
       const data1 = await response.json();
+      try{
       obj.push({
         Date: urlEle.Date,
         Time: urlEle.time,
@@ -48,13 +49,16 @@ const trendlyne = async (tlid) => {
         },
         upsert: true
       });
-    }
+    }catch (error) {
+    console.log(error);
+  }
 
     return {
       statusCode: 200,
       body: JSON.stringify({ data: obj })
     };
-  } catch (error) {
+  }
+ } catch (error) {
     console.log(error);
     return {
       statusCode: 500,
