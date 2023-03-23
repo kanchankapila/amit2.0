@@ -73,6 +73,11 @@ baseurl:any;
 
     return this.http.post(this.baseurl+'/.netlify/functions/tlpostdvmwrite',tlid)
   }
+  gettrendlynepostdvm1(tlid){
+    
+
+    return this.http.post('https://renderwebservice.onrender.com/api/trendlynepostdvm',tlid)
+  }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
     return this.http.get(this.baseurl+'/.netlify/functions/news?bqnames='+bqnames+'&dateday5='+dateday5+'&datetoday='+datetoday)
