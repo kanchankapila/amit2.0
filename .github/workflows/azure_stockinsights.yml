@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'stockinsights'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E1A6217AD354C35950920D43FAD565B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_909B3090AA4B4204B342B6613F2DD1CB }}
           package: .
