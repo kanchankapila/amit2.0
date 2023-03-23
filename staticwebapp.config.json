@@ -1,4 +1,4 @@
 {
-    "output_location": "dist/amitnginx",
-    "app_location": "dist/amitnginx"
+    "output_location": "dist/",
+    "app_location": "dist/"
 }
