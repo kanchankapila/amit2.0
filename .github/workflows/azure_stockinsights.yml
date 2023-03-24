@@ -64,4 +64,4 @@ jobs:
           app-name: 'stockinsights'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_972F6089FD6740E49D10AE750C8A70A8 }}
-          package: .
+          package: ./dist
