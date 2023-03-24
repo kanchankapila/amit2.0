@@ -18,6 +18,9 @@ const handler = async function () {
     console.error(error)
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+    },
       body: JSON.stringify({ msg: error.message }),
     }
   }
