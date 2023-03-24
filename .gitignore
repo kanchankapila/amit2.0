@@ -52,7 +52,7 @@ Thumbs.db
 .netlify
 package-lock.json
 .env
-index.js
+
 /.env
 .env
 .env
