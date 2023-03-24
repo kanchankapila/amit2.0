@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/59c266ff-965e-4ba8-b20a-124609736bfb/resourceGroups/stockinsights_group/providers/Microsoft.Web/sites/stockinsights",
-    "appService.deploySubpath": "dist/amitnginx"
-}
