@@ -73,10 +73,10 @@ baseurl:any;
 
     return this.http.post(this.baseurl+'/.netlify/functions/tlpostdvmwrite',tlid)
   }
-  gettrendlynepostdvm1(tlid){
+  gettrendlynepostdvm1(){
     
 
-    return this.http.post('https://renderwebservice.onrender.com/api/trendlynepostdvm',tlid)
+    return this.http.get('https://stockinsights.azurewebsites.net/api/etsharetoday')
   }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
