@@ -27,6 +27,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/web.config",
               "src/manifest.webmanifest"
               
             ],
@@ -132,7 +133,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-             
+              "src/web.config",
               "src/manifest.webmanifest"
             ],
             "styles": [
