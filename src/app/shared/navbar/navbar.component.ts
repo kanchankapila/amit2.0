@@ -560,7 +560,7 @@ export class NavbarComponent implements OnInit {
         
       }
      console.log("tlid="+(typeof(this.tlid)))
-      this.dataApi.gettrendlynepostdvm1().subscribe(data5 => {
+      this.dataApi.gettrendlynepostdvm1(this.tlid).subscribe(data5 => {
   
   
       }, err => {
