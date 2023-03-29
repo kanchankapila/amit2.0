@@ -76,7 +76,7 @@ baseurl:any;
   gettrendlynepostdvm1(tlid){
     
 
-    return this.http.post('https://odd-erin-crayfish-hat.cyclic.app/api/trendlynepostdvm',tlid)
+    return this.http.post('https://gentle-pink-pea-coat.cyclic.app/api/trendlynepostdvm',tlid)
   }
   getgnewsapi(bqnames,dateday5,datetoday) {
    
