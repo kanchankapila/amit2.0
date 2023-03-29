@@ -190,6 +190,7 @@ export class NavbarComponent implements OnInit {
     this.getmcniftyrealtime()
     this.getmcbankniftyrealtime()
     this.getmcpharmaniftyrealtime()
+    this.gettrendlynepostdvm1()
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
     this.bqstocks=bqstock.default.Data
