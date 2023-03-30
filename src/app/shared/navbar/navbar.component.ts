@@ -110,7 +110,7 @@ export class NavbarComponent implements OnInit {
   items: SelectItem[];
   item: string;
   eqsymbol1 = [];
-  tlid : Array<any> = [];
+  tlid = [];
   n50optionssupport: any;
   n50optionsresistance: any;
   bnoptionssupport: any;
@@ -189,8 +189,9 @@ export class NavbarComponent implements OnInit {
     this.sectorList = sectors.default.Data
     this.getmcniftyrealtime()
     this.getmcbankniftyrealtime()
+    
     this.getmcpharmaniftyrealtime()
-    this.gettrendlynepostdvm1()
+    this.gettrendlynepostdvm()
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
     this.bqstocks=bqstock.default.Data
@@ -530,45 +531,26 @@ export class NavbarComponent implements OnInit {
     )
   }
   gettrendlynepostdvm() {
-      console.log("trendlyne post durability/Volatility/Momentum score start")
-      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      console.log('Date is' + this.datetoday)
-      var d = new Date();
-      console.log(d.getHours()+":"+d.getMinutes())
-      this.tlid.length=0;
-      for (let val in this.stock) {
-        this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
-        
-      }
-     console.log("tlid="+(typeof(this.tlid)))
-      this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
-  
-  
-      }, err => {
-        console.log(err)
-      }
-      )
+    console.log("trendlyne post durability/Volatility/Momentum score start")
+    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+    console.log('Date is' + this.datetoday)
+    var d = new Date();
+    console.log(d.getHours()+":"+d.getMinutes())
+    this.tlid.length=0;
+    for (let val in this.stock) {
+      this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+      
     }
-    gettrendlynepostdvm1() {
-      console.log("trendlyne post durability/Volatility/Momentum score start")
-      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      console.log('Date is' + this.datetoday)
-      var d = new Date();
-      console.log(d.getHours()+":"+d.getMinutes())
-      this.tlid.length=0;
-      for (let val in this.stock) {
-        this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
-        
-      }
-     console.log("tlid="+(typeof(this.tlid)))
-      this.dataApi.gettrendlynepostdvm1(this.tlid).subscribe(data5 => {
-  
-  
-      }, err => {
-        console.log(err)
-      }
-      )
+   
+    this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
+
+
+    }, err => {
+      console.log(err)
     }
+    )
+  }
+  
   nsepostdata2() {
     console.log("eq sector combine start")
     for (let val in this.fnostock) {
