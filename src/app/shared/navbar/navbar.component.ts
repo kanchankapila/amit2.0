@@ -191,7 +191,7 @@ export class NavbarComponent implements OnInit {
     this.getmcbankniftyrealtime()
     
     this.getmcpharmaniftyrealtime()
-    this.gettrendlynepostdvm()
+    
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
     this.bqstocks=bqstock.default.Data
@@ -532,21 +532,18 @@ export class NavbarComponent implements OnInit {
   }
   gettrendlynepostdvm() {
     console.log("trendlyne post durability/Volatility/Momentum score start")
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    console.log('Date is' + this.datetoday)
-    var d = new Date();
-    console.log(d.getHours()+":"+d.getMinutes())
-    this.tlid.length=0;
-    for (let val in this.stock) {
-      this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
-      
-    }
    
-    this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
+   
+    this.dataApi.gettrendlynepostdvm().subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
+    }
+    )
+  }
+  tlrefresh() {
+  this.dataApi.tlrefresh().subscribe(data5 => {
+
+
     }
     )
   }
