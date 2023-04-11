@@ -28,6 +28,7 @@
     "stripInternal": true
   },
   "angularCompilerOptions": {
+    "enableIvy":true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": false
   }
