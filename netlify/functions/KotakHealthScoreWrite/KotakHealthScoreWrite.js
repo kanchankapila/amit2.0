@@ -2,7 +2,7 @@
 
 const fetch = require('node-fetch')
 const { MongoClient } = require('mongodb');
-   const client = new MongoClient("mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority");
+   const client = new MongoClient("mongodb+srv://kanchankapila2020:amit0605@cluster0.mbhkhse.mongodb.net/test");
   
 
 
