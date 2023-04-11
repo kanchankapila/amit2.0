@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
-
+import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
-import axios from "axios";
+
 import {  ActivatedRoute } from '@angular/router';
 import {RadioButton} from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
@@ -459,6 +459,7 @@ public titlepv: string = 'Volume Analysis';
   maxpain: maxpaintile[] = [];
   newscard: newscardtile[] = [];
   hmsg: any;
+  htmlContent:any;
   fnomsg:any;
   fnomsg1: fnomsg1tile[] = [];
   dealsmsg:dealsmsgtile[] = [];
@@ -636,7 +637,7 @@ public titlepv: string = 'Volume Analysis';
     }
   };
 
-
+  
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -748,7 +749,7 @@ public titlepv: string = 'Volume Analysis';
     });
    await Promise.all([
     this.getopstrastockpcr(this.eqsymbol),
-
+    this.getHtmlFromApi(this.tlid),
     this.getopstrastockpcrintra(this.eqsymbol),
     this.getstockmaema(this.eqsymbol,this.mcsymbol),
 
@@ -765,7 +766,7 @@ public titlepv: string = 'Volume Analysis';
     // this.getzerodha(),
     // this.getkotak(),
     this.gettlstockparams(this.tlid,this.duration),
-    this.gettrendlynestocksti(this.tlid),
+    // this.gettrendlynestocksti(this.tlid),
     this.getkotakview(this.eqsymbol),
     this.getmcstockinsight(this.mcsymbol),
     this.getmcstockrealtime(this.mcsymbol),
@@ -862,7 +863,17 @@ showMaximizableDialog4() {
   });
    };
 
-    
+   getHtmlFromApi(tlid) {
+    axios.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/'+this.tlid)
+      .then(response => {
+        this.htmlContent = response.data;
+        // Do something with the HTML content, e.g. display it in a component
+        console.log(this.htmlContent)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
  
 
  async getkotakview(eqsymbol) {
@@ -945,15 +956,15 @@ showMaximizableDialog4() {
 
    
   
-  gettrendlynestocksti(tlid) {
-    axios.get('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/' + this.tlid + '/24/')
-      .then((response) => {
-        let nestedItems = Object.keys((response.data)).map(key => {
-          return (response.data)[key];
-        });;
-         console.log(nestedItems)
-      });
-  }
+  // gettrendlynestocksti(tlid) {
+  //   axios.get('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/' + this.tlid + '/24/')
+  //     .then((response) => {
+  //       let nestedItems = Object.keys((response.data)).map(key => {
+  //         return (response.data)[key];
+  //       });;
+  //        console.log(nestedItems)
+  //     });
+  // }
   async getetshareholding(stockid) {
   
       try {
@@ -2021,7 +2032,7 @@ this.stockhcdate1.map((value: number, index: number) => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
- console.log(nestedItems)
+ 
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
      
@@ -2217,11 +2228,11 @@ this.stockhcdate1.map((value: number, index: number) => {
   } catch (err) {
     console.error(err);
   }
-    this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol).subscribe(data5 => {
+    this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol+'&user_id=').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-     console.log(this.pcurrent)
+     
        this.stockema.length = 0;
       // this.stocksma.length = 0;
       this.stockema.push(nestedItems[10].toFixed(2),nestedItems[5].toFixed(2),nestedItems[7].toFixed(2),nestedItems[9].toFixed(2),nestedItems[11].toFixed(2),nestedItems[6].toFixed(2),nestedItems[8].toFixed(2),this.pcurrent )

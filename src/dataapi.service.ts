@@ -63,29 +63,21 @@ baseurl:any;
   getopstrastockpcrintra(eqsymbol) {
     return this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh2?eqsymbol='+eqsymbol)
   }
+  test1() {
+    return this.http.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/2633/')
+  }
   getnteodscreeners(ntoptions) {
     
     return this.http.post(this.baseurl+'/.netlify/functions/ntscreeners',ntoptions)
   
   }
-  gettrendlynepostdvm(tlid){
-    console.log(tlid)
-    return this.http.post('https://lonely-windbreaker-ray.cyclic.app/api/trendlynepostdvm',tlid)
-  }
-  // gettrendlynepostdvm(tlid){
-    
 
-  //   return this.http.post(this.baseurl+'/.netlify/functions/tlpostdvmwrite',tlid)
-  // }
-  // gettrendlynepostdvm1(tlid){
+  gettrendlynepostdvm(){
     
-  //   // return this.http.post(this.baseurl+'/.netlify/functions/express',tlid)
-  //   //  return this.http.post('https://gentle-pink-pea-coat.cyclic.app/api/trendlynepostdvm',tlid)
-  //    return this.http.post('https://erin-enchanting-tuna.cyclic.app/api/trendlynepostdvm',tlid)
-  // }
-  sample(){
-    return this.http.get('https://gentle-pink-pea-coat.cyclic.app/api/etsharetoday')
+    return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM')
   }
+ 
+  
   getgnewsapi(bqnames,dateday5,datetoday) {
    
     return this.http.get(this.baseurl+'/.netlify/functions/news?bqnames='+bqnames+'&dateday5='+dateday5+'&datetoday='+datetoday)
@@ -287,6 +279,9 @@ baseurl:any;
   refreshtl() {
  
     return this.http.get(this.baseurl+'/.netlify/functions/tlrefresh')
+  }
+  tlrefresh(){
+    return this.http.get('https://render-express-e54x.onrender.com/api/trendlynecookie')
   }
   getntniftypcrdetails() {
  
