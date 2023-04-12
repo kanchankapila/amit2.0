@@ -168,13 +168,13 @@
  <br>
  <br>
 <div fxLayout="row wrap" fxLayoutGap="10px" class="col-lg-8 col-xs-3 text-center text-white">
-<div style="text-transform: uppercase;font-weight:bold;" fxFlex="20" fxFlex.lg="20%" fxFlex.xs="30%" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
+<div style="text-transform: uppercase;font-weight:bold;" fxFlex="30" fxFlex.lg="20%" fxFlex.xs="30" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
   '  bg-gradient-bear ': 0.80 > tile.text2,
   '  bg-gradient-bull ': tile.text1 > 0.80,
-  '  bg-gradient-warning ': tile.text1 == 0.80}"><br>{{tile.text1}}<br>{{tile.text2}}
+  '  bg-gradient-warning ': tile.text1 == 0.80}">{{tile.text1}}<br>{{tile.text2}}
   </div>
-  <div style="text-transform: uppercase;font-weight:bold" fxFlex="15" fxFlex.lg="15%" fxFlex.xs="30%" fxFlex.sm="33%" *ngFor="let tile of maxpain trackBy: trackByFunction44" class=' bg-gradient-bear '>
-    <br>{{tile.text1}}<br>{{tile.text2}}
+  <div style="text-transform: uppercase;font-weight:bold" fxFlex="30" fxFlex.lg="15%" fxFlex.xs="30" fxFlex.sm="33%" *ngFor="let tile of maxpain trackBy: trackByFunction44" class=' bg-gradient-bear '>
+    {{tile.text1}}<br>{{tile.text2}}
   </div>
 </div>
 
@@ -182,6 +182,8 @@
     [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
     <h4>{{tile.text1}}&nbsp;[{{tile.text2}}]</h4>
   </div>
+  <br>
+
   <div fxLayout="row" fxLayout.xs="column">
   <div class="scene col-lg-13 col-xs-6 ">
     <div class="card22 text-center   "*ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
@@ -305,7 +307,7 @@ Lower Circuit:{{tile.text8}}<br>
       <ejs-chart  style='display:block;  ' [chartArea]='chartArea'   id='chart' [primaryXAxis]='primaryXAxispv'
           [primaryYAxis]='primaryYAxispv' [title]='titlepv'  >
           <e-series-collection>
-              <e-series [dataSource]='datapv' type='Bar' xName='Day' yName='cvol' name='Current Volume' columnSpacing=0.1> </e-series>
+              <e-series [dataSource]='datapv' type='Bar' xName='Day' yName='cvol' name='Current Volume' columnS0cing=0.1> </e-series>
               <e-series [dataSource]='datapv' type='Bar' xName='Day' yName='delivery' name="Delivery" columnSpacing=0.1 > </e-series>
           </e-series-collection>
       </ejs-chart>
