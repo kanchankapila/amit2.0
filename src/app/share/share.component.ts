@@ -8,6 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
 
+
 import {  ActivatedRoute } from '@angular/router';
 import {RadioButton} from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
@@ -863,17 +864,6 @@ showMaximizableDialog4() {
   });
    };
 
-   getHtmlFromApi(tlid) {
-    axios.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/'+this.tlid)
-      .then(response => {
-        this.htmlContent = response.data;
-        // Do something with the HTML content, e.g. display it in a component
-        console.log(this.htmlContent)
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
  
 
  async getkotakview(eqsymbol) {
@@ -1790,7 +1780,8 @@ else if(this.fnomsg.includes("Short Buildup")){
     this.stockDatasma100.length=0;
     this.stockDatasma200.length=0;
     ////////////////Nifty 3 months/////////////////////////////
-    this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol).subscribe(data5 => {
+    
+    this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol+'&user_id=').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -2395,7 +2386,7 @@ this.stockhcdate1.map((value: number, index: number) => {
         }
       }
     };
-  
+
       // this.chartOptions2 = {
       //   series: [
       //     {
@@ -2506,6 +2497,20 @@ this.stockhcdate1.map((value: number, index: number) => {
     }, err => {
       console.log(err)
     })
+  }
+  getHtmlFromApi(tlid) {
+    axios.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/' + this.tlid)
+      .then(response => {
+        this.htmlContent = response.data;
+        console.log(this.htmlContent);
+        
+     
+       
+       
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
   async getntstockdetails(eqsymbol) {
     // 
