@@ -17,9 +17,5 @@ package = "netlify-plugin-chromium"
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-[functions."tlfresh"]
-schedule = "@weekly"
 
-[functions."opstrarefresh"]
-schedule = "@hourly"
 
