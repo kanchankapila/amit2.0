@@ -29,7 +29,7 @@
               <div class="card-body">
                 
                 
-                <div [ngClass]="{'bg-gradient-success mb-1 ': 30 > tile.text1 > 0,'bg-gradient-warning mb-1 ': 50 > tile.text1 > 30,'bg-gradient-neu mb-1 ': 70 > tile.text1 > 50,'bg-gradient-danger mb-1 ': tile.text1 > 70}" *ngFor="let tile of ttmmi">{{tile.text1| number : '1.2-2'}}
+                <div [ngClass]="{'bg-gradient-success mb-1 ': 30 > tile.text1 &&  tile.text1 > 0,'bg-gradient-warning mb-1 ': 50 > tile.text1 && tile.text1 > 30,'bg-gradient-neu mb-1 ': 70 > tile.text1 && tile.text1 > 50,'bg-gradient-danger mb-1 ': tile.text1 > 70}" *ngFor="let tile of ttmmi">{{tile.text1| number : '1.2-2'}}
                 <h6 class="card-text"></h6>
               </div>
             </div>

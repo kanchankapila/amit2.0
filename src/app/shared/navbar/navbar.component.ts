@@ -26,7 +26,7 @@ export interface pcrnseniftytile {
   text1: number;
 }
 export interface ttmmitiles {
-  text1: number;
+  text1: any;
 }
 export interface pcrnsebniftytile {
   text1: number;
