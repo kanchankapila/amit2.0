@@ -65,7 +65,7 @@ exports.handler = async (event,context,callback) => {
         };
         const config = {
           method: 'post',
-          url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
+          url: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action/updateOne',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Request-Headers': '*',

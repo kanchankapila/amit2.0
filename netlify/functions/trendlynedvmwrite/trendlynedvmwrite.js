@@ -2,7 +2,7 @@ const axios = require('axios');
 const { MongoClient } = require('mongodb');
 
 exports.handler = async (event) => {
-  const uri = 'mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority';
+  const uri = 'mongodb+srv://kanchankapila2020:amit0605@cluster0.mbhkhse.mongodb.net/?retryWrites=true&w=majority';
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   await client.connect();
 
