@@ -58,7 +58,7 @@
   ],
   "splash_pages":[
     {
-      "src":"stockinsights.gif",
+      "src":"assets/stockinsights.gif",
       "sizes":"auto",
       "type":"image/gif"
     }
