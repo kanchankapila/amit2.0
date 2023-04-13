@@ -239,6 +239,7 @@ export class NavbarComponent implements OnInit {
     
     if (response.ok) {
       const ttmmi=await response.json()
+      this.ttmmi.length=0;
       this.ttmmi.push({text1:ttmmi['data'].currentValue})
       
       
