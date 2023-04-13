@@ -1,11 +1,11 @@
 const fetch = require('node-fetch');
 const axios=require('axios')
 const axiosApiInstance = axios.create({
-  baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+  baseURL: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action',
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Request-Headers': '*',
-    'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+    'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
     Accept: 'application/ejson'
   }
 });
