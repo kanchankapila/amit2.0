@@ -56,6 +56,13 @@
       "purpose": "maskable any"
     }
   ],
+  "splash_pages":[
+    {
+      "src":"stockinsights.gif",
+      "sizes":"auto",
+      "type":"image/gif"
+    }
+  ],
   "assetGroups": [
   
     {
