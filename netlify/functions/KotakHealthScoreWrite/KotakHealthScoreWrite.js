@@ -2,7 +2,7 @@
 
 const fetch = require('node-fetch')
 const { MongoClient } = require('mongodb');
-   const client = new MongoClient("mongodb+srv://kanchankapila2020:amit0605@cluster0.mbhkhse.mongodb.net/test");
+   const client = new MongoClient(process.env.mogoapiurl);
   
 
 

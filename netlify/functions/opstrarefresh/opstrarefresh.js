@@ -64,11 +64,11 @@ exports.handler = async (event,context,callback) => {
         };
         const config = {
           method: 'post',
-          url: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action/updateOne',
+          url: process.env.mongoapikey+'/updateOne',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Request-Headers': '*',
-            'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
+            'api-key': process.env.mongoapikey,
             'Accept': 'application/ejson'
           },
           data,
