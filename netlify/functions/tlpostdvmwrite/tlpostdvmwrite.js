@@ -1,11 +1,11 @@
 const fetch = require('node-fetch');
 const axios=require('axios')
 const axiosApiInstance = axios.create({
-  baseURL: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action',
+  baseURL: process.env.mongoapiurl,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Request-Headers': '*',
-    'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
+    'api-key': process.env.mongoapikey,
     Accept: 'application/ejson'
   }
 });
