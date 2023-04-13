@@ -230,22 +230,21 @@ export class NavbarComponent implements OnInit {
   
   async getttmmi(){
     try {
-      const response = await fetch("https://api.tickertape.in/mmi/now", {
-      method: 'GET',
-      headers: {
-        
-      }
-    });
+      this.dataApi.getttmmi().subscribe(data5 => {
+        let nestedItems= Object.keys(data5).map(key => {
+          return data5[key];
+        });
+     
     
-    if (response.ok) {
-      const ttmmi=await response.json()
+        console.log(nestedItems)
+      
       this.ttmmi.length=0;
-      this.ttmmi.push({text1:ttmmi['data'].currentValue})
+      this.ttmmi.push({text1:nestedItems[0]['data'].currentValue})
       
       
       
-    }
-  } catch (err) {
+    })
+  }catch (err) {
     console.error(err);
   }
   

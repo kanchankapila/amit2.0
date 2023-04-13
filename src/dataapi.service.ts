@@ -93,7 +93,9 @@ baseurl:any;
     return this.http.get(this.baseurl+'/.netlify/functions/etpredefinedFilters?selectedvalue='+selectedValue+'&filter='+filter+'&order='+order)
   
   }
- 
+  getttmmi(){
+    return this.http.get(this.baseurl+'/.netlify/functions/tickertapeapi')
+  }
   gettlindexparams(indexid,duration) {
    
     return this.http.get(this.baseurl+'/.netlify/functions/trendlyneindex?indexid='+indexid+'&duration='+duration)
