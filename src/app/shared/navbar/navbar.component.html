@@ -10,6 +10,7 @@
     
       
     <div class="InsideContent1">
+      
       <div class="InsideContent">
     <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true" [itemSize]="31"
     [filter]="true" (onChange)='selectEvent(item)'>
@@ -21,7 +22,19 @@
      </div>
         
         <div class="InsideContent1">
+
         <div class="InsideContent">
+          <div class="col-md-2 col-xs-2">
+            <div class="card bg-gradient-primary text-white">
+              <div class="card-body">
+                
+                
+                <div [ngClass]="{'bg-gradient-success mb-1 ': 30 > tile.text1 > 0,'bg-gradient-warning mb-1 ': 50 > tile.text1 > 30,'bg-gradient-neu mb-1 ': 70 > tile.text1 > 50,'bg-gradient-danger mb-1 ': tile.text1 > 70}" *ngFor="let tile of ttmmi">{{tile.text1| number : '1.2-2'}}
+                <h6 class="card-text"></h6>
+              </div>
+            </div>
+          </div>
+        </div>
         <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Actions" class="p-button-raised p-button-success p-button-outlined pButton"></button>
         <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left" label=" News" class="p-button-raised p-button-warning p-button-outlined pButton"></button>
         <button pButton type="button" (click)=tlrefresh() icon="pi pi-arrow-up" label="TLRefresh" class="p-button-raised p-button-help p-button-outlined pButton"></button>
@@ -29,6 +42,7 @@
         <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up" label="Websites" class="p-button-raised p-button-help p-button-outlined pButton"></button>
        
       </div>
+      
       <div class="InsideContent">
       <div class="col-md-8 col-xs-6 ">
         <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">

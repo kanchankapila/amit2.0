@@ -63,6 +63,7 @@ $theme-colors: (
   secondary: #c3bdbd,
   success: #1bcfb4,
   info: #198ae3,
+  neutral: orange,
   warning: #fed713,
   danger: #fe7c96,
   light: #f8f9fa,
@@ -77,6 +78,7 @@ $theme-colors: (
   $danger: #fe7c96;
   $light: #f8f9fa;
   $dark: #3e4b5b;
+  $neu:orange;
 
 $theme-gradient-colors: (primary: linear-gradient(to right, #da8cff, #9a55ff),
 secondary: linear-gradient(to right, #e7ebf0, #868e96),
@@ -84,6 +86,7 @@ success: linear-gradient(to right, #84d9d2, #07cdae),
 info: linear-gradient(to right, #90caf9, #047edf 99%),
 warning: linear-gradient(to right, #f6e384, #ffd500),
 danger: linear-gradient(to right, #ffbf96, #fe7096),
+neu:linear-gradient(to right, orange, #edfe70),
 light: linear-gradient(to bottom, #f4f4f4, #e4e4e9),
 dark: linear-gradient(89deg, #5e7188, #3e4b5b),
 bull:         linear-gradient(to right,#9bf49b, #75e5ef),
@@ -98,6 +101,7 @@ bear2:         linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
 bear3:        linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
 bear4:         linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
 bear5:          linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
+
 neutral:         linear-gradient( 109.6deg, rgba(176,237,244,1) 31.4%, rgba(250,185,235,1) 68% )
 );
 

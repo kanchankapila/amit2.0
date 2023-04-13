@@ -462,6 +462,9 @@ public titlepv: string = 'Volume Analysis';
   hmsg: any;
   htmlContent:any;
   fnomsg:any;
+  forecasthigh:any;
+  forecastlow:any;
+  forecastmean:any;
   fnomsg1: fnomsg1tile[] = [];
   dealsmsg:dealsmsgtile[] = [];
   shareholdingmsg:shareholdingmsgtile[] = [];
@@ -753,7 +756,7 @@ public titlepv: string = 'Volume Analysis';
     this.getHtmlFromApi(this.tlid),
     this.getopstrastockpcrintra(this.eqsymbol),
     this.getstockmaema(this.eqsymbol,this.mcsymbol),
-
+    this.getmcforecast(this.mcsymbol),
     this.getstocktoday(this.mcsymbol, this.eqsymbol),
    
     
@@ -2511,6 +2514,30 @@ this.stockhcdate1.map((value: number, index: number) => {
       .catch(error => {
         console.error(error);
       });
+  }
+  async getmcforecast(mcsymbol){
+    try {
+      const response = await fetch(" https://api.moneycontrol.com/mcapi/v1/stock/estimates/price-forecast?scId="+this.mcsymbol+"&ex=N&deviceType=W", {
+        method: 'GET',
+        headers: {
+         
+        }
+      });
+    
+      if (response.ok) {
+        const forecastdata=await response.json()
+        console.log(forecastdata)
+
+        this.forecasthigh=forecastdata['data'].high;
+        console.log(this.forecasthigh)
+        this.forecastlow=forecastdata['data'].low;
+        this.forecastmean=forecastdata['data'].mean;
+       
+    }
+  } catch (err) {
+    console.error(err);
+  }
+   
   }
   async getntstockdetails(eqsymbol) {
     // 

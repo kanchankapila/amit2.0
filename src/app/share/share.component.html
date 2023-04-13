@@ -167,15 +167,25 @@
     
  <br>
  <br>
-<div fxLayout="row wrap" fxLayoutGap="10px" class="col-lg-8 col-xs-3 text-center text-white">
-<div style="text-transform: uppercase;font-weight:bold;" fxFlex="30" fxFlex.lg="20%" fxFlex.xs="30" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
+<div fxLayout="row wrap" fxLayoutGap="2px" class="col-lg-8 col-xs-8 text-center text-white">
+<div style="text-transform: uppercase;font-weight:bold;" fxFlex="15" fxFlex.lg="20%" fxFlex.xs="20%" fxFlex.sm="33%" *ngFor="let tile of stockpcr trackBy: trackByFunction43" [ngClass]="{
   '  bg-gradient-bear ': 0.80 > tile.text2,
   '  bg-gradient-bull ': tile.text1 > 0.80,
   '  bg-gradient-warning ': tile.text1 == 0.80}">{{tile.text1}}<br>{{tile.text2}}
   </div>
-  <div style="text-transform: uppercase;font-weight:bold" fxFlex="30" fxFlex.lg="15%" fxFlex.xs="30" fxFlex.sm="33%" *ngFor="let tile of maxpain trackBy: trackByFunction44" class=' bg-gradient-bear '>
+  <div style="text-transform: uppercase;font-weight:bold" fxFlex="15" fxFlex.lg="15%" fxFlex.xs="20%" fxFlex.sm="33%" *ngFor="let tile of maxpain trackBy: trackByFunction44" class=' bg-gradient-bear '>
     {{tile.text1}}<br>{{tile.text2}}
   </div>
+  <div *ngIf="forecasthigh" style="text-transform: uppercase;font-weight:bold" fxFlex="20" fxFlex.lg="20%" fxFlex.xs="20%" fxFlex.sm="33%"  class=' bg-gradient-bull '>
+    Fcast High<br>{{forecasthigh}}
+  </div>
+  <div *ngIf="forecastlow" style="text-transform: uppercase;font-weight:bold" fxFlex="20" fxFlex.lg="20%" fxFlex.xs="20%" fxFlex.sm="33%"  class=' bg-gradient-bear '>
+    Fcast Low<br>{{forecastlow}}
+  </div>
+  <div *ngIf="forecastmean" style="text-transform: uppercase;font-weight:bold" fxFlex="20" fxFlex.lg="20%" fxFlex.xs="16%" fxFlex.sm="33%"  class=' bg-gradient-warning'>
+    Fcast mean<br>{{forecastmean}}
+  </div>
+
 </div>
 
 <div *ngFor="let tile of brokertarget trackBy: trackByFunction10"
