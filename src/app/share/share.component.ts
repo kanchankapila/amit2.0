@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef , ViewEncapsulation } from '@angular/core';
 import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
 import axios from 'axios';
@@ -177,7 +177,7 @@ export interface tlindexparamtile{text1: string;text2: string;text3: string;}
 })
 @Injectable()
 export class ShareComponent implements OnInit {
- 
+
 //Initializing Chart Width
 
 
@@ -222,6 +222,8 @@ public titlepv: string = 'Volume Analysis';
 
   visibleSidebar5;
   res;
+  @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+  @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
   @ViewChild("chart") chart: ChartComponent;
   // @ViewChild("chart2") chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;
@@ -264,6 +266,18 @@ public titlepv: string = 'Volume Analysis';
           this.onClick.emit(null);
       }
   };
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+  script.charset = 'utf-8';
+  this.trendlyneWidget.nativeElement.appendChild(script);
+
+  const script1 = document.createElement('script');
+  script1.async = true;
+  script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
+  script1.charset = 'utf-8';
+  this.TradingViewWidget.nativeElement.appendChild(script1);
+  
   } 
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
@@ -461,6 +475,7 @@ public titlepv: string = 'Volume Analysis';
   newscard: newscardtile[] = [];
   hmsg: any;
   htmlContent:any;
+  htmlContent1:any;
   fnomsg:any;
   forecasthigh:any;
   forecastlow:any;
@@ -754,6 +769,7 @@ public titlepv: string = 'Volume Analysis';
    await Promise.all([
     this.getopstrastockpcr(this.eqsymbol),
     this.getHtmlFromApi(this.tlid),
+    this.getHtmlFromApi1(),
     this.getopstrastockpcrintra(this.eqsymbol),
     this.getstockmaema(this.eqsymbol,this.mcsymbol),
     this.getmcforecast(this.mcsymbol),
@@ -2505,7 +2521,21 @@ this.stockhcdate1.map((value: number, index: number) => {
     axios.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/' + this.tlid)
       .then(response => {
         this.htmlContent = response.data;
-        console.log(this.htmlContent);
+        // console.log(this.htmlContent);
+        
+     
+       
+       
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  getHtmlFromApi1() {
+    axios.get('https://trendlyne.com/web-widget/checklist-widget/Poppins/BEL/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E' + this.tlid)
+      .then(response => {
+        this.htmlContent1 = response.data;
+         console.log(this.htmlContent);
         
      
        
@@ -2526,10 +2556,10 @@ this.stockhcdate1.map((value: number, index: number) => {
     
       if (response.ok) {
         const forecastdata=await response.json()
-        console.log(forecastdata)
+       
 
         this.forecasthigh=forecastdata['data'].high;
-        console.log(this.forecasthigh)
+       
         this.forecastlow=forecastdata['data'].low;
         this.forecastmean=forecastdata['data'].mean;
        
