@@ -276,6 +276,16 @@ public titlepv: string = 'Volume Analysis';
   script1.async = true;
   script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
   script1.charset = 'utf-8';
+  script1.text = JSON.stringify({
+    "interval": "1m",
+    "width": "100%",
+    "isTransparent": false,
+    "height": "100%",
+    "symbol": "NSE:"+this.eqsymbol,
+    "showIntervalTabs": true,
+    "locale": "in",
+    "colorTheme": "light"
+  });
   this.TradingViewWidget.nativeElement.appendChild(script1);
   
   } 
