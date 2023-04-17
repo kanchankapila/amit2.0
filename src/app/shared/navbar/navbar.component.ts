@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild,ElementRef  } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
@@ -157,7 +157,7 @@ export class NavbarComponent implements OnInit {
   dateday5: any;
   date5: any;
   res;
-  
+  @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window,private dataApi: DataapiService) {
     config.placement = 'bottom-right'; this.items = [];
     this.stock = stocks.default.Data;
@@ -170,7 +170,81 @@ export class NavbarComponent implements OnInit {
     }
   }
   
+  ngAfterViewInit() {
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+  script.charset = 'utf-8';
+  script.text=JSON.stringify({
+    "symbols": [
+      {
+        "description": "",
+        "proName": "NSE:BANKNIFTY"
+      },
+      {
+        "description": "",
+        "proName": "NSE:NIFTY"
+      },
+      {
+        "description": "",
+        "proName": "NSE:INDIAVIX"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXFINANCE"
+      },
+      {
+        "description": "",
+        "proName": "BSE:SENSEX"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXAUTO"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXAUTO"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXFMCG"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXPHARMA"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNX500"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXSMALLCAP"
+      },
+      {
+        "description": "",
+        "proName": "NSE:CNXMIDCAP"
+      },
+      {
+        "description": "",
+        "proName": "ECONOMICS:ININTR"
+      },
+      {
+        "description": "",
+        "proName": "ECONOMICS:INGDP"
+      }
+    ],
+    "showSymbolLogo": true,
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "in"
+  })
   
+  
+  this.TradingViewWidget.nativeElement.appendChild(script);
+
+  }
   async ngOnInit() {
     
     
