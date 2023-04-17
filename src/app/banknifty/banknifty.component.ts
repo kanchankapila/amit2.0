@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, ViewChild,ElementRef ,OnInit, } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
 import {RadioButton} from 'primeng/radiobutton';
 import { PrimeNGConfig } from 'primeng/api';
@@ -113,7 +113,8 @@ export interface bniftysmatile{
   styleUrls: ['./banknifty.component.scss']
 })
 export class BankniftyComponent implements OnInit {
- 
+  @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+  @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
     
   }
@@ -127,6 +128,27 @@ export class BankniftyComponent implements OnInit {
           this.onClick.emit(null);
       }
   };
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+  script.charset = 'utf-8';
+  this.trendlyneWidget.nativeElement.appendChild(script);
+
+  const script1 = document.createElement('script');
+  script1.async = true;
+  script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
+  script1.charset = 'utf-8';
+  script1.text = JSON.stringify({
+    "interval": "1m",
+    "width": "100%",
+    "isTransparent": false,
+    "height": "100%",
+    "symbol": "NSE:BANKNIFTY",
+    "showIntervalTabs": true,
+    "locale": "in",
+    "colorTheme": "light"
+  });
+  this.TradingViewWidget.nativeElement.appendChild(script1);
   }
   abc:any;
   indexid='1898'; 

@@ -8,7 +8,23 @@
 <br>
 <br>
 <br>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div fxLayout="row" fxLayout.xs="column">
+  <blockquote class="trendlyne-widgets abc" 
+              
+              [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTY50/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
+              data-theme="light" 
+              #trendlyneWidget></blockquote>
+  <blockquote class="abc" 
+  href='https://in.tradingview.com/symbols/NSE-NIFTY/technicals/'
+               
+              #TradingViewWidget></blockquote>    
+  </div>  
 <div class="InsideContent">
   <p-radioButton name="groupname" value="5" label="5 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
   <p-radioButton name="groupname" value="10" label="10 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
