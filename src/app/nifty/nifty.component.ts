@@ -1,7 +1,7 @@
 import { Component,ViewChild,ElementRef , OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-
+declare const TradingView: any;
 
 import {  ChartType } from 'chart.js';
 
@@ -128,6 +128,7 @@ export class NiftyComponent implements OnInit {
   b: any;
   c:any;
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+  @ViewChild('TradingViewWidget1', { static: true }) TradingViewWidget1: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
     
@@ -142,29 +143,49 @@ export class NiftyComponent implements OnInit {
           this.onClick.emit(null);
       }
   };
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
-  script.charset = 'utf-8';
-  this.trendlyneWidget.nativeElement.appendChild(script);
+  const trendlyneScript = document.createElement('script');
+  trendlyneScript.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+  trendlyneScript.charset = 'utf-8';
+  trendlyneScript.setAttribute('preload', '');
+  this.trendlyneWidget.nativeElement.appendChild(trendlyneScript);
 
-  const script1 = document.createElement('script');
-  script1.async = true;
-  script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-  script1.charset = 'utf-8';
-  script1.text = JSON.stringify({
-    "interval": "1m",
-    "width": "100%",
-    "isTransparent": false,
-    "height": "100%",
-    "symbol": "NSE:NIFTY",
-    "showIntervalTabs": true,
-    "locale": "in",
-    "colorTheme": "light"
+  const tradingViewScript = document.createElement('script');
+  tradingViewScript.defer = true;
+  tradingViewScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+  tradingViewScript.charset = 'utf-8';
+  tradingViewScript.innerHTML = JSON.stringify({
+    interval: '1m',
+    width: '100%',
+    isTransparent: false,
+    height: '100%',
+    symbol: 'NSE:NIFTY',
+    showIntervalTabs: true,
+    locale: 'in',
+    colorTheme: 'light',
   });
-  this.TradingViewWidget.nativeElement.appendChild(script1);
-  
-  } 
+  this.TradingViewWidget.nativeElement.appendChild(tradingViewScript);
+
+  const tradingViewScript1 = document.createElement('script');
+  tradingViewScript1.defer = true;
+  tradingViewScript1.src = 'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js';
+  tradingViewScript1.charset = 'utf-8';
+  tradingViewScript1.innerHTML = JSON.stringify({
+    "symbol": "NSE:NIFTY",
+	  "width": 350,
+	  "height": 220,
+	  "locale": "in",
+	  "dateRange": "12M",
+	  "colorTheme": "light",
+	  "trendLineColor": "rgba(41, 98, 255, 1)",
+	  "underLineColor": "rgba(41, 98, 255, 0.3)",
+	  "underLineBottomColor": "rgba(41, 98, 255, 0)",
+	  "isTransparent": false,
+	  "autosize": false,
+  "largeChartUrl": ""
+  });
+
+  this.TradingViewWidget1.nativeElement.appendChild(tradingViewScript1);
+} 
   //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
   public nifty50data: Array<number> = [];

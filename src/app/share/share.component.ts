@@ -224,6 +224,7 @@ public titlepv: string = 'Volume Analysis';
   res;
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
+  @ViewChild('mcWidget', { static: true }) mcWidget: ElementRef;
   @ViewChild("chart") chart: ChartComponent;
   // @ViewChild("chart2") chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;
@@ -287,6 +288,8 @@ public titlepv: string = 'Volume Analysis';
     "colorTheme": "light"
   });
   this.TradingViewWidget.nativeElement.appendChild(script1);
+
+
   
   } 
   public stockhcdate: Array<any> = [];

@@ -23,7 +23,7 @@
       "dom"
     ],
     
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     // "noUnusedParameters": true,
     "stripInternal": true
   },
