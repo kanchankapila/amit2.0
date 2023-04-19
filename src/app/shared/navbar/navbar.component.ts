@@ -171,81 +171,78 @@ export class NavbarComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
-  script.charset = 'utf-8';
-  script.text=JSON.stringify({
-    "symbols": [
-      {
-        "description": "",
-        "proName": "NSE:BANKNIFTY"
-      },
-      {
-        "description": "",
-        "proName": "NSE:NIFTY"
-      },
-      {
-        "description": "",
-        "proName": "NSE:INDIAVIX"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXFINANCE"
-      },
-      {
-        "description": "",
-        "proName": "BSE:SENSEX"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXAUTO"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXAUTO"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXFMCG"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXPHARMA"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNX500"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXSMALLCAP"
-      },
-      {
-        "description": "",
-        "proName": "NSE:CNXMIDCAP"
-      },
-      {
-        "description": "",
-        "proName": "ECONOMICS:ININTR"
-      },
-      {
-        "description": "",
-        "proName": "ECONOMICS:INGDP"
-      }
-    ],
-    "showSymbolLogo": true,
-    "colorTheme": "light",
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "locale": "in"
-  })
+    // const tickerTapeJson = {
+    //   symbols: [
+    //     {
+    //       description: "",
+    //       proName: "NSE:BANKNIFTY",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:NIFTY",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:INDIAVIX",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXFINANCE",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "BSE:SENSEX",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXAUTO",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXFMCG",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXPHARMA",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNX500",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXSMALLCAP",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "NSE:CNXMIDCAP",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "ECONOMICS:ININTR",
+    //     },
+    //     {
+    //       description: "",
+    //       proName: "ECONOMICS:INGDP",
+    //     },
+    //   ],
+    //   showSymbolLogo: true,
+    //   colorTheme: "light",
+    //   isTransparent: false,
+    //   displayMode: "adaptive",
+    //   locale: "in",
+    // };
   
+    // const script = document.createElement("script");
+    // script.defer = true;
+    // script.src =
+    //   "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+    // script.charset = "utf-8";
+    // script.innerHTML = JSON.stringify(tickerTapeJson);
   
-  this.TradingViewWidget.nativeElement.appendChild(script);
-
+    // this.TradingViewWidget.nativeElement.appendChild(script);
   }
-  async ngOnInit() {
+   async ngOnInit() {
     
     
     this.today = new Date();
