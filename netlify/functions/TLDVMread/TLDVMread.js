@@ -1,12 +1,10 @@
-
-
 const MongoClient = require('mongodb').MongoClient;
 
 exports.handler = async function(event, context) {
   // Connection URL
   const url = process.env.MONGODB_ATLAS_CLUSTER_URI; // Update with your MongoDB connection URL
-  const dbName = 'Tickertape'; // Update with your database name
-  const collectionName = 'Volume'; // Update with your collection name
+  const dbName = 'DVM'; // Update with your database name
+  const collectionName = 'DVM'; // Update with your collection name
 
   try {
     const client = await MongoClient.connect(url);
@@ -16,8 +14,8 @@ exports.handler = async function(event, context) {
 
     // Aggregation pipeline
     const pipeline = [
-      { $match: { "obj.volBreakout": { $gt: 100 } } },
-      { $project: { obj: { $filter: { input: "$obj", as: "o", cond: { $gt: ["$$o.volBreakout", 100] } } } } }
+      { $match: { "output.DurabilityScore": { $gt: 55 }, "output.MomentumScore": { $gt: 60 }, "output.VolatilityScore": { $gt: 50 } } },
+      { $project: { output: { $filter: { input: "$output", as: "o", cond: { $and: [{ $gt: ["$$o.DurabilityScore", 55] }, { $gt: ["$$o.MomentumScore", 60] }, { $gt: ["$$o.VolatilityScore", 50] }] } } } } }
     ];
 
     // Execute aggregation query
