@@ -40,32 +40,6 @@ const opstrafetch2 = async (eqsymbol,event,context,callback) => {
         "method": "GET"
       }
        )
-      // const data = {
-      //   "collection": "cookie",
-      //   "database": "Opstracookie",
-      //   "dataSource": "Cluster0",
-      //   "filter":{},
-      //   "update":{$set: {
-      //     "jsessionid":  process.env.jsessionid,
-          
-      //     "time": start
-      //   }},
-      //   "upsert":true
-      //   };
-      //   const config = {
-      //     method: 'post',
-      //  
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Access-Control-Request-Headers': '*',
-      //
-      //       'Accept': 'application/ejson'
-      //     },
-      //     data,
-      // };
-      // const result = await axios(config);
-            
-      // return response data
       if (!response.ok) {
         return { statusCode: response.status, body: response.statusText };
       }
