@@ -527,6 +527,7 @@ public titlepv: string = 'Volume Analysis';
   sectorid: any;
   today: any;
   datetoday: any;
+  datetoday1: any;
   dateyearback:any
 
   dateyesterday: any
@@ -736,6 +737,7 @@ public titlepv: string = 'Volume Analysis';
     this.today = new Date();
     
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
+    this.datetoday1 = this.datePipe.transform(this.today, 'M/d/yyyy')
     this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
     this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
       
@@ -827,9 +829,9 @@ public titlepv: string = 'Volume Analysis';
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
-      // setInterval(() => {this.opstrarefresh()},60000);
-      //  setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
-      // setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
+      //  setInterval(() => {this.opstrarefresh()},60000);
+        setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},60000);
+       setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
      
     
   }
@@ -1259,15 +1261,18 @@ else if(this.fnomsg.includes("Short Buildup")){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(this.opstrastockpcrintradata)
-      console.log(this.opstrastockpcrintraLabels)
+     
       this.opstrastockpcrintradata.length=0;
       this.opstrastockpcrintraLabels.length=0;
       for(let val in nestedItems[0]['data']){
+        if (this.datetoday1 == this.opstrastockpcrintraLabels){
         this.opstrastockpcrintradata.push(nestedItems[0]['data'][val][2]);
         this.opstrastockpcrintraLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
-     
+        }
       }
+      console.log(this.datetoday1)
+      console.log(this.opstrastockpcrintradata)
+      console.log(this.opstrastockpcrintraLabels)
        });
        this.chartOptions5 = {
         series: [{
