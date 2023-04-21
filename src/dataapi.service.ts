@@ -76,6 +76,10 @@ baseurl:any;
     
     return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM')
   }
+  setOpstracookie(){
+    
+    return this.http.get('https://render-express-e54x.onrender.com/api/Opstracookie')
+  }
  
   
   getgnewsapi(bqnames,dateday5,datetoday) {
