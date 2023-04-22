@@ -830,8 +830,8 @@ public titlepv: string = 'Volume Analysis';
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
       //  setInterval(() => {this.opstrarefresh()},60000);
-      //   setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},60000);
-      //  setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
+         setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
+        setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},30000);
      
     
   }
@@ -1208,14 +1208,13 @@ else if(this.fnomsg.includes("Short Buildup")){
   }
   
   async getopstrastockpcr(eqsymbol) {
-    this.dataApi.setOpstracookie();
-    await this.sleep(30000);
+   
     this.dataApi.getopstrastockpcr(this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
    
-    console.log(nestedItems)
+    
       this.opstrastockpcrdata.length=0;
       this.opstrastockpcrLabels.length=0;
      for(let val in nestedItems[0]['data']){
@@ -1261,8 +1260,7 @@ else if(this.fnomsg.includes("Short Buildup")){
     this.opstrastockLabels = this.opstrastockpcrLabels;
    }
   async getopstrastockpcrintra(eqsymbol) {
-    this.dataApi.setOpstracookie();
-    await this.sleep(30000);
+    
     this.dataApi.getopstrastockpcrintra(this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -1270,15 +1268,15 @@ else if(this.fnomsg.includes("Short Buildup")){
      
       this.opstrastockpcrintradata.length=0;
       this.opstrastockpcrintraLabels.length=0;
+
       for(let val in nestedItems[0]['data']){
-        if (this.datetoday1 == this.opstrastockpcrintraLabels){
+        // console.log((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0])
+         if (this.datetoday1 == (new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]){
         this.opstrastockpcrintradata.push(nestedItems[0]['data'][val][2]);
         this.opstrastockpcrintraLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
-        }
+         }
       }
-      console.log(this.datetoday1)
-      console.log(this.opstrastockpcrintradata)
-      console.log(this.opstrastockpcrintraLabels)
+   
        });
        this.chartOptions5 = {
         series: [{

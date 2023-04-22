@@ -307,7 +307,7 @@ export class NavbarComponent implements OnInit {
         });
      
     
-        console.log(nestedItems)
+        
       
       this.ttmmi.length=0;
       this.ttmmi.push({text1:nestedItems[0]['data'].currentValue})
