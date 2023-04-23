@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
    { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
+  { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) },
   
 
 ];

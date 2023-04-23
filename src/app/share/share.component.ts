@@ -84,17 +84,7 @@ export type ChartOptions5 = {
 export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xaxis: ApexXAxis; yaxis: ApexYAxis; plotOptions: ApexPlotOptions; dataLabels: ApexDataLabels; stroke: ApexStroke; };
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
-export interface stockDatatiles { x: number; open: any; high: any; low: any; close: any; volume: any; }
-// export type ChartOptions2 = {
-//   series: ApexAxisChartSeries;
-//   chart: ApexChart;
-//   dataLabels: ApexDataLabels;
-//   plotOptions: ApexPlotOptions;
-//   yaxis: ApexYAxis;
-//   xaxis: ApexXAxis;
-//   colors: string[];
-//   legend: ApexLegend;
-// };
+
 
 export interface mcaptile { text1: string; text2: string; text3: string; }
 export interface nptile { text1: string; text2: string; text3: string; }
