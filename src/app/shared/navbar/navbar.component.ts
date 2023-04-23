@@ -572,6 +572,9 @@ navigatebanknifty() {
 navigatepnifty() {
   this.window.open("/pharmanifty", "_blank") 
 }
+navigateanalytics() {
+  this.window.open("/analytics", "_blank") 
+}
 
 // chartink() {
 //   console.log("chartink start")

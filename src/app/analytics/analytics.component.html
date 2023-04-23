@@ -18,7 +18,7 @@
           <div  class=" card__face card__face--front type1-bold  "
           [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
           'bg-gradient-bear':0 > tile.text3,
-          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2}}&nbsp;&nbsp;({{tile.text3}}%)
+          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
                     
       </div>
       <div class="card__face card__face--back type1-bold"
@@ -41,7 +41,7 @@
           <div  class=" card__face card__face--front type1-bold  "
           [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
           'bg-gradient-bear':0 > tile.text3,
-          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2}}&nbsp;&nbsp;({{tile.text3}}%)
+          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
                     
       </div>
       <div class="card__face card__face--back type1-bold"

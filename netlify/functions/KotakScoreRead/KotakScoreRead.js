@@ -40,7 +40,8 @@ const KotakScore = async (stock,event, context) => {
       body: JSON.stringify({ msg: error.message }),
     }
     
-  }finally{await client.close()}
+  }finally{
+    await client.close()}
  
 }
 const handler = async (event) => {
