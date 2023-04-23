@@ -25,7 +25,7 @@ exports.handler = async function(event, context) {
     const result = await db.collection(collectionName).aggregate(pipeline).toArray();
     console.log('Aggregation result:', result);
 
-    client.close();
+    
 
     return {
       statusCode: 200,
@@ -37,5 +37,7 @@ exports.handler = async function(event, context) {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal server error' })
     };
+  }finally{
+    await client.close();
   }
 };
