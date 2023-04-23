@@ -16,8 +16,8 @@ exports.handler = async function(event, context) {
 
     // Aggregation pipeline
     const pipeline = [
-      { $match: { "obj.volBreakout": { $gt: 100 } } },
-      { $project: { obj: { $filter: { input: "$obj", as: "o", cond: { $gt: ["$$o.volBreakout", 100] } } } } }
+      { $match: { "obj.volBreakout": { $gt: 500 } } },
+      { $project: { obj: { $filter: { input: "$obj", as: "o", cond: { $gt: ["$$o.volBreakout", 500] } } } } }
     ];
 
     // Execute aggregation query

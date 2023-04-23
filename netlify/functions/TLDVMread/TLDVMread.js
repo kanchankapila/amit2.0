@@ -7,7 +7,10 @@ exports.handler = async function(event, context) {
   const collectionName = 'DVM'; // Update with your collection name
 
   try {
-    const client = await MongoClient.connect(url);
+    const client = await MongoClient.connect(url,{
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      });
     console.log('Connected successfully to MongoDB');
 
     const db = client.db(dbName);

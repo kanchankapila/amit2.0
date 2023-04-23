@@ -156,6 +156,12 @@ baseurl:any;
   getntstock1yr(eqsymbol) {
     return this.http.get(this.baseurl+'/.netlify/functions/ntstock1yr?eqsymbol='+eqsymbol) 
   }
+  gettldvm(){
+    return this.http.get(this.baseurl+'/.netlify/functions/TLDVMread') 
+  }
+  getttvolume(){
+    return this.http.get(this.baseurl+'/.netlify/functions/TTVolumeread') 
+  }
   getetindicesdata() {
     return this.http.get(this.baseurl+'/.netlify/functions/etallindices') 
   }
