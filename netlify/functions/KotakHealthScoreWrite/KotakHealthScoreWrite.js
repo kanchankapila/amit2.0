@@ -46,7 +46,7 @@ const { MongoClient } = require('mongodb');
       
        
       
-           await client.close()
+         
        
   
       return {
@@ -65,6 +65,8 @@ const { MongoClient } = require('mongodb');
         // Could be a custom message or object i.e. JSON.stringify(err)
         body: JSON.stringify({ msg: error.message }),
       }
+    }finally{
+      await client.close()
     }
   }
   

@@ -40,6 +40,8 @@ const KotakSector = async (sector,event, context) => {
       body: JSON.stringify({ msg: error.message }),
     }
     
+  }finally{
+    await client.close()
   }
  
 }
