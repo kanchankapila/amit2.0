@@ -16,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
  import { MatCardModule } from '@angular/material/card';
  import { MatIconModule } from '@angular/material/icon';
-
+ import { NgChartsModule } from 'ng2-charts';
 
 
 const routes : Routes = [
@@ -36,6 +36,7 @@ const routes : Routes = [
     CommonModule,
     // NavbarModule,
     FormsModule,
+    NgChartsModule,
     // ButtonsModule,
     NgbModule,
     MatIconModule,

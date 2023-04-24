@@ -7,8 +7,6 @@ import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
-
-
 import {  ActivatedRoute } from '@angular/router';
 import {RadioButton} from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +15,7 @@ import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
-
+import Chart from 'chart.js/auto';
 import {  ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
@@ -167,8 +165,10 @@ export interface tlindexparamtile{text1: string;text2: string;text3: string;}
 })
 @Injectable()
 export class ShareComponent implements OnInit {
+  @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
+  sparklineChart: Chart;
+ 
 
-//Initializing Chart Width
 
 
 
@@ -706,7 +706,8 @@ public titlepv: string = 'Volume Analysis';
   minutes:any;
   time:any;
   // periods: any
-  
+  sparklinestockdata: Array<any>= [];
+  sparklinestocklabel: Array<any>= [];
   public lineChartType: ChartType = 'line';
   public lineChartOptions: ChartOptions = {
     responsive: true,
@@ -772,6 +773,7 @@ public titlepv: string = 'Volume Analysis';
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
    await Promise.all([
+    this.getstocksparkline(this.mcsymbol),
     this.getopstrastockpcr(this.eqsymbol),
     this.getHtmlFromApi(this.tlid),
     this.getHtmlFromApi1(),
@@ -820,8 +822,8 @@ public titlepv: string = 'Volume Analysis';
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
      setInterval(() => {this.getmcpricevolume(this.mcsymbol)}, 3000);
       //  setInterval(() => {this.opstrarefresh()},60000);
-         setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},30000);
-        setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},30000);
+         setInterval(() => {this.getopstrastockpcr(this.eqsymbol)},60000);
+        setInterval(() => {this.getopstrastockpcrintra(this.eqsymbol)},60000);
      
     
   }
@@ -875,7 +877,57 @@ showMaximizableDialog4() {
   this.gettlstockparams(this.indexid,this.selectedValue)
   
 }
-
+async getstocksparkline(mcsymbol){
+  try {
+    this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+    
+  
+      console.log(nestedItems)
+   
+   
+  
+   const sparklineCanvas = this.sparklineChartRef.nativeElement;
+      this.sparklinestockdata.length=0;
+      this.sparklinestocklabel.length=0;
+      for(let val in nestedItems[5]){
+        this.sparklinestockdata.push(nestedItems[5][val]['value'])
+        this.sparklinestocklabel.push(nestedItems[5][val]['time'])
+      }
+      
+      this.sparklineChart = new Chart(sparklineCanvas, {
+        type: 'line',
+        data: {
+          labels: this.sparklinestocklabel,
+          datasets: [{
+            data: this.sparklinestockdata, 
+            borderColor: 'rgba(0, 0,0)',
+            borderWidth: 2, 
+            fill: false, 
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: {
+            point: { radius: 0 } 
+          },
+          scales: {
+            x: { display: false }, 
+            y: { display: false }, 
+          },
+          plugins: {
+            legend: { display: false } 
+          },
+        }
+      });
+    });
+    }catch (err) {
+      console.error(err);
+    } 
+}
  opstrarefresh() {
  
      this.http.get(this.baseurl+'/.netlify/functions/opstrarefresh').subscribe(data5 => {
