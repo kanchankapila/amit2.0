@@ -1,10 +1,10 @@
-import { Component, OnInit ,ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit ,AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
 import { DatePipe } from '@angular/common';
 import {SelectItem} from 'primeng/api';
-
+import Chart from 'chart.js/auto';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
 import { formatDate } from '@angular/common';
@@ -98,7 +98,12 @@ export interface pcrnsebniftytile {
   styleUrls: ['./navbar.component.scss',],
   providers: [NgbDropdownConfig]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit,AfterViewInit {
+  @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
+    sparklineChart: Chart;
+ 
+  
+     
   stock: any
   data: any
   pcrnsebnifty: pcrnsebniftytile[] = [];
@@ -152,12 +157,14 @@ export class NavbarComponent implements OnInit {
   pcrnsenifty1:any
   pcrnsebnifty1length:any
   pcrnsebnifty1:any
-  
+  sparklineniftydata: Array<any>= [];
+  sparklineniftylabel: Array<any>= [];
   dateyesterday: any;
   dateday5: any;
   date5: any;
   res;
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+ 
   constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window,private dataApi: DataapiService) {
     config.placement = 'bottom-right'; this.items = [];
     this.stock = stocks.default.Data;
@@ -171,77 +178,9 @@ export class NavbarComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    // const tickerTapeJson = {
-    //   symbols: [
-    //     {
-    //       description: "",
-    //       proName: "NSE:BANKNIFTY",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:NIFTY",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:INDIAVIX",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXFINANCE",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "BSE:SENSEX",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXAUTO",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXFMCG",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXPHARMA",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNX500",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXSMALLCAP",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "NSE:CNXMIDCAP",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "ECONOMICS:ININTR",
-    //     },
-    //     {
-    //       description: "",
-    //       proName: "ECONOMICS:INGDP",
-    //     },
-    //   ],
-    //   showSymbolLogo: true,
-    //   colorTheme: "light",
-    //   isTransparent: false,
-    //   displayMode: "adaptive",
-    //   locale: "in",
-    // };
-  
-    // const script = document.createElement("script");
-    // script.defer = true;
-    // script.src =
-    //   "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
-    // script.charset = "utf-8";
-    // script.innerHTML = JSON.stringify(tickerTapeJson);
-  
-    // this.TradingViewWidget.nativeElement.appendChild(script);
+    
   }
+ 
    async ngOnInit() {
     
     
@@ -267,6 +206,7 @@ export class NavbarComponent implements OnInit {
     {setInterval(() => { this.getttmmi() }, 60000);}
     
     await Promise.all([
+      this.getniftysparkline(),
       this.getmcniftyrealtime(),
       this.getniftypcr(),
       this.getbankniftypcr(),
@@ -279,8 +219,7 @@ export class NavbarComponent implements OnInit {
     
     
   }
-  
-  
+ 
   keyword = 'name';
   selectEvent(stock_isin) {
     
@@ -554,7 +493,50 @@ getmcbankniftyrealtime() {
   console.log(err)
 })
 }
-
+getniftysparkline(){
+  this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+      const sparklineCanvas = this.sparklineChartRef.nativeElement;
+      this.sparklineniftydata.length=0;
+      this.sparklineniftylabel.length=0;
+      for(let val in nestedItems[1]['values']){
+        this.sparklineniftydata.push(nestedItems[1]['values'][val]['_value'])
+        this.sparklineniftylabel.push(nestedItems[1]['values'][val]['_time'])
+      }
+      // Create the sparkline chart
+      this.sparklineChart = new Chart(sparklineCanvas, {
+        type: 'line',
+        data: {
+          labels: this.sparklineniftylabel,
+          datasets: [{
+            data: this.sparklineniftydata, // Generate random data for 350 points
+            borderColor: 'rgba(0, 0,0)', // Define the color of the sparkline
+            borderWidth: 2, // Define the width of the sparkline
+            fill: false, // Do not fill the area under the sparkline
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: {
+            point: { radius: 0 } // Hide data points on the sparkline
+          },
+          scales: {
+            x: { display: false }, // Hide x-axis
+            y: { display: false }, // Hide y-axis
+          },
+          plugins: {
+            legend: { display: false } // Hide legend
+          },
+        }
+      });
+   
+      
+    });
+}
 
 
 

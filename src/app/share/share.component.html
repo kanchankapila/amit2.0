@@ -210,7 +210,11 @@ href='https://in.tradingview.com/symbols/NSE-BEL/technicals/'
 
   <div fxLayout="row" fxLayout.xs="column">
   <div class="scene col-lg-13 col-xs-6 ">
+    <div class="canvas-wrapper" style="position: absolute; top: 0; right: 0; width: 70%; height: 100%; opacity: 0.2;">
+      <canvas #sparklineChart></canvas>
+    </div>
     <div class="card22 text-center   "*ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
+     
       <div class="card22__face card22__face--front text-center type1-bold  content" [ngClass]="{ 
         'bg-gradient-bull text-center text-green': tile.text3 > 0,
         'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
