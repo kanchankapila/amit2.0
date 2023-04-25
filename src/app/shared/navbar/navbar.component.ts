@@ -100,7 +100,11 @@ export interface pcrnsebniftytile {
 })
 export class NavbarComponent implements OnInit,AfterViewInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
+  @ViewChild('sparklineChart1') sparklineChartRef1: ElementRef;
+  @ViewChild('sparklineChart2') sparklineChartRef2: ElementRef;
     sparklineChart: Chart;
+    sparklineChart1: Chart;
+    sparklineChart2: Chart;
  
   
      
@@ -159,6 +163,10 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   pcrnsebnifty1:any
   sparklineniftydata: Array<any>= [];
   sparklineniftylabel: Array<any>= [];
+  sparklinebniftydata: Array<any>= [];
+  sparklinebniftylabel: Array<any>= [];
+  sparklinepniftydata: Array<any>= [];
+  sparklinepniftylabel: Array<any>= [];
   dateyesterday: any;
   dateday5: any;
   date5: any;
@@ -207,6 +215,8 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     
     await Promise.all([
       this.getniftysparkline(),
+      this.getbniftysparkline(),
+      this.getpniftysparkline(),
       this.getmcniftyrealtime(),
       this.getniftypcr(),
       this.getbankniftypcr(),
@@ -513,8 +523,98 @@ getniftysparkline(){
           labels: this.sparklineniftylabel,
           datasets: [{
             data: this.sparklineniftydata, // Generate random data for 350 points
-            borderColor: 'rgba(0, 0,0)', // Define the color of the sparkline
-            borderWidth: 2, // Define the width of the sparkline
+            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderWidth: 1, // Define the width of the sparkline
+            fill: false, // Do not fill the area under the sparkline
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: {
+            point: { radius: 0 } // Hide data points on the sparkline
+          },
+          scales: {
+            x: { display: false }, // Hide x-axis
+            y: { display: false }, // Hide y-axis
+          },
+          plugins: {
+            legend: { display: false } // Hide legend
+          },
+        }
+      });
+   
+      
+    });
+}
+
+getbniftysparkline(){
+  this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1d&type=area').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+      const sparklineCanvas1 = this.sparklineChartRef1.nativeElement;
+      this.sparklinebniftydata.length=0;
+      this.sparklinebniftylabel.length=0;
+      for(let val in nestedItems[1]['values']){
+        this.sparklinebniftydata.push(nestedItems[1]['values'][val]['_value'])
+        this.sparklinebniftylabel.push(nestedItems[1]['values'][val]['_time'])
+      }
+      // Create the sparkline chart
+      this.sparklineChart1 = new Chart(sparklineCanvas1, {
+        type: 'line',
+        data: {
+          labels: this.sparklinebniftylabel,
+          datasets: [{
+            data: this.sparklinebniftydata, // Generate random data for 350 points
+            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderWidth: 1, // Define the width of the sparkline
+            fill: false, // Do not fill the area under the sparkline
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: {
+            point: { radius: 0 } // Hide data points on the sparkline
+          },
+          scales: {
+            x: { display: false }, // Hide x-axis
+            y: { display: false }, // Hide y-axis
+          },
+          plugins: {
+            legend: { display: false } // Hide legend
+          },
+        }
+      });
+   
+      
+    });
+}
+
+getpniftysparkline(){
+  this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+      const sparklineCanvas2 = this.sparklineChartRef2.nativeElement;
+      this.sparklinepniftydata.length=0;
+      this.sparklinepniftylabel.length=0;
+      for(let val in nestedItems[1]['values']){
+        this.sparklinepniftydata.push(nestedItems[1]['values'][val]['_value'])
+        this.sparklinepniftylabel.push(nestedItems[1]['values'][val]['_time'])
+      }
+      // Create the sparkline chart
+      this.sparklineChart2 = new Chart(sparklineCanvas2, {
+        type: 'line',
+        data: {
+          labels: this.sparklinepniftylabel,
+          datasets: [{
+            data: this.sparklinepniftydata, // Generate random data for 350 points
+            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderWidth: 1, // Define the width of the sparkline
             fill: false, // Do not fill the area under the sparkline
           }]
         },
