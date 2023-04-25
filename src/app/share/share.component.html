@@ -209,51 +209,44 @@ href='https://in.tradingview.com/symbols/NSE-BEL/technicals/'
   <br>
 
   <div fxLayout="row" fxLayout.xs="column">
-  <div class="scene col-lg-13 col-xs-6 ">
-    <div class="canvas-wrapper" style="position: absolute; top: 0; right: 0; width: 70%; height: 100%; opacity: 0.2;">
-      <canvas #sparklineChart></canvas>
-    </div>
-    <div class="card22 text-center   "*ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
-     
-      <div class="card22__face card22__face--front text-center type1-bold  content" [ngClass]="{ 
-        'bg-gradient-bull text-center text-green': tile.text3 > 0,
-        'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
-        'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
-        <div class="InsideContent1">   
-        <h4>
-{{tile.text1}}
-
-
-</h4>
-<br>
-
-
-<h6>{{tile.text4}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%</h6>
-</div>
-        
+    <div class="scene col-lg-13 col-xs-6 ">
+      <div class="canvas-wrapper" style="position: absolute; bottom: 0; left: 0; width: 70%; height: 70%; opacity: 0.8;z-index:1;">
+        <canvas #sparklineChart></canvas>
       </div>
-      <div class="card22__face card22__face--back type1-bold  content" [ngClass]="{ 
-        'bg-gradient-bull text-center text-green': tile.text3 > 0,
-        'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
-        'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
+      <div class="card22 text-center" *ngFor="let tile of stockdetails1 trackBy: trackByFunction42">
 
-<div class="InsideContent1">           <h6>
-52 wk High:{{tile.text5}}<br>
-52 wk Low:{{tile.text6}}<br>
-Upper Circuit:{{tile.text7}}<br>
-Lower Circuit:{{tile.text8}}<br>
-
-
-</h6>
-
-
-
-</div>
+        <div class="card22__face card22__face--front text-center type1-bold  content" [ngClass]="{ 
+          'bg-gradient-bull text-center text-green': tile.text3 > 0,
+          'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
+          'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
+          
+          <div style="text-transform: uppercase;font-weight:bold" class="InsideContent1">   
+            <h4>{{tile.text1}}</h4>
+            <br>
+            <h6>{{tile.text4}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%</h6>
+          </div>
+         
+        
        
+        </div>
+        <div style="text-transform: uppercase;font-weight:bold" class="card22__face card22__face--back type1-bold  content" [ngClass]="{ 
+          'bg-gradient-bull text-center text-green': tile.text3 > 0,
+          'bg-gradient-bear text-center text-red': 0 > tile.text3 ,
+          'bg-gradient-warning text-center text-yellow': tile.text3 == 0 }">
+          <div class="InsideContent1">           
+            <h6>
+              52 wk High:{{tile.text5}}<br>
+              52 wk Low:{{tile.text6}}<br>
+              Upper Circuit:{{tile.text7}}<br>
+              Lower Circuit:{{tile.text8}}<br>
+            </h6>
+          </div>
+        </div>
       </div>
     </div>
     
-  </div>
+   
+    
 <br>
 <br>
 <br>

@@ -49,10 +49,10 @@
       </div>
       
       <div class="InsideContent">
-        <div class="col-md-8 col-xs-6">
+        <div class="col-md-12 col-xs-6">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
             <div class="card-body">
-              <div class="canvas-wrapper" style="position: absolute; top: 0; right: 0; width: 70%; height: 100%; opacity: 0.2;">
+              <div class="canvas-wrapper" >
                 <canvas #sparklineChart></canvas>
               </div>
               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
@@ -73,9 +73,12 @@
           </div>
         </div>
         
-      <div class="col-md-8 col-xs-6">
+      <div class="col-md-12 col-xs-6">
         <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatebanknifty()">
           <div class="card-body">
+            <div class="canvas-wrapper" >
+              <canvas #sparklineChart1></canvas>
+            </div>
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
            
             <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success ' : tile.text4 > 0 ,'bg-gradient-danger ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>
@@ -91,9 +94,12 @@
         </div>
       </div>
       
-        <div class="col-md-8 col-xs-6">
+        <div class="col-md-12 col-xs-6">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatepnifty()">
             <div class="card-body">
+              <div class="canvas-wrapper" >
+                <canvas #sparklineChart2></canvas>
+              </div>
               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
               
               <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcpniftyrt">&nbsp;Pharma NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>

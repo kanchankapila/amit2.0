@@ -903,8 +903,8 @@ async getstocksparkline(mcsymbol){
           labels: this.sparklinestocklabel,
           datasets: [{
             data: this.sparklinestockdata, 
-            borderColor: 'rgba(0, 0,0)',
-            borderWidth: 2, 
+            borderColor: 'rgba(255,255,255)',
+            borderWidth: 1, 
             fill: false, 
           }]
         },
