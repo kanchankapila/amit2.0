@@ -14,7 +14,8 @@ exports.handler = async function(event, context) {
     console.log('Connected successfully to MongoDB');
 
     const db = client.db(dbName);
-
+    
+    // const time = await db.collection(collectionName).findOne({time}).toArray();
     // Aggregation pipeline
     const pipeline = [
       { $match: { "output.DurabilityScore": { $gt: 55 }, "output.MomentumScore": { $gt: 60 }, "output.VolatilityScore": { $gt: 50 } } },
@@ -23,15 +24,24 @@ exports.handler = async function(event, context) {
 
     // Execute aggregation query
     const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    const time = await db.collection(collectionName).find({time})
-
+    
+     const time = await client.db('DVM').collection("DVM").findOne({}, { projection: { _id: 0, time: 1 } }); 
     await client.close();
-
-    return {
+    const response = {
       statusCode: 200,
-      body: JSON.stringify(result),
-      time:time
+      body: JSON.stringify({
+        body: result,
+        time: time
+      })
     };
+     return response;
+    // const response= {
+    //   statusCode: 200,
+    //   body: JSON.stringify({result,time})
+     
+      
+    // };
+    // return response;
   } catch (err) {
     console.error(err);
     return {
