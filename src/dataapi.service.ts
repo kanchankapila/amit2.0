@@ -257,6 +257,9 @@ baseurl:any;
   getmoneycontrolti(mcsymbol){
     return this.http.post(this.baseurl + '/moneycontrolti',mcsymbol)
   }
+  gettlstockchecklist(tlid){
+    return this.http.get(this.baseurl + '/.netlify/functions/tlstockchecklist?tlid='+tlid)
+  }
   getmcvolume(mcsymbol){
     return this.http.post(this.baseurl + '/mcvolume',mcsymbol)
   }

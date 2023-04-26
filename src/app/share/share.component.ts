@@ -121,6 +121,7 @@ export interface etstockohlctodaytile { c: number; o: number; h: number; l: numb
 export interface brokerrecodowngradetile { text1: string; text2: string; text3: string; }
 export interface brokerrecoupgradetile { text1: string; text2: string; text3: string; }
 export interface brokertargettile { text1: string; text2: string; text3: string; }
+export interface foundContenttile { text1: any;  }
 export interface ema_26tile { text1: string; text2: string; text3: string; text4: string; }
 export interface ema_50tile { text1: string; text2: string; text3: string; text4: string; }
 export interface ema_100tile { text1: string; text2: string; text3: string; text4: string; }
@@ -167,6 +168,7 @@ export interface tlindexparamtile{text1: string;text2: string;text3: string;}
 export class ShareComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
   sparklineChart: Chart;
+  
  
 
 
@@ -453,6 +455,7 @@ public titlepv: string = 'Volume Analysis';
   stockcrossoverw: stockcrossoverwtile[] = [];
   stockcrossoverm: stockcrossovermtile[] = [];
   vscore: vscoretile[] = [];
+  foundContent:foundContenttile[]=[];
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
   dscore: dscoretile[] = [];
@@ -2582,10 +2585,40 @@ this.stockhcdate1.map((value: number, index: number) => {
     })
   }
   getHtmlFromApi(tlid) {
-    axios.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/' + this.tlid)
+    
+   
+    axios.get('http://stockinsights.netlify.app/.netlify/functions/tlstockchecklist?tlid='+ this.tlid)
       .then(response => {
         this.htmlContent = response.data;
-        // console.log(this.htmlContent);
+        
+        const parser=new DOMParser();
+        const doc=parser.parseFromString(response.data,'text/html')
+        const elements=doc.getElementsByTagName('span');
+        for (let i = 0; i < elements.length; i++) {
+          if (elements[i].textContent.trim() !== '') {
+            if ((elements[i].textContent).length == 233) {
+              continue;
+            } else if ((elements[i].textContent).length == 349) {
+              continue;
+            } else if ((elements[i].textContent).length == 163) {
+              continue;
+            } else if ((elements[i].textContent).length == 1) {
+              continue;
+            } else if ((elements[i].textContent).length == 31) {
+              continue;
+            } else if ((elements[i].textContent).length == 8) {
+              continue;
+            } else if ((elements[i].textContent).length == 35) {
+              continue;
+            } else if ((elements[i].textContent).length == 12) {
+              continue;
+            }
+            else {
+              // console.log(elements[i].textContent)
+              this.foundContent.push({text1:elements[i].textContent});
+            }
+          }
+        }
         
      
        
