@@ -23,13 +23,14 @@ exports.handler = async function(event, context) {
 
     // Execute aggregation query
     const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    console.log('Aggregation result:', result);
+    const time = await db.collection(collectionName).find({time})
 
     await client.close();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result)
+      body: JSON.stringify(result),
+      time:time
     };
   } catch (err) {
     console.error(err);

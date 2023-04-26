@@ -869,6 +869,6 @@ NR7:{{nr7}}
     </div>
   </div>
 </div>
- <div [innerHtml]="htmlContent"></div> 
- <div [innerHtml]="htmlContent1"></div> 
-<blockquote data-get-url= "https://trendlyne.com/web-widget/checklist-widget/Poppins/BEL/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E" data-theme="light"></blockquote>
+
+
+ <div [ngClass]="{'text-green cardbear':tile.text1 === 'YES','text-red':tile.text1 === 'NO'}" *ngFor="let tile of foundContent">{{tile.text1}}</div>
