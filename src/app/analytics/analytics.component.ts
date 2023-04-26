@@ -10,9 +10,11 @@ export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4:
   styleUrls: ['./analytics.component.scss']
 })
 export class AnalyticsComponent {
+  time1: string;
   constructor( private dataApi: DataapiService) {
     
   }
+  time:any;
   stockList: any;
   tldvmmcsymbol:any;
   ttvolumemcsymbol:any;
@@ -34,11 +36,14 @@ export class AnalyticsComponent {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       this.tldvmstocks.length=0;
-      for (let val in nestedItems[0]['output']) {
-        this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0]['output'][val].Name)[0].mcsymbol);
+      this.time=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
+      console.log(this.time)
+      for (let val in nestedItems[0][0]['output']) {
+        this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0][0]['output'][val].Name)[0].mcsymbol);
         if (this.tldvmmcsymbol == '#N/A') {
-          console.error(`No mcsymbol found for name: ${nestedItems[0]['obj'][val].Name}. Skipping to next iteration.`);
+          console.error(`No mcsymbol found for name: ${nestedItems[0][0]['obj'][val].Name}. Skipping to next iteration.`);
           continue;
         }
   
@@ -71,12 +76,13 @@ export class AnalyticsComponent {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
-      for (let val in nestedItems[0]['obj']) {
+     console.log(nestedItems)
+      this.time1=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
+      for (let val in nestedItems[0][0]['obj']) {
   
-        const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0]['obj'][val].Name)[0]?.mcsymbol;
+        const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0][0]['obj'][val].Name)[0]?.mcsymbol;
         if (ttvolumemcsymbol == '#N/A') {
-          console.error(`No mcsymbol found for name: ${nestedItems[0]['obj'][val].Name}. Skipping to next iteration.`);
+          console.error(`No mcsymbol found for name: ${nestedItems[0][0]['obj'][val].Name}. Skipping to next iteration.`);
           continue;
         }
         console.log(ttvolumemcsymbol)

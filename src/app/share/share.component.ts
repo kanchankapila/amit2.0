@@ -2587,7 +2587,7 @@ this.stockhcdate1.map((value: number, index: number) => {
   getHtmlFromApi(tlid) {
     
    
-    axios.get('http://stockinsights.netlify.app/.netlify/functions/tlstockchecklist?tlid='+ this.tlid)
+    axios.get('https://stockinsights.netlify.app/.netlify/functions/tlstockchecklist?tlid='+ this.tlid)
       .then(response => {
         this.htmlContent = response.data;
         
