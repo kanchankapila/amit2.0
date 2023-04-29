@@ -159,6 +159,12 @@ baseurl:any;
   gettldvm(){
     return this.http.get(this.baseurl+'/.netlify/functions/TLDVMread') 
   }
+  settldvm(){
+    return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM') 
+  }
+  setttvolume(){
+    return this.http.get('https://render-express-e54x.onrender.com/api/ttvolbreakout') 
+  }
   getttvolume(){
     return this.http.get(this.baseurl+'/.netlify/functions/TTVolumeread') 
   }

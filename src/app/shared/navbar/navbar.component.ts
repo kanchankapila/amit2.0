@@ -508,7 +508,7 @@ getniftysparkline(){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     
       const sparklineCanvas = this.sparklineChartRef.nativeElement;
       this.sparklineniftydata.length=0;
       this.sparklineniftylabel.length=0;
@@ -553,7 +553,7 @@ getbniftysparkline(){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     
       const sparklineCanvas1 = this.sparklineChartRef1.nativeElement;
       this.sparklinebniftydata.length=0;
       this.sparklinebniftylabel.length=0;
@@ -598,7 +598,7 @@ getpniftysparkline(){
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     
       const sparklineCanvas2 = this.sparklineChartRef2.nativeElement;
       this.sparklinepniftydata.length=0;
       this.sparklinepniftylabel.length=0;

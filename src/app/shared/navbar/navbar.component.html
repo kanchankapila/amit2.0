@@ -56,7 +56,7 @@
                 <canvas #sparklineChart></canvas>
               </div>
               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-              <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success': tile.text4 > 0, 'bg-gradient-danger': 0 > tile.text4}" *ngFor="let tile of mcniftyrt">
+              <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success small-text': tile.text4 > 0, 'bg-gradient-danger': 0 > tile.text4}" *ngFor="let tile of mcniftyrt">
                 &nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%
                 <br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}
                
