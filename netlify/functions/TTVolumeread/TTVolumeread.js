@@ -22,12 +22,8 @@ exports.handler = async function(event, context) {
 
     // Execute aggregation query
     const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    const time = await client.db('DVM').collection("DVM").findOne({}, { projection: { _id: 0, time: 1 } }); 
-    
-    console.log(time)
-
+    const time = await client.db('Tickertape').collection("Volume").findOne({}, { projection: { _id: 0, time: 1 } }); 
     await client.close();
-
     const response = {
       statusCode: 200,
       body: JSON.stringify({
@@ -36,6 +32,12 @@ exports.handler = async function(event, context) {
       })
     };
      return response;
+    
+   
+
+   
+
+   
   } catch (err) {
     console.error(err);
     return {

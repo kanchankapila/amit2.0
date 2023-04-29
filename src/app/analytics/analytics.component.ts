@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 export interface tldvmstockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
@@ -11,10 +11,11 @@ export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4:
 })
 export class AnalyticsComponent {
   time1: string;
-  constructor( private dataApi: DataapiService) {
+  constructor( private dataApi: DataapiService, private http: HttpClient) {
     
   }
   time:any;
+  currenttime:any;
   stockList: any;
   tldvmmcsymbol:any;
   ttvolumemcsymbol:any;
@@ -26,20 +27,22 @@ export class AnalyticsComponent {
   this.gettldvm(),
   this.getttvolume()
     ])
+    {setInterval(() => { this.gettime() }, 60000); }
   }
-
+ 
   trackByFunction1(index1, item1) {return item1.text3;}
   trackByFunction2(index2, item2) {return item2.text3;}
+ 
   async gettldvm() {
     try {
       const data5 = await this.dataApi.gettldvm().toPromise();
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     
       this.tldvmstocks.length=0;
       this.time=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
-      console.log(this.time)
+      
       for (let val in nestedItems[0][0]['output']) {
         this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0][0]['output'][val].Name)[0].mcsymbol);
         if (this.tldvmmcsymbol == '#N/A') {
@@ -68,7 +71,12 @@ export class AnalyticsComponent {
       console.error(err);
     }
   }
-  
+  async gettime(){
+    this.currenttime=new Date (Date.now()).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })
+   if(this.currenttime== '15:45'){
+    this.http.get('https://render-express-e54x.onrender.com/api/ttvolbreakout')
+   }
+  }
   async getttvolume() {
     try {
       const data5 = await this.dataApi.getttvolume().toPromise(); // convert Observable to Promise
@@ -76,7 +84,7 @@ export class AnalyticsComponent {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-     console.log(nestedItems)
+    
       this.time1=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
       for (let val in nestedItems[0][0]['obj']) {
   
@@ -85,7 +93,7 @@ export class AnalyticsComponent {
           console.error(`No mcsymbol found for name: ${nestedItems[0][0]['obj'][val].Name}. Skipping to next iteration.`);
           continue;
         }
-        console.log(ttvolumemcsymbol)
+       
         const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/" + ttvolumemcsymbol, {
           method: 'GET',
           headers: {
