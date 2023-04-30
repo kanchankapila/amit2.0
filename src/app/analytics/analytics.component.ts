@@ -27,7 +27,7 @@ export class AnalyticsComponent {
   this.gettldvm(),
   this.getttvolume()
     ])
-    {setInterval(() => { this.gettime() }, 60000); }
+    {setInterval(() => { this.hitttvolbreakout() }, 180000); }
   }
  
   trackByFunction1(index1, item1) {return item1.text3;}
@@ -71,11 +71,10 @@ export class AnalyticsComponent {
       console.error(err);
     }
   }
-  async gettime(){
-    this.currenttime=new Date (Date.now()).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })
-   if(this.currenttime== '15:45'){
+  async hitttvolbreakout(){
+   
     this.http.get('https://render-express-e54x.onrender.com/api/ttvolbreakout')
-   }
+   
   }
   async getttvolume() {
     try {
