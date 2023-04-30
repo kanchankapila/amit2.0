@@ -6,36 +6,9 @@
 <br>
 <br>
 <br>
-
-<div fxLayout="row" fxLayout.xs="column">
-  <blockquote class="trendlyne-widgets abc" 
-              
-              [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTY50/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
-              data-theme="light" 
-              #trendlyneWidget>
-            
-  </blockquote>
-  
-  <blockquote class="abc" 
-  href='https://in.tradingview.com/symbols/NSE-NIFTY/technicals/'
-  #TradingViewWidget>
-  </blockquote>    
-              
-  
-  <blockquote class="abc" 
-  href='https://in.tradingview.com/symbols/NSE-NIFTY/'
-  #TradingViewWidget1>
-  </blockquote>  
-              
-              
-  </div>  
-
-  <div class="tradingview-widget-container" #tradingviewWidget1>
-    
-   
-    <a href="https://in.tradingview.com/symbols/NSE-HDFC/"></a>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  </div>
+<br>
+<br>
+<br>
 
 <div class="InsideContent">
   <p-radioButton name="groupname" value="5" label="5 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
@@ -569,5 +542,23 @@
       </div>
       </div>
     </div>
-   
+    <div fxLayout="row" fxLayout.xs="column">
+      <blockquote class="trendlyne-widgets abc" 
+                  
+                  [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTY50/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
+                  data-theme="light" 
+                  #trendlyneWidget>
+                
+      </blockquote>
+      
+      <blockquote class="abc" 
+      href='https://in.tradingview.com/symbols/NSE-NIFTY/technicals/'
+      #TradingViewWidget>
+      </blockquote>    
+                  
+      
+      
+       </div>  
+    
+       
    

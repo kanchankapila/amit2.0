@@ -9,29 +9,8 @@
 <br>
 <br>
 <br>
-<h4 class="text-black text-center">High Durability/Volatility/Momentum Stocks</h4><br><em>Last Refreshed:{{this.time}}</em>
-<div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
-    <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of tldvmstocks trackBy: trackByFunction1">
-   
-      <div class="scene">
-        <div class="card text-center text-white ">
-          <div  class=" card__face card__face--front type1-bold  "
-          [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-          'bg-gradient-bear':0 > tile.text3,
-          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
-                    
-      </div>
-      <div class="card__face card__face--back type1-bold"
-      [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-      'bg-gradient-bear': 0 > tile.text3,
-      'bg-gradient-warning':0 === tile.text3}">52H:{{tile.text5}}<br>52L:{{tile.text6}}<br>{{tile.text7}}<br>{{tile.text8}}              
-     </div>
-
-</div>
-
-</div>
-</div>
-</div>
+<br>
+<br>
 <h4 class="text-black text-center">Volume Breakout</h4><br><em>Last Refreshed:{{this.time1}}</em>
 <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
     <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of ttvolumestocks trackBy: trackByFunction2">
@@ -56,3 +35,27 @@
 </div>
 </div>
 
+
+<h4 class="text-black text-center">High Durability/Volatility/Momentum Stocks</h4><br><em>Last Refreshed:{{this.time}}</em>
+<div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
+    <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of tldvmstocks trackBy: trackByFunction1">
+   
+      <div class="scene">
+        <div class="card text-center text-white ">
+          <div  class=" card__face card__face--front type1-bold  "
+          [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
+          'bg-gradient-bear':0 > tile.text3,
+          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
+                    
+      </div>
+      <div class="card__face card__face--back type1-bold"
+      [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
+      'bg-gradient-bear': 0 > tile.text3,
+      'bg-gradient-warning':0 === tile.text3}">52H:{{tile.text5}}<br>52L:{{tile.text6}}<br>{{tile.text7}}<br>{{tile.text8}}              
+     </div>
+
+</div>
+
+</div>
+</div>
+</div>

@@ -12,23 +12,6 @@
 
 
 
-<div fxLayout="row" fxLayout.xs="column">
-<blockquote class="trendlyne-widgets abc" 
-            
-            [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/' + eqsymbol + '/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
-            data-theme="light" 
-            #trendlyneWidget>
-</blockquote>
-
-
-
-<blockquote class="abc" 
-href='https://in.tradingview.com/symbols/NSE-BEL/technicals/'
-#TradingViewWidget>
-</blockquote>   
-            
-           
-</div>      
 
 <button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="Neutral" class="p-button-raised p-button-warning p-button-text"></button>
 <button pButton pRipple type="button"  (click)="showMaximizableDialog1()" label="Positives" class="p-button-raised p-button-success p-button-text"></button>
@@ -512,7 +495,7 @@ NR7:{{nr7}}
       <h4 class="text-black text-center">Sentiment</h4>
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
         <div fxFlex="30" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of stocksentiments trackBy: trackByFunction9">
-          <mat-card class="text-blue type1-bold textcenter grid-margin stretch-card"
+          <mat-card style="text-transform: uppercase;font-weight:bold" class="text-blue type1-bold textcenter grid-margin stretch-card"
           [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
                       'bg-gradient-bull1':tile.text1 === 'Very Bullish',
                       'bg-gradient-bear':tile.text1 === 'Bearish',
@@ -872,3 +855,21 @@ NR7:{{nr7}}
 
 
  <div [ngClass]="{'text-green':tile.text1 === 'YES','text-red':tile.text1 === 'NO'}" *ngFor="let tile of foundContent">{{tile.text1}}</div>
+ <div fxLayout="row" fxLayout.xs="column">
+  <blockquote class="trendlyne-widgets abc" 
+              
+              [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/' + eqsymbol + '/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
+              data-theme="light" 
+              #trendlyneWidget>
+  </blockquote>
+  
+  
+  
+  <blockquote class="abc" 
+  href='https://in.tradingview.com/symbols/NSE-BEL/technicals/'
+  #TradingViewWidget>
+  </blockquote>   
+              
+             
+  </div>      
+  
