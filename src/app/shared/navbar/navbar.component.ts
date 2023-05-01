@@ -523,7 +523,7 @@ getniftysparkline(){
           labels: this.sparklineniftylabel,
           datasets: [{
             data: this.sparklineniftydata, // Generate random data for 350 points
-            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderColor: 'rgba(0,0,0)', // Define the color of the sparkline
             borderWidth: 1, // Define the width of the sparkline
             fill: false, // Do not fill the area under the sparkline
           }]
@@ -568,7 +568,7 @@ getbniftysparkline(){
           labels: this.sparklinebniftylabel,
           datasets: [{
             data: this.sparklinebniftydata, // Generate random data for 350 points
-            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderColor: 'rgba(0,0,0)', // Define the color of the sparkline
             borderWidth: 1, // Define the width of the sparkline
             fill: false, // Do not fill the area under the sparkline
           }]
@@ -613,7 +613,7 @@ getpniftysparkline(){
           labels: this.sparklinepniftylabel,
           datasets: [{
             data: this.sparklinepniftydata, // Generate random data for 350 points
-            borderColor: 'rgba(255,255,255)', // Define the color of the sparkline
+            borderColor: 'rgba(0,0,0)', // Define the color of the sparkline
             borderWidth: 1, // Define the width of the sparkline
             fill: false, // Do not fill the area under the sparkline
           }]
