@@ -42,21 +42,19 @@
         <div class="col-md-10 col-xs-6">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
             <div class="card-body">
-              <div class="canvas-wrapper" >
-                <canvas #sparklineChart></canvas>
-              </div>
+              
               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
               <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success small-text': tile.text4 > 0, 'bg-gradient-danger': 0 > tile.text4}" *ngFor="let tile of mcniftyrt">
                 &nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%
-                <br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}
-               
-              </div>
+                <br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}} </div>
+                <div class="canvas-wrapper" >
+                  <canvas #sparklineChart></canvas>
+                </div>
+             
               <div class="InsideContent">
-                <!-- <div [ngClass]="{'font-green' : tile.text1 >= 1.2 ,'font-red': 0.80 > tile.text1 ,'font-yellow': 1.2 > tile.text1 && tile.text1 > 0.80 }" *ngFor="let tile of pcrnsenifty">{{tile.text1| number : '1.2-2'}}</div>
-                -->
+               
                 <div style="font-weight:bold">{{pcrnsenifty1}}</div>
-                <!-- <div class="font-green">&nbsp;&nbsp;{{this.n50optionssupport}}</div>
-                <div class="font-red">&nbsp;&nbsp;{{this.n50optionsresistance}}</div>     -->
+                
               </div>
               <h6 class="card-text"></h6>
             </div>
@@ -66,18 +64,16 @@
       <div class="col-md-10 col-xs-6">
         <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatebanknifty()">
           <div class="card-body">
-            <div class="canvas-wrapper" >
-              <canvas #sparklineChart1></canvas>
-            </div>
+            
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
            
             <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success ' : tile.text4 > 0 ,'bg-gradient-danger ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>
-            
+            <div class="canvas-wrapper" >
+              <canvas #sparklineChart1></canvas>
+            </div>
             <div class="InsideContent">
             <div style="font-weight:bold">{{pcrnsebnifty1}}</div>
-            <!-- <div [ngClass]="{'font-green' : tile.text1 >= 1.2 ,'font-red': 0.80 > tile.text1 ,'font-yellow': 1.2 > tile.text1 && tile.text1 > 0.80 }" *ngFor="let tile of pcrnsebnifty">{{tile.text1| number : '1.2-2'}}</div>
-            <div class="font-green">&nbsp;&nbsp;{{this.bnoptionssupport}}</div>
-            <div class="font-red">&nbsp;&nbsp;{{this.bnoptionsresistance}}</div> -->
+          
           </div>
             <h6 class="card-text"></h6>
           </div>
@@ -87,17 +83,16 @@
         <div class="col-md-10 col-xs-9">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatepnifty()">
             <div class="card-body">
-              <div class="canvas-wrapper" >
-                <canvas #sparklineChart2></canvas>
-              </div>
+              
               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
               
               <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcpniftyrt">&nbsp;Pharma N <br>&nbsp;{{tile.text2}}<br>&nbsp;{{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</div>
+              <div class="canvas-wrapper" >
+                <canvas #sparklineChart2></canvas>
+              </div>
               <div class="InsideContent">
                 <div style="text-transform: uppercase;font-weight:bold" [ngClass]="{'bg-gradient-success mb-1 ': 30 > tile.text1 &&  tile.text1 > 0,'bg-gradient-warning mb-1 ': 50 > tile.text1 && tile.text1 > 30,'bg-gradient-neu mb-1 ': 70 > tile.text1 && tile.text1 > 50,'bg-gradient-danger mb-1 ': tile.text1 > 70}" *ngFor="let tile of ttmmi">MMI: {{tile.text1| number : '1.2-2'}}</div>
-                <!-- <div [ngClass]="{'font-green' : tile.text1 >= 1.2 ,'font-red': 0.80 > tile.text1 ,'font-yellow': 1.2 > tile.text1 && tile.text1 > 0.80 }" *ngFor="let tile of pcrnsebnifty">{{tile.text1| number : '1.2-2'}}</div>
-                <div class="font-green">&nbsp;&nbsp;{{this.bnoptionssupport}}</div>
-                <div class="font-red">&nbsp;&nbsp;{{this.bnoptionsresistance}}</div> -->
+                
               </div>
               <h6 class="card-text"></h6>
               
