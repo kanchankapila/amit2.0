@@ -121,15 +121,47 @@
 
 
 
+<h1>ET Screeners</h1>
 
-
-
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="moversvolume" label="Active by Volume" [(ngModel)]="selectedValue" (onClick)="onClick6($event)" ></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="moversvalue" label="Active by Value" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="onlybuyer" label="Only Buyers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="onlyseller" label="Only Sellers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="fallfromhigh" label="Fall from High" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="recoveryfromlow" label="Rise from Low" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+<section>
+  <div>
+    <input type="radio" id="moversvolume" name="groupname" value="moversvolume"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="moversvolume"><p>Active by Volume</p></label>
+    
+  </div>
+  <div>
+    <input type="radio" id="moversvalue" name="groupname" value="moversvalue"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="moversvalue"><p>Active by Value</p></label>
+    
+  </div>
+  <div>
+    <input type="radio" id="onlybuyer" name="groupname" value="onlybuyer"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="onlybuyer"><p>Only Buyers</p></label>
+    
+  </div>
+  <div>
+    <input type="radio" id="onlyseller" name="groupname" value="onlyseller"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="onlyseller"><p>Only Sellers</p></label>
+    
+  </div>
+  <div>
+    <input type="radio" id="fallfromhigh" name="groupname" value="fallfromhigh"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="fallfromhigh"><p>Fall From High</p></label>
+    
+  </div>
+  <div>
+    <input type="radio" id="recoveryfromlow" name="groupname" value="recoveryfromlow"
+      [(ngModel)]="selectedValue" (click)="onClick6($event)">
+    <label for="recoveryfromlow"><p>Recovery From Low</p></label>
+    
+  </div>
+  
+</section>
 
   <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
     <div class="content card textcenter">
