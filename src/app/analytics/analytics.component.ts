@@ -19,13 +19,15 @@ export class AnalyticsComponent {
   stockList: any;
   tldvmmcsymbol:any;
   ttvolumemcsymbol:any;
+  screenercode:any;
   tldvmstocks: tldvmstockstile[] = [];
   ttvolumestocks: ttvolumestockstile[] = [];
   async ngOnInit() {
     await Promise.all([
   this.stockList = stocks.default.Data,
   this.gettldvm(),
-  this.getttvolume()
+  this.getttvolume(),
+  this.gettlscreener(this.screenercode)
     ])
     {setInterval(() => { this.hitttvolbreakout() }, 180000); }
   }
@@ -124,6 +126,19 @@ export class AnalyticsComponent {
     }
   }
     
+  async gettlscreener(screenercode) {
+    this.screenercode='15697';
+    this.dataApi.gettlscreeners(this.screenercode).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+   
+      
+    
+      console.log(nestedItems)
+    });
+    
+  }
   
  
 
