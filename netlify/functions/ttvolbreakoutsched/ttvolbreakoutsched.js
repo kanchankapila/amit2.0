@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const handler = async function () {
   try {
-    const response = await fetch('https://render-express-e54x.onrender.com/api/ttvolbreakout', {
+    const response = await fetch('https://render-express-e54x.onrender.com/api/ttvolnmcinsight', {
       headers: { Accept: 'application/json' },
     })
     if (!response.ok) {
