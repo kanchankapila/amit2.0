@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
-import { HttpClient } from '@angular/common/http';
+
 import * as  stocks from '../lists/stocklist'
 export interface tldvmstockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
@@ -11,7 +11,7 @@ export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4:
 })
 export class AnalyticsComponent {
   time1: string;
-  constructor( private dataApi: DataapiService, private http: HttpClient) {
+  constructor( private dataApi: DataapiService) {
     
   }
   time:any;
@@ -27,7 +27,7 @@ export class AnalyticsComponent {
   this.gettldvm(),
   this.getttvolume()
     ])
-    {setInterval(() => { this.hitttvolbreakout() }, 180000); }
+   
   }
  
   trackByFunction1(index1, item1) {return item1.text3;}
@@ -71,11 +71,7 @@ export class AnalyticsComponent {
       console.error(err);
     }
   }
-  async hitttvolbreakout(){
-   
-    this.http.get('https://render-express-e54x.onrender.com/api/ttvolbreakout')
-   
-  }
+  
   async getttvolume() {
     try {
       const data5 = await this.dataApi.getttvolume().toPromise(); // convert Observable to Promise
