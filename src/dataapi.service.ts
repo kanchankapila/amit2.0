@@ -152,7 +152,10 @@ baseurl:any;
   nsedatapioii(){
     return this.http.get(this.baseurl + '/nsedatapioii')
   }
-  
+  gettlscreeners(screenercode){
+    console.log(screenercode)
+    return this.http.get(this.baseurl+'/.netlify/functions/tlstockscreeners?screenercode='+screenercode)
+  }
   getntstock1yr(eqsymbol) {
     return this.http.get(this.baseurl+'/.netlify/functions/ntstock1yr?eqsymbol='+eqsymbol) 
   }
