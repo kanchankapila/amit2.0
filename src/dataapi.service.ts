@@ -166,7 +166,7 @@ baseurl:any;
     return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM') 
   }
   setttvolume(){
-    return this.http.get('https://render-express-e54x.onrender.com/api/ttvolbreakout') 
+    return this.http.get('https://render-express-e54x.onrender.com/api/ttvolnmcinsight') 
   }
   getttvolume(){
     return this.http.get(this.baseurl+'/.netlify/functions/TTVolumeread') 
