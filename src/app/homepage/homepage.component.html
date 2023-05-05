@@ -121,48 +121,15 @@
 
 
 
-<h1>ET Screeners</h1>
-
-<section>
-  <div>
-    <input type="radio" id="moversvolume" name="groupname" value="moversvolume"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="moversvolume"><p>Active by Volume</p></label>
-    
-  </div>
-  <div>
-    <input type="radio" id="moversvalue" name="groupname" value="moversvalue"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="moversvalue"><p>Active by Value</p></label>
-    
-  </div>
-  <div>
-    <input type="radio" id="onlybuyer" name="groupname" value="onlybuyer"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="onlybuyer"><p>Only Buyers</p></label>
-    
-  </div>
-  <div>
-    <input type="radio" id="onlyseller" name="groupname" value="onlyseller"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="onlyseller"><p>Only Sellers</p></label>
-    
-  </div>
-  <div>
-    <input type="radio" id="fallfromhigh" name="groupname" value="fallfromhigh"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="fallfromhigh"><p>Fall From High</p></label>
-    
-  </div>
-  <div>
-    <input type="radio" id="recoveryfromlow" name="groupname" value="recoveryfromlow"
-      [(ngModel)]="selectedValue" (click)="onClick6($event)">
-    <label for="recoveryfromlow"><p>Recovery From Low</p></label>
-    
-  </div>
-  
-</section>
-
+<p>ET Screeners</p>
+<div fxLayout="row" fxLayout.xs="column" >
+<p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="moversvolume" label="Active by Volume" [(ngModel)]="selectedValue" (onClick)="onClick6($event)" ></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="moversvalue" label="Active by Value" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="onlybuyer" label="Only Buyers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="onlyseller" label="Only Sellers" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="fallfromhigh" label="Fall from High" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="recoveryfromlow" label="Rise from Low" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
+</div>
   <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
     <div class="content card textcenter">
      
@@ -194,16 +161,17 @@
   </div>
   </div>
   <p>Pre-Defined Filters</p>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="VALUE_STOCKS,marketCapValue,desc" label="Value Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_DIVIDEND_YIELD,dividendYield,desc" label="HighDividendYield" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="MID_CAP_GROWTH_STOCKS,marketCapValue,desc" label="Mid-cap Growth Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="ATTRACTIVE_BLUECHIPS,marketCapValue,desc" label="Attractive Bluechips" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="FII_BUYING,percentageScrrFiiChange,desc" label="Stocks with FII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_BUYING,percentageScrrDiiChange,desc" label="Stocks with DII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="FII_SELLING,percentageScrrFiiChange,desc" label="Stocks with FII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="GARP,marketCapValue,desc" label="Growth at Reasonable Price" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
-
+  <div fxLayout="row" fxLayout.xs="column" >
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="VALUE_STOCKS,marketCapValue,desc" label="Value Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="HIGH_DIVIDEND_YIELD,dividendYield,desc" label="High Dividend Yield" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="MID_CAP_GROWTH_STOCKS,marketCapValue,desc" label="Mid-cap Growth Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="ATTRACTIVE_BLUECHIPS,marketCapValue,desc" label="Attractive Bluechips" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="FII_BUYING,percentageScrrFiiChange,desc" label="Stocks with FII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="DII_BUYING,percentageScrrDiiChange,desc" label="Stocks with DII Buying" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="FII_SELLING,percentageScrrFiiChange,desc" label="Stocks with FII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="GARP,marketCapValue,desc" label="Growth at Reasonable Price" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
+</div>
   <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
     <div class="content card textcenter">
      
@@ -231,16 +199,17 @@
   </div>
   </div>
   <p>Stock Score Filters</p>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_DOWNGRADE,avgScoreChange1m,desc" label="Score Downgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_UPGRADE,rvScore,desc" label="Score Upgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="TOP_SCORE_COMPANIES,analystScore,desc" label="Top Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="SCORE_IMPROVEMENT,avgScoreChange1m,desc" label="Score Improvement" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_UPSIDE_POTENTIAL,rvScore,desc" label="High Upside Potential" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="LOW_SCORE_COMPANIES,rvScore,desc" label="Low Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-  <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="HIGH_DOWNSIDE_STOCKS,rvScore,desc" label="High Downside Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
-   <p-radioButton class="btn btn-responsive btn-danger" name="groupname" value="STRONG_MOMENTUM_STOCKS,rvScore,desc" label="Strong Momentum Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
- 
+  <div fxLayout="row" fxLayout.xs="column" >
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="SCORE_DOWNGRADE,avgScoreChange1m,desc" label="Score Downgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="SCORE_UPGRADE,rvScore,desc" label="Score Upgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="TOP_SCORE_COMPANIES,analystScore,desc" label="Top Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="SCORE_IMPROVEMENT,avgScoreChange1m,desc" label="Score Improvement" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="HIGH_UPSIDE_POTENTIAL,rvScore,desc" label="High Upside Potential" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="LOW_SCORE_COMPANIES,rvScore,desc" label="Low Score Companies" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+  <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="HIGH_DOWNSIDE_STOCKS,rvScore,desc" label="High Downside Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+   <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="STRONG_MOMENTUM_STOCKS,rvScore,desc" label="Strong Momentum Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
+ </div>
   <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
     <div class="content card textcenter">
      
