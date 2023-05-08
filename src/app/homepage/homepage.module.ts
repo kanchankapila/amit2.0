@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import { TableModule } from 'primeng/table';
-
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { TableModule } from 'primeng/table';
     MatCardModule,
     RadioButtonModule,
     FormsModule,
+    DialogModule,
     ButtonModule,
     TableModule
    

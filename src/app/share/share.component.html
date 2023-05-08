@@ -458,7 +458,38 @@ NR7:{{nr7}}
 </div>
 </div>
 
-  
+<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+  <div class="content card textcenter">
+    <div fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%" *ngFor="let tile of stockindicators; let i = index; trackBy: trackByFunction2">
+        <p-dialog header="{{tile.text1}}" [(visible)]="dialogVisible[i]" [style]="{width: '50vw'}">
+          <div class="text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card">
+            {{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+          </div>
+          <div class="text-black type1-regular textcenter grid-margin stretch-card">
+            Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+          </div>
+          <p-footer>
+            <button type="button" pButton (click)="dialogVisible[i] = false" label="Close"></button>
+            <button type="button" pButton (click)="maximizeDialog(i)" icon="pi pi-window-maximize" iconPos="right"></button>
+          </p-footer>
+        </p-dialog>
+        <div class="scene">
+          <div class="card">
+            <div class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
+              (click)="dialogVisible[i] = true">{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+              <div style="text-align: center;"></div>
+            </div>
+            <div class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular  textcenter grid-margin stretch-card"
+              (click)="dialogVisible[i] = true">Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+              <div style="text-align: center;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   
 

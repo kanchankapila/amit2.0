@@ -242,6 +242,7 @@ public titlepv: string = 'Volume Analysis';
 
   
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
+    this.dialogVisible = this.pdstocks.map(() => false);
     if (window.location.hostname === "localhost") {
       this.baseurl = "http://localhost:8888"
     } else {
@@ -1026,7 +1027,52 @@ async getstocksparkline(mcsymbol){
     return new Promise<void>(resolve => setTimeout(resolve, ms));
   }
    
-  
+  pdstocks = [
+    {
+      text1: 'Stock 1',
+      text2: '2.5',
+      text3: '$25.00',
+      text4: '$30.00',
+      text5: '$20.00',
+      text6: '10',
+      text7: '5',
+      text8: '7',
+      text9: 'Company A',
+      text10: '5',
+      text11: '8',
+      text12: '9'
+    },
+    {
+      text1: 'Stock 2',
+      text2: '-1.5',
+      text3: '$50.00',
+      text4: '$55.00',
+      text5: '$45.00',
+      text6: '8',
+      text7: '2',
+      text8: '10',
+      text9: 'Company B',
+      text10: '6',
+      text11: '7',
+      text12: '8'
+    }
+  ];
+
+  dialogVisible: boolean[] = [];
+
+
+
+ 
+
+  maximizeDialog(index: number) {
+    const dialog = document.getElementsByClassName('ui-dialog-content')[index] as HTMLElement;
+    dialog.style.width = '100vw';
+    dialog.style.height = '100vh';
+    dialog.style.top = '0';
+    dialog.style.left = '0';
+    dialog.style.margin = '0';
+    dialog.style.borderRadius = '0';
+  }
   // gettrendlynestocksti(tlid) {
   //   axios.get('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/' + this.tlid + '/24/')
   //     .then((response) => {
