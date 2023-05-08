@@ -271,6 +271,7 @@ tableDataGainers: Gainers[] = [];
 tableDataLosers: Losers[] = [];
 cols: any[] = [];
 constructor(private http: HttpClient,private dataApi: DataapiService) {
+  this.dialogVisible = this.pdstocks.map(() => false);
   if (window.location.hostname === "localhost") {
     this.baseurl = "http://localhost:9999"
   } else {
@@ -447,6 +448,23 @@ refreshtl() {
   console.log("TLrefresh is hit")
 });
 }; 
+dialogVisible: boolean[] = [];
+
+trackByFunction22(index, item) {
+  return index;
+}
+
+
+
+maximizeDialog(index: number) {
+  const dialog = document.getElementsByClassName('ui-dialog-content')[index] as HTMLElement;
+  dialog.style.width = '100vw';
+  dialog.style.height = '100vh';
+  dialog.style.top = '0';
+  dialog.style.left = '0';
+  dialog.style.margin = '0';
+  dialog.style.borderRadius = '0';
+}
 getadvdec1() {
   
   this.http.get<any>('https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true').subscribe(data5 => {

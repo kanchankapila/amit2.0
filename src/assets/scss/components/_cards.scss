@@ -23,10 +23,11 @@
 .card {
   border: 0;
   background: $card-bg;
+  margin-top: 1rem;
   .card-body {
     padding: $card-padding-y $card-padding-x;
     + .card-body {
-      padding-top: 1rem;
+      padding-top: 5rem;
     }
   }
   .card-title {
