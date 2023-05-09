@@ -15,7 +15,7 @@
     
     <h4 class="mb-4">Global Markets</h4>
     <div fxLayout="row wrap" fxLayoutGap="10px grid">
-      <div fxFlex="11" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket trackBy: trackByFunction1">
+      <div fxFlex="11" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket let i = index; trackBy: trackByFunctionglobalmarket">
     <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
     [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
               'bg-gradient-bear':0 > tile.text3 ,
@@ -130,36 +130,54 @@
   <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="fallfromhigh" label="Fall from High" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
   <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="recoveryfromlow" label="Rise from Low" [(ngModel)]="selectedValue" (onClick)="onClick6($event)"></p-radioButton>
 </div>
-  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-    <div class="content card textcenter">
+
+<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+  <div class="content card textcenter">
+   
+    <div fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="30" fxFlex.sm="33%"  *ngFor="let tile of screener;let i = index; trackBy: trackByFunctionscreener">
      
-   <div fxLayout="row wrap" fxLayoutGap="5px grid">
-        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of screener trackBy: trackByFunction3">
-       
-  <div class="scene">
-    <div class="card">
-      <div class="card__face card__face--front text-blue type1-regular textcenter grid-margin stretch-card"
-      [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+        <div class="scene">
+          <div class="card">
+            <div class="card__face card__face--front bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true"
+              [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
       'bg-gradient-bear':0 > tile.text4 ,
       'bg-gradient-warning':tile.text4 === 0}">{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;({{tile.text4}})%<br>Volume:{{tile.text11}}K
       <div style="text-align: center;">
       </div>
+     </div>
+            <div class="card__face card__face--back bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true"
+              [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+              'bg-gradient-bear':0 > tile.text4 ,
+              'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
+              <div style="text-align: center;">
+              </div>  
+            </div>
           </div>
-          <div class="card__face card__face--back text-blue type1-regular  textcenter grid-margin stretch-card"
-          [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
-          'bg-gradient-bear':0 > tile.text4 ,
-          'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
-          <div style="text-align: center;">
-          </div>   
         </div>
-    
+        <p-dialog header="{{tile.text1}}" [(visible)]="dialogVisible[i]" [style]="{width: '100vw', height: '100vh'}">
+          <div class="text-black bg-gradient-bull type1-regular text-center grid-margin"  [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+            'bg-gradient-bear':0 > tile.text4 ,
+            'bg-gradient-warning':tile.text4 === 0}">{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;({{tile.text4}})%<br>Volume:{{tile.text11}}K
+            <div style="text-align: center;">
+            </div>
+          </div>
+          <div class="text-black type1-regular bg-gradient-bull text-center grid-margin"  [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
+            'bg-gradient-bear':0 > tile.text4 ,
+            'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
+            <div style="text-align: center;">
+            </div>  
+          </div>
+          <p-footer>
+            <button type="button" pButton (click)="dialogVisible[i] = false" label="Close"></button>
+            <button type="button" pButton (click)="maximizeDialog(i)" icon="pi pi-window-maximize" iconPos="right"></button>
+          </p-footer>
+        </p-dialog>
+      </div>
     </div>
-    
   </div>
-  </div>
-  </div>
-  </div>
-  </div>
+</div> 
+
   <p>Pre-Defined Filters</p>
   <div fxLayout="row" fxLayout.xs="column" >
   <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="VALUE_STOCKS,marketCapValue,desc" label="Value Stocks" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
@@ -173,15 +191,29 @@
   <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="GARP,marketCapValue,desc" label="Growth at Reasonable Price" [(ngModel)]="selectedValue" (onClick)="onClick4($event)"></p-radioButton>
 </div>
 
-<div class="col-lg-13 col-xs-6  ">
-  <div class="content card textcenter stretch-card">
-    <div fxLayout="row wrap" fxLayoutGap="2px grid">
-      <div fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%" *ngFor="let tile of pdstocks; let i = index; trackBy: trackByFunction22">
-        <p-dialog header="{{tile.text1}}" [(visible)]="dialogVisible[i]" [style]="{width: '50vw'}">
-          <div class="text-black bg-gradient-bull type1-regular textcenter grid-margin ">
+<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+  <div class="content card textcenter">
+   
+    <div fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="30" fxFlex.sm="33%"  *ngFor="let tile of pdstocks;let i = index; trackBy: trackByFunctionpdstocks">
+     
+        <div class="scene">
+          <div class="card">
+            <div class="card__face card__face--front bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true">
+              {{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+              <div style="text-align: center;"></div>
+            </div>
+            <div class="card__face card__face--back bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true">
+              Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+              <div style="text-align: center;"></div>
+            </div>
+          </div>
+        </div>
+        <p-dialog header="{{tile.text1}}" [(visible)]="dialogVisible[i]" [style]="{width: '100vw', height: '100vh'}">
+          <div class="text-black bg-gradient-bull type1-regular text-center grid-margin">
             {{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
           </div>
-          <div class="text-black type1-regular textcenter bg-gradient-fair grid-margin ">
+          <div class="text-black type1-regular bg-gradient-bull text-center grid-margin">
             Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
           </div>
           <p-footer>
@@ -189,49 +221,11 @@
             <button type="button" pButton (click)="maximizeDialog(i)" icon="pi pi-window-maximize" iconPos="right"></button>
           </p-footer>
         </p-dialog>
-        <div class="scene">
-          <div class="card">
-            <div class="card__face card__face--front text-center text-black  bg-gradient-fair type1-regular textcenter grid-margin "
-              (click)="dialogVisible[i] = true">{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
-              <div style="text-align: center;"></div>
-            </div>
-            <div class="card__face card__face--back text-center  bg-gradient-fair text-black type1-regular  textcenter grid-margin "
-              (click)="dialogVisible[i] = true">Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
-              <div style="text-align: center;"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-</div>
+</div> 
 
-  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-    <div class="content card textcenter">
-     
-      <div fxLayout="row wrap" fxLayoutGap="5px grid">
-        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of pdstocks trackBy: trackByFunction2">
-       
-  <div class="scene">
-    <div class="card">
-      <div class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
-      >{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
-      <div style="text-align: center;">
-      </div>
-          </div>
-          <div class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular  textcenter grid-margin stretch-card"
-          >Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
-          <div style="text-align: center;">
-          </div>
-         </div>
-    
-    </div>
-    
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
   <p>Stock Score Filters</p>
   <div fxLayout="row" fxLayout.xs="column" >
   <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="SCORE_DOWNGRADE,avgScoreChange1m,desc" label="Score Downgrade" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
@@ -244,65 +238,43 @@
    <p-radioButton class="btn btn-responsive btn-outline-danger" name="groupname" value="DII_SELLING,percentageScrrFiiChange,desc" label="Stocks with DII Selling" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
    <p-radioButton class="btn btn-responsive btn-outline-success" name="groupname" value="STRONG_MOMENTUM_STOCKS,rvScore,desc" label="Strong Momentum Stocks" [(ngModel)]="selectedValue" (onClick)="onClick5($event)"></p-radioButton>
  </div>
-  <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-    <div class="content card textcenter">
-     
-      <div fxLayout="row wrap" fxLayoutGap="5px grid">
-        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of ssstocks trackBy: trackByFunction4 ">
-       
-  <div class="scene">
-    <div class="card">
-      <div class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
-      >{{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
-      <div style="text-align: center;">
-      </div>
-          </div>
-          <div class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular  textcenter grid-margin stretch-card"
-          >Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
-          <div style="text-align: center;">
-          </div>
-         </div>
-    
-    </div>
-    
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-    <div class="content card textcenter">
-     
-      <div fxLayout="row wrap" fxLayoutGap="5px grid">
-        <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="50" fxFlex.sm="33%"  *ngFor="let tile of screenerhourly trackBy: trackByFunction3">
-       
-  <div class="scene">
-      <div class="card">
-        <div class="card__face card__face--front text-blue type1-regular textcenter grid-margin stretch-card"
-        [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
-        'bg-gradient-bear':0 > tile.text4 ,
-        'bg-gradient-warning':tile.text4 === 0}">{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;({{tile.text4}})%<br><br>Above from Low:{{tile.text7}}({{tile.text8}})%<br>Low from High:{{tile.text9}}({{tile.text10}})%<br>Volume:{{tile.text11}}K
-          <div style="text-align: center;">
-     </div>
-        </div>
-            <div class="card__face card__face--back text-blue type1-regular  textcenter grid-margin stretch-card"
-            [ngClass]="{'bg-gradient-bull text-black':tile.text4 > 0,
-            'bg-gradient-bear':0 > tile.text4 ,
-            'bg-gradient-warning':tile.text4 === 0}">52wk High:{{tile.text5}}<br>52wk Low:{{tile.text6}}
-              <div style="text-align: center;">
-     </div>
-            </div>
-      
-      </div>
-      
-    </div>
-  
-  </div>
-  </div>
-  </div>
-  </div> 
-   -->
 
+
+ <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+  <div class="content card textcenter">
+   
+    <div fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div  fxFlex="20" fxFlex.lg="12%" fxFlex.xs="30" fxFlex.sm="33%"  *ngFor="let tile of ssstocks;let i = index; trackBy: trackByFunctionssstocks">
+     
+        <div class="scene">
+          <div class="card">
+            <div class="card__face card__face--front bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true">
+              {{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+              <div style="text-align: center;"></div>
+            </div>
+            <div class="card__face card__face--back bg-gradient-bull text-center text-black type1-regular grid-margin" (click)="dialogVisible[i] = true">
+              Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+              <div style="text-align: center;"></div>
+            </div>
+          </div>
+        </div>
+        <p-dialog header="{{tile.text1}}" [(visible)]="dialogVisible[i]" [style]="{width: '100vw', height: '100vh'}">
+          <div class="text-black bg-gradient-bull type1-regular text-center grid-margin">
+            {{tile.text1}}<br>{{tile.text9}}<br>Tech Score:{{tile.text11}}<br>Analyst Score:{{tile.text12}}<br>Risk Score:{{tile.text10}}<br>Current Price:{{tile.text3}}<br>Change:{{tile.text2}}%
+          </div>
+          <div class="text-black type1-regular bg-gradient-bull text-center grid-margin">
+            Target High:{{tile.text4}}<br>Target Low:{{tile.text5}}<br>Strong Buy:({{tile.text6}})<br>Sell:{{tile.text7}}<br>Hold:{{tile.text8}}
+          </div>
+          <p-footer>
+            <button type="button" pButton (click)="dialogVisible[i] = false" label="Close"></button>
+            <button type="button" pButton (click)="maximizeDialog(i)" icon="pi pi-window-maximize" iconPos="right"></button>
+          </p-footer>
+        </p-dialog>
+      </div>
+    </div>
+  </div>
+</div> 
+ 
 
   <div fxLayout="row" fxLayout.xs="column">
     
@@ -329,14 +301,12 @@
    
   
     <p-table
-    
-    [responsive]="true"
-      [value]="tableDataGainers"
-      [scrollable]="true"
-      responsiveLayout="stack" 
-      scrollWidth="flex"
-      scrollHeight="flex"
-      >
+    [value]="tableDataGainers"
+    [scrollable]="true"
+    scrollWidth="flex"
+    scrollHeight="flex"
+    class="p-datatable"
+  >
   
       <ng-template pTemplate="header">
         <tr>
@@ -414,12 +384,12 @@
 
   
   <p-table
-
   [value]="tableDataLosers"
   [scrollable]="true"
   scrollWidth="flex"
   scrollHeight="flex"
-  >
+  class="p-datatable"
+>
 
   <ng-template pTemplate="header">
     <tr>
@@ -474,6 +444,3 @@
 </div>
 </div>
 
-<div class="card">
-  Magic Card
-</div>

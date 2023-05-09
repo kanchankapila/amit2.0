@@ -363,11 +363,7 @@ async  ngOnInit() {
 
 
 }
-// globalmarket: globalmarkettiles[] = [];
 
-//   // trackByFunction1(index1, item1) {
-//     return item1.text1
-//  }
 onClick(event) {
   
   this.getetscreenersGainers(this.selectedValueGainers)
@@ -450,10 +446,18 @@ refreshtl() {
 }; 
 dialogVisible: boolean[] = [];
 
-trackByFunction22(index, item) {
+trackByFunctionpdstocks(index, item) {
   return index;
 }
-
+trackByFunctionssstocks(index, item) {
+  return index;
+}
+trackByFunctionscreener(index, item) {
+  return index;
+}
+trackByFunctionglobalmarket(index, item) {
+  return index;
+}
 
 
 maximizeDialog(index: number) {
@@ -1060,18 +1064,9 @@ getadvdec() {
   
 }
 
-trackByFunction1(item1) {
-    return item1.text1
-}
-trackByFunction2(item2) {
-  return item2.text1
-}
-trackByFunction3(item3) {
-  return item3.text1
-}
-trackByFunction4(item4) {
-  return item4.text1
-}
+
+
+
 opstrafiidii() {
   
   //let headers: HttpHeaders = new HttpHeaders()
