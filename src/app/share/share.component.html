@@ -19,7 +19,7 @@
 <button pButton pRipple type="button"  (click)="showMaximizableDialog3()" label="Insights" class="p-button-raised p-button-secondary p-button-text"></button>
 <button pButton pRipple type="button"  (click)="showMaximizableDialog4()" label="Stock News" class="p-button-raised p-button-primary p-button-text"></button>
 
-<p-dialog header="Neutral" [(visible)]="displayMaximizable" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '150vw'}" [style]="{width: '100vw'}" [maximizable]="true" [baseZIndex]="10000"
+<p-dialog header="Neutral" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-warning card">
@@ -36,7 +36,7 @@
   </ng-template>
   </p-dialog>        
 
-<p-dialog header="Positive" [(visible)]="displayMaximizable1" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '150vw'}" [style]="{width: '150vw'}" [maximizable]="true" [baseZIndex]="10000"
+<p-dialog header="Positive" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
@@ -52,7 +52,7 @@
   </ng-template>
   </p-dialog>
 
-    <p-dialog header="Negative" [(visible)]="displayMaximizable2" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '150vw'}" [style]="{width: '150vw'}" [maximizable]="true" [baseZIndex]="10000"
+    <p-dialog header="Negative" [(visible)]="displayMaximizable2" [modal]="true" [style]="{width: '100vw', height: '100vh'}" [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-danger card">
@@ -70,7 +70,7 @@
   </p-dialog>
 
 
-    <p-dialog header="Insights" [(visible)]="displayMaximizable3" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '100vw'}" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    <p-dialog header="Insights" [(visible)]="displayMaximizable3" [modal]="true" [style]="{width: '100vw', height: '100vh'}" [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <p *ngFor="let tile of brokertarget trackBy: trackByFunction10"
     [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
@@ -132,7 +132,7 @@
   </ng-template>
   </p-dialog>
 
-    <p-dialog header="Stock News" [(visible)]="displayMaximizable4" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '100vw'}" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    <p-dialog header="Stock News" [(visible)]="displayMaximizable4" [modal]="true" [style]="{width: '100vw', height: '100vh'}" [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
       <div class="content card">
