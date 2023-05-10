@@ -15,7 +15,7 @@
     
     <h4 class="mb-4">Global Markets</h4>
     <div fxLayout="row wrap" fxLayoutGap="10px grid">
-      <div fxFlex="11" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket let i = index; trackBy: trackByFunctionglobalmarket">
+      <div fxFlex="11" fxFlex.xs="50%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket let i = index; trackBy: trackByFunctionglobalmarket">
     <mat-card class="text-blue type1-bold cardnew  text-center"
     [ngClass]="{'bg-gradient-bull ':tile.text3 > 0,
               'bg-gradient-bear':0 > tile.text3 ,

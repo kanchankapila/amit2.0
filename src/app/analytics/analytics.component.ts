@@ -43,7 +43,7 @@ export class AnalyticsComponent {
       });
      
       this.tldvmstocks.length=0;
-      this.time=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
+      this.time=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
       
       for (let val in nestedItems[0][0]['output']) {
         this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0][0]['output'][val].Name)[0].mcsymbol);
@@ -82,7 +82,7 @@ export class AnalyticsComponent {
         return data5[key];
       });
     
-      this.time1=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
+      this.time1=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
       for (let val in nestedItems[0][0]['obj']) {
   
         const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0][0]['obj'][val].Name)[0]?.mcsymbol;
