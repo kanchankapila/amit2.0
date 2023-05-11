@@ -1,3 +1,10 @@
+.InsideContent{
+  display:flex;
+  align-items: flex-start;
+}
+.InsideContent1{
+  display:block;
+}
 .scene {
     width: 900px;
     display: flex;
@@ -35,8 +42,20 @@
     
    
   }
-  .chart{
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .chart {
+    display:flex;
+    align-items: flex-start;
+   
     max-width: 350px;
     max-height: 350px;
+    margin: 10px;
+    
   }
+
+  
  
