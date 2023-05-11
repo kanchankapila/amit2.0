@@ -2,7 +2,7 @@
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
-require('dotenv').config()
+require('dotenv').config('/.env')
 const mysql = require('mysql2')
 
 

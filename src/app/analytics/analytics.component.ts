@@ -176,10 +176,10 @@ export class AnalyticsComponent implements OnInit{
         return data5[key];
       });
   
-      const chartContainer = document.getElementById('chart-container');
+      
       for (let val in nestedItems[0]) {
         const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
-  
+        
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
           const nestedItems = Object.keys(data5).map(key => {
@@ -190,16 +190,17 @@ export class AnalyticsComponent implements OnInit{
           const longbuildstocklabel = [];
           if (nestedItems[6][0].hasOwnProperty('value')) {
             for (let val in nestedItems[6]) {
+             
               longbuildstockdata.push(nestedItems[6][val]['value']);
-              longbuildstocklabel.push(nestedItems[6][val]['time']);
+              longbuildstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
             }
           } else if (nestedItems[5][0].hasOwnProperty('value')) {
             for (let val in nestedItems[5]) {
               longbuildstockdata.push(nestedItems[5][val]['value']);
-              longbuildstocklabel.push(nestedItems[5][val]['time']);
+              longbuildstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
             }
           }
-  
+          const chartContainer = document.getElementById('chart-container');
           const data = {
             labels: longbuildstocklabel,
             datasets: [{
@@ -213,8 +214,8 @@ export class AnalyticsComponent implements OnInit{
   
           const canvas = document.createElement('canvas');
           canvas.id = 'chart' + longbuildstock;
-          canvas.width = 400;
-          canvas.height = 400;
+          canvas.width = 50;
+          canvas.height = 50;
   
           chartContainer.appendChild(canvas);
   
@@ -222,6 +223,7 @@ export class AnalyticsComponent implements OnInit{
             type: 'line',
             data: data,
             options: {
+              maintainAspectRatio: true,
               scales: {
                 // yAxes: [{
                 //   ticks: {
