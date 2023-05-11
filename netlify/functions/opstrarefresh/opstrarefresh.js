@@ -2,9 +2,14 @@
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
+require('dotenv').config()
+const mysql = require('mysql2')
+
 
 exports.handler = async (event,context,callback) => {
-  
+  const connection = mysql.createConnection(process.env.DATABASE_URL)
+console.log('Connected to PlanetScale!')
+connection.end()
     let browser = null
     console.log('spawning chrome headless')
     try {
