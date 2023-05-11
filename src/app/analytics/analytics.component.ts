@@ -171,83 +171,76 @@ export class AnalyticsComponent implements OnInit{
   }
   async getmcinsightread() {
     try {
-        const data5 = await this.dataApi.getmcinsightread().toPromise();
-        const nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-        });
-
-        for (let val in nestedItems[0]) {
-            this.lengtha=nestedItems[0].length;
-            const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
-
-            try {
-                const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
-                const nestedItems = Object.keys(data5).map(key => {
-                    return data5[key];
-                });
-                this.longbuildstockdata.length=0;
-                this.longbuildstocklabel.length=0;
-                if (nestedItems[6][0].hasOwnProperty('value')) {
-                    for (let val in nestedItems[6]) {
-                        this.longbuildstockdata.push(nestedItems[6][val]['value'])
-                        this.longbuildstocklabel.push(nestedItems[6][val]['time'])
-                    }
-                } else if (nestedItems[5][0].hasOwnProperty('value')) {
-                    for (let val in nestedItems[5]) {
-                        this.longbuildstockdata.push(nestedItems[5][val]['value'])
-                        this.longbuildstocklabel.push(nestedItems[5][val]['time'])
-                    }
-                }
-                console.log(this.longbuildstockdata)
-                // generate data for multiple charts
-     for (let i = 1; i < this.lengtha; i++) {
-      const data = {
-        labels: this.longbuildstocklabel,
-        datasets: [{
-          label: 'Dataset ' + i,
-          data: this.longbuildstockdata,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1
-        }]
-      };
-
-      // create new canvas element for each chart
-      const canvas = document.createElement('canvas');
-      canvas.id = 'chart' + i;
-      canvas.width = 400;
-      canvas.height = 400;
-
-      
-      const chartContainer = document.getElementById('chart-container');
-      chartContainer.appendChild(canvas);
-
-     
-      const chart = new Chart(canvas, {
-        type: 'line',
-        data: data,
-        options: {
-          scales: {
-            // yAxes: [{
-            //   ticks: {
-            //     beginAtZero: true
-            //   }
-            // }]
-          }
-        }
+      const data5 = await this.dataApi.getmcinsightread().toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
       });
-
-      
-      this.chartList.push(chart);
-     }
-                // this.lineChartLabels = this.longbuildstocklabel;
-            } catch (err) {
-                console.error(err);
+  
+      const chartContainer = document.getElementById('chart-container');
+      for (let val in nestedItems[0]) {
+        const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
+  
+        try {
+          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
+          const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+  
+          const longbuildstockdata = [];
+          const longbuildstocklabel = [];
+          if (nestedItems[6][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[6]) {
+              longbuildstockdata.push(nestedItems[6][val]['value']);
+              longbuildstocklabel.push(nestedItems[6][val]['time']);
             }
+          } else if (nestedItems[5][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[5]) {
+              longbuildstockdata.push(nestedItems[5][val]['value']);
+              longbuildstocklabel.push(nestedItems[5][val]['time']);
+            }
+          }
+  
+          const data = {
+            labels: longbuildstocklabel,
+            datasets: [{
+              label: 'Dataset ' + longbuildstock,
+              data: longbuildstockdata,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          };
+  
+          const canvas = document.createElement('canvas');
+          canvas.id = 'chart' + longbuildstock;
+          canvas.width = 400;
+          canvas.height = 400;
+  
+          chartContainer.appendChild(canvas);
+  
+          const chart = new Chart(canvas, {
+            type: 'line',
+            data: data,
+            options: {
+              scales: {
+                // yAxes: [{
+                //   ticks: {
+                //     beginAtZero: true
+                //   }
+                // }]
+              }
+            }
+          });
+  
+          this.chartList.push(chart);
+        } catch (err) {
+          console.error(err);
         }
+      }
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}
+  }
+  
  
   }
