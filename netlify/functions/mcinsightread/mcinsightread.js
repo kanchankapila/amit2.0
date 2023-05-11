@@ -1,43 +1,67 @@
-
-
 const MongoClient = require('mongodb').MongoClient;
 
 exports.handler = async function(event, context) {
-  // Connection URL
-  const url = process.env.MONGODB_ATLAS_CLUSTER_URI; // Update with your MongoDB connection URL
-  const dbName = 'Tickertape'; // Update with your database name
-  const collectionName = 'Volume'; // Update with your collection name
+  const uri = process.env.MONGODB_ATLAS_CLUSTER_URI;
+  const dbName = 'MC';
+  const collectionName = 'mcinsights';
+
+  const pipelines = [
+    {
+      name: 'longbuildup',
+      pipeline: [
+        { $unwind: '$output' },
+        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Long Buildup today' } },
+        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
+      ]
+    },
+    {
+      name: 'longunwinding',
+      pipeline: [
+        { $unwind: '$output' },
+        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Long Unwinding today' } },
+        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
+      ]
+    },
+    {
+      name: 'shortcovering',
+      pipeline: [
+        { $unwind: '$output' },
+        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Short covering today' } },
+        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
+      ]
+    },
+    {
+      name: 'shortbuildup',
+      pipeline: [
+        { $unwind: '$output' },
+        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Short Buildup today' } },
+        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
+      ]
+    }
+  ];
 
   try {
-    const client = await MongoClient.connect(url);
-    console.log('Connected successfully to MongoDB');
-
+    const client = await MongoClient.connect(uri);
     const db = client.db(dbName);
 
-    // Aggregation pipeline
-    const pipeline = [
-      { $match: { "obj.volBreakout": { $gt: 500 } } },
-      { $project: { obj: { $filter: { input: "$obj", as: "o", cond: { $gt: ["$$o.volBreakout", 500] } } } } }
-    ];
+    const pipelineResults = await Promise.all(pipelines.map(async ({ name, pipeline }) => ({
+      name,
+      results: await db.collection(collectionName).aggregate(pipeline).toArray()
+    })));
 
-    // Execute aggregation query
-    const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    const time = await client.db('Tickertape').collection("Volume").findOne({}, { projection: { _id: 0, time: 1 } }); 
-    await client.close();
+    client.close();
+
+    const responseBody = pipelineResults.reduce((acc, { name, results }) => ({
+      ...acc,
+      [name]: results
+    }), {});
+
     const response = {
       statusCode: 200,
-      body: JSON.stringify({
-        body: result,
-        time: time
-      })
+      body: JSON.stringify(responseBody)
     };
-     return response;
-    
-   
+    return response;
 
-   
-
-   
   } catch (err) {
     console.error(err);
     return {

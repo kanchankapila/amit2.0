@@ -11,6 +11,10 @@
 <br>
 <br>
 <br>
+<div id="chart-container"></div>
+<!-- 
+<canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
+[options]="lineChartOptions"></canvas> -->
 <h4 class="text-black text-center">Volume Breakout</h4><br><em>Last Refreshed:{{this.time1}}</em>
 <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
     <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of ttvolumestocks trackBy: trackByFunction2">
