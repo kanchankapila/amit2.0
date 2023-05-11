@@ -896,10 +896,16 @@ async getstocksparkline(mcsymbol){
    const sparklineCanvas = this.sparklineChartRef.nativeElement;
       this.sparklinestockdata.length=0;
       this.sparklinestocklabel.length=0;
+      if(nestedItems[6][0].hasOwnProperty('value') ){
+        for(let val in nestedItems[6]){
+          this.sparklinestockdata.push(nestedItems[6][val]['value'])
+          this.sparklinestocklabel.push(nestedItems[6][val]['time'])
+        }}
+        else if(nestedItems[5][0].hasOwnProperty('value')){
       for(let val in nestedItems[5]){
         this.sparklinestockdata.push(nestedItems[5][val]['value'])
         this.sparklinestocklabel.push(nestedItems[5][val]['time'])
-      }
+      }}
       
       this.sparklineChart = new Chart(sparklineCanvas, {
         type: 'line',

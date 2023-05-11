@@ -1,32 +1,64 @@
-import { Component } from '@angular/core';
+import { Component,ViewEncapsulation,OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
-
+import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
+import {  ChartOptions,  ChartType } from 'chart.js';
+import { Chart } from 'chart.js';
 export interface tldvmstockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.scss']
+  styleUrls: ['./analytics.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class AnalyticsComponent {
+export class AnalyticsComponent implements OnInit{
+  chartList: Chart[] = [];
+
+ 
   time1: string;
-  constructor( private dataApi: DataapiService) {
+  longbuildstockdata:  Array<number> = [];
+  longbuildstocklabel:  Array<number> = [];
+  lengtha: any;
+  constructor( private dataApi: DataapiService,private http: HttpClient,) {
     
   }
+  
+
   time:any;
   currenttime:any;
   stockList: any;
   tldvmmcsymbol:any;
   ttvolumemcsymbol:any;
   screenercode:any;
+  public lineChartData: Array<any> = [];
+  public lineChartLabels: Array<number> = [];
   tldvmstocks: tldvmstockstile[] = [];
   ttvolumestocks: ttvolumestockstile[] = [];
+  public lineChartType: ChartType = 'line';
+  public lineChartOptions: ChartOptions = {
+    responsive: true,
+    // aspectRatio: 1,
+     maintainAspectRatio:false,
+    scales: {
+    },
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+  };
+ 
+
   async ngOnInit() {
+    
+  
+   
     await Promise.all([
   this.stockList = stocks.default.Data,
   this.gettldvm(),
   this.getttvolume(),
+  this.getmcinsightread(),
   this.gettlscreener(this.screenercode)
     ])
    
@@ -34,7 +66,9 @@ export class AnalyticsComponent {
  
   trackByFunction1(index1, item1) {return item1.text3;}
   trackByFunction2(index2, item2) {return item2.text3;}
- 
+  getRandomNumber() {
+    return Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+  }
   async gettldvm() {
     try {
       const data5 = await this.dataApi.gettldvm().toPromise();
@@ -135,7 +169,85 @@ export class AnalyticsComponent {
     });
     
   }
-  
- 
+  async getmcinsightread() {
+    try {
+        const data5 = await this.dataApi.getmcinsightread().toPromise();
+        const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+        });
 
+        for (let val in nestedItems[0]) {
+            this.lengtha=nestedItems[0].length;
+            const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
+
+            try {
+                const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
+                const nestedItems = Object.keys(data5).map(key => {
+                    return data5[key];
+                });
+                this.longbuildstockdata.length=0;
+                this.longbuildstocklabel.length=0;
+                if (nestedItems[6][0].hasOwnProperty('value')) {
+                    for (let val in nestedItems[6]) {
+                        this.longbuildstockdata.push(nestedItems[6][val]['value'])
+                        this.longbuildstocklabel.push(nestedItems[6][val]['time'])
+                    }
+                } else if (nestedItems[5][0].hasOwnProperty('value')) {
+                    for (let val in nestedItems[5]) {
+                        this.longbuildstockdata.push(nestedItems[5][val]['value'])
+                        this.longbuildstocklabel.push(nestedItems[5][val]['time'])
+                    }
+                }
+                console.log(this.longbuildstockdata)
+                // generate data for multiple charts
+     for (let i = 1; i < this.lengtha; i++) {
+      const data = {
+        labels: this.longbuildstocklabel,
+        datasets: [{
+          label: 'Dataset ' + i,
+          data: this.longbuildstockdata,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      };
+
+      // create new canvas element for each chart
+      const canvas = document.createElement('canvas');
+      canvas.id = 'chart' + i;
+      canvas.width = 400;
+      canvas.height = 400;
+
+      
+      const chartContainer = document.getElementById('chart-container');
+      chartContainer.appendChild(canvas);
+
+     
+      const chart = new Chart(canvas, {
+        type: 'line',
+        data: data,
+        options: {
+          scales: {
+            // yAxes: [{
+            //   ticks: {
+            //     beginAtZero: true
+            //   }
+            // }]
+          }
+        }
+      });
+
+      
+      this.chartList.push(chart);
+     }
+                // this.lineChartLabels = this.longbuildstocklabel;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    } catch (err) {
+        console.error(err);
+    }
 }
+ 
+  }
