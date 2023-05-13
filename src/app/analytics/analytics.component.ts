@@ -179,13 +179,14 @@ export class AnalyticsComponent implements OnInit{
       
       for (let val in nestedItems[0]) {
         const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
+        const longbuildstockname = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.name;
         
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
           const nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });
-  
+          console.log(nestedItems)
           const longbuildstockdata = [];
           const longbuildstocklabel = [];
           if (nestedItems[6][0].hasOwnProperty('value')) {
@@ -201,24 +202,33 @@ export class AnalyticsComponent implements OnInit{
             }
           }
           const chartContainer = document.getElementById('chart-container');
+
+          // create a new wrapper element for the canvas
+          const chartWrapper = document.createElement('div');
+          chartWrapper.classList.add('chart-wrapper');
+          
           const data = {
             labels: longbuildstocklabel,
             datasets: [{
-              label: 'Dataset ' + longbuildstock,
+              label: longbuildstockname,
               data: longbuildstockdata,
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1
             }]
           };
-  
+          
           const canvas = document.createElement('canvas');
           canvas.id = 'chart' + longbuildstock;
-          canvas.width = 50;
-          canvas.height = 50;
-  
-          chartContainer.appendChild(canvas);
-  
+          canvas.width = 300;
+          canvas.height = 300;
+          
+          // append the canvas to the new wrapper element
+          chartWrapper.appendChild(canvas);
+          
+          // append the wrapper element to the chart container
+          chartContainer.appendChild(chartWrapper);
+          
           const chart = new Chart(canvas, {
             type: 'line',
             data: data,
@@ -233,8 +243,9 @@ export class AnalyticsComponent implements OnInit{
               }
             }
           });
-  
+          
           this.chartList.push(chart);
+          
         } catch (err) {
           console.error(err);
         }
