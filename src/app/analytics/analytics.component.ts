@@ -14,6 +14,9 @@ export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4:
 })
 export class AnalyticsComponent implements OnInit{
   chartList: Chart[] = [];
+  chartList1: Chart[] = [];
+  chartList2: Chart[] = [];
+  chartList3: Chart[] = [];
 
  
   time1: string;
@@ -58,7 +61,10 @@ export class AnalyticsComponent implements OnInit{
   this.stockList = stocks.default.Data,
   this.gettldvm(),
   this.getttvolume(),
-  this.getmcinsightread(),
+  this.getmcinsightreadshortcovering(),
+  this.getmcinsightreadlongbuild(),
+  this.getmcinsightreadshortbuild(),
+  this.getmcinsightreadlongunwinding(),
   this.gettlscreener(this.screenercode)
     ])
    
@@ -169,7 +175,7 @@ export class AnalyticsComponent implements OnInit{
     });
     
   }
-  async getmcinsightread() {
+  async getmcinsightreadshortcovering() {
     try {
       const data5 = await this.dataApi.getmcinsightread().toPromise();
       const nestedItems = Object.keys(data5).map(key => {
@@ -177,6 +183,91 @@ export class AnalyticsComponent implements OnInit{
       });
   
       
+      for (let val in nestedItems[2]) {
+        const shortcoveringstock = this.stockList.filter(i => i.name === nestedItems[2][val].Name)[0]?.mcsymbol;
+        const shortcoveringstockname = this.stockList.filter(i => i.name === nestedItems[2][val].Name)[0]?.name;
+        
+        try {
+          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + shortcoveringstock + '&resolution=1D').toPromise();
+          const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+          
+          const shortcoveringstockdata = [];
+          const shortcoveringstocklabel = [];
+          if (nestedItems[6][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[6]) {
+             
+              shortcoveringstockdata.push(nestedItems[6][val]['value']);
+              shortcoveringstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          } else if (nestedItems[5][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[5]) {
+              shortcoveringstockdata.push(nestedItems[5][val]['value']);
+              shortcoveringstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          }
+          const chartContainer = document.getElementById('chart-containershortcovering');
+
+          // create a new wrapper element for the canvas
+          const chartWrappershortcovering = document.createElement('div');
+          chartWrappershortcovering.classList.add('chart-wrappershortcovering');
+          
+          const datashortcovering = {
+            labels: shortcoveringstocklabel,
+            datasets: [{
+              label: shortcoveringstockname,
+              data: shortcoveringstockdata,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          };
+          
+          const canvasshortcovering = document.createElement('canvas');
+          canvasshortcovering.id = 'chart' + shortcoveringstock;
+          canvasshortcovering.width = 300;
+          canvasshortcovering.height = 300;
+          
+          // append the canvas to the new wrapper element
+          chartWrappershortcovering.appendChild(canvasshortcovering);
+          
+          // append the wrapper element to the chart container
+          chartContainer.appendChild(chartWrappershortcovering);
+          
+          const chartshortcovering = new Chart(canvasshortcovering, {
+            type: 'line',
+            data: datashortcovering,
+            options: {
+              maintainAspectRatio: true,
+              scales: {
+                // yAxes: [{
+                //   ticks: {
+                //     beginAtZero: true
+                //   }
+                // }]
+              }
+            }
+          });
+          
+          this.chartList.push(chartshortcovering);
+          
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async getmcinsightreadlongbuild() {
+    try {
+      const data5 = await this.dataApi.getmcinsightread().toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+  
+      console.log(nestedItems)
       for (let val in nestedItems[0]) {
         const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.mcsymbol;
         const longbuildstockname = this.stockList.filter(i => i.name === nestedItems[0][val].Name)[0]?.name;
@@ -186,7 +277,7 @@ export class AnalyticsComponent implements OnInit{
           const nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });
-          console.log(nestedItems)
+          
           const longbuildstockdata = [];
           const longbuildstocklabel = [];
           if (nestedItems[6][0].hasOwnProperty('value')) {
@@ -201,13 +292,13 @@ export class AnalyticsComponent implements OnInit{
               longbuildstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
             }
           }
-          const chartContainer = document.getElementById('chart-container');
+          const chartContainer = document.getElementById('chart-containerlongbuild');
 
           // create a new wrapper element for the canvas
-          const chartWrapper = document.createElement('div');
-          chartWrapper.classList.add('chart-wrapper');
+          const chartWrapperlongbuild = document.createElement('div');
+          chartWrapperlongbuild.classList.add('chart-wrapperlongbuild');
           
-          const data = {
+          const datalongbuild = {
             labels: longbuildstocklabel,
             datasets: [{
               label: longbuildstockname,
@@ -218,8 +309,178 @@ export class AnalyticsComponent implements OnInit{
             }]
           };
           
+          const canvaslongbuild = document.createElement('canvas');
+          canvaslongbuild.id = 'chart' + longbuildstock;
+          canvaslongbuild.width = 300;
+          canvaslongbuild.height = 300;
+          
+          // append the canvas to the new wrapper element
+          chartWrapperlongbuild.appendChild(canvaslongbuild);
+          
+          // append the wrapper element to the chart container
+          chartContainer.appendChild(chartWrapperlongbuild);
+          
+          const chartlongbuild = new Chart(canvaslongbuild, {
+            type: 'line',
+            data: datalongbuild,
+            options: {
+              maintainAspectRatio: true,
+              scales: {
+                // yAxes: [{
+                //   ticks: {
+                //     beginAtZero: true
+                //   }
+                // }]
+              }
+            }
+          });
+          
+          this.chartList1.push(chartlongbuild);
+          
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async getmcinsightreadshortbuild() {
+    try {
+      const data5 = await this.dataApi.getmcinsightread().toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+  
+      
+      for (let val in nestedItems[3]) {
+        const shortbuildstock = this.stockList.filter(i => i.name === nestedItems[3][val].Name)[0]?.mcsymbol;
+        const shortbuildstockname = this.stockList.filter(i => i.name === nestedItems[3][val].Name)[0]?.name;
+        
+        try {
+          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + shortbuildstock + '&resolution=1D').toPromise();
+          const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+        
+          const shortbuildstockdata = [];
+          const shortbuildstocklabel = [];
+          if (nestedItems[6][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[6]) {
+             
+              shortbuildstockdata.push(nestedItems[6][val]['value']);
+              shortbuildstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          } else if (nestedItems[5][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[5]) {
+              shortbuildstockdata.push(nestedItems[5][val]['value']);
+              shortbuildstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          }
+          const chartContainershortbuild = document.getElementById('chart-containershortbuild');
+
+          // create a new wrapper element for the canvas
+          const chartWrappershortbuild = document.createElement('div');
+          chartWrappershortbuild.classList.add('chart-wrappershortbuild');
+          
+          const data = {
+            labels: shortbuildstocklabel,
+            datasets: [{
+              label: shortbuildstockname,
+              data: shortbuildstockdata,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          };
+          
+          const canvasshortbuild = document.createElement('canvas');
+          canvasshortbuild.id = 'chart' + shortbuildstock;
+          canvasshortbuild.width = 300;
+          canvasshortbuild.height = 300;
+          
+          // append the canvas to the new wrapper element
+          chartWrappershortbuild.appendChild(canvasshortbuild);
+          
+          // append the wrapper element to the chart container
+          chartContainershortbuild.appendChild(chartWrappershortbuild);
+          
+          const chartshortbuild = new Chart(canvasshortbuild, {
+            type: 'line',
+            data: data,
+            options: {
+              maintainAspectRatio: true,
+              scales: {
+                // yAxes: [{
+                //   ticks: {
+                //     beginAtZero: true
+                //   }
+                // }]
+              }
+            }
+          });
+          
+          this.chartList2.push(chartshortbuild);
+          
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async getmcinsightreadlongunwinding() {
+    try {
+      const data5 = await this.dataApi.getmcinsightread().toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+  
+     
+      for (let val in nestedItems[1]) {
+        const longunwindingstock = this.stockList.filter(i => i.name === nestedItems[1][val].Name)[0]?.mcsymbol;
+        const longunwindingstockname = this.stockList.filter(i => i.name === nestedItems[1][val].Name)[0]?.name;
+        
+        try {
+          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longunwindingstock + '&resolution=1D').toPromise();
+          const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+          
+          const longunwindingstockdata = [];
+          const longunwindingstocklabel = [];
+          if (nestedItems[6][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[6]) {
+             
+              longunwindingstockdata.push(nestedItems[6][val]['value']);
+              longunwindingstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          } else if (nestedItems[5][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[5]) {
+              longunwindingstockdata.push(nestedItems[5][val]['value']);
+              longunwindingstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }
+          }
+          const chartContainer = document.getElementById('chart-containerlongunwinding');
+
+          // create a new wrapper element for the canvas
+          const chartWrapper = document.createElement('div');
+          chartWrapper.classList.add('chart-wrapper');
+          
+          const data = {
+            labels: longunwindingstocklabel,
+            datasets: [{
+              label: longunwindingstockname,
+              data: longunwindingstockdata,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          };
+          
           const canvas = document.createElement('canvas');
-          canvas.id = 'chart' + longbuildstock;
+          canvas.id = 'chart' + longunwindingstock;
           canvas.width = 300;
           canvas.height = 300;
           
@@ -244,7 +505,7 @@ export class AnalyticsComponent implements OnInit{
             }
           });
           
-          this.chartList.push(chart);
+          this.chartList3.push(chart);
           
         } catch (err) {
           console.error(err);
@@ -254,6 +515,5 @@ export class AnalyticsComponent implements OnInit{
       console.error(err);
     }
   }
-  
  
   }
