@@ -23,6 +23,7 @@ export class AnalyticsComponent implements OnInit{
   longbuildstockdata:  Array<number> = [];
   longbuildstocklabel:  Array<number> = [];
   lengtha: any;
+  time3: any;
   constructor( private dataApi: DataapiService,private http: HttpClient,) {
     
   }
@@ -181,8 +182,8 @@ export class AnalyticsComponent implements OnInit{
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-  
-      
+  console.log(nestedItems)
+      this.time3=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
       for (let val in nestedItems[2]) {
         const shortcoveringstock = this.stockList.filter(i => i.name === nestedItems[2][val].Name)[0]?.mcsymbol;
         const shortcoveringstockname = this.stockList.filter(i => i.name === nestedItems[2][val].Name)[0]?.name;
@@ -195,6 +196,7 @@ export class AnalyticsComponent implements OnInit{
           
           const shortcoveringstockdata = [];
           const shortcoveringstocklabel = [];
+        
           if (nestedItems[6][0].hasOwnProperty('value')) {
             for (let val in nestedItems[6]) {
              
