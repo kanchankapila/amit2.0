@@ -19,9 +19,34 @@
   <div class="chart" id="chart-container"></div>
   
 </div> -->
-
+<header style="display: flex; justify-content: center;">
+  <h1 class="header-1">Long Buildup</h1>
+  </header>
+  <div
+   class="chart" id="chart-containerlongbuild">
+  </div>
+  
+<header style="display: flex; justify-content: center;">
+  <h1 class="header-1">Short Covering</h1>
+</header>
 <div
- class="chart" id="chart-container">
+ class="chart" id="chart-containershortcovering">
+</div>
+
+
+
+
+<header style="display: flex; justify-content: center;">
+<h1 class="header-2">Long Unwinding</h1>
+</header>
+<div
+ class="chart" id="chart-containerlongunwinding">
+</div>
+<header style="display: flex; justify-content: center;">
+<h1 class="header-3">Short Buildup</h1>
+</header>
+<div
+ class="chart" id="chart-containershortbuild">
 </div>
 
 
@@ -31,7 +56,10 @@
 <!-- 
 <canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
 [options]="lineChartOptions"></canvas> -->
-<h4 class="text-black text-center">Volume Breakout</h4><br><em>Last Refreshed:{{this.time1}}</em>
+<header style="display: flex; justify-content: center;">
+  <h1 class="header-1">Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
+</header>
+
 <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
     <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of ttvolumestocks trackBy: trackByFunction2">
    
@@ -55,8 +83,10 @@
 </div>
 </div>
 
+<header style="display: flex; justify-content: center;">
+  <h1 class="header-1">High Durability/Volatility/Momentum Stocks</h1><br><em>Last Refreshed:{{this.time}}</em>
+</header>
 
-<h4 class="text-black text-center">High Durability/Volatility/Momentum Stocks</h4><br><em>Last Refreshed:{{this.time}}</em>
 <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
     <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of tldvmstocks trackBy: trackByFunction1">
    
