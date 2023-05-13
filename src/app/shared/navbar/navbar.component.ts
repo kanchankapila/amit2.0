@@ -386,7 +386,13 @@ nsedataniftyoi() {
     console.log(err)
   })
 }
-
+setttvolume(){
+  this.dataApi.setttvolume().subscribe(data5 => {
+    
+    
+  }
+  );
+}
 
 nsedatabniftyoi() {
   

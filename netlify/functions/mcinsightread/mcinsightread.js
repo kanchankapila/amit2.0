@@ -55,13 +55,16 @@ exports.handler = async function(event, context) {
       ...acc,
       [name]: results
     }), {});
-
+    const time = await client.db('MC').collection("mcinsights").findOne({}, { projection: { _id: 0, time: 1 } }); 
     const response = {
       statusCode: 200,
-      body: JSON.stringify(responseBody)
+      body: JSON.stringify({
+        body: responseBody,
+        time: time
+      })
     };
-    return response;
-
+     return response;
+   
   } catch (err) {
     console.error(err);
     return {
