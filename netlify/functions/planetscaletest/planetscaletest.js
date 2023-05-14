@@ -1,12 +1,12 @@
 require('dotenv').config('/.env')
 const mysql = require('mysql2')
-const connection = mysql.createConnection(process.env.PLANETSCALE_DATABASE_URL);
+const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 const handler = async function () {
     try{
     connection.connect();
     console.log("connected Successfully to PlanetScale DB")
-    connection.query('CREATE TABLE mcinsight (id serial NOT NULL PRIMARY KEY,info jsonb NOT NULL)', function (err, rows, fields) {
+    connection.query('SELECT * FROM mc', function (err, rows, fields) {
         if (err) throw err
     
         res.send(rows)
