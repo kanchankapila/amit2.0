@@ -42,6 +42,7 @@
     
    
   }
+  
   #chart-containershortcovering {
     display: flex;
     flex-wrap: wrap;
@@ -95,6 +96,120 @@ header .header-2{
 header .header-3{
   background-image: repeating-radial-gradient(circle farthest-side at 5px 10px,#553c9a 10%, #ee4b2b 30%, #553c9a);
 }
+:root {
+  font-size: 20px;
+  box-sizing: inherit;
+}
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+p:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+body {
+  font: 1em/1.618 Inter, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  min-height: 100vh;
+  padding: 35px;
+  
+  color: #224;
+  
+}
+
+.cardnew {
+  max-width: auto;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: auto;
+  height: auto;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(15px);
+}
+
+.card-footer {
+  font-size: 0.75em;
+  color: #446;
+}
+
+@media (max-width: 424px) {
+  :root {
+    font-size: 1em;
+    box-sizing: inherit;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  p:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+  
+  body {
+    font: 1em/2 Inter, sans-serif;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+     min-height: 100vh;
+    padding: 15px;
+    
+    color: #224;
+   
+  }
+  
+  .cardnew {
+    max-width: 350px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    max-width: 350px;
+    height: 350px;
+    padding: 10px;
+  
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  
+    backdrop-filter: blur(15px);
+  }
+  
+  .card-footer {
+    font-size: 0.15em;
+    color: #446;
+  }
+}
   
  
