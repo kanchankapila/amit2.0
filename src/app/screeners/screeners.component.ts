@@ -237,6 +237,10 @@ export class ScreenersComponent implements OnInit {
   ngOnInit(): void {
     this.stockList = stocks.default.Data
   }
+  displayMaximizable: boolean;
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+} 
   trackByFunction42(index42, item42) {
     // console.log( 'TrackBy:', item.text2, 'at index', index );
      return item42.text2
