@@ -1,3 +1,4 @@
+require('dotenv').config('/.env')
 const { Pool } = require('pg');
 
 exports.handler = async (event, context) => {
@@ -11,7 +12,7 @@ exports.handler = async (event, context) => {
 
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT * FROM mcinsight');
+    const result = await client.query('SELECT * FROM mcinsights');
     return {
       statusCode: 200,
       body: JSON.stringify(result.rows)

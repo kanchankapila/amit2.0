@@ -9,10 +9,14 @@
 <br>
 <br>
 <br>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="NT Screeners" class="p-button-raised p-button-success p-button-text"></button>
+<p-dialog header="Nifty Traders Screeners" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
 <div class="animate">
    <button ejs-button id="Refresh1" Class="e-control e-outline e-btn e-primary" #defaultButton
        (click)="refresh()">Refresh</button>
  </div>
+
 <section class="example-section" [formGroup]="SMA">
 
 <br>
@@ -354,3 +358,4 @@
     </div>
     </div>
     </div>
+   </p-dialog>  
