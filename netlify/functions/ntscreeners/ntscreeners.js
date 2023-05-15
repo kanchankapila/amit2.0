@@ -18,7 +18,7 @@ const qs=require('querystring')
       },
       "referrer": "https://www.niftytrader.in/",
       "referrerPolicy": "strict-origin-when-cross-origin",
-      "body": "{\"email\":\"amit.kapila.2009@gmail.com\",\"password\":\"amit0605\",\"platform_type\":1}",
+      "body": "{\"email\":\"amit.kapila.2009@gmail.com\",\"password\":\"Angular@789\",\"platform_type\":1}",
       "method": "POST",
       "mode": "cors",
       "credentials": "omit"
