@@ -9,7 +9,23 @@
 <br>
 <br>
 <br>
-<button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="NT Screeners" class="p-button-raised p-button-success p-button-text"></button>
+<p-dialog header="TL Screeners" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+<form>
+   <div *ngFor="let option of options">
+     <label>
+       <input type="radio" [name]="option.name" [value]="option.value" [(ngModel)]="selectedOption"> {{ option.label }}
+     </label>
+   </div>
+ </form>
+ 
+ <div
+ class="chart" id="tlchart-container">
+</div>
+ <button type="button" class="btn btn-danger btn-lg btn-block" (click)="gettlscreeners(selectedOption)">tlscreeners</button>
+ </p-dialog>
+ <button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="NT Screeners" class="p-button-raised p-button-success p-button-text"></button>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog1()" label="TL Screeners" class="p-button-raised p-button-success p-button-text"></button>
 <p-dialog header="Nifty Traders Screeners" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
 <div class="animate">
@@ -308,7 +324,6 @@
 <button type="button" class="btn btn-danger btn-lg btn-block" (click)="getnteodscreeners(SMA.value)">Screener</button>
  </section>
 
- 
 
 <!-- <div class="grid-margin stretch-card">
    <div class="content card  container">

@@ -217,3 +217,7 @@ mat-checkbox ::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;}
       color:red;
       margin-bottom:2px;
     }
+    #tlchart-container {
+      display: flex;
+      flex-wrap: wrap;
+    }

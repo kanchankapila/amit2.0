@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-
+import { HttpClient } from '@angular/common/http';
 import { UntypedFormBuilder } from '@angular/forms';
 import * as  stocks from '../lists/stocklist'
+import {Chart} from 'chart.js';
 export interface screenerstockstile {
   text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; text9: any;
   text10: any;text11: any;text12: any;}
@@ -12,9 +13,19 @@ export interface screenerstockstile {
   styleUrls: ['./screeners.component.scss']
 })
 export class ScreenersComponent implements OnInit {
+  tlchartList: Chart[] = [];
+  options = [
+    { name: 'Amit', value: '15697', label: "Stock screener for upcoming results, identifying stocks whose share prices are heading in the positive direction compared to month performance" },
+    { name: 'color', value: 'green', label: 'Green' },
+    { name: 'color', value: 'blue', label: 'Blue' },
+    { name: 'size', value: 'small', label: 'Small' },
+    { name: 'size', value: 'medium', label: 'Medium' },
+    { name: 'size', value: 'large', label: 'Large' }
+  ];
+  selectedOption: string;
   stockList: any;
   symbol: any;
-
+  
   SMA = this._formBuilder.group({
    "_20_day_sma_below":false,
     "_20_day_sma_above":false,
@@ -209,11 +220,16 @@ export class ScreenersComponent implements OnInit {
   ntoptions: any;
  // postId: any;
  SMA1: string = '';
+  screenercode: string;
  setValue(SMA1:string) {
    console.log('SMA Name: ',SMA1);
  }
+ setValue1(selectedOption:string) {
+  console.log('selectedOption: ',selectedOption);
+}
+
   screenerstocks: screenerstockstile[] = [];
-  constructor(private dataApi: DataapiService,private _formBuilder: UntypedFormBuilder, private window: Window) { }
+  constructor(private dataApi: DataapiService,private http: HttpClient,private _formBuilder: UntypedFormBuilder, private window: Window) { }
   templateForm(value: any) {
    
     
@@ -241,11 +257,112 @@ export class ScreenersComponent implements OnInit {
   showMaximizableDialog() {
     this.displayMaximizable = true;
 } 
+displayMaximizable1: boolean;
+  showMaximizableDialog1() {
+    this.displayMaximizable1 = true;
+} 
   trackByFunction42(index42, item42) {
     // console.log( 'TrackBy:', item.text2, 'at index', index );
      return item42.text2
    }
+   async gettlscreeners(selectedOption:string){
+    
+      this.screenercode=selectedOption;
+      const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+        
+     
+        try{
+      
+        console.log(nestedItems[0]['body']['tableData'][5])
+        
+      for (let val in nestedItems[0]['body']['tableData']) {
+        const tlscreenerstock = this.stockList.filter(i => i.isin === nestedItems[0]['body']['tableData'][val][5])[0]?.mcsymbol;
+        const tlscreenerstockname = this.stockList.filter(i => i.isin === nestedItems[0]['body']['tableData'][val][5])[0]?.name;
+        if(  tlscreenerstock !== '#N/A'){
+          console.log(tlscreenerstock)
+        console.log(tlscreenerstockname)
+        
+        try {
+          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
+          const nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+          
+          const tlselectedstockdata = [];
+          const tlselectedstocklabel = [];
+          if (nestedItems[6][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[6]) {
+              tlselectedstockdata.push(nestedItems[6][val]['value']);
+              tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }}
+            else if (nestedItems[5][0].hasOwnProperty('value')) {
+            for (let val in nestedItems[5]) {
+              tlselectedstockdata.push(nestedItems[5][val]['value']);
+              tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
+            }}
+          
+          const tlchartContainer = document.getElementById('tlchart-container');
+
+          // create a new wrapper element for the canvas
+          const tlchartWrapper = document.createElement('div');
+          tlchartWrapper.classList.add('tlchart-wrapper');
+          
+          const tldata = {
+            labels: tlselectedstocklabel,
+            datasets: [{
+              label: tlscreenerstockname,
+              data: tlselectedstockdata,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          };
+          
+          const tlcanvas = document.createElement('canvas');
+          tlcanvas.id = 'chart' + tlscreenerstock;
+          tlcanvas.width = 300;
+          tlcanvas.height = 300;
+          
+          // append the canvas to the new wrapper element
+          tlchartWrapper.appendChild(tlcanvas);
+          
+          // append the wrapper element to the chart container
+          tlchartContainer.appendChild(tlchartWrapper);
+          
+          const tlchart = new Chart(tlcanvas, {
+            type: 'line',
+            data: tldata,
+            options: {
+              maintainAspectRatio: true,
+              scales: {
+                // yAxes: [{
+                //   ticks: {
+                //     beginAtZero: true
+                //   }
+                // }]
+              }
+            }
+          });
+          
+          this.tlchartList.push(tlchart);
+          
+        } catch (err) {
+          console.error(err);
+        }
+              }     
+             }
+    } catch (err) {
+      console.error(err);
+    }
+ 
+  
+     
+   }
   getnteodscreeners(SMA1:string) {
+
     this.dataApi.getnteodscreeners(SMA1).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
