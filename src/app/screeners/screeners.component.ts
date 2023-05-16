@@ -16,11 +16,20 @@ export class ScreenersComponent implements OnInit {
   tlchartList: Chart[] = [];
   options = [
     { name: 'Amit', value: '15697', label: "Stock screener for upcoming results, identifying stocks whose share prices are heading in the positive direction compared to month performance" },
-    { name: 'color', value: 'green', label: 'Green' },
-    { name: 'color', value: 'blue', label: 'Blue' },
-    { name: 'size', value: 'small', label: 'Small' },
-    { name: 'size', value: 'medium', label: 'Medium' },
-    { name: 'size', value: 'large', label: 'Large' }
+    { name: 'color', value: '11793', label: 'DVM - High Performing, Highly Durable Companies' },
+    { name: 'color', value: '9818', label: 'Strong Performers - High DVM Stocks' },
+    { name: 'size', value: '9896', label: 'Await Turnaround (DVM)' },
+    { name: 'size', value: '19746', label: 'High DVM Mid and Small Caps' },
+    { name: 'size', value: '764', label: 'Profit making Companies with High ROCE and Low PE' },
+    { name: 'Amit', value: '24', label: "Street Favorite: High Analyst Rating with at least 20% upside" },
+    { name: 'color', value: '24716', label: 'High volume, High Gain' },
+    { name: 'color', value: '280337', label: 'High Momentum - Stocks with Highest Trendlyne Momentum Scores and High Volumes' },
+    { name: 'size', value: '6160', label: 'Rising Momentum: Momentum Score Weekly Gainers' },
+    { name: 'size', value: '207497', label: 'Forecaster Consensus Estimates: Stocks with Strong Buy Calls from Analysts' },
+    { name: 'size', value: '208614', label: 'Stocks with high FnO put to call ratio or PCR, indicating a bullish sentiment' },
+    { name: 'size', value: '208626', label: 'Securities seeing a long buildup' },
+    { name: 'size', value: '82566', label: 'Rising Delivery Percentage Compared to Previous Day and Month, Strong Volumes' },
+    { name: 'size', value: '11122', label: 'Newly Affordable Stocks with Good Financials and Durability' }
   ];
   selectedOption: string;
   stockList: any;
@@ -276,7 +285,7 @@ displayMaximizable1: boolean;
      
         try{
       
-        console.log(nestedItems[0]['body']['tableData'])
+        console.log(nestedItems[0]['body'])
         
       for (let val in nestedItems[0]['body']['tableData']) {
         const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.','Limited')))[0]?.mcsymbol;
