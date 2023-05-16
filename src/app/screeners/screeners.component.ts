@@ -276,15 +276,15 @@ displayMaximizable1: boolean;
      
         try{
       
-        console.log(nestedItems[0]['body']['tableData'][5])
+        console.log(nestedItems[0]['body']['tableData'])
         
       for (let val in nestedItems[0]['body']['tableData']) {
-        const tlscreenerstock = this.stockList.filter(i => i.isin === nestedItems[0]['body']['tableData'][val][5])[0]?.mcsymbol;
-        const tlscreenerstockname = this.stockList.filter(i => i.isin === nestedItems[0]['body']['tableData'][val][5])[0]?.name;
-        if(  tlscreenerstock !== '#N/A'){
-          console.log(tlscreenerstock)
-        console.log(tlscreenerstockname)
+        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.','Limited')))[0]?.mcsymbol;
+       
+        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.','Limited')))[0]?.name;
+        if( tlscreenerstock !== '#N/A'){
         
+      
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
           const nestedItems = Object.keys(data5).map(key => {
@@ -302,7 +302,7 @@ displayMaximizable1: boolean;
             for (let val in nestedItems[5]) {
               tlselectedstockdata.push(nestedItems[5][val]['value']);
               tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
-            }}
+            }}else{continue}
           
           const tlchartContainer = document.getElementById('tlchart-container');
 
@@ -353,6 +353,7 @@ displayMaximizable1: boolean;
           console.error(err);
         }
               }     
+              else{continue;}
              }
     } catch (err) {
       console.error(err);
