@@ -353,7 +353,8 @@ displayMaximizable1: boolean;
           console.error(err);
         }
               }     
-              else{continue;}
+              else{console.log(nestedItems[0]['body']['tableData'][val][0])
+                continue;}
              }
     } catch (err) {
       console.error(err);
