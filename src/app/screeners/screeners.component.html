@@ -9,13 +9,7 @@
 <br>
 <br>
 <br>
-<template id="tlchart-card-template">
-   <div class="tlchart-card">
-     <div class="tlchart-wrapper">
-       <canvas></canvas>
-     </div>
-   </div>
- </template>
+
 <p-dialog header="TL Screeners" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
 <form>
@@ -26,8 +20,7 @@
    </div>
  </form>
  
- <div
- class="chart" id="tlchart-container">
+ <div class="chart" id="tlchart-container">
 </div>
  <button type="button" class="btn btn-danger btn-lg btn-block" (click)="gettlscreeners(selectedOption)">tlscreeners</button>
  </p-dialog>

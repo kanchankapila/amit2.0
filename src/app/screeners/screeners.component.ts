@@ -230,6 +230,7 @@ export class ScreenersComponent implements OnInit {
  // postId: any;
  SMA1: string = '';
   screenercode: string;
+
  setValue(SMA1:string) {
    console.log('SMA Name: ',SMA1);
  }
@@ -274,104 +275,181 @@ displayMaximizable1: boolean;
     // console.log( 'TrackBy:', item.text2, 'at index', index );
      return item42.text2
    }
-   async gettlscreeners(selectedOption:string){
-    
-      this.screenercode=selectedOption;
-      const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-        
-     
-        try{
-      
-        console.log(nestedItems[0]['body'])
-        
+   async gettlscreeners(selectedOption: string) {
+    this.screenercode = selectedOption;
+    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    const tlcardprice = [];
+    const tlcardpricecolor = [];
+    const tlcardshareholding = [];
+    const tlcardshareholdingcolor = [];
+    try {
+      console.log(nestedItems[0]['body']);
+  
       for (let val in nestedItems[0]['body']['tableData']) {
-        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.','Limited')))[0]?.mcsymbol;
-       
-        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.','Limited')))[0]?.name;
-        if( tlscreenerstock !== '#N/A'){
-        
-      
-        try {
-          const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
-          const nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-          
-          const tlselectedstockdata = [];
-          const tlselectedstocklabel = [];
-          if (nestedItems[6][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[6]) {
-              tlselectedstockdata.push(nestedItems[6][val]['value']);
-              tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
-            }}
-            else if (nestedItems[5][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[5]) {
-              tlselectedstockdata.push(nestedItems[5][val]['value']);
-              tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time']* 1000).toUTCString()).split(" ").slice(0,6)[4]).slice(0,5));
-            }}else{continue}
-          
-          const tlchartContainer = document.getElementById('tlchart-container');
-
-          // create a new wrapper element for the canvas
-          const tlchartWrapper = document.createElement('div');
-          tlchartWrapper.classList.add('tlchart-wrapper');
-          
-          const tldata = {
-            labels: tlselectedstocklabel,
-            datasets: [{
-              label: tlscreenerstockname,
-              data: tlselectedstockdata,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1
-            }]
-          };
-          
-          const tlcanvas = document.createElement('canvas');
-          tlcanvas.id = 'chart' + tlscreenerstock;
-          tlcanvas.width = 300;
-          tlcanvas.height = 300;
-          
-          // append the canvas to the new wrapper element
-          tlchartWrapper.appendChild(tlcanvas);
-          
-          // append the wrapper element to the chart container
-          tlchartContainer.appendChild(tlchartWrapper);
-          
-          const tlchart = new Chart(tlcanvas, {
-            type: 'line',
-            data: tldata,
-            options: {
-              maintainAspectRatio: true,
-              scales: {
-                // yAxes: [{
-                //   ticks: {
-                //     beginAtZero: true
-                //   }
-                // }]
+        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
+  
+        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
+        if (tlscreenerstock !== '#N/A') {
+          try {
+            const data6 = await this.http.get('https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=' + tlscreenerstock + '&type=d').toPromise();
+            const nestedItems1 = Object.keys(data6).map(key => {
+              return data6[key];
+            });
+            console.log(nestedItems1)
+           
+            const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
+            const nestedItems = Object.keys(data5).map(key => {
+              return data5[key];
+            });
+  
+            const tlselectedstockdata = [];
+            const tlselectedstocklabel = [];
+            if (nestedItems[6][0].hasOwnProperty('value')) {
+              for (let val in nestedItems[6]) {
+                tlselectedstockdata.push(nestedItems[6][val]['value']);
+                tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
+            } else if (nestedItems[5][0].hasOwnProperty('value')) {
+              for (let val in nestedItems[5]) {
+                tlselectedstockdata.push(nestedItems[5][val]['value']);
+                tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
+              }
+            } else {
+              console.log(nestedItems[0]['body']['tableData'][val][0]+"First")
+              continue;
             }
-          });
-          
-          this.tlchartList.push(tlchart);
-          
-        } catch (err) {
-          console.error(err);
+  
+            const tlchartContainer = document.getElementById('tlchart-container');
+  
+            // create a new card element
+            const tlcard = document.createElement('div');
+            tlcard.classList.add('card', 'col-md-3', 'my-3');
+  
+            // create a card body
+            const tlcardBody = document.createElement('div');
+            tlcardBody.classList.add('card-body');
+  
+            // create a card title
+            const tlcardTitle = document.createElement('h5');
+            tlcardTitle.classList.add('card-title');
+            tlcardTitle.innerText = tlscreenerstockname;
+  
+            // append the card title to the card body
+            tlcardBody.appendChild(tlcardTitle);
+  
+            // create a new wrapper element for the canvas
+            const tlchartWrapper = document.createElement('div');
+            tlchartWrapper.classList.add('tlchart-wrapper');
+  
+            const tldata = {
+              labels: tlselectedstocklabel,
+              datasets: [{
+                label: tlscreenerstockname,
+                data: tlselectedstockdata,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+              }]
+            };
+  
+            const tlcanvas = document.createElement('canvas');
+            tlcanvas.id = 'chart' + tlscreenerstock;
+            tlcanvas.width = 300;
+            tlcanvas.height = 300;
+  
+            // append the canvas to the new wrapper element
+            tlchartWrapper.appendChild(tlcanvas);
+  
+            // append the wrapper element to the card body
+            tlcardBody.appendChild(tlchartWrapper);
+  
+            // create tlcardPrice element
+            tlcardprice.length = 0; // Clear the tlcardprice array
+tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
+tlcardshareholding.length = 0; // Clear the tlcardshareholding array
+tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
+
+for (let val1 in nestedItems1[1]['insightData']['price']) {
+  tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
+  tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
+}
+
+console.log(tlcardpricecolor)
+
+for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+  tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
+  tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
+}
+console.log(tlcardshareholdingcolor)
+
+// const tlcardBody = document.createElement('div');
+
+for (let i = 0; i < tlcardprice.length; i++) {
+  const tlcardPrice = document.createElement('div');
+  tlcardPrice.innerText = tlcardprice[i];
+  
+  if (tlcardpricecolor[i] === 'positive') {
+    tlcardPrice.style.color = 'green';
+  } else if (tlcardpricecolor[i] === 'neutral') {
+    tlcardPrice.style.color = 'blue';
+  } else if (tlcardpricecolor[i] === 'negative') {
+    tlcardPrice.style.color = 'red';
+  }
+  
+  tlcardBody.appendChild(tlcardPrice);
+}
+
+for (let i = 0; i < tlcardshareholding.length; i++) {
+  const tlcardShareholding = document.createElement('div');
+  tlcardShareholding.innerText = tlcardshareholding[i];
+  
+  if (tlcardshareholdingcolor[i] === 'positive') {
+    tlcardShareholding.style.color = 'green';
+  } else if (tlcardshareholdingcolor[i] === 'neutral') {
+    tlcardShareholding.style.color = 'blue';
+  } else if (tlcardshareholdingcolor[i] === 'negative') {
+    tlcardShareholding.style.color = 'red';
+  }
+  
+  tlcardBody.appendChild(tlcardShareholding);
+}
+
+// Append the card body to the card
+tlcard.appendChild(tlcardBody);
+
+  
+            // append the card to the chart container
+            tlchartContainer.appendChild(tlcard);
+  
+            const tlchart = new Chart(tlcanvas, {
+              type: 'line',
+              data: tldata,
+              options: {
+                maintainAspectRatio: true,
+                scales: {}
+              }
+            });
+  
+            this.tlchartList.push(tlchart);
+  
+          } catch (err) {
+            console.error(err);
+          }
+        } else {
+          console.log(nestedItems[0]['body']['tableData'][val][0]);
+          continue;
         }
-              }     
-              else{console.log(nestedItems[0]['body']['tableData'][val][0])
-                continue;}
-             }
+      }
     } catch (err) {
       console.error(err);
     }
- 
+  }
   
-     
-   }
+  
+  
   getnteodscreeners(SMA1:string) {
 
     this.dataApi.getnteodscreeners(SMA1).subscribe(data5 => {
