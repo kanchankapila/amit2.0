@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UntypedFormBuilder } from '@angular/forms';
 import * as  stocks from '../lists/stocklist'
 import {Chart} from 'chart.js';
+
 export interface screenerstockstile {
   text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; text9: any;
   text10: any;text11: any;text12: any;}
@@ -323,15 +324,29 @@ displayMaximizable1: boolean;
             }
   
             const tlchartContainer = document.getElementById('tlchart-container');
-  
+            
             // create a new card element
             const tlcard = document.createElement('div');
             tlcard.classList.add('card', 'col-md-3', 'my-3');
-  
+           
+const maximiseButton = document.createElement('button');
+maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
+maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
+maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+
+const exitFullscreenButton = document.createElement('button');
+exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
+exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
+exitFullscreenButton.style.display = 'none'; // Hide the button initially
+exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+
+// Append the maximise and exit fullscreen buttons to the card body
+tlcard.appendChild(maximiseButton);
+tlcard.appendChild(exitFullscreenButton);
             // create a card body
             const tlcardBody = document.createElement('div');
             tlcardBody.classList.add('card-body');
-  
+            
             // create a card title
             const tlcardTitle = document.createElement('h5');
             tlcardTitle.classList.add('card-title');
@@ -371,7 +386,17 @@ displayMaximizable1: boolean;
 tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
 tlcardshareholding.length = 0; // Clear the tlcardshareholding array
 tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-
+function toggleFullscreen(element) {
+  if (!document.fullscreenElement) {
+    element.requestFullscreen().catch(err => {
+      console.error(err);
+    });
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
 for (let val1 in nestedItems1[1]['insightData']['price']) {
   tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
   tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -420,6 +445,10 @@ for (let i = 0; i < tlcardshareholding.length; i++) {
 // Append the card body to the card
 tlcard.appendChild(tlcardBody);
 
+
+
+
+
   
             // append the card to the chart container
             tlchartContainer.appendChild(tlcard);
@@ -465,6 +494,7 @@ tlcard.appendChild(tlcardBody);
   refresh(){
     window.location.reload()
   }
+ 
   changestockpage(symbol) {
      
 
