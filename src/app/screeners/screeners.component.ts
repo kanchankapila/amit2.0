@@ -477,7 +477,7 @@ tlcard.appendChild(tlcardBody);
     }
   }
   
-  
+
   
   getnteodscreeners(SMA1:string) {
 
