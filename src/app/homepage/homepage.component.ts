@@ -94,6 +94,7 @@ import {RadioButton} from 'primeng/radiobutton';
 import ApexCharts from 'apexcharts';
 
 
+
 export type ChartOptions5 = {
 series: ApexAxisChartSeries;
 chart: ApexChart;
@@ -313,11 +314,14 @@ mcadvvalue1: Array<any> = [];
 public advdecChartData: ChartConfiguration['data']
 public dealsdata: dealsdatatile[] = [];
 public advdecChartType: ChartType = 'line';
-//  public leafItemSettings: object
-//  public data: object[]
-//  public tooltipSettings: object
+
 public advdecChartOptions:ChartOptions = {
-  scales: {},
+  responsive: true,
+  maintainAspectRatio: true,
+  scales: {
+    // Add ,scales options if needed
+  },
+ 
 
   elements: {
     point: {
@@ -325,7 +329,7 @@ public advdecChartOptions:ChartOptions = {
     }
   }
 };
-//  ? screen:any;
+
 
 async  ngOnInit() {
   await Promise.all([
@@ -488,12 +492,12 @@ getadvdec1() {
     var options = {
       chart: {
         type: 'donut',
+        width: '75%', // Set the chart width to 100% for responsiveness
       },
       series: this.mcadvvalue1,
-      labels: ["Advance","Decline"],
-      colors: ["#32cd32",
-      "#ff4040"]
-    }
+      labels: ["Advance", "Decline"],
+      colors: ["#32cd32", "#ff4040"]
+    };
     
     var chart = new ApexCharts(document.querySelector("#chart2"), options);
     chart.render();
@@ -563,7 +567,7 @@ this.dataApi.getetindicesdata().subscribe(data => {
     },
     plotOptions: {
       bar: {
-        horizontal: true
+        horizontal: false
       },
     },
     stroke: {
@@ -584,17 +588,22 @@ this.dataApi.getetindicesdata().subscribe(data => {
     },dataLabels: {
       enabled: false // turn off data labels
     },
+   
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return String(val).slice(0, 3);
+        }
+      }
+    },
     yaxis: {
       title: {
         text: undefined
-      }
-    },
-    tooltip: {
-      y: {
-        formatter: function(val) {
-          return val + "";
+      },
+      labels: {
+        formatter: function (value) {
+          return String(value).slice(0, 3);
         }
-        
       }
     },
     fill: {
@@ -625,7 +634,7 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
     this.sectorsname.push(nestedItems[0].searchresult[val].sectorName)
   }
   
-  
+
   this.chartOptions1 = {
     
     series: [
@@ -642,7 +651,9 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
     ],
     chart: {
       type: "bar",
-      height:'500',
+     
+      height: '500', // Set the chart height to 100% for responsiveness
+      width: '100%',
       
       
       stacked: true
@@ -650,7 +661,7 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
     plotOptions: {
       
       bar: {
-        horizontal: true
+        horizontal: false
       }
     },
     stroke: {
@@ -671,17 +682,23 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
     },dataLabels: {
       enabled: false // turn off data labels
     },
+    
+    
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return String(val).slice(0, 3);
+        }
+      }
+    },
     yaxis: {
       title: {
         text: undefined
-      }
-    },
-    tooltip: {
-      y: {
-        formatter: function(val) {
-          return val + "";
+      },
+      labels: {
+        formatter: function (value) {
+          return String(value).slice(0, 3);
         }
-        
       }
     },
     fill: {
@@ -689,7 +706,7 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
     },
     legend: {
       position: "top",
-      horizontalAlign: "left",
+      horizontalAlign: "center",
       offsetX: 40
     }
   };
@@ -971,6 +988,8 @@ getsectors() {
                                             }
     }
     this.chartOptions5 = {
+     
+
       series: [
         {
           data: this.sectors
@@ -980,7 +999,7 @@ getsectors() {
         show: false
       },
       chart: {
-        width: '100%',
+        width: '75%',
         type: 'treemap'
       },
     

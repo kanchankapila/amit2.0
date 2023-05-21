@@ -189,9 +189,16 @@ text-align: center;
   }
 
 }
-
-
-
+.chart1{
+  width:900px;
+  height:500px
+}
+@media (max-width: 424px) {
+.chart1{
+  width:300px;
+  height:500px
+}
+}
 
   
   @media (max-width: 424px) {

@@ -10,11 +10,11 @@
 <br>
 <br>
 
-<div class="col-lg-13 col-xs-6 grid-margin stretch-card">
-  <div class="content cardnew">
+<div class="col-lg-18 col-xs-6">
+  <div class=" cardnew">
     
     <h4 class="mb-4">Global Markets</h4>
-    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxLayout="row wrap" fxLayoutGap="30px grid">
       <div fxFlex="11" fxFlex.xs="50%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket let i = index; trackBy: trackByFunctionglobalmarket">
     <mat-card class="text-blue type1-bold cardnew  text-center"
     [ngClass]="{'bg-gradient-bull ':tile.text3 > 0,
@@ -28,51 +28,47 @@
 </div>
 <div fxLayout="row" fxLayout.xs="column" >
 
-  <div class="col-lg-3 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
     <div class="cardnew">
-      <div class="card-body" >
-     
+      <div class="card-body">
         <div class="table-responsive">
-      
-         
-          <canvas baseChart  [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType" [options]="advdecChartOptions"></canvas>
-  
-      </div>
+          <canvas baseChart [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType"></canvas>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-lg-3 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+  
+  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
     <div class="cardnew">
-<div id="chart"  *ngIf="chartOptions5">
-  <apx-chart
-    [series]="chartOptions5.series"
-    [chart]="chartOptions5.chart"
-    [dataLabels]="chartOptions5.dataLabels"
-    [plotOptions]="chartOptions5.plotOptions"
-    [title]="chartOptions5.title"
-    [legend]="chartOptions5.legend"
-  ></apx-chart>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
-  <div class="cardnew">
-<div class="chart2" id="chart2">
-
-</div>
-</div>
-</div>
-</div>
-
-
-
-<div fxLayout="row" fxLayout.xs="column" >
+      <div id="chart" *ngIf="chartOptions5">
+        <apx-chart
+          [series]="chartOptions5.series"
+          [chart]="chartOptions5.chart"
+          [dataLabels]="chartOptions5.dataLabels"
+          [plotOptions]="chartOptions5.plotOptions"
+          [title]="chartOptions5.title"
+          [legend]="chartOptions5.legend"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
   
+  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
+    <div class="cardnew">
+      <div class="chart2" id="chart2"></div>
+    </div>
+  </div>
   
-  <div class="col-lg-4 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+</div>
+
+
+
+
+<div fxLayout="row" fxLayout.xs="column" > 
+  
+  <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 ">
     <div class="cardnew">   
-<div id="chart"  *ngIf="chartOptions6">
+<div id="chart" class="chart1" *ngIf="chartOptions6">
   <apx-chart
     [series]="chartOptions6.series"
     [chart]="chartOptions6.chart"
@@ -89,7 +85,7 @@
 </div>
 </div>
 </div>
-<div class="col-lg-8 col-md-10 col-sm-6 col-xs-5 grid-margin stretch-card">
+<div class="col-lg-6 col-md-10 col-sm-6 col-xs-5 ">
   <div class="cardnew">
 <div class="chart1"  id="chart1"  *ngIf="chartOptions1">
   <apx-chart
@@ -111,12 +107,12 @@
 </div>
 </div>
 
-
-
-
-
-
 </div>
+
+
+
+
+
 
 
 

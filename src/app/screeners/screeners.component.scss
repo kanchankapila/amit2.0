@@ -5,16 +5,22 @@
   perspective: 800px;
 
   .card {
-    position: relative;
-    width: 180px;
-    height: 150px;
-    color: white;
-    // cursor: pointer;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    text-align:center;
-    transition: 1s ease-in-out;
-    transform-style: preserve-3d;
+    max-width: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    max-width: auto;
+    height: auto;
+    padding: 35px;
+  
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  
+    backdrop-filter: blur(15px);
 
     &:hover {
       transform: rotateY(0.5turn);
@@ -249,4 +255,122 @@ mat-checkbox ::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;}
       cursor: pointer;
     }
     
+
+
+@media (max-width: 424px) {
+  :root {
+    font-size: 1em;
+    box-sizing: inherit;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  p:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+  
+  body {
+    font: 1em/2 Inter, sans-serif;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+     min-height: 100vh;
+    padding: 15px;
+    
+    color: #224;
+   
+  }
+  
+  .cardnew {
+    max-width: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    max-width: auto;
+    height: auto;
+    padding: 10px;
+  
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  
+    backdrop-filter: blur(15px);
+  }
+  
+  .cardnew-footer {
+    font-size: 0.15em;
+    color: #446;
+  }
+}
+:root {
+  font-size: 20px;
+  box-sizing: inherit;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+p:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+body {
+  font: 1em/1.618 Inter, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  min-height: 100vh;
+  padding: 35px;
+  
+  color: #224;
+  background:
+    url(https://source.unsplash.com/E8Ufcyxz514/2400x1823)
+    center / cover no-repeat fixed;
+}
+
+.cardnew {
+  max-width: auto;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: auto;
+  height: auto;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(15px);
+}
+
+.cardnew-footer {
+  font-size: 0.75em;
+  color: #446;
+}   
  
