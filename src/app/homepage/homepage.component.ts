@@ -562,6 +562,7 @@ this.dataApi.getetindicesdata().subscribe(data => {
     chart: {
       type: "bar",
       height:'500',
+      width:'85%',
       
       stacked: true
     },
@@ -999,7 +1000,7 @@ getsectors() {
         show: false
       },
       chart: {
-        width: '75%',
+        width: '80%',
         type: 'treemap'
       },
     
