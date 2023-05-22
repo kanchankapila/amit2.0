@@ -130,6 +130,7 @@ export class NiftyComponent implements OnInit {
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('TradingViewWidget1', { static: true }) TradingViewWidget1: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
+  tlbuildup: any;
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
     
   }
@@ -336,6 +337,7 @@ public primaryYAxis1: Object;
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
     await Promise.all([
+    
     this.getniftypcr(),
     this.getmcnifty50stocks(),
     this.getnifty50smaema(),
@@ -1044,7 +1046,7 @@ this.stockhcdate1.map((value: number, index: number) => {
 })
 }
   
-   
+  
   getniftytoday() {
         ////////////To get Nifty Today Price///////////////////////
     

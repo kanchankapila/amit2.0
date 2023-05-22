@@ -172,6 +172,12 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   date5: any;
   res;
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+  tlbuildup: any;
+  tlniftybuildup: any;
+  tlbniftybuildup: any;
+  tlpniftybuildup: any;
+  tlidnifty: string;
+  tlidbnifty: string;
  
   constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window,private dataApi: DataapiService) {
     config.placement = 'bottom-right'; this.items = [];
@@ -206,6 +212,8 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     this.primengConfig.ripple = true;
     this.data = this.stock
     this.sectorList = sectors.default.Data
+    this.tlidnifty='1887'
+    this.tlidbnifty='1898'
     {setInterval(() => { this.getniftypcr() }, 30000); }
     {setInterval(() => { this.getbankniftypcr() }, 30000); }
     {setInterval(() => { this.getmcniftyrealtime() }, 5000);}
@@ -214,6 +222,9 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     {setInterval(() => { this.getttmmi() }, 60000);}
     
     await Promise.all([
+      this.getniftytlbuildup(this.tlidnifty),
+      this.getbniftytlbuildup(this.tlidbnifty),
+      this.getpniftytlbuildup('1905'),
       this.getniftysparkline(),
       this.getbniftysparkline(),
       this.getpniftysparkline(),
@@ -386,6 +397,35 @@ nsedataniftyoi() {
     console.log(err)
   })
 }
+getniftytlbuildup(tlidnifty){
+  this.tlidnifty='1887'
+  this.dataApi.gettlbuildup(this.tlidnifty).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    this.tlniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
+    console.log(this.tlniftybuildup)
+  });
+ }
+ getbniftytlbuildup(tlidbnifty){
+  this.tlidbnifty='1898'
+  this.dataApi.gettlbuildup(this.tlidbnifty).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    this.tlbniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
+    console.log(this.tlbniftybuildup)
+  });
+ }
+ getpniftytlbuildup(tlid){
+  this.dataApi.gettlbuildup(this.tlid).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    this.tlpniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
+    console.log(this.tlpniftybuildup)
+  });
+ }
 setttvolume(){
   console.log("Set TTVOLMCINSIGHT is hit !!!")
   this.dataApi.setttvolume().subscribe(data5 => {
