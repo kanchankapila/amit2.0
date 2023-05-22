@@ -178,6 +178,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   tlpniftybuildup: any;
   tlidnifty: string;
   tlidbnifty: string;
+  tlniftybuildup5: any;
  
   constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window,private dataApi: DataapiService) {
     config.placement = 'bottom-right'; this.items = [];
@@ -223,8 +224,9 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     
     await Promise.all([
       this.getniftytlbuildup(this.tlidnifty),
+      this.getniftytlbuildup5(),
       this.getbniftytlbuildup(this.tlidbnifty),
-      this.getpniftytlbuildup('1905'),
+      // this.getpniftytlbuildup('1905'),
       this.getniftysparkline(),
       this.getbniftysparkline(),
       this.getpniftysparkline(),
@@ -404,7 +406,21 @@ getniftytlbuildup(tlidnifty){
       return data5[key];
     });
     this.tlniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
-    console.log(this.tlniftybuildup)
+    // console.log(this.tlniftybuildup)
+  });
+ }
+ getniftytlbuildup5(){
+  this.tlidnifty='1887'
+  this.dataApi.gettlbuildup5().subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    // this.tlniftybuildup5=(nestedItems[0]['data_v2'][0]['buildup'])
+    for(let val in nestedItems[0]['all']['series']){
+      if(nestedItems[0]['all']['series'][val].code == "NIFTY50"){
+        this.tlniftybuildup5=nestedItems[0]['all']['series'][val].builtup_str
+      }
+    }
   });
  }
  getbniftytlbuildup(tlidbnifty){
@@ -414,18 +430,18 @@ getniftytlbuildup(tlidnifty){
       return data5[key];
     });
     this.tlbniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
-    console.log(this.tlbniftybuildup)
+    // console.log(this.tlbniftybuildup)
   });
  }
- getpniftytlbuildup(tlid){
-  this.dataApi.gettlbuildup(this.tlid).subscribe(data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-    this.tlpniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
-    console.log(this.tlpniftybuildup)
-  });
- }
+//  getpniftytlbuildup(tlid){
+//   this.dataApi.gettlbuildup(this.tlid).subscribe(data5 => {
+//     let nestedItems = Object.keys(data5).map(key => {
+//       return data5[key];
+//     });
+//     this.tlpniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
+//     console.log(this.tlpniftybuildup)
+//   });
+//  }
 setttvolume(){
   console.log("Set TTVOLMCINSIGHT is hit !!!")
   this.dataApi.setttvolume().subscribe(data5 => {
