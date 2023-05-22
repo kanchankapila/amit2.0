@@ -181,6 +181,9 @@ baseurl:any;
   getetallsectorsdata() {
     return this.http.get(this.baseurl+'/.netlify/functions/etallsectors') 
   }
+  gettlbuildup(tlid) {
+    return this.http.get(this.baseurl+'/.netlify/functions/trendlynebuildup?tlid='+tlid) 
+  }
  
   nsedataadvdec(){
     return this.http.get(this.baseurl + '/nsedataadvdec')
