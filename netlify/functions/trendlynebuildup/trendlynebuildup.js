@@ -25,7 +25,7 @@ const trendlynebuildup = async (tlid, expdate, event, context) => {
     const year = date.getFullYear();
     const formattedDate = `${day}-${month}-${year}`;
 console.log(csrf[0].csrf)
-    const response = await fetch(`https://trendlyne.com/futures-options/api/derivative/buildup-5/${formattedDate}-near/${tlid}/`, {
+    const response = await fetch(`https://trendlyne.com/futures-options/api/derivative/buildup-15/${formattedDate}-near/${tlid}/`, {
       headers: {
         "accept": "application/json, text/javascript, */*; q=0.01",
         "accept-language": "en-US,en;q=0.9",
@@ -37,7 +37,7 @@ console.log(csrf[0].csrf)
         "sec-fetch-site": "same-origin",
         "x-requested-with": "XMLHttpRequest",
         "cookie": "_gid=GA1.2.1330229069.1671722517; g_state={\"i_l\":0}; csrftoken="+csrf[0].csrf+"; .trendlyne="+trnd[0].trnd+"; _gat=1; _ga_7F29Q8ZGH0=GS1.1.1671722518.6.1.1671722626.0.0.0; AWSALB=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; AWSALBCORS=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; _ga=GA1.2.521023439.1671467978",
-        "Referer": `https://trendlyne.com/futures-options/derivative/buildup-5-minutes/${formattedDate}-near/${tlid}/`,
+        "Referer": `https://trendlyne.com/futures-options/derivative/buildup-15-minutes/${formattedDate}-near/${tlid}/`,
         "Referrer-Policy": "strict-origin-when-cross-origin"
       },
       body: null,
