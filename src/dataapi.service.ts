@@ -184,6 +184,9 @@ baseurl:any;
   gettlbuildup(tlid) {
     return this.http.get(this.baseurl+'/.netlify/functions/trendlynebuildup?tlid='+tlid) 
   }
+  gettlbuildup5() {
+    return this.http.get(this.baseurl+'/.netlify/functions/trendlynebuildup5') 
+  }
  
   nsedataadvdec(){
     return this.http.get(this.baseurl + '/nsedataadvdec')
