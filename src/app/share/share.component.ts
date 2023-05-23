@@ -250,7 +250,7 @@ public titlepv: string = 'Volume Analysis';
     } 
    }
   selectedValue: string;
-
+  
   ngAfterViewInit() {
     RadioButton.prototype.select = function () {
       if (!this.disabled) {
@@ -265,7 +265,10 @@ public titlepv: string = 'Volume Analysis';
   script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
   script.charset = 'utf-8';
   this.trendlyneWidget.nativeElement.appendChild(script);
-
+  const card18 = document.querySelector('.card18');
+  card18.addEventListener('click', function() {
+    this.classList.toggle('flipped');
+  });
   const script1 = document.createElement('script');
   script1.async = true;
   script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
