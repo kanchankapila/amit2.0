@@ -102,7 +102,27 @@
     box-shadow: none;
   }
 }
+.cardnew {
+  // border: 0;
+  max-width: auto;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  max-width: auto;
+  height: auto;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(15px);
+  
+  margin-top: 0.5rem;
+}
 @media (min-width: 576px) {
   .card-columns {
     column-count: 3;
@@ -141,4 +161,7 @@
   .card-inverse-#{$color} {
     @include card-inverse-variant(rgba($value, .2), theme-color-level($value, 1), theme-color-level($value, 3));
   }
+}
+.gap-div{
+  margin-top:200px;
 }

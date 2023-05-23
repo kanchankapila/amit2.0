@@ -327,7 +327,7 @@ displayMaximizable1: boolean;
             
             // create a new card element
             const tlcard = document.createElement('div');
-            tlcard.classList.add('card', 'col-md-3', 'my-3');
+            tlcard.classList.add('cardnew', 'col-md-3', 'my-3');
            
 const maximiseButton = document.createElement('button');
 maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon

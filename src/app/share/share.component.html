@@ -1,13 +1,4 @@
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div class="gap-div">
 
 
 
@@ -417,15 +408,15 @@ NR7:{{nr7}}
 </div>
 </div>
 
-  
+
 
 
     <h4 class="text-black text-center">Daily Technical Indicators</h4>
     <div fxLayout="row wrap" fxLayoutGap="10px grid" class=" col-lg-13 col-xs-3  ">
       <div  style="text-transform: uppercase;font-weight:bold; margin: 10px;text-align:center;" fxFlex="15" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of stockindicators trackBy: trackByFunction7">
      
-<div class="scene">
-  <div class="card text-center text-white ">
+
+  <div class=" text-center text-white ">
     <div  class=" card__face card__face--front type1-bold  "
          [ngClass]="{'bg-gradient-bull ':tile.text3 === 'Bullish',
                       'bg-gradient-bull1 ':tile.text3 === 'Oversold',
@@ -455,7 +446,7 @@ NR7:{{nr7}}
   
   </div>
   
-</div>
+
 </div>
 </div>
 
@@ -887,7 +878,7 @@ NR7:{{nr7}}
 
 
  <div [ngClass]="{'text-green':tile.text1 === 'YES','text-red':tile.text1 === 'NO'}" *ngFor="let tile of foundContent">{{tile.text1}}</div>
- <div fxLayout="row" fxLayout.xs="column">
+ <!-- <div fxLayout="row" fxLayout.xs="column">
   <blockquote class="trendlyne-widgets abc" 
               
               [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/' + eqsymbol + '/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
@@ -904,4 +895,5 @@ NR7:{{nr7}}
               
              
   </div>      
-  
+   -->
+  </div>
