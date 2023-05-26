@@ -1,47 +1,42 @@
-const MongoClient = require('mongodb').MongoClient;
+const { Pool } = require('pg');
 
 exports.handler = async function(event, context) {
-  // Connection URL
-  const url = process.env.MONGODB_ATLAS_CLUSTER_URI; // Update with your MongoDB connection URL
+  const pool = new Pool({
+    connectionString: process.env.POSTGRESS_DATABASE_URL, // Update with your PostgreSQL connection URL
+  });
+
   const dbName = 'DVM'; // Update with your database name
-  const collectionName = 'DVM'; // Update with your collection name
+  const tableName = 'DVM'; // Update with your table name
 
   try {
-    const client = await MongoClient.connect(url,{
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      });
-    console.log('Connected successfully to MongoDB');
+    const client = await pool.connect();
+    console.log('Connected successfully to PostgreSQL');
 
-    const db = client.db(dbName);
+    // Execute query to fetch data
+    const query = `
+      SELECT obj_item->>'Name' AS Name, (obj_item->>'DurabilityScore')::numeric AS DurabilityScore, (obj_item->>'MomentumScore')::numeric AS MomentumScore, (obj_item->>'VolatilityScore')::numeric AS VolatilityScore
+      FROM ${tableName}, jsonb_array_elements(${tableName}.obj) AS obj_item
+      WHERE (obj_item->>'DurabilityScore')::numeric > '55'
+        AND (obj_item->>'MomentumScore')::numeric > '60'
+        AND (obj_item->>'VolatilityScore')::numeric > '50'
+    `;
+    const result = await client.query(query);
+    const time = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
     
-    // const time = await db.collection(collectionName).findOne({time}).toArray();
-    // Aggregation pipeline
-    const pipeline = [
-      { $match: { "output.DurabilityScore": { $gt: 55 }, "output.MomentumScore": { $gt: 60 }, "output.VolatilityScore": { $gt: 50 } } },
-      { $project: { output: { $filter: { input: "$output", as: "o", cond: { $and: [{ $gt: ["$$o.DurabilityScore", 55] }, { $gt: ["$$o.MomentumScore", 60] }, { $gt: ["$$o.VolatilityScore", 50] }] } } } } }
-    ];
 
-    // Execute aggregation query
-    const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    
-     const time = await client.db('DVM').collection("DVM").findOne({}, { projection: { _id: 0, time: 1 } }); 
-    await client.close();
+    console.log('Aggregation query result:', result.rows);
+    console.log('Time:', time.rows[0].time);
+    await client.end();
+
     const response = {
       statusCode: 200,
       body: JSON.stringify({
-        body: result,
-        time: time
+        body: result.rows,
+        time: time.rows[0].time
       })
     };
-     return response;
-    // const response= {
-    //   statusCode: 200,
-    //   body: JSON.stringify({result,time})
-     
-      
-    // };
-    // return response;
+
+    return response;
   } catch (err) {
     console.error(err);
     return {

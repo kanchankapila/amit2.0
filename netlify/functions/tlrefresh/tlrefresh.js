@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const handler = async function () {
   try {
-    const response = await fetch('https://render-express-e54x.onrender.com/api/trendlynecookie', {
+    const response = await fetch('https://render-express-e54x.onrender.com/api/trendlynecookiepg', {
       headers: { Accept: 'application/json' },
     })
     if (!response.ok) {

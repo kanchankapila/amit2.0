@@ -68,7 +68,8 @@ export class AnalyticsComponent implements OnInit{
   this.getmcinsightreadlongunwinding(),
   this.gettlscreener(this.screenercode)
     ])
-   
+    setInterval(() => { this.getntvolume() }, 120000);
+    setInterval(() => { this.getntvolumeread() }, 125000);
   }
  
   trackByFunction1(index1, item1) {return item1.text3;}
@@ -83,13 +84,14 @@ export class AnalyticsComponent implements OnInit{
         return data5[key];
       });
      
-      this.tldvmstocks.length=0;
-      this.time=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
-      
-      for (let val in nestedItems[0][0]['output']) {
-        this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0][0]['output'][val].Name)[0].mcsymbol);
+      // this.tldvmstocks.length=0;
+      this.time=new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
+      console.log(nestedItems[0])
+      for (let val in nestedItems[0]) {
+        console.log(val)
+        this.tldvmmcsymbol = (this.stockList.filter(i => i.name == nestedItems[0][val].name)[0].mcsymbol);
         if (this.tldvmmcsymbol == '#N/A') {
-          console.error(`No mcsymbol found for name: ${nestedItems[0][0]['obj'][val].Name}. Skipping to next iteration.`);
+          console.error(`No mcsymbol found for name: ${nestedItems[0][val].name}. Skipping to next iteration.`);
           continue;
         }
   
@@ -123,12 +125,13 @@ export class AnalyticsComponent implements OnInit{
         return data5[key];
       });
     
-      this.time1=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
-      for (let val in nestedItems[0][0]['obj']) {
+      this.time1=new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
+      for (let val in nestedItems[0]) {
   
-        const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0][0]['obj'][val].Name)[0]?.mcsymbol;
+        const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0][val].name)[0]?.mcsymbol;
+      
         if (ttvolumemcsymbol == '#N/A') {
-          console.error(`No mcsymbol found for name: ${nestedItems[0][0]['obj'][val].Name}. Skipping to next iteration.`);
+          console.error(`No mcsymbol found for name: ${nestedItems[0][val].name}. Skipping to next iteration.`);
           continue;
         }
        
@@ -183,11 +186,11 @@ export class AnalyticsComponent implements OnInit{
         return data5[key];
       });
   
-      this.time3=new Date(nestedItems[1]['time']).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
-      console.log( this.time3)
+      this.time3=new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
+      
       for (let val in nestedItems[0]['shortcovering']) {
-        const shortcoveringstock = this.stockList.filter(i => i.name === nestedItems[0]['shortcovering'][val].Name)[0]?.mcsymbol;
-        const shortcoveringstockname = this.stockList.filter(i => i.name === nestedItems[0]['shortcovering'][val].Name)[0]?.name;
+        const shortcoveringstock = this.stockList.filter(i => i.name === nestedItems[0]['shortcovering'][val].name)[0]?.mcsymbol;
+        const shortcoveringstockname = this.stockList.filter(i => i.name === nestedItems[0]['shortcovering'][val].name)[0]?.name;
         
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + shortcoveringstock + '&resolution=1D').toPromise();
@@ -270,10 +273,10 @@ export class AnalyticsComponent implements OnInit{
         return data5[key];
       });
   
-      
+     
       for (let val in nestedItems[0]['longbuildup']) {
-        const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0]['longbuildup'][val].Name)[0]?.mcsymbol;
-        const longbuildstockname = this.stockList.filter(i => i.name === nestedItems[0]['longbuildup'][val].Name)[0]?.name;
+        const longbuildstock = this.stockList.filter(i => i.name === nestedItems[0]['longbuildup'][val].name)[0]?.mcsymbol;
+        const longbuildstockname = this.stockList.filter(i => i.name === nestedItems[0]['longbuildup'][val].name)[0]?.name;
         
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longbuildstock + '&resolution=1D').toPromise();
@@ -357,8 +360,8 @@ export class AnalyticsComponent implements OnInit{
   
       
       for (let val in nestedItems[0]['shortbuildup']) {
-        const shortbuildstock = this.stockList.filter(i => i.name === nestedItems[0]['shortbuildup'][val].Name)[0]?.mcsymbol;
-        const shortbuildstockname = this.stockList.filter(i => i.name === nestedItems[0]['shortbuildup'][val].Name)[0]?.name;
+        const shortbuildstock = this.stockList.filter(i => i.name === nestedItems[0]['shortbuildup'][val].name)[0]?.mcsymbol;
+        const shortbuildstockname = this.stockList.filter(i => i.name === nestedItems[0]['shortbuildup'][val].name)[0]?.name;
         
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + shortbuildstock + '&resolution=1D').toPromise();
@@ -442,8 +445,8 @@ export class AnalyticsComponent implements OnInit{
   
      
       for (let val in nestedItems[0]['longunwinding']) {
-        const longunwindingstock = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].Name)[0]?.mcsymbol;
-        const longunwindingstockname = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].Name)[0]?.name;
+        const longunwindingstock = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].name)[0]?.mcsymbol;
+        const longunwindingstockname = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].name)[0]?.name;
         
         try {
           const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + longunwindingstock + '&resolution=1D').toPromise();
@@ -519,4 +522,19 @@ export class AnalyticsComponent implements OnInit{
     }
   }
  
+
+   async getntvolume() {
+  
+       await this.dataApi.getntvolume();
+      
+
+    }
+    async getntvolumeread() {
+  
+      const data5 = await this.dataApi.getntvolumeread().toPromise();
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    }
   }
