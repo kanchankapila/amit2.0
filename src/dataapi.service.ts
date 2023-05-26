@@ -187,6 +187,14 @@ baseurl:any;
   gettlbuildup5() {
     return this.http.get(this.baseurl+'/.netlify/functions/trendlynebuildup5') 
   }
+
+  getntvolume() {
+    return this.http.get(this.baseurl+'/.netlify/functions/ntvolume') 
+  }
+
+  getntvolumeread() {
+    return this.http.get(this.baseurl+'/.netlify/functions/ntvolumeread') 
+  }
  
   nsedataadvdec(){
     return this.http.get(this.baseurl + '/nsedataadvdec')

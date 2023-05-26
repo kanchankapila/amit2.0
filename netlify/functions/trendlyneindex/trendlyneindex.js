@@ -1,10 +1,11 @@
-
-const { MongoClient } = require('mongodb');
-const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI);
-
+const { Pool } = require('pg');
 const fetch = require('node-fetch')
-
-
+const pool = new Pool({
+  connectionString: process.env.POSTGRESS_DATABASE_URL, // Replace with your PostgreSQL database connection string
+  ssl: {
+    rejectUnauthorized: false, // Only set this option if using a self-signed certificate
+  },
+});
 
 
 
@@ -12,10 +13,17 @@ const trendlyneindex =  async (indexid,duration,event, context) => {
  
   
   try {
-    await client1.connect();
-    const csrf = await client1.db('Trendlynecookie').collection("cookie").find({},{ projection: { _id: 0, csrf: 1 } }).toArray(); 
-    const trnd = await client1.db('Trendlynecookie').collection("cookie").find({},{ projection: { _id: 0, trnd: 1 } }).toArray(); 
+    const client = await pool.connect();
    
+      const result = await client.query('SELECT csrf, time, trnd FROM cookie ');
+      const rows = result.rows;
+      for (const row of rows) {
+        const { csrf, time, trnd } = row;
+        process.env.csrf=csrf
+        process.env.trnd=trnd
+        process.env.time=time
+      
+      };
     
     const response = await fetch('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+indexid+'/'+duration+'/', {
       method: 'GET',
@@ -28,7 +36,7 @@ const trendlyneindex =  async (indexid,duration,event, context) => {
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin",
-    "cookie": "_gid=GA1.2.1330229069.1671722517; g_state={\"i_l\":0}; csrftoken="+csrf[0].csrf+"; .trendlyne="+trnd[0].trnd+"; _gat=1; _ga_7F29Q8ZGH0=GS1.1.1671722518.6.1.1671722626.0.0.0; AWSALB=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; AWSALBCORS=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; _ga=GA1.2.521023439.1671467978",
+    "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=`+process.env.trnd+`; csrftoken=`+process.env.csrf+`; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
     "Referer": "https://trendlyne.com/equity/technical-analysis/NIFTY50/1887/nifty-50/",
     "Referrer-Policy": "strict-origin-when-cross-origin"
         },
@@ -40,6 +48,7 @@ const trendlyneindex =  async (indexid,duration,event, context) => {
       // NOT res.status >= 200 && res.status < 300
       return { statusCode: response.status, body: response.statusText }
     }
+    await client.release();
     const dataindx = await response.json()
     
     process.env.trendlyneindx = JSON.stringify({ dataindx });
@@ -58,7 +67,7 @@ const trendlyneindex =  async (indexid,duration,event, context) => {
     }
   }finally {
     
-       await client1.close()
+     
     
   }
    

@@ -1,45 +1,40 @@
-
-
-const MongoClient = require('mongodb').MongoClient;
+const { Client } = require('pg');
 
 exports.handler = async function(event, context) {
-  // Connection URL
-  const url = process.env.MONGODB_ATLAS_CLUSTER_URI; // Update with your MongoDB connection URL
+  const connectionString = process.env.POSTGRESS_DATABASE_URL; // Update with your PostgreSQL connection string
   const dbName = 'Tickertape'; // Update with your database name
-  const collectionName = 'Volume'; // Update with your collection name
+  const tableName = 'Volume'; // Update with your table name
 
   try {
-    const client = await MongoClient.connect(url);
-    console.log('Connected successfully to MongoDB');
+    const client = new Client({ connectionString });
+    await client.connect();
+    console.log('Connected successfully to PostgreSQL');
 
-    const db = client.db(dbName);
+    const query = `
+    SELECT obj_item->>'sid' AS sid, obj_item->>'Name' AS Name, (obj_item->>'volBreakout')::numeric AS volBreakout
+    FROM ${tableName} ,
+        jsonb_array_elements(${tableName}.obj) AS obj_item
+    WHERE (obj_item->>'volBreakout')::numeric > 600;
+  `;
 
-    // Aggregation pipeline
-    const pipeline = [
-      { $match: { "obj.volBreakout": { $gt: 500 } } },
-      { $project: { obj: { $filter: { input: "$obj", as: "o", cond: { $gt: ["$$o.volBreakout", 500] } } } } }
-    ];
+    const result = await client.query(query);
+    const time = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
+    await client.end();
 
-    // Execute aggregation query
-    const result = await db.collection(collectionName).aggregate(pipeline).toArray();
-    const time = await client.db('Tickertape').collection("Volume").findOne({}, { projection: { _id: 0, time: 1 } }); 
-    await client.close();
-    const response = {
+    console.log('Aggregation query result:', result.rows);
+    console.log('Time:', time.rows[0].time);
+
+    // Process the query result and time if needed
+
+    return {
       statusCode: 200,
       body: JSON.stringify({
-        body: result,
-        time: time
+        result: result.rows,
+        time: time.rows[0].time
       })
     };
-     return response;
-    
-   
-
-   
-
-   
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal server error' })

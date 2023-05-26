@@ -1,61 +1,68 @@
-const MongoClient = require('mongodb').MongoClient;
+const { Client } = require('pg');
 
 exports.handler = async function(event, context) {
-  const uri = process.env.MONGODB_ATLAS_CLUSTER_URI;
+  const connectionString = process.env.POSTGRESS_DATABASE_URL;
   const dbName = 'MC';
-  const collectionName = 'mcinsights';
+  const tableName = 'mcinsights';
 
-  const pipelines = [
+  const queries = [
     {
       name: 'longbuildup',
-      pipeline: [
-        { $unwind: '$output' },
-        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Long Buildup today' } },
-        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
-      ]
-    },
+       query : `
+    SELECT obj_item->'Name' AS Name, obj_item->'FnO'->>'shortDesc' AS shortDesc
+    FROM ${tableName} INDEX (fno_idx), jsonb_array_elements(obj) AS obj_item
+    WHERE obj_item->'FnO'->>'shortDesc' = 'F&O data suggests Long Buildup today'
+  `},
     {
       name: 'longunwinding',
-      pipeline: [
-        { $unwind: '$output' },
-        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Long Unwinding today' } },
-        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
-      ]
-    },
+       query : `
+    SELECT obj_item->'Name' AS Name, obj_item->'FnO'->>'shortDesc' AS shortDesc
+    FROM ${tableName}, jsonb_array_elements(obj) AS obj_item
+    WHERE obj_item->'FnO'->>'shortDesc' = 'F&O data suggests Long Unwinding today'
+  `},
+      
     {
       name: 'shortcovering',
-      pipeline: [
-        { $unwind: '$output' },
-        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Short covering today' } },
-        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
-      ]
+      query: `
+        SELECT obj_item->'Name' AS Name, obj_item->'FnO'->>'shortDesc' AS shortDesc
+    FROM ${tableName}, jsonb_array_elements(obj) AS obj_item
+    WHERE obj_item->'FnO'->>'shortDesc' = 'F&O data suggests Short covering today'
+      `
     },
     {
       name: 'shortbuildup',
-      pipeline: [
-        { $unwind: '$output' },
-        { $match: { 'output.FnO.shortDesc': 'F&O data suggests Short Buildup today' } },
-        { $project: { Name: '$output.Name', shortDesc: '$output.FnO.shortDesc' } }
-      ]
+      query: `
+       SELECT obj_item->'Name' AS Name, obj_item->'FnO'->>'shortDesc' AS shortDesc
+    FROM ${tableName}, jsonb_array_elements(obj) AS obj_item
+    WHERE obj_item->'FnO'->>'shortDesc' = 'F&O data suggests Short Buildup today'
+      `
     }
   ];
 
   try {
-    const client = await MongoClient.connect(uri);
-    const db = client.db(dbName);
+    const client = new Client({ connectionString });
+    await client.connect();
 
-    const pipelineResults = await Promise.all(pipelines.map(async ({ name, pipeline }) => ({
+    const queryResults = await Promise.all(queries.map(async ({ name, query }) => ({
       name,
-      results: await db.collection(collectionName).aggregate(pipeline).toArray()
+      results: await client.query(query)
     })));
 
-    client.close();
+    await client.end();
 
-    const responseBody = pipelineResults.reduce((acc, { name, results }) => ({
+    const responseBody = queryResults.reduce((acc, { name, results }) => ({
       ...acc,
-      [name]: results
+      [name]: results.rows
     }), {});
-    const time = await client.db('MC').collection("mcinsights").findOne({}, { projection: { _id: 0, time: 1 } }); 
+
+    // Get the time value separately
+    const client2 = new Client({ connectionString });
+    await client2.connect();
+    const timeQuery = `SELECT time FROM ${tableName} LIMIT 1`;
+    const timeResult = await client2.query(timeQuery);
+    const time = timeResult.rows.length > 0 ? timeResult.rows[0].time : null;
+    await client2.end();
+
     const response = {
       statusCode: 200,
       body: JSON.stringify({
@@ -63,8 +70,8 @@ exports.handler = async function(event, context) {
         time: time
       })
     };
-     return response;
-   
+
+    return response;
   } catch (err) {
     console.error(err);
     return {
