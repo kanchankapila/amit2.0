@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 exports.handler = async (event, context) => {
-  const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL });
+  const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
 
   try {
     await client.connect();

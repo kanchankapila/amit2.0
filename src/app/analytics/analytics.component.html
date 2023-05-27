@@ -7,14 +7,15 @@
   <div class="chart" id="chart-container"></div>
   
 </div> -->
+
 <header style="display: flex; justify-content: center;">
-  <h1 class="header-1">Long Buildup</h1><br><em>Last Refreshed:{{this.time3}}</em>
+  <h1 class="header-1">Long Buildup</h1><br>
   </header>
   <div
-   class="chart" id="chart-containerlongbuild">
+   class="chart" id="chart-containerlongbuildup">
   </div>
   
-<header style="display: flex; justify-content: center;"><br><em>Last Refreshed:{{this.time3}}</em>
+<header style="display: flex; justify-content: center;">
   <h1 class="header-1">Short Covering</h1>
 </header>
 <div
@@ -24,83 +25,42 @@
 
 
 
-<header style="display: flex; justify-content: center;"><br><em>Last Refreshed:{{this.time3}}</em>
+<!-- <header style="display: flex; justify-content: center;"><br><em>Last Refreshed:{{this.time3}}</em>
 <h1 class="header-2">Long Unwinding</h1>
 </header>
 <div
  class="chart" id="chart-containerlongunwinding">
-</div>
-<header style="display: flex; justify-content: center;"><br><em>Last Refreshed:{{this.time3}}</em>
+</div> -->
+<header style="display: flex; justify-content: center;">
 <h1 class="header-3">Short Buildup</h1>
 </header>
 <div
- class="chart" id="chart-containershortbuild">
+ class="chart" id="chart-containershortbuildup">
 </div>
 
-
-
-
-
-<!-- 
-<canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
-[options]="lineChartOptions"></canvas> -->
-<header style="display: flex; justify-content: center;">
-  <h1 class="header-1">Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
-</header>
-
-<div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
-    <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of ttvolumestocks trackBy: trackByFunction2">
-   
-      <div class="scene">
-        <div class="card text-center text-white ">
-          <div  class=" card__face card__face--front type1-bold  "
-          [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-          'bg-gradient-bear':0 > tile.text3,
-          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
-                    
-      </div>
-      <div class="card__face card__face--back type1-bold"
-      [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-      'bg-gradient-bear': 0 > tile.text3,
-      'bg-gradient-warning':0 === tile.text3}">{{tile.text5}}<br>{{tile.text6}}<br>{{tile.text7}}<br>{{tile.text8}}              
-     </div>
-
-</div>
-
-</div>
-</div>
-</div>
-<br>
-<br>
-<br>
-<br>
 <header style="display: flex; justify-content: center;">
   <h1 class="header-1">High Durability/Volatility/Momentum Stocks</h1><br><em>Last Refreshed:{{this.time}}</em>
-</header>
-<br>
-<br>
+  </header>
+  <div
+   class="chart" id="chart-containertldvmstock">
+  </div>
 
-<div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
-    <div  style="text-transform: uppercase; margin: 10px;text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"  *ngFor="let tile of tldvmstocks trackBy: trackByFunction1">
-   
-      <div class="scene">
-        <div class="card text-center text-white ">
-          <div  class=" card__face card__face--front type1-bold  "
-          [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-          'bg-gradient-bear':0 > tile.text3,
-          'bg-gradient-warning':0 === tile.text3}">{{tile.text4}}<br>Price:{{tile.text1}}<br>{{tile.text2| number : '1.2-2'}}&nbsp;&nbsp;({{tile.text3| number : '1.2-2'}}%)
-                    
+  <header style="display: flex; justify-content: center;">
+    <h1 class="header-1">TT Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
+    </header>
+    <div
+     class="chart" id="chart-containerttvolbo">
+    </div>
+
+    <header style="display: flex; justify-content: center;">
+      <h1 class="header-1">NT Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
+      </header>
+      <div
+       class="chart" id="chart-containerntvolbo">
       </div>
-      <div class="card__face card__face--back type1-bold"
-      [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
-      'bg-gradient-bear': 0 > tile.text3,
-      'bg-gradient-warning':0 === tile.text3}">52H:{{tile.text5}}<br>52L:{{tile.text6}}<br>{{tile.text7}}<br>{{tile.text8}}              
-     </div>
 
-</div>
 
-</div>
-</div>
-</div>
+
+
 
 </div>

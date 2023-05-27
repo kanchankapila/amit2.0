@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 exports.handler = async function(event, context) {
   const pool = new Pool({
-    connectionString: process.env.POSTGRESS_DATABASE_URL, // Update with your PostgreSQL connection URL
+    connectionString: process.env.POSTGRESS_DATABASE_URL1, // Update with your PostgreSQL connection URL
   });
 
   const dbName = 'DVM'; // Update with your database name
