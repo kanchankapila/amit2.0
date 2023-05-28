@@ -63,15 +63,17 @@ export class AnalyticsComponent implements OnInit{
   this.stockList = stocks.default.Data,
   this.gettldvm(),
   // this.getttvolume(),
-   this.getmcinsightreadshortcovering(),
+  
    this.getmcinsightreadlongbuildup(),
-   this.getmcinsightreadshortbuildup(),
+ 
   // this.getmcinsightreadlongunwinding(),
   // this.gettlscreener(this.screenercode),
 
   this.getntvolumeread()
 
     ])
+    this.getmcinsightreadshortcovering()
+    this.getmcinsightreadshortbuildup()
     setInterval(() => { this.getntvolume() }, 120000);
     setInterval(() => { this.getntvolumeread() }, 125000);
   }
