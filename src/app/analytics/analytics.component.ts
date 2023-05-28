@@ -58,8 +58,6 @@ export class AnalyticsComponent implements OnInit{
  
 
   async ngOnInit() {
-    
-  
    
     await Promise.all([
   this.stockList = stocks.default.Data,
@@ -77,6 +75,31 @@ export class AnalyticsComponent implements OnInit{
     setInterval(() => { this.getntvolume() }, 120000);
     setInterval(() => { this.getntvolumeread() }, 125000);
   }
+  
+  displayMaximizable: boolean;
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+} 
+displayMaximizable1: boolean;
+  showMaximizableDialog1() {
+    this.displayMaximizable1 = true;
+}
+displayMaximizable2: boolean;
+showMaximizableDialog2() {
+  this.displayMaximizable = true;
+} 
+displayMaximizable3: boolean;
+showMaximizableDialog3() {
+  this.displayMaximizable1 = true;
+}
+displayMaximizable4: boolean;
+showMaximizableDialog4() {
+this.displayMaximizable = true;
+} 
+displayMaximizable5: boolean;
+showMaximizableDialog5() {
+this.displayMaximizable1 = true;
+}
  
   trackByFunction1(index1, item1) {return item1.text3;}
   trackByFunction2(index2, item2) {return item2.text3;}

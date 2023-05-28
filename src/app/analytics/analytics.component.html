@@ -1,5 +1,8 @@
 <div class="gap-div">
-
+  <head>
+    <!-- Other head elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  </head>
 
 
 <!-- <div class="chart" id="chart-container"></div> -->
@@ -7,21 +10,25 @@
   <div class="chart" id="chart-container"></div>
   
 </div> -->
-
+<p-dialog header="Long Buildup" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+</p-dialog>
 <header style="display: flex; justify-content: center;">
   <h1 class="header-1">Long Buildup</h1><br>
   </header>
   <div
    class="chart" id="chart-containerlongbuildup">
   </div>
-  
+ 
+  <p-dialog header="Short Covering" [(visible)]="displayMaximizable2" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
 <header style="display: flex; justify-content: center;">
   <h1 class="header-1">Short Covering</h1>
 </header>
 <div
  class="chart" id="chart-containershortcovering">
 </div>
-
+</p-dialog>
 
 
 
@@ -31,30 +38,37 @@
 <div
  class="chart" id="chart-containerlongunwinding">
 </div> -->
+<p-dialog header="Short Buildup" [(visible)]="displayMaximizable3" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
 <header style="display: flex; justify-content: center;">
 <h1 class="header-3">Short Buildup</h1>
 </header>
 <div
  class="chart" id="chart-containershortbuildup">
 </div>
-
+</p-dialog>
+<p-dialog header="High Durability/Volatility/Momentum Stocks" [(visible)]="displayMaximizable4" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
 <header style="display: flex; justify-content: center;">
   <h1 class="header-1">High Durability/Volatility/Momentum Stocks</h1><br><em>Last Refreshed:{{this.time}}</em>
   </header>
   <div
    class="chart" id="chart-containertldvmstock">
   </div>
-
+</p-dialog>
+<p-dialog header="TT Volume Breakout" [(visible)]="displayMaximizable5" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
   <header style="display: flex; justify-content: center;">
     <h1 class="header-1">TT Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
     </header>
     <div
      class="chart" id="chart-containerttvolbo">
     </div>
-
+  </p-dialog>
     <header style="display: flex; justify-content: center;">
       <h1 class="header-1">NT Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
       </header>
+      <br>
       <div
        class="chart" id="chart-containerntvolbo">
       </div>
