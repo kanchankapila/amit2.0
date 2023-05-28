@@ -76,29 +76,30 @@ export class AnalyticsComponent implements OnInit{
     setInterval(() => { this.getntvolumeread() }, 125000);
   }
   
-  displayMaximizable: boolean;
-  showMaximizableDialog() {
-    this.displayMaximizable = true;
-} 
+
 displayMaximizable1: boolean;
   showMaximizableDialog1() {
     this.displayMaximizable1 = true;
 }
 displayMaximizable2: boolean;
 showMaximizableDialog2() {
-  this.displayMaximizable = true;
+  this.displayMaximizable2 = true;
 } 
 displayMaximizable3: boolean;
 showMaximizableDialog3() {
-  this.displayMaximizable1 = true;
+  this.displayMaximizable3 = true;
 }
 displayMaximizable4: boolean;
 showMaximizableDialog4() {
-this.displayMaximizable = true;
+this.displayMaximizable4 = true;
 } 
 displayMaximizable5: boolean;
 showMaximizableDialog5() {
-this.displayMaximizable1 = true;
+this.displayMaximizable5 = true;
+}
+displayMaximizable6: boolean;
+showMaximizableDialog6() {
+this.displayMaximizable6 = true;
 }
  
   trackByFunction1(index1, item1) {return item1.text3;}
@@ -118,7 +119,7 @@ this.displayMaximizable1 = true;
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       try {
-        console.log(nestedItems[0]['body']);
+        
     
         for (let val in nestedItems[0]['body']['tableData']) {
           const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
@@ -130,7 +131,7 @@ this.displayMaximizable1 = true;
               const nestedItems1 = Object.keys(data6).map(key => {
                 return data6[key];
               });
-              console.log(nestedItems1)
+             
              
               const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
               const nestedItems = Object.keys(data5).map(key => {
@@ -150,7 +151,7 @@ this.displayMaximizable1 = true;
                   tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
                 }
               } else {
-                console.log(nestedItems[0]['body']['tableData'][val][0]+"First")
+                console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
                 continue;
               }
     
@@ -233,13 +234,13 @@ this.displayMaximizable1 = true;
     tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
   }
   
-  console.log(tlcardpricecolor)
+
   
   for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
     tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
     tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
   }
-  console.log(tlcardshareholdingcolor)
+
   
   // const tlcardBody = document.createElement('div');
   
@@ -299,7 +300,7 @@ this.displayMaximizable1 = true;
               console.error(err);
             }
           } else {
-            console.log(nestedItems[0]['body']['tableData'][val][0]);
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
         }
@@ -358,7 +359,7 @@ async getttvolume() {
               ttvolumemcstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
           } else {
-            console.log("First")
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
 
@@ -538,7 +539,7 @@ tlcard.appendChild(tlcardBody);
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       try {
-        console.log(nestedItems[0]['body']);
+      
     
         for (let val in nestedItems[0]['body']['tableData']) {
           const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
@@ -550,7 +551,7 @@ tlcard.appendChild(tlcardBody);
               const nestedItems1 = Object.keys(data6).map(key => {
                 return data6[key];
               });
-              console.log(nestedItems1)
+           
              
               const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
               const nestedItems = Object.keys(data5).map(key => {
@@ -570,7 +571,7 @@ tlcard.appendChild(tlcardBody);
                   tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
                 }
               } else {
-                console.log(nestedItems[0]['body']['tableData'][val][0]+"First")
+                console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
                 continue;
               }
     
@@ -653,13 +654,13 @@ tlcard.appendChild(tlcardBody);
     tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
   }
   
-  console.log(tlcardpricecolor)
+
   
   for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
     tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
     tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
   }
-  console.log(tlcardshareholdingcolor)
+
   
   // const tlcardBody = document.createElement('div');
   
@@ -719,7 +720,7 @@ tlcard.appendChild(tlcardBody);
               console.error(err);
             }
           } else {
-            console.log(nestedItems[0]['body']['tableData'][val][0]);
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
         }
@@ -740,7 +741,7 @@ tlcard.appendChild(tlcardBody);
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       try {
-        console.log(nestedItems[0]['body']);
+    
     
         for (let val in nestedItems[0]['body']['tableData']) {
           const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
@@ -752,7 +753,7 @@ tlcard.appendChild(tlcardBody);
               const nestedItems1 = Object.keys(data6).map(key => {
                 return data6[key];
               });
-              console.log(nestedItems1)
+          
              
               const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
               const nestedItems = Object.keys(data5).map(key => {
@@ -772,7 +773,7 @@ tlcard.appendChild(tlcardBody);
                   tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
                 }
               } else {
-                console.log(nestedItems[0]['body']['tableData'][val][0]+"First")
+                console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
                 continue;
               }
     
@@ -855,13 +856,13 @@ tlcard.appendChild(tlcardBody);
     tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
   }
   
-  console.log(tlcardpricecolor)
+
   
   for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
     tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
     tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
   }
-  console.log(tlcardshareholdingcolor)
+
   
   // const tlcardBody = document.createElement('div');
   
@@ -921,7 +922,7 @@ tlcard.appendChild(tlcardBody);
               console.error(err);
             }
           } else {
-            console.log(nestedItems[0]['body']['tableData'][val][0]);
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
         }
@@ -942,7 +943,7 @@ tlcard.appendChild(tlcardBody);
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       try {
-        console.log(nestedItems[0]['body']);
+      
     
         for (let val in nestedItems[0]['body']['tableData']) {
           const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
@@ -954,7 +955,7 @@ tlcard.appendChild(tlcardBody);
               const nestedItems1 = Object.keys(data6).map(key => {
                 return data6[key];
               });
-              console.log(nestedItems1)
+             
              
               const data5 = await this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + tlscreenerstock + '&resolution=1D').toPromise();
               const nestedItems = Object.keys(data5).map(key => {
@@ -974,7 +975,7 @@ tlcard.appendChild(tlcardBody);
                   tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
                 }
               } else {
-                console.log(nestedItems[0]['body']['tableData'][val][0]+"First")
+                console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
                 continue;
               }
     
@@ -1057,13 +1058,13 @@ tlcard.appendChild(tlcardBody);
     tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
   }
   
-  console.log(tlcardpricecolor)
+
   
   for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
     tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
     tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
   }
-  console.log(tlcardshareholdingcolor)
+
   
   // const tlcardBody = document.createElement('div');
   
@@ -1123,7 +1124,7 @@ tlcard.appendChild(tlcardBody);
               console.error(err);
             }
           } else {
-            console.log(nestedItems[0]['body']['tableData'][val][0]);
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
         }
@@ -1175,7 +1176,7 @@ tlcard.appendChild(tlcardBody);
                 longunwindingstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else {
-              console.log("First")
+              console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
               continue;
             }
   
@@ -1324,7 +1325,7 @@ tlcard.appendChild(tlcardBody);
             console.error(err);
           }
         } else {
-          console.log('error');
+          console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
           continue;
         }
       }
@@ -1351,19 +1352,19 @@ async getntvolumeread() {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
+  
    const tlcardprice = [];
    const tlcardpricecolor = [];
    const tlcardshareholding = [];
    const tlcardshareholdingcolor = [];
     this.time1=new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata'});
-    for (let val in nestedItems) {
+    for (let val in nestedItems[0]) {
       // console.log(nestedItems[val].name)
-      const ntvolumemcsymbol = this.stockList.filter(i => i.symbol === nestedItems[val].symbol)[0]?.mcsymbol;
-  const ntvolumemcname = this.stockList.filter(i => i.symbol === nestedItems[val].symbol)[0]?.name;
+      const ntvolumemcsymbol = this.stockList.filter(i => i.symbol === nestedItems[0][val].symbol)[0]?.mcsymbol;
+  const ntvolumemcname = this.stockList.filter(i => i.symbol === nestedItems[0][val].symbol)[0]?.name;
     
       if (ntvolumemcsymbol == '#N/A') {
-        console.error(`No mcsymbol found for name: ${nestedItems[val].symbol}. Skipping to next iteration.`);
+        console.error(`No mcsymbol found for name: ${nestedItems[0][val].symbol}. Skipping to next iteration.`);
         continue;
       }
         try {
@@ -1391,7 +1392,7 @@ async getntvolumeread() {
               ntvolumemcstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
           } else {
-            console.log("First")
+            console.log(nestedItems[0]['body']['tableData'][val][0]+"not found")
             continue;
           }
 

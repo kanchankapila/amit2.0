@@ -30,14 +30,18 @@ exports.handler = async (event, context) => {
     `;
 
     const result = await client.query(query);
-
+    const time = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
+    console.log('Time:', time.rows[0].time);
     const data = result.rows;
 
     await client.end();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+      body: (data),
+      time: time.rows[0].time
+      })
     };
   } catch (error) {
     console.log('Error occurred while querying data:', error);
