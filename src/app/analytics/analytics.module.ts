@@ -8,7 +8,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
-
+import { DialogModule } from 'primeng/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
@@ -28,7 +28,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MatButtonModule,
     NgChartsModule,
     TabViewModule,
-    
+    DialogModule,
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
