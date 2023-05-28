@@ -12,7 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
-
+import { ButtonModule } from 'primeng/button';
 import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
@@ -23,6 +23,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     CommonModule,
     AnalyticsRoutingModule,
     FlexLayoutModule,
+    ButtonModule,
     // NgbModule,
     MatCardModule,
     MatButtonModule,

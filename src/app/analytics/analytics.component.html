@@ -10,16 +10,23 @@
   <div class="chart" id="chart-container"></div>
   
 </div> -->
+<button pButton pRipple type="button"  (click)="showMaximizableDialog1()" label="Long Buildup" class="p-button-raised p-button-success p-button-text"></button>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog2()" label="Short Covering" class="p-button-raised p-button-success p-button-text"></button>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog3()" label="Short Buildup" class="p-button-raised p-button-danger p-button-text"></button>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog4()" label="High DVM" class="p-button-raised p-button-success p-button-text"></button>
+<button pButton pRipple type="button"  (click)="showMaximizableDialog5()" label="TT Volume B/o" class="p-button-raised p-button-success p-button-text"></button>
+<br>
+<br>
 <p-dialog header="Long Buildup" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
-</p-dialog>
+
 <header style="display: flex; justify-content: center;">
   <h1 class="header-1">Long Buildup</h1><br>
   </header>
   <div
    class="chart" id="chart-containerlongbuildup">
   </div>
- 
+</p-dialog>
   <p-dialog header="Short Covering" [(visible)]="displayMaximizable2" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
 <header style="display: flex; justify-content: center;">
@@ -65,6 +72,7 @@
      class="chart" id="chart-containerttvolbo">
     </div>
   </p-dialog>
+
     <header style="display: flex; justify-content: center;">
       <h1 class="header-1">NT Volume Breakout</h1><br><em>Last Refreshed:{{this.time1}}</em>
       </header>
@@ -72,7 +80,7 @@
       <div
        class="chart" id="chart-containerntvolbo">
       </div>
-
+    
 
 
 
