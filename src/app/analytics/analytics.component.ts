@@ -61,10 +61,8 @@ export class AnalyticsComponent implements OnInit{
    
     await Promise.all([
   this.stockList = stocks.default.Data,
-  this.gettldvm(),
-  // this.getttvolume(),
   
-   this.getmcinsightreadlongbuildup(),
+ 
  
   // this.getmcinsightreadlongunwinding(),
   // this.gettlscreener(this.screenercode),
@@ -72,36 +70,43 @@ export class AnalyticsComponent implements OnInit{
   this.getntvolumeread()
 
     ])
-    this.getmcinsightreadshortcovering()
-    this.getmcinsightreadshortbuildup()
-    setInterval(() => { this.getntvolume() }, 120000);
-    setInterval(() => { this.getntvolumeread() }, 125000);
+   
+    
+    // setInterval(() => { this.getntvolume() }, 120000);
+    // setInterval(() => { this.getntvolumeread() }, 125000);
   }
   
 
 displayMaximizable1: boolean;
   showMaximizableDialog1() {
     this.displayMaximizable1 = true;
+    this.getmcinsightreadlongbuildup()
 }
 displayMaximizable2: boolean;
 showMaximizableDialog2() {
   this.displayMaximizable2 = true;
+  this.getmcinsightreadshortcovering()
 } 
 displayMaximizable3: boolean;
 showMaximizableDialog3() {
   this.displayMaximizable3 = true;
+  this.getmcinsightreadshortbuildup()
 }
 displayMaximizable4: boolean;
 showMaximizableDialog4() {
 this.displayMaximizable4 = true;
+this.gettldvm()
 } 
 displayMaximizable5: boolean;
 showMaximizableDialog5() {
 this.displayMaximizable5 = true;
+this.getttvolume()
 }
 displayMaximizable6: boolean;
 showMaximizableDialog6() {
 this.displayMaximizable6 = true;
+this.getntvolume()
+this.getntvolumeread()
 }
  
   trackByFunction1(index1, item1) {return item1.text3;}
