@@ -198,7 +198,6 @@ export class NavbarComponent implements OnInit,AfterViewInit {
  
    async ngOnInit() {
     
-    
     this.today = new Date();
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
     this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
@@ -706,6 +705,9 @@ getpniftysparkline(){
 
 navigatenifty() {
   this.window.open("/nifty", "_blank") 
+}
+navigatehomepage() {
+  this.window.open("/homepage", "_blank") 
 }
 navigatescreeners() {
   this.window.open("/screeners", "_blank") 

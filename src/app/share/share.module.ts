@@ -33,7 +33,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     CommonModule,
     AccumulationChartAllModule,
     ShareRoutingModule,
-    // NgbModule,
+   
     RadioButtonModule, 
     MatCardModule,
     DialogModule,
