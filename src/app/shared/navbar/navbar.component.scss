@@ -47,7 +47,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.3;
+    opacity: 0.1;
     z-index: auto;
   }
   
@@ -60,13 +60,13 @@
   }
 }
 
-@media (max-width: 424px) {
-  .pButton {
-    font-size: 10px;
-    height: 40px;
-    width: auto;
-  }
-}
+// @media (max-width: 424px) {
+//   .pButton {
+//     font-size: 30px;
+//     height: 40px;
+//     width: auto;
+//   }
+// }
 
 @media (min-width: 1025px) {
   .pButton {
@@ -77,8 +77,10 @@
 }
 @media(max-width:320px){
   :host ::ng-deep .pButton {
-    width: 1rem;
-    font-size: 1px;
+    width: 3.5rem;
+    font-size: 10px;
+    
+    text-align: left;
   }
   :host ::ng-deep .p-dropdown {
     width: 7rem;
@@ -86,7 +88,7 @@
   }
   :host ::ng-deep .card {
     width: 6rem;
-    font-size: xx-small;
+    font-size: x-small;
     
   }
   :host ::ng-deep .navbar-brand{
@@ -669,3 +671,14 @@ pcry1{
     }
   }
 }
+
+@media(max-width:424px){
+  
+  :host ::ng-deep .pButton  {
+   
+    width: 5.5rem;
+    font-size: small;
+    text-align: left;
+    display:grid;
+    }
+  }

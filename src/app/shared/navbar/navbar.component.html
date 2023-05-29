@@ -1,7 +1,15 @@
 
 
 <nav class="navbar py-8 default-layout-navbar col-md-13 col-xs-3  p-0 fixed-top d-flex flex-row">
-  
+
+  <!-- <p-megaMenu [model]="items1">
+    <ng-template pTemplate="end"> 
+        <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true"
+          [itemSize]="31" [filter]="true" (onChange)="selectEvent(item)" >
+        </p-dropdown>
+     
+    </ng-template>
+  </p-megaMenu>   -->
   <!-- <blockquote class="abc" 
   href='https://in.tradingview.com/markets/'
                
@@ -16,31 +24,35 @@
     <div class="InsideContent1">
       
       <div class="InsideContent">
-    <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true" [itemSize]="31"
-    [filter]="true" (onChange)='selectEvent(item)' class="responsive-dropdown">
-    
-     </p-dropdown>  
-     
-     <button pButton type="button" (click)="setttvolume()" icon="pi" label="MCInsights" class="p-button-raised p-button-help p-button-outlined pButton"></button>
-     <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi" label="Actions" class="p-button-raised p-button-success p-button-outlined pButton"></button>
-     <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi" label="Websites" class="p-button-raised p-button-help p-button-outlined pButton"></button>
+  
+        <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true" [itemSize]="31"
+        [filter]="true" (onChange)='selectEvent(item)' class="responsive-dropdown">
+        
+         </p-dropdown> 
+    <button pButton type="button" (click)="setttvolume()" icon="pi" label="MCInsights" class="p-button-raised p-button-help p-button-outlined pButton"></button> 
+     <button pButton type="button" (click)="navigateanalytics()" icon="pi" label="Analytics" class="p-button-raised p-button-help p-button-outlined pButton"></button>
     
      </div>
-        
+     <div class="InsideContent">
+     <button pButton type="button" (click)="navigatescreeners()" icon="pi" label="Screeners" class="p-button-raised p-button-success p-button-outlined pButton"></button>
+     <button pButton type="button" (click)=tlrefresh() icon="pi" label="TLRefresh" class="p-button-raised p-button-help p-button-outlined pButton"></button> 
+     <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi" label=" News" class="p-button-raised p-button-warning p-button-outlined pButton"></button>
+     <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi" label="Actions" class="p-button-raised p-button-success p-button-outlined pButton"></button>
+     <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi" label="Websites" class="p-button-raised p-button-help p-button-outlined pButton"></button> 
+    </div>
         <div class="InsideContent1">
 
         <div class="InsideContent">
-          
-      
-        <button pButton type="button" (click)="navigateanalytics()" icon="pi" label="Analytics" class="p-button-raised p-button-help p-button-outlined pButton"></button>
+     
+        <!-- <button pButton type="button" (click)="navigateanalytics()" icon="pi" label="Analytics" class="p-button-raised p-button-help p-button-outlined pButton"></button>
         <button pButton type="button" (click)="navigatescreeners()" icon="pi" label="Screeners" class="p-button-raised p-button-success p-button-outlined pButton"></button>
         <button pButton type="button" (click)=tlrefresh() icon="pi" label="TLRefresh" class="p-button-raised p-button-help p-button-outlined pButton"></button> 
         <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi" label=" News" class="p-button-raised p-button-warning p-button-outlined pButton"></button>
-       
+       -->
       </div>
-      
+     
       <div class="InsideContent">
-        <div class="col-md-10 col-xs-6">
+        <div class="col-md-6 col-xs-6">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
             <div class="card-body">
               
@@ -55,7 +67,7 @@
               <div class="InsideContent">
                
                 <div style="font-weight:bold">{{pcrnsenifty1}}</div>
-                &nbsp;<div>{{tlniftybuildup}}</div>
+                &nbsp;<div style="font-weight:bold">{{tlniftybuildup}}</div>
                 <!-- &nbsp;<div style="font-weight:bold">{{tlniftybuildup5}}</div> -->
                 
               </div>
@@ -64,7 +76,7 @@
           </div>
         </div>
         
-      <div class="col-md-10 col-xs-6">
+      <div class="col-md-6 col-xs-6">
         <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatebanknifty()">
           <div class="card-body">
             
@@ -76,7 +88,7 @@
             </div>
             <div class="InsideContent">
             <div style="font-weight:bold">{{pcrnsebnifty1}}</div>
-            &nbsp;<div>{{tlbniftybuildup}}</div>
+            &nbsp;<div style="font-weight:bold">{{tlbniftybuildup}}</div>
           
           </div>
             <h6 class="card-text"></h6>
@@ -84,7 +96,7 @@
         </div>
       </div>
       
-        <div class="col-md-10 col-xs-9">
+        <div class="col-md-6 col-xs-9">
           <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatepnifty()">
             <div class="card-body">
               
