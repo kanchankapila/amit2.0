@@ -562,7 +562,7 @@ this.dataApi.getetindicesdata().subscribe(data => {
     chart: {
       type: "bar",
       height:'500',
-      width:'85%',
+    
       
       stacked: true
     },
@@ -654,7 +654,7 @@ this.dataApi.getetallsectorsdata().subscribe(data => {
       type: "bar",
      
       height: '500', // Set the chart height to 100% for responsiveness
-      width: '100%',
+      
       
       
       stacked: true
