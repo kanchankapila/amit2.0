@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            
             "outputPath": "dist/amitnginx",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,29 +29,22 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/web.config"
-              
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
-              
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/"]
+              "includePaths": [
+                "node_modules/"
+              ]
             },
             "allowedCommonJsDependencies": [
               "chart.js",
-              
               "ng-apexcharts.mjs"
-
             ],
-            "scripts": [
-              
-             
-            
-            ],
+            "scripts": [],
             "vendorChunk": true,
-            
             "extractLicenses": true,
             "buildOptimizer": false,
             "sourceMap": true,
@@ -63,19 +55,18 @@
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
-            "development":{
+            "development": {
               "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
               "aot": false,
-              "statsJson":false,
+              "statsJson": false,
               "extractLicenses": false,
               "vendorChunk": true,
               "buildOptimizer": false,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
-             
             },
             "production": {
               "fileReplacements": [
@@ -114,11 +105,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "amitnginx:build:development"
-           },
+          },
           "configurations": {
             "production": {
               "browserTarget": "amitnginx:build:production"
-              
             }
           }
         },
@@ -142,21 +132,16 @@
               "src/web.config",
               "src/manifest.webmanifest"
             ],
-            
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "node_modules/"
-                ]
-              },
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/"
+              ]
+            },
             "styles": [
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
-             
-              
-              
             ],
             "scripts": []
-             
           }
         },
         "e2e": {
@@ -170,12 +155,23 @@
               "devServerTarget": "amitnginx:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
-  
 }
