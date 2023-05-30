@@ -23,6 +23,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "aot": false,
             "assets": [
               "src/stockinsights2.ico",
@@ -35,7 +36,11 @@
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
               
-            ],"allowedCommonJsDependencies": [
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules/"]
+            },
+            "allowedCommonJsDependencies": [
               "chart.js",
               
               "ng-apexcharts.mjs"
@@ -130,12 +135,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/stockinsights2.ico",
               "src/assets",
               "src/web.config",
               "src/manifest.webmanifest"
             ],
+            
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "node_modules/"
+                ]
+              },
             "styles": [
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
@@ -143,8 +155,8 @@
               
               
             ],
-            "scripts": [
-          ]
+            "scripts": []
+             
           }
         },
         "e2e": {
