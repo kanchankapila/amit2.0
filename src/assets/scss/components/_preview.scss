@@ -51,13 +51,13 @@
         position: absolute;
         width: 14px;
         &.badge-online {
-          @extend .badge-success;
+          @extend .badge-success !optional;
         }
         &.badge-offline {
-          @extend .badge-info;
+          @extend .badge-info !optional;
         }
         &.badge-busy {
-          @extend .badge-warning;
+          @extend .badge-warning !optional;
         }
       }
     }
