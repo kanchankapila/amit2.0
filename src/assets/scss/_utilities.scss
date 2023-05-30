@@ -138,7 +138,7 @@
   }
 
   .text-avatar {
-    @extend .bg-inverse-primary;
+    @extend .bg-inverse-primary !optional;
     color: $primary;
     font-size: 11px;
     font-weight: 600;
