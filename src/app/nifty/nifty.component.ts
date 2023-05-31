@@ -5,7 +5,7 @@ declare const TradingView: any;
 
 import {  ChartType } from 'chart.js';
 
-import {  ChartAnnotationSettingsModel } from '@syncfusion/ej2-angular-charts';
+import {  ChartAnnotationSettingsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
 
 import {RadioButton} from 'primeng/radiobutton';
 
