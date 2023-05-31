@@ -5,8 +5,8 @@ import { PrimeNGConfig } from 'primeng/api';
 import * as  stocks from '../lists/stocklist'
 
 import { HttpClient  } from '@angular/common/http';
-import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts';
-import { Browser } from '@syncfusion/ej2-base';
+import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
+// import { Browser } from '@syncfusion/ej2-base';
 import {RadioButton} from 'primeng/radiobutton';
 import { ChartType, ChartOptions } from 'chart.js';
 
@@ -335,7 +335,7 @@ export class PharmaniftyComponent implements OnInit {
         }
     };
     
-    public width: string = Browser.isDevice ? '100%' : '60%';
+    public width: string 
     public legend: Object = { visible: true };
    
     public tooltip: Object = {

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild,ElementRef , ViewEncapsulation } from '@angular/core';
-import { Browser } from '@syncfusion/ej2-base';
+// import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
 import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
-import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
+import { PeriodsModel,ITooltipRenderEventArgs,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -177,14 +177,14 @@ export class ShareComponent implements OnInit {
 
   
 
-public width: string = Browser.isDevice ? '100%' : '30%';
+public width: string 
 
 
  
 
   // custom code end
- public radius: string = Browser.isDevice ? '40%' : '40%'
- public startAngle: number = Browser.isDevice ? 62 : 0 ;
+ public radius: string 
+ public startAngle: number 
 
  public titlesh: string = 'Shareholdings';
    

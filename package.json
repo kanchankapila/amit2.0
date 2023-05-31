@@ -41,7 +41,7 @@
     "@netlify/functions": "^1.6.0",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.8",
-    "@syncfusion/ej2-angular-charts": "^20.4.49",
+    "@syncfusion/ej2-angular-charts": "^21.2.8",
     "@types/chart.js": "^2.9.37",
     "@types/node": "^20.2.5",
     "animate.css": "^4.1.1",
