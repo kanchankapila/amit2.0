@@ -1,48 +1,5 @@
-/*-------------------------------------------------------------------
-  ===== Table of Contents =====
 
-  * Bootstrap functions
-  * Template variables
-  * SCSS Compass Functions
-  * Boostrap Main SCSS
-  * Template mixins
-    + Animation Mixins
-    + Background Mixins
-    + Badge Mixins
-    + Button Mixins
-    + Miscellaneous Mixins
-    + BlockQuote Mixins
-    + Cards Mixins
-    + Color Functions Mixins
-    + Tooltips
-    + popovers
-  * Core Styles
-    + Reset Styles
-    + Fonts
-    + Functions
-    + Backgrounds
-    + Typography
-    + Miscellaneous
-    + Footer
-    + Layouts
-    + Utilities
-    + Demo styles
-  * Components
-    + Badges
-    + Boostrap Progress
-    + Buttons
-    + Breadcrumbs
-    + Cards
-    + Checkboxes and Radios
-    + Dropdowns
-    + Forms
-    + Icons
-    + Preview
-    + Tables
-    + Todo List
-  * Landing screens
-    + Auth
--------------------------------------------------------------------*/
+
 /*-------------------------------------------------------------------*/
 /* === Import Bootstrap functions and variables === */
 
@@ -66,28 +23,15 @@
 /* === Template mixins === */
 @import "./mixins/misc";
 @import "./mixins/animation";
-// @import "./mixins/background";
-// @import "./mixins/badges";
-// @import "./mixins/blockqoute";
-// @import "./mixins/buttons";
-// @import "./mixins/breadcrumbs";
-@import "./mixins/cards";
-// @import "./mixins/pagination";
-// @import "./mixins/popovers";
-// @import "./mixins/tooltips";
-@import "./mixins/text";
 
-/*-------------------------------------------------------------------*/
-/* === Core Styles === */
-// @import "./reset";
-// @import "./fonts";
+@import "./mixins/cards";
+
+// @import "./mixins/text";
+
 @import "./functions";
-// @import "./typography";
-// @import "./misc";
-// @import "./footer";
+
 @import "./utilities";
-// @import "./demo";
-// @import "./dashboard";
+
 
 /*-------------------------------------------------------------------*/
 /* === Components === */
@@ -96,17 +40,10 @@
 
 @import "./components/cards";
 
-// @import "./components/preview";
-// @import "./components/tables";
-
-
-// @import "../../assets/scss/responsive";
-/*-------------------------------------------------------------------*/
-/* === Landing screens === */
 
 
 
-@import './navbar';
-@import './sidebar';
+// @import './navbar';
+// @import './sidebar';
 @import './layouts';
 @import './vertical-wrapper';
