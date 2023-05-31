@@ -23,21 +23,3 @@ schedule = "@hourly"
 [functions."tlrefresh"]
 schedule = "@daily"
 
-# Config for the Netlify Build Plugin: netlify-plugin-fetch-feeds
-[[plugins]]
-  package = "netlify-plugin-fetch-feeds"
-
-  [plugins.inputs]
-    # Where should data files reside
-    dataDir = "/_data"
-
-    # All the feeds we wish to gather for use in the build
-
-    [[plugins.inputs.feeds]]
-      name = "moneycontrol realtime"
-      url = "https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX"
-      ttl = 3600
-    [[plugins.inputs.feeds]]
-      name = "moneycontrol realtime"
-      url = "https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx"
-      ttl = 3600
