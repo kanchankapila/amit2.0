@@ -21,18 +21,18 @@
 
 /*-------------------------------------------------------------------*/
 /* === Template mixins === */
-@import "./mixins/misc";
-@import "./mixins/animation";
+// @import "./mixins/misc";
+// @import "./mixins/animation";
 
 @import "./mixins/cards";
 
-// @import "./mixins/text";
+@import "./mixins/text";
 
 @import "./functions";
 
 @import "./utilities";
 
-
+@import "./mixins/buttons";
 /*-------------------------------------------------------------------*/
 /* === Components === */
 

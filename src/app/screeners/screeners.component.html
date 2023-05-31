@@ -1,9 +1,8 @@
 
+
 <div class="gap-div">
-<head>
-   <!-- Other head elements -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
- </head>
+
+
 <p-dialog header="TL Screeners" [(visible)]="displayMaximizable1" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
 <form>
@@ -18,7 +17,8 @@
 </div>
  <button type="button" class="btn btn-danger btn-lg btn-block" (click)="gettlscreeners(selectedOption)">tlscreeners</button>
  </p-dialog>
- <button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="NT Screeners" class="p-button-raised p-button-success p-button-text"></button>
+
+<button pButton pRipple type="button"  (click)="showMaximizableDialog()" label="NT Screeners" class="p-button-raised p-button-success p-button-text"></button>
 <button pButton pRipple type="button"  (click)="showMaximizableDialog1()" label="TL Screeners" class="p-button-raised p-button-success p-button-text"></button>
 <p-dialog header="Nifty Traders Screeners" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '100vw', height: '100vh'}"  [maximizable]="true" [baseZIndex]="10000"
 [draggable]="false" [resizable]="false">
@@ -351,13 +351,13 @@
              [ngClass]="{ 
                'cardbear bg-gradient-bull': tile.text2 > 0,
                'cardbear2 bg-gradient-bear2': 0 > tile.text2 ,
-               'cardbear3 bg-gradient-neutral': tile.text2 == 0 }">&nbsp;&nbsp;&nbsp;{{tile.text12}}<br>{{tile.text1}}<br>Price Change:{{tile.text2}}<br>Current Volume:{{tile.text4}}<br>20d Avg Vol:{{tile.text3}}
+               'cardbear3 bg-gradient-neutral': tile.text2 === 0 }">&nbsp;&nbsp;&nbsp;{{tile.text12}}<br>{{tile.text1}}<br>Price Change:{{tile.text2}}<br>Current Volume:{{tile.text4}}<br>20d Avg Vol:{{tile.text3}}
             </div>
             <div class="card__face card__face--back text-blue type1-bold  text-blue text-blue type1-bold grid-margin stretch-card type1-bold textcenter grid-margin stretch-card textcenter grid-margin stretch-card"
             [ngClass]="{ 
                'cardbear bg-gradient-bull': tile.text2 > 0,
                'cardbear2 bg-gradient-bear2': 0 > tile.text2 ,
-               'cardbear3 bg-gradient-neutral': tile.text2 == 0 }">&nbsp;&nbsp;&nbsp;{{tile.text12}}<br>{{tile.text1}}<br>Price Change:{{tile.text2}}<br>Current Volume:{{tile.text4}}<br>20d Avg Vol:{{tile.text3}}
+               'cardbear3 bg-gradient-neutral': tile.text2 === 0 }">&nbsp;&nbsp;&nbsp;{{tile.text12}}<br>{{tile.text1}}<br>Price Change:{{tile.text2}}<br>Current Volume:{{tile.text4}}<br>20d Avg Vol:{{tile.text3}}
             </div>
       
       </div>
