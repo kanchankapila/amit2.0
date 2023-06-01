@@ -10,7 +10,7 @@ module.exports = {
   mode: 'production', // Set the mode to production
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/amitnginx'),
     filename: '[name].[chunkhash].js',
     publicPath: '/', // Set the public path to root ('/') to work with Netlify
   },
@@ -43,6 +43,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css',

@@ -1,5 +1,5 @@
 command = "webpack --mode production"
-publish = "dist"
+publish = "dist/amitnginx"
 
 base="/"
 
