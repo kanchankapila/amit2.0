@@ -21,7 +21,7 @@
     "uglify-es": "npm:terser"
   },
   "private": true,
-  "sideEffects": false,
+  
   "dependencies": {
     "@angular-builders/custom-webpack": "^15.0.0",
     "@angular/animations": "^16.0.3",
@@ -114,7 +114,9 @@
     "karma-jasmine-html-reporter": "^2.0.0",
     "prettier": "2.8.8",
     "protractor": "^7.0.0",
+  
     "typescript": "^5.0.4",
+   
     "webpack-bundle-analyzer": "^4.8.0"
   }
 }
