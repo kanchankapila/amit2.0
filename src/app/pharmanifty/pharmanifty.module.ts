@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChartAllModule, AccumulationChartAllModule, DateTimeService,DateTimeCategoryService,RangeNavigatorAllModule,MultiColoredLineSeriesService } from '@syncfusion/ej2-angular-charts';
+import { ChartModule as SyncfusionChartModule , AccumulationChartModule, DateTimeService,DateTimeCategoryService,RangeNavigatorModule,MultiColoredLineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { PharmaniftyRoutingModule } from './pharmanifty-routing.module';
 import { PharmaniftyComponent } from './pharmanifty.component';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +27,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     TabViewModule,
     ChartModule,
     RadioButtonModule,
-    ChartAllModule, AccumulationChartAllModule, RangeNavigatorAllModule
+    SyncfusionChartModule,
+    ChartModule, AccumulationChartModule, RangeNavigatorModule
 
   ],
   providers:[MultiColoredLineSeriesService,DateTimeCategoryService,DateTimeService]
