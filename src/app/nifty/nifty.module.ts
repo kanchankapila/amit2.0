@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
-import { ChartAllModule, AccumulationChartAllModule, DateTimeCategoryService,DateTimeService,RangeNavigatorAllModule,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
+import { ChartModule as SyncfusionChartModule, AccumulationChartModule, DateTimeCategoryService,DateTimeService,RangeNavigatorModule,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 
@@ -20,9 +20,9 @@ import {RadioButtonModule} from 'primeng/radiobutton';
   ],
   imports: [
     CommonModule,
-    ChartAllModule, 
-    AccumulationChartAllModule, 
-    RangeNavigatorAllModule,
+    SyncfusionChartModule, 
+    AccumulationChartModule, 
+    RangeNavigatorModule,
     NiftyRoutingModule,
     FlexLayoutModule,
     MatCardModule,
