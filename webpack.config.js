@@ -7,10 +7,12 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
+  mode: 'production', // Set the mode to production
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
+    publicPath: '/', // Set the public path to root ('/') to work with Netlify
   },
   resolve: {
     extensions: ['.ts', '.js'],
