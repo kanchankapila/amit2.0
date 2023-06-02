@@ -130,29 +130,29 @@ export class PharmaniftyComponent implements OnInit {
           this.onClick.emit(null);
       }
   };
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
-  script.charset = 'utf-8';
-  this.trendlyneWidget.nativeElement.appendChild(script);
+  // const script = document.createElement('script');
+  // script.async = true;
+  // script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+  // script.charset = 'utf-8';
+  // this.trendlyneWidget.nativeElement.appendChild(script);
 
-  const script1 = document.createElement('script');
-  script1.async = true;
-  script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-  script1.charset = 'utf-8';
-  script1.text = JSON.stringify({
-    "interval": "1m",
-    "width": "100%",
-    "isTransparent": false,
-    "height": "100%",
-    "symbol": "NSE:CNXPHARMA",
-    "showIntervalTabs": true,
-    "locale": "in",
-    "colorTheme": "light"
-  });
-  this.TradingViewWidget.nativeElement.appendChild(script1);
-  } 
-  //stockhighcharts: StockChart;
+  // const script1 = document.createElement('script');
+  // script1.async = true;
+  // script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
+  // script1.charset = 'utf-8';
+  // script1.text = JSON.stringify({
+  //   "interval": "1m",
+  //   "width": "100%",
+  //   "isTransparent": false,
+  //   "height": "100%",
+  //   "symbol": "NSE:CNXPHARMA",
+  //   "showIntervalTabs": true,
+  //   "locale": "in",
+  //   "colorTheme": "light"
+  // });
+  // this.TradingViewWidget.nativeElement.appendChild(script1);
+   } 
+  // //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
   public stockhcdate1: Array<any> = [];
   public pharmaniftydata: Array<number> = [];
