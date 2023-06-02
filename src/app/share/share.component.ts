@@ -260,30 +260,30 @@ public titlepv: string = 'Volume Analysis';
           this.onClick.emit(null);
       }
   };
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
-  script.charset = 'utf-8';
-  this.trendlyneWidget.nativeElement.appendChild(script);
-  const card18 = document.querySelector('.card18');
-  card18.addEventListener('click', function() {
-    this.classList.toggle('flipped');
-  });
-  const script1 = document.createElement('script');
-  script1.async = true;
-  script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-  script1.charset = 'utf-8';
-  script1.text = JSON.stringify({
-    "interval": "1m",
-    "width": "100%",
-    "isTransparent": false,
-    "height": "100%",
-    "symbol": "NSE:"+this.eqsymbol,
-    "showIntervalTabs": true,
-    "locale": "in",
-    "colorTheme": "light"
-  });
-  this.TradingViewWidget.nativeElement.appendChild(script1);
+  // const script = document.createElement('script');
+  // script.async = true;
+  // script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+  // script.charset = 'utf-8';
+  // this.trendlyneWidget.nativeElement.appendChild(script);
+  // const card18 = document.querySelector('.card18');
+  // card18.addEventListener('click', function() {
+  //   this.classList.toggle('flipped');
+  // });
+  // const script1 = document.createElement('script');
+  // script1.async = true;
+  // script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
+  // script1.charset = 'utf-8';
+  // script1.text = JSON.stringify({
+  //   "interval": "1m",
+  //   "width": "100%",
+  //   "isTransparent": false,
+  //   "height": "100%",
+  //   "symbol": "NSE:"+this.eqsymbol,
+  //   "showIntervalTabs": true,
+  //   "locale": "in",
+  //   "colorTheme": "light"
+  // });
+  // this.TradingViewWidget.nativeElement.appendChild(script1);
 
 
   

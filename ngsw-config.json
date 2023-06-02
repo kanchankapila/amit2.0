@@ -4,14 +4,20 @@
   "assetGroups": [
     {
       "name": "app",
-      "installMode": "prefetch",
+      "installMode": "lazy",
+      "updateMode": "lazy",
       "resources": {
         "files": [
           "/stockinsights2.ico",
           "/index.html",
           "/manifest.json",
-          "/*.css",
-          "/*.js"
+          "/*.css"
+        ],
+        "urls": [
+          "/main.*.js",
+          "/polyfills.*.js",
+          "/runtime.*.js",
+          "/vendor.*.js"
         ]
       }
     },
@@ -24,6 +30,17 @@
           "/assets/**",
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "app-data",
+      "urls": [],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "7d",
+        "strategy": "freshness"
       }
     }
   ]

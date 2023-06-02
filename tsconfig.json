@@ -23,10 +23,15 @@
       "es2020",
       "dom"
     ],
-    
-     "noUnusedLocals": false,
-    // "noUnusedParameters": true,
-    "stripInternal": true
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strictNullChecks": false,
+    "noImplicitReturns": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": false,
+    "noEmitOnError": true,
+    "incremental": true
   },
   "include": [
     "src/**/*.ts"
@@ -35,8 +40,8 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
-    "enableIvy":true,
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": false
+    "strictInjectionParameters": true
   }
 }

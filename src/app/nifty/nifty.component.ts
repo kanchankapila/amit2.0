@@ -1,7 +1,7 @@
 import { Component,ViewChild,ElementRef , OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-declare const TradingView: any;
+
 
 import {  ChartType } from 'chart.js';
 
@@ -144,51 +144,52 @@ export class NiftyComponent implements OnInit {
           this.onClick.emit(null);
       }
   };
-  const trendlyneScript = document.createElement('script');
-  trendlyneScript.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
-  trendlyneScript.charset = 'utf-8';
-  trendlyneScript.setAttribute('preload', '');
-  this.trendlyneWidget.nativeElement.appendChild(trendlyneScript);
+//   const trendlyneScript = document.createElement('script');
+//   trendlyneScript.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
+//   trendlyneScript.charset = 'utf-8';
+//   trendlyneScript.setAttribute('preload', '');
+//   this.trendlyneWidget.nativeElement.appendChild(trendlyneScript);
 
-  const tradingViewScript = document.createElement('script');
-  tradingViewScript.defer = true;
-  tradingViewScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
-  tradingViewScript.charset = 'utf-8';
-  tradingViewScript.innerHTML = JSON.stringify({
-    interval: '1m',
-    width: '100%',
-    isTransparent: false,
-    height: '100%',
-    symbol: 'NSE:NIFTY',
-    showIntervalTabs: true,
-    locale: 'in',
-    colorTheme: 'light',
-  });
-  this.TradingViewWidget.nativeElement.appendChild(tradingViewScript);
+//   const tradingViewScript = document.createElement('script');
+//   tradingViewScript.defer = true;
+//   tradingViewScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+//   tradingViewScript.charset = 'utf-8';
+//   tradingViewScript.innerHTML = JSON.stringify({
+//     interval: '1m',
+//     width: '100%',
+//     isTransparent: false,
+//     height: '100%',
+//     symbol: 'NSE:NIFTY',
+//     showIntervalTabs: true,
+//     locale: 'in',
+//     colorTheme: 'light',
+//   });
+//   this.TradingViewWidget.nativeElement.appendChild(tradingViewScript);
 
-  const tradingViewScript1 = document.createElement('script');
-  tradingViewScript1.defer = true;
-  tradingViewScript1.src = 'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js';
-  tradingViewScript1.charset = 'utf-8';
-  tradingViewScript1.innerHTML = JSON.stringify({
-    "symbol": "NSE:NIFTY",
-	  "width": 350,
-	  "height": 220,
-	  "locale": "in",
-	  "dateRange": "12M",
-	  "colorTheme": "light",
-	  "trendLineColor": "rgba(41, 98, 255, 1)",
-	  "underLineColor": "rgba(41, 98, 255, 0.3)",
-	  "underLineBottomColor": "rgba(41, 98, 255, 0)",
-	  "isTransparent": false,
-	  "autosize": false,
-  "largeChartUrl": ""
-  });
+//   const tradingViewScript1 = document.createElement('script');
+//   tradingViewScript1.defer = true;
+//   tradingViewScript1.src = 'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js';
+//   tradingViewScript1.charset = 'utf-8';
+//   tradingViewScript1.innerHTML = JSON.stringify({
+//     "symbol": "NSE:NIFTY",
+// 	  "width": 350,
+// 	  "height": 220,
+// 	  "locale": "in",
+// 	  "dateRange": "12M",
+// 	  "colorTheme": "light",
+// 	  "trendLineColor": "rgba(41, 98, 255, 1)",
+// 	  "underLineColor": "rgba(41, 98, 255, 0.3)",
+// 	  "underLineBottomColor": "rgba(41, 98, 255, 0)",
+// 	  "isTransparent": false,
+// 	  "autosize": false,
+//   "largeChartUrl": ""
+//   });
 
-  this.TradingViewWidget1.nativeElement.appendChild(tradingViewScript1);
-} 
-  //stockhighcharts: StockChart;
-  public stockhcdate: Array<any> = [];
+//   this.TradingViewWidget1.nativeElement.appendChild(tradingViewScript1);
+// } 
+//   //stockhighcharts: StockChart;
+}
+public stockhcdate: Array<any> = [];
   public nifty50data: Array<number> = [];
   public nifty50Labels: Array<any> = [];
   public niftypcrdata: Array<number> = [];
