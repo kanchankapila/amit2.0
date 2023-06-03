@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsComponent } from './analytics.component';
-import {FormsModule} from '@angular/forms';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    RadioButtonModule 
-   
+    RadioButtonModule
+
   ]
 })
 export class AnalyticsModule { }
