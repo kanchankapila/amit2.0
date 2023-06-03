@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import {  ChartOptions,  ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
-export interface tldvmstockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
-export interface ttvolumestockstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
+
+
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
@@ -40,8 +40,8 @@ export class AnalyticsComponent implements OnInit{
   screenercode:any;
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
-  tldvmstocks: tldvmstockstile[] = [];
-  ttvolumestocks: ttvolumestockstile[] = [];
+  
+
   public lineChartType: ChartType = 'line';
   public lineChartOptions: ChartOptions = {
     responsive: true,

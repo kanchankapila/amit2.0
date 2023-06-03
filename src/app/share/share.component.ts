@@ -11,10 +11,10 @@ import {  ActivatedRoute } from '@angular/router';
 import {RadioButton} from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
-import * as bqstock from '../lists/bqlist'
-import * as etsector from '../lists/etsectorlist'
-import * as etindex from '../lists/etindexlist'
-import * as mcindex from '../lists/mcsectorlist'
+
+
+
+
 import Chart from 'chart.js/auto';
 import {  ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 
@@ -672,12 +672,12 @@ public titlepv: string = 'Volume Analysis';
   basicOptions3: any;
   stockList: any
   etsectors: any
-  etindexs: any
+
   stock: any
   mcsymbol2:any
-  bqstocks: any
+  
 
-  mcindexs: any
+ 
   eqsymbol: any
   tlid: any
   tlname: any
@@ -760,11 +760,10 @@ public titlepv: string = 'Volume Analysis';
 
     this.stockList = stocks.default.Data
     this.stock = stocks.default.Data
-    this.bqstocks = bqstock.default.Data
     
-    this.etsectors = etsector.default.Data
-    this.etindexs = etindex.default.Data
-    this.mcindexs = mcindex.default.Data
+   
+   
+    
     this.route.queryParams.subscribe(params => {
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
       this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
