@@ -568,7 +568,13 @@ getpniftysparkline(){
     });
 }
 
-
+tlrefresh() {
+  this.dataApi.tlrefresh().subscribe(data5 => {
+    
+    
+  }
+  )
+}
 
 
 navigatenifty() {
