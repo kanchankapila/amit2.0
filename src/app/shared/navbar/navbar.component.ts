@@ -1,18 +1,18 @@
-import { Component, OnInit ,AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit , ViewChild, ElementRef  } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
-import * as stocks1 from '../../lists/list1';
+
 import { DatePipe } from '@angular/common';
 import {SelectItem} from 'primeng/api';
 import Chart from 'chart.js/auto';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
-import { formatDate } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
-import * as sectors from '../../lists/mcsectorlist';
-import * as fnostocks from '../../lists/fnostocks';
-import * as bqstock from '../../lists/bqlist'
-import * as etstock from '../../lists/etlist'
+
+
+
+
 
 
 
@@ -98,7 +98,7 @@ export interface pcrnsebniftytile {
   styleUrls: ['./navbar.component.scss',],
   providers: [NgbDropdownConfig]
 })
-export class NavbarComponent implements OnInit,AfterViewInit {
+export class NavbarComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
   @ViewChild('sparklineChart1') sparklineChartRef1: ElementRef;
   @ViewChild('sparklineChart2') sparklineChartRef2: ElementRef;
@@ -144,7 +144,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   mcniftyrt: mcniftyrttiles[] = [];
   mcpniftyrt: mcpniftyrttiles[] = [];
   mcbniftyrt: mcbniftyrttiles[] = [];
-  bqstocks: any;
+
   sectorList: any;
   etstocks: any;
  
@@ -156,11 +156,11 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   visibleSidebar3;
   visibleSidebar4;
   visibleSidebar5;
-  today: any;
-  pcrnsenifty1length:any
-  pcrnsenifty1:any
-  pcrnsebnifty1length:any
-  pcrnsebnifty1:any
+  today: Date;
+  pcrnsenifty1length:number
+  pcrnsenifty1:number;
+  pcrnsebnifty1length:number;
+  pcrnsebnifty1:number;
   sparklineniftydata: Array<any>= [];
   sparklineniftylabel: Array<any>= [];
   sparklinebniftydata: Array<any>= [];
@@ -171,7 +171,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
   dateday5: any;
   date5: any;
   res;
-  @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
+  // @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   tlbuildup: any;
   tlniftybuildup: any;
   tlbniftybuildup: any;
@@ -192,26 +192,25 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     }
   }
   
-  ngAfterViewInit() {
-    
-  }
+  
  
    async ngOnInit() {
     
     this.today = new Date();
+    
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
     this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
     this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
     this.date5 = this.today.setDate(this.today.getDate() - 5)
     this.stock = stocks.default.Data
     this.item=stocks.default.Data['name']
-    this.stock1 = stocks1.default.Data
-    this.fnostock = fnostocks.default.Data
-    this.etstocks = etstock.default.Data
-    this.bqstocks=bqstock.default.Data
+  
+   
+   
+   
     this.primengConfig.ripple = true;
     this.data = this.stock
-    this.sectorList = sectors.default.Data
+   
     this.tlidnifty='1887'
     this.tlidbnifty='1898'
     {setInterval(() => { this.getniftypcr() }, 30000); }
@@ -335,69 +334,7 @@ getbankniftypcr() {
 
 
 
-nsedataniftyoi() {
-  this.dataApi.getnsedataniftyoi().subscribe(data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-    
-    
-    
-    this.optionwc.length = 0;
-    this.optionwp.length = 0;
-    
-    this.pcrnsenifty.length=0;
-    this.pcrnsenifty.push({ text1: nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI })
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-          
-          this.optionwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
-        }
-      }
-    }
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        var maxc = this.optionwc.reduce((a, b) => Math.max(a, b));  // 5
-      }
-    }
-    
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        if (nestedItems[1]['data'][val]['CE'].openInterest == maxc) {
-          this.n50optionsresistance= nestedItems[1]['data'][val]['CE'].strikePrice 
-        }
-      }
-      
-      
-      if (nestedItems[1]['data'][val]['PE']) {
-        if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-          
-          this.optionwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
-        }
-      }
-    }
-    
-    const maxp = this.optionwp.reduce((a, b) => Math.max(a, b));  // 5
-    
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['PE']) {
-        if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-          
-          if (nestedItems[1]['data'][val]['PE'].openInterest == maxp) {
-            this.n50optionssupport= nestedItems[1]['data'][val]['PE'].strikePrice 
-            
-          }
-        }
-      }
-    }
-    
-    
-    
-  }, err => {
-    console.log(err)
-  })
-}
+
 getniftytlbuildup(tlidnifty){
   this.tlidnifty='1887'
   this.dataApi.gettlbuildup(this.tlidnifty).subscribe(data5 => {
@@ -432,15 +369,7 @@ getniftytlbuildup(tlidnifty){
     // console.log(this.tlbniftybuildup)
   });
  }
-//  getpniftytlbuildup(tlid){
-//   this.dataApi.gettlbuildup(this.tlid).subscribe(data5 => {
-//     let nestedItems = Object.keys(data5).map(key => {
-//       return data5[key];
-//     });
-//     this.tlpniftybuildup=(nestedItems[0]['data_v2'][0]['buildup'])
-//     console.log(this.tlpniftybuildup)
-//   });
-//  }
+
 setttvolume(){
   console.log("Set TTVOLMCINSIGHT is hit !!!")
   this.dataApi.setttvolume().subscribe(data5 => {
@@ -450,68 +379,7 @@ setttvolume(){
   );
 }
 
-nsedatabniftyoi() {
-  
-  this.dataApi.getnsedatabniftyoi().subscribe(data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-    
-    this.optionbwc.length = 0;
-    
-    this.optionbwp.length = 0;
-    this.pcrnsebnifty.length=0;
-    this.pcrnsebnifty.push({ text1: nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI })
-    
-    
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-          
-          this.optionbwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
-        }
-      }
-    }
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        var maxbc = this.optionbwc.reduce((a, b) => Math.max(a, b));  // 5
-      }
-    }
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['CE']) {
-        if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
-          this.bnoptionsresistance= nestedItems[1]['data'][val]['CE'].strikePrice 
-        }
-      }
-      
-      
-      if (nestedItems[1]['data'][val]['PE']) {
-        if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-          this.optionbwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
-        }
-      }
-    }
-    
-    const maxbp = this.optionbwp.reduce((a, b) => Math.max(a, b));  // 5
-    
-    for (let val in nestedItems[1]['data']) {
-      if (nestedItems[1]['data'][val]['PE']) {
-        if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-          
-          if (nestedItems[1]['data'][val]['PE'].openInterest == maxbp) {
-            this.bnoptionssupport= nestedItems[1]['data'][val]['PE'].strikePrice 
-            
-          }
-        }
-      }
-    }
-    
-    
-    
-  }, err => {
-    console.log(err)
-  })
-}
+
 
 getmcniftyrealtime() {
   
@@ -722,95 +590,5 @@ navigatepnifty() {
 navigateanalytics() {
   this.window.open("/analytics", "_blank") 
 }
-
-// chartink() {
-//   console.log("chartink start")
-//   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-//  // console.log('Date is'+ this.datetoday)
-
-//     this.abc.push({ name:'copy-buy-100-accuracy-morning-scanner-scan-at-9-30-4002',Date:this.datetoday })
-
-
-
-//   this.dataApi.chartink(this.abc).subscribe(data5 => {
-
-
-//   }, err => {
-//     console.log(err)
-//   }
-//   )
-// }
-
-// getmcsectorcombine() {
-//   console.log("mc sector combine start")
-//   for (let val in this.sectorList) {
-//     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-//   //  console.log('Date is'+ this.datetoday)
-//     this.mcsectorsymbol.push({ mcsectorsymbol: this.sectorList[val].mcsectorsymbol, sectorid: this.sectorList[val].mcsectorid, name: this.sectorList[val].name,Date:this.datetoday })
-//   //  console.log(this.sectorList[val].mcsectorsymbol)
-//   }
-
-//   this.dataApi.getmcsectorcombine(this.mcsectorsymbol).subscribe(data5 => {
-
-
-//   }, err => {
-//     console.log(err)
-//   }
-//   )
-// }
-
-nsepostdata1() {
-  console.log("eq sector combine start")
-  for (let val in this.stock) {
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    
-    this.eqsymbol1.push({ eqsymbol1: this.stock[val].symbol,name: this.stock[val].name,Date:this.datetoday })
-    
-  }
-  
-  this.dataApi.nsepostdata1(this.eqsymbol1).subscribe(data5 => {
-    
-    
-  }, err => {
-    console.log(err)
-  }
-  )
-}
-gettrendlynepostdvm() {
-  console.log("trendlyne post durability/Volatility/Momentum score start")
-  
-  
-  this.dataApi.gettrendlynepostdvm().subscribe(data5 => {
-    
-    
-  }
-  )
-}
-tlrefresh() {
-  this.dataApi.tlrefresh().subscribe(data5 => {
-    
-    
-  }
-  )
-}
-
-nsepostdata2() {
-  console.log("eq sector combine start")
-  for (let val in this.fnostock) {
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    
-    this.eqsymbol1.push({ eqsymbol1: this.fnostock[val].symbol,Date:this.datetoday })
-    
-  }
-  
-  this.dataApi.nsepostdata2(this.eqsymbol1).subscribe(data5 => {
-    
-    
-  }, err => {
-    console.log(err)
-  }
-  )
-}
-
 
 }

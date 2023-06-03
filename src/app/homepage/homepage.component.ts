@@ -312,7 +312,7 @@ mcadvvalue1: Array<any> = [];
 
 
 public advdecChartData: ChartConfiguration['data']
-public dealsdata: dealsdatatile[] = [];
+
 public advdecChartType: ChartType = 'line';
 
 public advdecChartOptions:ChartOptions = {
@@ -337,7 +337,7 @@ async  ngOnInit() {
   this.getadvdec(),
   this.opstrafiidii(),
   this.getsectors(),
-  this.getmcinsightview(),
+ 
   this.selectedValueGainers= "gainers,intraday,desc,1d",
   this.selectedValueLosers= "losers,intraday,desc,1d",
   this.getetscreenersGainers(this.selectedValueGainers),
@@ -915,42 +915,7 @@ async getetstockscorescreeners(selectedValue){
   
 }
 
-getmcinsightview() {
-  
-  this.dataApi.getmcinsightview().subscribe( async data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-    
-    this.dealsdata.length = 0;
-    
-      
-    for (let val in nestedItems) {
-      try {
-        const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/" + this.mcsymbol1, {
-          method: 'GET',
-          headers: {
-          
-          }
-          
-        });
-    
-      if(response.ok) {
-        const result = await response.json();
-        
-      
-        this.mcsymbol1 = nestedItems[val].symbol
-        
-        this.dealsdata.push({ text1: nestedItems[val]['deals'].slice(nestedItems[val]['deals'].length - 33).slice(0, 3), text2: nestedItems[val].name, text3: nestedItems[val].date, text4: nestedItems[val].time, text5: nestedItems[val].symbol, text6: result.data['pricepercentchange'] })
-        }
-      } catch (err) {
-        console.error(err);
-        }
-      
-    }
-  })
-  
-}
+
 
 getglobal() {
   this.dataApi.getntglobal().subscribe(data5 => {
