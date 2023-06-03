@@ -3,48 +3,39 @@
   display: flex;
   justify-content: space-between;
   perspective: 800px;
-
   .card {
-   max-width: auto;
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  max-width: auto;
-  height: auto;
-  padding: 35px;
+    max-width: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: auto;
+    height: auto;
+    padding: 35px;
     background-color: antiquewhite;
-  border: 1px solid rgba(255, 255, 255, .25);
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-
-  backdrop-filter: blur(15px);
-
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
     &:hover {
       transform: rotateY(0.5turn);
     }
-
     .card__face {
       position: absolute;
-      
       width: 100%;
       height: 100%;
-     
-      text-align:center;
+      text-align: center;
       border-radius: 3px;
       backface-visibility: hidden;
       transition: 1s ease-in-out;
       // -webkit-box-reflect: below 0
-        // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-
+      // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
       img {
         width: 240px;
         height: 300px;
         object-fit: cover;
       }
-
       &--back {
         transform: rotateY(0.5turn);
       }
@@ -52,264 +43,230 @@
   }
 }
 @media (max-width: 320px) {
-.scene {
-  width: 1000px;
-  display: flex;
-  justify-content: space-between;
-  perspective: 800px;
-
-  .card {
-    position: relative;
-    width: 75px;
-    height: 90px;
-    color: white;
-    // cursor: pointer;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    transition: 1s ease-in-out;
-    transform-style: preserve-3d;
-
-    &:hover {
-      transform: rotateY(0.5turn);
-    }
-
-    .card__face {
-      position: absolute;
-      
-      width: 100%;
-      height: 100%;
-     
-      text-align:center;
-      border-radius: 3px;
-      backface-visibility: hidden;
+  .scene {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    perspective: 800px;
+    .card {
+      position: relative;
+      width: 75px;
+      height: 90px;
+      color: white;
+      // cursor: pointer;
+      margin-left: 10px;
+      margin-bottom: 10px;
       transition: 1s ease-in-out;
-      // -webkit-box-reflect: below 0
-        // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-
-      img {
-        width: 240px;
-        height: 300px;
-        object-fit: cover;
-      }
-
-      &--back {
+      transform-style: preserve-3d;
+      &:hover {
         transform: rotateY(0.5turn);
+      }
+      .card__face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border-radius: 3px;
+        backface-visibility: hidden;
+        transition: 1s ease-in-out;
+        // -webkit-box-reflect: below 0
+        // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+        img {
+          width: 240px;
+          height: 300px;
+          object-fit: cover;
+        }
+        &--back {
+          transform: rotateY(0.5turn);
+        }
       }
     }
   }
-}}
-.textcenter{
+}
+.textcenter {
   text-align: center;
-  
 }
 .mat-checkbox .mat-checkbox-frame {
   transform: scale(2);
 }
-
 .mat-checkbox-checked .mat-checkbox-background {
   transform: scale(2);
 }
-mat-checkbox ::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;}
-.InsideContent1 {
-    display: block;
-  }
-.InsideContent{
-    display:flex;
-    align-items: flex-start;
-  }
-  .mat-checkbox-layout { white-space: normal !important; }
-  .cardbear1{
-    width:200px;
-    height:200px;
-    margin-right:10px;
-    text-align:center;
-    border-radius:15%;
-  }
-  .cardbear{
-    width:auto;
-    height:auto;
-    margin-right:5px;
-    text-align:center;
-    
-  }
-  .mat-checkbox .mat-checkbox-frame {
-    transform: scale(6);
+mat-checkbox ::ng-deep .mat-checkbox-inner-container {
+  width: 30px;
+  height: 30px;
 }
-  .cardbear2{
-    width:auto;
-    height:auto;
-    margin-right:5px;
-    text-align:center;
-    
+.InsideContent1 {
+  display: block;
+}
+.InsideContent {
+  display: flex;
+  align-items: flex-start;
+}
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
+.cardbear1 {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 15%;
+}
+.cardbear {
+  width: auto;
+  height: auto;
+  margin-right: 5px;
+  text-align: center;
+}
+.mat-checkbox .mat-checkbox-frame {
+  transform: scale(6);
+}
+.cardbear2 {
+  width: auto;
+  height: auto;
+  margin-right: 5px;
+  text-align: center;
+}
+.cardbear3 {
+  width: auto;
+  height: auto;
+  margin-right: 5px;
+  text-align: center;
+}
+@media(max-width:320px) {
+  :host ::ng-deep .mat-checkbox .mat-checkbox-inner-container {
+    width: 30px;
+    height: 30px;
   }
-  .cardbear3{
-    width:auto;
-    height:auto;
-    margin-right:5px;
-    text-align:center;
-    
+  :host ::ng-deep .pButton {
+    width: 1rem;
+    font-size: 1px;
   }
-  @media(max-width:320px){
-    :host ::ng-deep .mat-checkbox .mat-checkbox-inner-container {
-      width: 30px;
-      height: 30px;
+  :host ::ng-deep .btn {
+    width: 10rem;
+    font-size: 10px;
   }
-    :host ::ng-deep .pButton {
-      width: 1rem;
-      font-size: 1px;
-    }
-    :host ::ng-deep .btn {
-      width: 10rem;
-      font-size: 10px;
-    }
-    :host ::ng-deep .btn1 {
-      width: 3rem;
-      font-size: 5px;
-    }
-    
-    :host ::ng-deep .p-dropdown {
-      width: 10rem;
-      
-    }
-    :host ::ng-deep .cardbear {
-      width: auto;
-      height:auto;
-      font-size: xx-small;
-      
-    }
-    :host ::ng-deep .cardbear3 {
-      width: auto;
-      height:auto;
-      font-size: xx-small;
-      
-    }
-    :host ::ng-deep .cardbear2 {
-      width: auto;
-      height:auto;
-      font-size: xx-small;
-      
-    }}
-
-    .poster {
-      height:200px;
-      width:133px;
-      padding-bottom:40px;
-    }
-    
-    .block {
-      
-      width: auto;
-      height:auto;
-      margin-bottom:2px;
-      margin-right:2px;
-      font-size:x-small;
-    }
-    
-    .tan {
-      background-color: tan;
-    }
-    .brown {
-      background-color: brown;
-    }
-    .grey {
-      background-color: grey;
-    }
-    .cornflowerblue {
-      background-color: cornflowerblue;
-    }
-    
-    .sample {
-      font-size: 10px;
-      color:red;
-      margin-bottom:2px;
-    }
-    #tlchart-container {
-      display: flex;
-      flex-wrap: wrap;
-      
-    }
-    .chart {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .tlchart-card {
-      width: 400px;
-      height: 400px;
-      margin: 10px;
-      padding: 10px;
-      border: 1px solid #080808;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      display: inline-block;
-    }
-
-    .tlchart-wrapper {
-      width: 100%;
-      height: 100%;
-    }
-    .fullscreen-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    
-
-
+  :host ::ng-deep .btn1 {
+    width: 3rem;
+    font-size: 5px;
+  }
+  :host ::ng-deep .p-dropdown {
+    width: 10rem;
+  }
+  :host ::ng-deep .cardbear {
+    width: auto;
+    height: auto;
+    font-size: xx-small;
+  }
+  :host ::ng-deep .cardbear3 {
+    width: auto;
+    height: auto;
+    font-size: xx-small;
+  }
+  :host ::ng-deep .cardbear2 {
+    width: auto;
+    height: auto;
+    font-size: xx-small;
+  }
+}
+.poster {
+  height: 200px;
+  width: 133px;
+  padding-bottom: 40px;
+}
+.block {
+  width: auto;
+  height: auto;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  font-size: x-small;
+}
+.tan {
+  background-color: tan;
+}
+.brown {
+  background-color: brown;
+}
+.grey {
+  background-color: grey;
+}
+.cornflowerblue {
+  background-color: cornflowerblue;
+}
+.sample {
+  font-size: 10px;
+  color: red;
+  margin-bottom: 2px;
+}
+#tlchart-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.chart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tlchart-card {
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #080808;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+.tlchart-wrapper {
+  width: 100%;
+  height: 100%;
+}
+.fullscreen-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 @media (max-width: 424px) {
   :root {
     font-size: 1em;
     box-sizing: inherit;
   }
-  
   *,
   *:before,
   *:after {
     box-sizing: inherit;
   }
-  
   p {
     margin: 0;
   }
-  
   p:not(:last-child) {
     margin-bottom: 0.5em;
   }
-  
   body {
     font: 1em/2 Inter, sans-serif;
-  
     display: flex;
     align-items: center;
     justify-content: center;
-    
-     min-height: 100vh;
+    min-height: 100vh;
     padding: 15px;
-    
     color: #224;
-   
   }
-  
   .cardnew {
     max-width: auto;
     min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  
     max-width: auto;
     height: auto;
     padding: 10px;
-  
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.45);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-  
     backdrop-filter: blur(15px);
   }
-  
   .cardnew-footer {
     font-size: 0.15em;
     color: #446;
@@ -319,58 +276,45 @@ mat-checkbox ::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;}
   font-size: 20px;
   box-sizing: inherit;
 }
-
 *,
 *:before,
 *:after {
   box-sizing: inherit;
 }
-
 p {
   margin: 0;
 }
-
 p:not(:last-child) {
   margin-bottom: 1.5em;
 }
-
 body {
   font: 1em/1.618 Inter, sans-serif;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  
   min-height: 100vh;
   padding: 35px;
-  
   color: #224;
-  
 }
-
 .cardnew {
   max-width: auto;
   min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   max-width: auto;
   height: auto;
   padding: 35px;
-
   border: 1px solid rgba(255, 255, 255, .25);
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.45);
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-
   backdrop-filter: blur(15px);
 }
-
 .cardnew-footer {
   font-size: 0.75em;
   color: #446;
-}   
-cardabc{
+}
+cardabc {
   background-color: aqua;
 }

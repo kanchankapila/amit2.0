@@ -1,524 +1,700 @@
 <div class="gap-div">
-
-
-<div class="InsideContent">
-  <p-radioButton name="groupname" value="5" label="5 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="10" label="10 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="15" label="15 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="30" label="30 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="60" label="60 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="120" label="120 min" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
-  <p-radioButton name="groupname" value="24" label="24 hrs" [(ngModel)]="selectedValue" (onClick)="onClick($event)"></p-radioButton><br>
+  <div class="InsideContent">
+    <p-radioButton
+      name="groupname"
+      value="5"
+      label="5 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="10"
+      label="10 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="15"
+      label="15 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="30"
+      label="30 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="60"
+      label="60 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="120"
+      label="120 min"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
+    <p-radioButton
+      name="groupname"
+      value="24"
+      label="24 hrs"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick($event)"
+    ></p-radioButton
+    ><br />
   </div>
-  
-      <h4 class="text-black text-center">Technical Indicators</h4>
-      <div fxLayout="row wrap" fxLayoutGap="5px grid" class="col-lg-13 col-xs-3 ">
-        <div style="text-transform: uppercase;font-weight:bold; margin: 10px;" fxFlex="13" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of tlindexparam trackBy: trackByFunction12">
-       
-  <div class="scene">
-    <div class="card text-white text-center">
-      <div class="card__face card__face--front  type1-regular  "
-      [ngClass]="{'bg-gradient-bull':tile.text3 === 'positive',
-      'bg-gradient-bear':tile.text3 === 'negative',
-      'bg-gradient-warning':tile.text3 === 'neutral'}">{{tile.text1}}
-
+  <h4 class="text-black text-center">Technical Indicators</h4>
+  <div fxLayout="row wrap" fxLayoutGap="5px grid" class="col-lg-13 col-xs-3">
+    <div
+      style="text-transform: uppercase; font-weight: bold; margin: 10px"
+      fxFlex="13"
+      fxFlex.lg="12%"
+      fxFlex.xs="30%"
+      fxFlex.sm="33%"
+      *ngFor="let tile of tlindexparam; trackBy: trackByFunction12"
+    >
+      <div class="scene">
+        <div class="card text-white text-center">
+          <div
+            class="card__face card__face--front type1-regular"
+            [ngClass]="{
+              'bg-gradient-bull': tile.text3 === 'positive',
+              'bg-gradient-bear': tile.text3 === 'negative',
+              'bg-gradient-warning': tile.text3 === 'neutral'
+            }"
+          >
+            {{ tile.text1 }}
           </div>
-          <div class="card__face card__face--back  type1-regular"
-          [ngClass]="{'bg-gradient-bull':tile.text3 === 'positive',
-                      'bg-gradient-bear':tile.text3 === 'negative',
-                      'bg-gradient-warning':tile.text3 === 'neutral'}"><h2>{{tile.text2}}</h2>
-            </div>
-    
-    </div>
-    
-  </div>
-  </div>
-  </div>
- 
-  
-      <h4 class="text-black text-center">Daily Technical Indicators</h4>
-      <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3 ">
-        <div  style="text-transform: uppercase;font-weight:bold; margin: 10px;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="30" fxFlex.sm="33%"  *ngFor="let tile of pharmaniftyindicators trackBy: trackByFunction">
-       
-  <div class="scene">
-    <div class="card text-center text-white">
-      <div class="card__face card__face--front text-blue type1-bold "
-           [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                        'bg-gradient-bull1':tile.text3 === 'Oversold',
-                        'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                        'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                        'bg-gradient-bear':tile.text3 === 'Bearish',
-                        'bg-gradient-bear1':tile.text3 === 'Overbought',
-                        'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                        'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                        'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}
+          <div
+            class="card__face card__face--back type1-regular"
+            [ngClass]="{
+              'bg-gradient-bull': tile.text3 === 'positive',
+              'bg-gradient-bear': tile.text3 === 'negative',
+              'bg-gradient-warning': tile.text3 === 'neutral'
+            }"
+          >
+            <h2>{{ tile.text2 }}</h2>
           </div>
-          <div class="card__face card__face--back text-blue type1-bold "
-          [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                       'bg-gradient-bull1':tile.text3 === 'Oversold',
-                       'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                       'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                       'bg-gradient-bear':tile.text3 === 'Bearish',
-                       'bg-gradient-bear1':tile.text3 === 'Overbought',
-                       'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                       'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                       'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text3}}
-         </div>
-    
-    </div>
-    
-  </div>
-  </div>
-  </div>
-  
-    
- 
-  <div fxLayout="row" fxLayout.xs="column">
-    <div class="col-lg-6 col-xs-4 ">
-      <div class="content card text-white text-card">
-        
-          <div class="block">
-        <h4 class="text-black text-center">Crossover</h4>
-        <div fxLayout="row wrap" fxLayoutGap="10px grid">
-          <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="30" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of pharmaniftycrossover trackBy: trackByFunction1">
-            <mat-card class="text-blue type1-bold "
-            [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                        'bg-gradient-bull1':tile.text3 === 'Oversold',
-                        'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                        'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                        'bg-gradient-bear':tile.text3 === 'Bearish',
-                        'bg-gradient-bear1':tile.text3 === 'Overbought',
-                        'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                        'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                        'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-            </mat-card>
-          </div>
-          <div class="table-responsive pt-3">
-            <table class="table table-bordered" *ngFor="let tile of pniftyema trackBy: trackByFunction3" >
-              <thead>
-                <tr>
-                 
-                 <th>
-                    E5
-                  </th>
-                  <th>
-                    E10
-                  </th>
-                  <th>
-                    E20
-                  </th>
-                  <th>
-                    E30
-                  </th>
-                  <th>
-                    E50
-                  </th>
-                  <th>
-                    E100
-                  </th>
-                  <th>
-                    E200
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="table-success">
-                  <td>
-                   {{tile.text1| number : '1.0-0'}} 
-                  </td>
-                  <td>
-                    {{tile.text2| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text3| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text4| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text5| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text6| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text7| number : '1.0-0'}} 
-                   </td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
-           
-          </div>
-        </div>
         </div>
       </div>
-    
+    </div>
+  </div>
+  <h4 class="text-black text-center">Daily Technical Indicators</h4>
+  <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
+    <div
+      style="text-transform: uppercase; font-weight: bold; margin: 10px"
+      fxFlex="10"
+      fxFlex.lg="12%"
+      fxFlex.xs="30"
+      fxFlex.sm="33%"
+      *ngFor="let tile of pharmaniftyindicators; trackBy: trackByFunction"
+    >
+      <div class="scene">
+        <div class="card text-center text-white">
+          <div
+            class="card__face card__face--front text-blue type1-bold"
+            [ngClass]="{
+              'bg-gradient-bull': tile.text3 === 'Bullish',
+              'bg-gradient-bull1': tile.text3 === 'Oversold',
+              'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+              'bg-gradient-bull3': tile.text3 === 'High Volatility',
+              'bg-gradient-bear': tile.text3 === 'Bearish',
+              'bg-gradient-bear1': tile.text3 === 'Overbought',
+              'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+              'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+              'bg-gradient-warning': tile.text3 === 'Neutral'
+            }"
+          >
+            {{ tile.text2 }}
+          </div>
+          <div
+            class="card__face card__face--back text-blue type1-bold"
+            [ngClass]="{
+              'bg-gradient-bull': tile.text3 === 'Bullish',
+              'bg-gradient-bull1': tile.text3 === 'Oversold',
+              'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+              'bg-gradient-bull3': tile.text3 === 'High Volatility',
+              'bg-gradient-bear': tile.text3 === 'Bearish',
+              'bg-gradient-bear1': tile.text3 === 'Overbought',
+              'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+              'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+              'bg-gradient-warning': tile.text3 === 'Neutral'
+            }"
+          >
+            {{ tile.text3 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayout.xs="column">
+    <div class="col-lg-6 col-xs-4">
+      <div class="content card text-white text-card">
+        <div class="block">
+          <h4 class="text-black text-center">Crossover</h4>
+          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            <div
+              style="
+                text-transform: uppercase;
+                font-weight: bold;
+                text-align: center;
+              "
+              fxFlex="30"
+              fxFlex.xs="33%"
+              fxFlex.sm="33%"
+              *ngFor="
+                let tile of pharmaniftycrossover;
+                trackBy: trackByFunction1
+              "
+            >
+              <mat-card
+                class="text-blue type1-bold"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text3 === 'Bullish',
+                  'bg-gradient-bull1': tile.text3 === 'Oversold',
+                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                  'bg-gradient-bear': tile.text3 === 'Bearish',
+                  'bg-gradient-bear1': tile.text3 === 'Overbought',
+                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                  'bg-gradient-warning': tile.text3 === 'Neutral'
+                }"
+                >{{ tile.text2 }}<br />{{ tile.text3 }}
+              </mat-card>
+            </div>
+            <div class="table-responsive pt-3">
+              <table
+                class="table table-bordered"
+                *ngFor="let tile of pniftyema; trackBy: trackByFunction3"
+              >
+                <thead>
+                  <tr>
+                    <th>E5</th>
+                    <th>E10</th>
+                    <th>E20</th>
+                    <th>E30</th>
+                    <th>E50</th>
+                    <th>E100</th>
+                    <th>E200</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-success">
+                    <td>
+                      {{ tile.text1 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text2 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text3 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text4 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text5 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text6 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text7 | number : "1.0-0" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-6 col-xs-4 text-white text-center">
       <div class="content card">
         <div class="block">
-        <h4 class="text-black text-center">Sentiment</h4>
-        <div fxLayout="row wrap" fxLayoutGap="10px grid">
-          <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="30" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of pharmaniftysentiments trackBy: trackByFunction2">
-            <mat-card class="text-blue type1-bold"
-            [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
-                        'bg-gradient-bull1':tile.text1 === 'Very Bullish',
-                        'bg-gradient-bear':tile.text1 === 'Bearish',
-                        'bg-gradient-bear1':tile.text1 === 'Very Bearish',
-                        'bg-gradient-warning':tile.text1 === 'Neutral'}">{{tile.text2}}<br>{{tile.text1}}
-            </mat-card>
+          <h4 class="text-black text-center">Sentiment</h4>
+          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            <div
+              style="
+                text-transform: uppercase;
+                font-weight: bold;
+                text-align: center;
+              "
+              fxFlex="30"
+              fxFlex.xs="33%"
+              fxFlex.sm="33%"
+              *ngFor="
+                let tile of pharmaniftysentiments;
+                trackBy: trackByFunction2
+              "
+            >
+              <mat-card
+                class="text-blue type1-bold"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text1 === 'Bullish',
+                  'bg-gradient-bull1': tile.text1 === 'Very Bullish',
+                  'bg-gradient-bear': tile.text1 === 'Bearish',
+                  'bg-gradient-bear1': tile.text1 === 'Very Bearish',
+                  'bg-gradient-warning': tile.text1 === 'Neutral'
+                }"
+                >{{ tile.text2 }}<br />{{ tile.text1 }}
+              </mat-card>
+            </div>
+            <div class="table-responsive pt-3">
+              <table
+                class="table table-bordered"
+                *ngFor="let tile of pniftysma; trackBy: trackByFunction3"
+              >
+                <thead>
+                  <tr>
+                    <th>S5</th>
+                    <th>S10</th>
+                    <th>S20</th>
+                    <th>S30</th>
+                    <th>S50</th>
+                    <th>S100</th>
+                    <th>S200</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-success">
+                    <td>
+                      {{ tile.text1 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text2 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text3 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text4 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text5 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text6 | number : "1.0-0" }}
+                    </td>
+                    <td>
+                      {{ tile.text7 | number : "1.0-0" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="table-responsive pt-3">
-            <table class="table table-bordered" *ngFor="let tile of pniftysma trackBy: trackByFunction3" >
-              <thead>
-                <tr>
-                 
-                 <th>
-                    S5
-                  </th>
-                  <th>
-                    S10
-                  </th>
-                  <th>
-                    S20
-                  </th>
-                  <th>
-                    S30
-                  </th>
-                  <th>
-                    S50
-                  </th>
-                  <th>
-                    S100
-                  </th>
-                  <th>
-                    S200
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="table-success">
-                  <td>
-                   {{tile.text1| number : '1.0-0'}} 
-                  </td>
-                  <td>
-                    {{tile.text2| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text3| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text4| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text5| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text6| number : '1.0-0'}} 
-                   </td>
-                   <td>
-                    {{tile.text7| number : '1.0-0'}} 
-                   </td>
-                </tr>
-                
-              </tbody>
-            </table>
-          
-          </div>      
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-   
-  
-    <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
-      <div class="content card">
-       
-    
-          <ejs-chart *ngIf="dataValues" style='display:block' id='chartcontainer' [title]='title' [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'
-              [tooltip]='tooltip' (load)='load($event)' [chartArea]='chartArea' [width]='width' [legendSettings]='legend'>
-              <e-series-collection>
-                  <e-series [dataSource]='dataValues' type='MultiColoredLine' xName='XValue' yName='YValue' name='Rainfall' width=2.5 pointColorMapping='color'>
-                  </e-series>
-              </e-series-collection>
-          </ejs-chart>
-      </div>
-   
-</div>
-    
-      <div class="col-lg-15 col-xs-5 grid-margin stretch-card ">
-        <div class="card">
-          <div class="card-body" >
-            <h4 class="text-black text-center">PHARMA NIFTY - Today</h4>
-           
-              <div class="table-responsive">
-            <canvas baseChart style="height:400px"  class="table" [datasets]="lineChartData" [labels]="lineChartLabels" [type]="lineChartType"   [options]="lineChartOptions" ></canvas>
-        
         </div>
       </div>
     </div>
   </div>
-      
-      
-      <div class="col-lg-15 col-xs-5 grid-margin stretch-card ">
-        <div class="card">
-          <div class="card-body" >
-            VIX
-          
-              <div class="table-responsive">
-            <canvas baseChart style="min-height:250px"  class="table" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [type]="lineChartType" [options]="lineChartOptions" ></canvas>
-         </div>
-        
-      </div>
+  <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
+    <div class="content card">
+      <ejs-chart
+        *ngIf="dataValues"
+        style="display: block"
+        id="chartcontainer"
+        [title]="title"
+        [primaryXAxis]="primaryXAxis"
+        [primaryYAxis]="primaryYAxis"
+        [tooltip]="tooltip"
+        (load)="load($event)"
+        [chartArea]="chartArea"
+        [width]="width"
+        [legendSettings]="legend"
+      >
+        <e-series-collection>
+          <e-series
+            [dataSource]="dataValues"
+            type="MultiColoredLine"
+            xName="XValue"
+            yName="YValue"
+            name="Rainfall"
+            width="2.5"
+            pointColorMapping="color"
+          >
+          </e-series>
+        </e-series-collection>
+      </ejs-chart>
+    </div>
+  </div>
+  <div class="col-lg-15 col-xs-5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-black text-center">PHARMA NIFTY - Today</h4>
+        <div class="table-responsive">
+          <canvas
+            baseChart
+            style="height: 400px"
+            class="table"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [type]="lineChartType"
+            [options]="lineChartOptions"
+          ></canvas>
         </div>
       </div>
-  
-   
-  
+    </div>
+  </div>
+  <div class="col-lg-15 col-xs-5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        VIX
+        <div class="table-responsive">
+          <canvas
+            baseChart
+            style="min-height: 250px"
+            class="table"
+            [datasets]="lineChartvixData"
+            [labels]="lineChartvixLabels"
+            [type]="lineChartType"
+            [options]="lineChartOptions"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
   <p-tabView>
-      
     <p-tabPanel header="5 days">
       <h4 class="text-black text-center">Weekly Technical Indicators</h4>
-      <div fxLayout="row wrap" fxLayoutGap="10px grid" class=" col-lg-13 col-xs-6">
-        <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"   *ngFor="let tile of pharmaniftyindicatorsw trackBy: trackByFunction5">
-       
-  <div class="scene">
-    <div class="card text-white text-center">
-      <div class="card__face card__face--front text-blue type1-boldd"
-           [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                        'bg-gradient-bull1':tile.text3 === 'Oversold',
-                        'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                        'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                        'bg-gradient-bear':tile.text3 === 'Bearish',
-                        'bg-gradient-bear1':tile.text3 === 'Overbought',
-                        'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                        'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                        'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}
-          </div>
-          <div class="card__face card__face--back text-blue type1-bold"
-          [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                       'bg-gradient-bull1':tile.text3 === 'Oversold',
-                       'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                       'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                       'bg-gradient-bear':tile.text3 === 'Bearish',
-                       'bg-gradient-bear1':tile.text3 === 'Overbought',
-                       'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                       'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                       'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text3}}
-         </div>
-    
-    </div>
-    
-  </div>
-  </div>
-  </div>
- 
-         
-        
-      
-      <div fxLayout="row" fxLayout.xs="column">
-        <div class="col-lg-6 col-xs-4 text-white text-center">
-          <div class="content card">
-            
-              <div class="block">
-            <h4 class="text-black text-center">Crossover</h4>
-            <div fxLayout="row wrap" fxLayoutGap="10px grid">
-              <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="30" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of pharmaniftycrossoverw trackBy: trackByFunction1">
-                <mat-card class="type1-bold"
-                [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                            'bg-gradient-bull1':tile.text3 === 'Oversold',
-                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                            'bg-gradient-bear':tile.text3 === 'Bearish',
-                            'bg-gradient-bear1':tile.text3 === 'Overbought',
-                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-                </mat-card>
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px grid"
+        class="col-lg-13 col-xs-6"
+      >
+        <div
+          style="
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+          "
+          fxFlex="10"
+          fxFlex.lg="12%"
+          fxFlex.xs="40"
+          fxFlex.sm="33%"
+          *ngFor="let tile of pharmaniftyindicatorsw; trackBy: trackByFunction5"
+        >
+          <div class="scene">
+            <div class="card text-white text-center">
+              <div
+                class="card__face card__face--front text-blue type1-boldd"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text3 === 'Bullish',
+                  'bg-gradient-bull1': tile.text3 === 'Oversold',
+                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                  'bg-gradient-bear': tile.text3 === 'Bearish',
+                  'bg-gradient-bear1': tile.text3 === 'Overbought',
+                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                  'bg-gradient-warning': tile.text3 === 'Neutral'
+                }"
+              >
+                {{ tile.text2 }}
+              </div>
+              <div
+                class="card__face card__face--back text-blue type1-bold"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text3 === 'Bullish',
+                  'bg-gradient-bull1': tile.text3 === 'Oversold',
+                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                  'bg-gradient-bear': tile.text3 === 'Bearish',
+                  'bg-gradient-bear1': tile.text3 === 'Overbought',
+                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                  'bg-gradient-warning': tile.text3 === 'Neutral'
+                }"
+              >
+                {{ tile.text3 }}
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column">
+        <div class="col-lg-6 col-xs-4 text-white text-center">
+          <div class="content card">
+            <div class="block">
+              <h4 class="text-black text-center">Crossover</h4>
+              <div fxLayout="row wrap" fxLayoutGap="10px grid">
+                <div
+                  style="
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    text-align: center;
+                  "
+                  fxFlex="30"
+                  fxFlex.xs="33%"
+                  fxFlex.sm="33%"
+                  *ngFor="
+                    let tile of pharmaniftycrossoverw;
+                    trackBy: trackByFunction1
+                  "
+                >
+                  <mat-card
+                    class="type1-bold"
+                    [ngClass]="{
+                      'bg-gradient-bull': tile.text3 === 'Bullish',
+                      'bg-gradient-bull1': tile.text3 === 'Oversold',
+                      'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                      'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                      'bg-gradient-bear': tile.text3 === 'Bearish',
+                      'bg-gradient-bear1': tile.text3 === 'Overbought',
+                      'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                      'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                      'bg-gradient-warning': tile.text3 === 'Neutral'
+                    }"
+                    >{{ tile.text2 }}<br />{{ tile.text3 }}
+                  </mat-card>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>  
-           
-        
-         
-           
-            
-          
-       
-        
-      <div class="col-lg-15 col-xs-5 col-xs-5 grid-margin  stretch-card">
+      </div>
+      <div class="col-lg-15 col-xs-5 col-xs-5 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
             <h4 class="text-black text-center">PHARMA NIFTY - 1 Week</h4>
             <div class="table-responsive">
-             
-            <canvas baseChart style="min-height:250px" class="table" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions" [type]="lineChartType" ></canvas>
-         
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="lineChart5dData"
+                [labels]="lineChart5dLabels"
+                [options]="lineChartOptions"
+                [type]="lineChartType"
+              ></canvas>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-      </div>
-    
     </p-tabPanel>
     <p-tabPanel header="1 month">
-
-      
-          <h4 class="text-black text-center">Monthly Technical Indicators</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid" class=" col-lg-13 col-xs-6">
-            <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="10" fxFlex.lg="12%" fxFlex.xs="40" fxFlex.sm="33%"   *ngFor="let tile of pharmaniftyindicatorsm trackBy: trackByFunction5">
-           
-      <div class="scene">
-        <div class="card text-white text-center">
-          <div class="card__face card__face--front text-blue type1-boldd"
-               [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                            'bg-gradient-bull1':tile.text3 === 'Oversold',
-                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                            'bg-gradient-bear':tile.text3 === 'Bearish',
-                            'bg-gradient-bear1':tile.text3 === 'Overbought',
-                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}
+      <h4 class="text-black text-center">Monthly Technical Indicators</h4>
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px grid"
+        class="col-lg-13 col-xs-6"
+      >
+        <div
+          style="
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+          "
+          fxFlex="10"
+          fxFlex.lg="12%"
+          fxFlex.xs="40"
+          fxFlex.sm="33%"
+          *ngFor="let tile of pharmaniftyindicatorsm; trackBy: trackByFunction5"
+        >
+          <div class="scene">
+            <div class="card text-white text-center">
+              <div
+                class="card__face card__face--front text-blue type1-boldd"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text3 === 'Bullish',
+                  'bg-gradient-bull1': tile.text3 === 'Oversold',
+                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                  'bg-gradient-bear': tile.text3 === 'Bearish',
+                  'bg-gradient-bear1': tile.text3 === 'Overbought',
+                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                  'bg-gradient-warning': tile.text3 === 'Neutral'
+                }"
+              >
+                {{ tile.text2 }}
               </div>
-              <div class="card__face card__face--back text-blue type1-bold"
-              [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                           'bg-gradient-bull1':tile.text3 === 'Oversold',
-                           'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                           'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                           'bg-gradient-bear':tile.text3 === 'Bearish',
-                           'bg-gradient-bear1':tile.text3 === 'Overbought',
-                           'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                           'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                           'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text3}}
-             </div>
-        
-        </div>
-        
-      </div>
-      </div>
-      </div>
-     
-        
-      
-      <div fxLayout="row" fxLayout.xs="column">
-        <div class="col-lg-6 col-xs-4 text-white text-center">
-          <div class="content card">
-            
-              <div class="block">
-            <h4 class="text-black text-center">Crossover</h4>
-            <div fxLayout="row wrap" fxLayoutGap="10px grid">
-              <div style="text-transform: uppercase;font-weight:bold; text-align:center;" fxFlex="30" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of pharmaniftycrossoverm trackBy: trackByFunction1">
-                <mat-card class=" type1-bold "
-                [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                            'bg-gradient-bull1':tile.text3 === 'Oversold',
-                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                            'bg-gradient-bear':tile.text3 === 'Bearish',
-                            'bg-gradient-bear1':tile.text3 === 'Overbought',
-                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-                </mat-card>
+              <div
+                class="card__face card__face--back text-blue type1-bold"
+                [ngClass]="{
+                  'bg-gradient-bull': tile.text3 === 'Bullish',
+                  'bg-gradient-bull1': tile.text3 === 'Oversold',
+                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                  'bg-gradient-bear': tile.text3 === 'Bearish',
+                  'bg-gradient-bear1': tile.text3 === 'Overbought',
+                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                  'bg-gradient-warning': tile.text3 === 'Neutral'
+                }"
+              >
+                {{ tile.text3 }}
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column">
+        <div class="col-lg-6 col-xs-4 text-white text-center">
+          <div class="content card">
+            <div class="block">
+              <h4 class="text-black text-center">Crossover</h4>
+              <div fxLayout="row wrap" fxLayoutGap="10px grid">
+                <div
+                  style="
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    text-align: center;
+                  "
+                  fxFlex="30"
+                  fxFlex.xs="33%"
+                  fxFlex.sm="33%"
+                  *ngFor="
+                    let tile of pharmaniftycrossoverm;
+                    trackBy: trackByFunction1
+                  "
+                >
+                  <mat-card
+                    class="type1-bold"
+                    [ngClass]="{
+                      'bg-gradient-bull': tile.text3 === 'Bullish',
+                      'bg-gradient-bull1': tile.text3 === 'Oversold',
+                      'bg-gradient-bull2': tile.text3 === 'Strong Trend',
+                      'bg-gradient-bull3': tile.text3 === 'High Volatility',
+                      'bg-gradient-bear': tile.text3 === 'Bearish',
+                      'bg-gradient-bear1': tile.text3 === 'Overbought',
+                      'bg-gradient-bear2': tile.text3 === 'Weak Trend',
+                      'bg-gradient-bear3': tile.text3 === 'Low Volatility',
+                      'bg-gradient-warning': tile.text3 === 'Neutral'
+                    }"
+                    >{{ tile.text2 }}<br />{{ tile.text3 }}
+                  </mat-card>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>  
-           
-      
-        
-          
-        
-      
-      
-      
-    
-        
-      <div class="col-lg-15 col-xs-5 grid-margin  stretch-card">
+      </div>
+      <div class="col-lg-15 col-xs-5 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
             <h4 class="text-black text-center">PHARMA NIFTY - 1 Month</h4>
             <div class="table-responsive">
-            <canvas baseChart style="min-height:250px" class="table" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [options]="lineChartOptions" [type]="lineChartType" ></canvas>
-          </div>
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="lineChart1mData"
+                [labels]="lineChart1mLabels"
+                [options]="lineChartOptions"
+                [type]="lineChartType"
+              ></canvas>
+            </div>
           </div>
         </div>
       </div>
-    
     </p-tabPanel>
-    
     <p-tabPanel header="3months">
-      <div class="col-lg-15 col-xs-6 grid-margin  stretch-card">
+      <div class="col-lg-15 col-xs-6 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body" >
+          <div class="card-body">
             <h4 class="text-black text-center">PHARMA NIFTY - 3 months</h4>
             <div class="table-responsive">
-            <canvas baseChart style="min-height:250px" class="table" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [type]="lineChartType" [options]="lineChartOptions" ></canvas>
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="lineChart3mData"
+                [labels]="lineChart3mLabels"
+                [type]="lineChartType"
+                [options]="lineChartOptions"
+              ></canvas>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </p-tabPanel>
     <p-tabPanel header="6 months">
-      <div class="col-lg-15 col-xs-6 grid-margin  stretch-card">
+      <div class="col-lg-15 col-xs-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
             <h4 class="text-black text-center">PHARMA NIFTY - 6 Months</h4>
             <div class="table-responsive">
-            <canvas baseChart style="min-height:250px"  class="table" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [type]="lineChartType" [options]="lineChartOptions" ></canvas>
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="lineChart6mData"
+                [labels]="lineChart6mLabels"
+                [type]="lineChartType"
+                [options]="lineChartOptions"
+              ></canvas>
+            </div>
           </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="1 Year">
+      <div class="col-lg-15 col-xs-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-black text-center">PHARMA NIFTY - 1 Year</h4>
+            <div class="table-responsive">
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="lineChart1yrData"
+                [labels]="lineChart1yrLabels"
+                [type]="lineChartType"
+                [options]="lineChartOptions"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <div class="col-lg-15 col-xs-9">
+    <div class="content card">
+      <h4 class="card-title text-black text-center">PHARMA NIFTY STOCKS</h4>
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div
+          style="text-transform: uppercase; font-weight: bold"
+          fxFlex="15%"
+          fxFlex.xs="33%"
+          fxFlex.sm="33%"
+          class="text-center"
+          *ngFor="let tile of pharmaniftystocks; trackBy: trackByFunction11"
+        >
+          <mat-card
+            [ngClass]="{
+              'bg-gradient-bull text-black  mat-elevation-z4': tile.text3 > 0,
+              ' bg-gradient-bear text-black mat-elevation-z4': 0 > tile.text3
+            }"
+          >
+            <h6>{{ tile.text1 }}</h6>
+            {{ tile.text4 }}<br />{{ tile.text2 }}&nbsp;({{ tile.text3 }}%)
+            <mat-card-actions>
+              <button mat-button (click)="changestockpage(tile.text5)">
+                Graph
+              </button>
+            </mat-card-actions>
+          </mat-card>
         </div>
       </div>
     </div>
-    </p-tabPanel>
-    <p-tabPanel header="1 Year">
-      <div class="col-lg-15 col-xs-6 grid-margin  stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="text-black text-center">PHARMA NIFTY - 1 Year </h4>
-            <div class="table-responsive">
-            <canvas baseChart style="min-height:250px"   class="table" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [type]="lineChartType" [options]="lineChartOptions" ></canvas>
-          </div>
-        </div>
-        </div>
-      </div>
-    
-    </p-tabPanel>
-    </p-tabView>
-    
-     
-    
-    
-    
-      
-   
-
-      <div class="col-lg-15 col-xs-9">
-        <div class="content card">
-          <h4 class="card-title text-black text-center">PHARMA NIFTY STOCKS</h4>
-          <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div style="text-transform: uppercase;font-weight:bold;"  fxFlex="15%" fxFlex.xs="33%" fxFlex.sm="33%" class="text-center"  *ngFor="let tile of pharmaniftystocks trackBy: trackByFunction11">
-              <mat-card [ngClass]="{'bg-gradient-bull text-black  mat-elevation-z4' : tile.text3 > 0 , ' bg-gradient-bear text-black mat-elevation-z4': 0 > tile.text3}"  >
-              
-                  <h6>{{tile.text1}}</h6>
-                  {{tile.text4}}<br>{{tile.text2}}&nbsp;({{tile.text3}}%)
-                <mat-card-actions>
-                  <button mat-button (click)="changestockpage(tile.text5)" >Graph</button>
-                </mat-card-actions>
-              </mat-card>
-            </div>
-          </div>
-          </div>
-        </div>
-
-
-     
+  </div>
   <!-- <div class="control-section">
     <div align='center' >
         <ejs-chart style='display:block;' [chartArea]='chartArea'  align='center' id='chartcontainer' [primaryXAxis]='primaryXAxis'
@@ -526,21 +702,20 @@
             <e-series-collection>
               <e-series [dataSource]='data2' type='Line' xName='x' yName='y' name='PCR' width=2 >
               </e-series>
-               
               <e-series [dataSource]='data3' type='MultiColoredLine' xName='x' yName='y' name='Nifty' width=2 yAxisName='yAxis' [marker]='marker'>
               </e-series>
-             
             </e-series-collection>
         </ejs-chart>
     </div>
   </div>   -->
-      
   <div fxLayout="row" fxLayout.xs="column">
-    <blockquote class="trendlyne-widgets abc" 
-                
-                [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTYPHARMA/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
-                data-theme="light" 
-                #trendlyneWidget></blockquote>
-      
-    </div>  
-  </div>  
+    <blockquote
+      class="trendlyne-widgets abc"
+      [attr.data-get-url]="
+        'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTYPHARMA/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'
+      "
+      data-theme="light"
+      #trendlyneWidget
+    ></blockquote>
+  </div>
+</div>

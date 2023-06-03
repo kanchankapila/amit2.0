@@ -1,4 +1,4 @@
-import { Component, OnInit,isDevMode,HostListener } from '@angular/core';
+import { Component, OnInit, isDevMode, HostListener } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import {
   SwPush,
@@ -9,33 +9,27 @@ import {
 } from '@angular/service-worker';
 import { PUBLIC_VAPID_KEY_OF_SERVER } from './app.constants';
 import { NotificationService } from './notifications.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  notificationData: string = '{}';
+  notificationData = '{}';
   title = 'demo1';
-  public getScreenWidth: any;
-  public getScreenHeight: any;
-
-  showSidebar: boolean = true;
-  showNavbar: boolean = true;
-  
+  public getScreenWidth:number;
+  public getScreenHeight: number;
+  showSidebar = true;
+  showNavbar = true;
   isLoading: boolean;
-
   constructor(private router: Router, private updateService: SwUpdate,
     private pushService: SwPush, private notificationService: NotificationService) {
-   
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         if ((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/register') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500')) {
           this.showSidebar = false;
           this.showNavbar = false;
-        
           document.querySelector('.main-panel').classList.add('w-100');
           document.querySelector('.page-body-wrapper').classList.add('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg',);
@@ -46,7 +40,6 @@ export class AppComponent implements OnInit {
         } else {
           this.showSidebar = true;
           this.showNavbar = true;
-          
           document.querySelector('.main-panel').classList.remove('w-100');
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
@@ -54,7 +47,6 @@ export class AppComponent implements OnInit {
         }
       }
     });
-
     // Spinner for lazyload modules
     router.events.forEach((event) => {
       if (event instanceof RouteConfigLoadStart) {
@@ -64,13 +56,9 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
- 
-
-
   ngOnInit() {
     this.getScreenWidth = window.innerWidth;
-      this.getScreenHeight = window.innerHeight;
+    this.getScreenHeight = window.innerHeight;
     if (isDevMode()) {
       console.log('Development!');
     } else {
@@ -83,9 +71,6 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-
-
-
     console.log('AppComponent.ngOnInit');
     if (!this.updateService.isEnabled) {
       console.log('AppComponent.ngOnInit: Service Worker is not enabled');
@@ -108,7 +93,6 @@ export class AppComponent implements OnInit {
   sendNotification() {
     this.notificationService.notifications(this.notificationData);
   }
-
   #handleUpdates() {
     this.updateService.versionUpdates.subscribe((event: VersionEvent) => {
       console.log(event);
@@ -132,14 +116,12 @@ export class AppComponent implements OnInit {
     //     clearInterval(interval);
     //   }
     // }, 1000);
-
     this.updateService.unrecoverable.subscribe(
       (event: UnrecoverableStateEvent) => {
         alert('Error reason : ' + event.reason);
       }
     );
   }
-
   async #handleNotifications() {
     try {
       const sub = await this.pushService.requestSubscription({
@@ -160,7 +142,4 @@ export class AppComponent implements OnInit {
       console.log(subscription);
     });
   }
-   
-  
 }
-

@@ -1,183 +1,143 @@
-
-
-
-  .scene {
-    width: 900px;
-    display: flex;
-    perspective: 800px;
-  
-    .card {
-      position: relative;
-      width: 125px;
-      height: 100px;
-      transition: 1s ease-in-out;
-      transform-style: preserve-3d;
-  
-      &:hover {
-        transform: rotateY(0.5turn);
-      }
+.scene {
+  width: 900px;
+  display: flex;
+  perspective: 800px;
+  .card {
+    position: relative;
+    width: 125px;
+    height: 100px;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+    &:hover {
+      transform: rotateY(0.5turn);
+    }
     .card-wrapper {
-        text-align: center;
+      text-align: center;
     }
-      .card__face {
-        position: absolute;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        border-radius: 3px;
-        backface-visibility: hidden;
-        transition: 1s ease-in-out;
-        
-  
-        &--back {
-          transform: rotateY(0.5turn);
-        }
-      }
-      
-    }
-    
-   
-  }
-  
-  .card22 {
-      position: relative;
-      width: 370px;
-      height:300px;
-      // text-align:center;
-      // object-fit: cover;
-      cursor: pointer;
-      text-size-adjust:inherit;
+    .card__face {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+      backface-visibility: hidden;
       transition: 1s ease-in-out;
-      transform-style: preserve-3d;
-  
-      &:hover {
+      &--back {
         transform: rotateY(0.5turn);
       }
-    
-      .card22__face {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        
-        border-radius: 3px;
-        backface-visibility: hidden;
-        transition: 1s ease-in-out;
-        // object-fit: cover;
-        // -webkit-box-reflect: below 0
-          // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-  
-       
-  
-        &--back {
-          transform: rotateY(0.5turn);
-        }
-      }
-      
     }
-
-    .scene1{
-      width: 900px;
-      display: flex;
-      perspective: 800px;
-    
-      .card {
-        position: relative;
-        width: 125px;
-        height: 55px;
-        transition: 1s ease-in-out;
-        transform-style: preserve-3d;
-    
-        &:hover {
-          transform: rotateY(0.5turn);
-        }
-      .card-wrapper {
-          text-align: center;
-      }
-        .card__face {
-          position: absolute;
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-          border-radius: 3px;
-          backface-visibility: hidden;
-          transition: 1s ease-in-out;
-          
-    
-          &--back {
-            transform: rotateY(0.5turn);
-          }
-        }
-        
-      }
-      
-     
+  }
+}
+.card22 {
+  position: relative;
+  width: 370px;
+  height: 300px;
+  // text-align:center;
+  // object-fit: cover;
+  cursor: pointer;
+  text-size-adjust: inherit;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
+  &:hover {
+    transform: rotateY(0.5turn);
+  }
+  .card22__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+    backface-visibility: hidden;
+    transition: 1s ease-in-out;
+    // object-fit: cover;
+    // -webkit-box-reflect: below 0
+    // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+    &--back {
+      transform: rotateY(0.5turn);
     }
-    
-    .card23 {
-        position: relative;
-        width: 370px;
-        height:400px;
-        // text-align:center;
-        // object-fit: cover;
-        cursor: pointer;
-        text-size-adjust:inherit;
-        transition: 1s ease-in-out;
-        transform-style: preserve-3d;
-    
-        &:hover {
-          transform: rotateY(0.5turn);
-        }
-    
-        .card23__face {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          
-          border-radius: 3px;
-          backface-visibility: hidden;
-          transition: 1s ease-in-out;
-          // object-fit: cover;
-          // -webkit-box-reflect: below 0
-            // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-    
-         
-    
-          &--back {
-            transform: rotateY(0.5turn);
-          }
-        }
-        
+  }
+}
+.scene1 {
+  width: 900px;
+  display: flex;
+  perspective: 800px;
+  .card {
+    position: relative;
+    width: 125px;
+    height: 55px;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+    &:hover {
+      transform: rotateY(0.5turn);
+    }
+    .card-wrapper {
+      text-align: center;
+    }
+    .card__face {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+      backface-visibility: hidden;
+      transition: 1s ease-in-out;
+      &--back {
+        transform: rotateY(0.5turn);
       }
-  
-  .marginbottom{
-    margin-bottom:5px;
-    margin-left:5px
+    }
   }
-  .text-center{
-    text-align: center;
+}
+.card23 {
+  position: relative;
+  width: 370px;
+  height: 400px;
+  // text-align:center;
+  // object-fit: cover;
+  cursor: pointer;
+  text-size-adjust: inherit;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
+  &:hover {
+    transform: rotateY(0.5turn);
   }
-
+  .card23__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+    backface-visibility: hidden;
+    transition: 1s ease-in-out;
+    // object-fit: cover;
+    // -webkit-box-reflect: below 0
+    // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+    &--back {
+      transform: rotateY(0.5turn);
+    }
+  }
+}
+.marginbottom {
+  margin-bottom: 5px;
+  margin-left: 5px
+}
+.text-center {
+  text-align: center;
+}
 :host ::ng-deep .p-button {
   margin: 0 .1rem 0 0;
   min-width: 15rem;
 }
-
 p {
   margin: 0;
 }
-
 .confirmation-content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 :host ::ng-deep .p-dialog .p-button {
   min-width: 6rem;
 }
-
 :host ::ng-deep button {
   margin-right: .25em;
 }
@@ -187,28 +147,25 @@ p {
 .p-component-overlay-enter {
   animation: p-component-overlay-enter-animation 150ms forwards;
 }
-
 .p-component-overlay-leave {
   animation: p-component-overlay-leave-animation 150ms forwards;
 }
-
 .p-component-overlay {
   @keyframes p-component-overlay-enter-animation {
-      from {
-          background-color: transparent;
-      }
-      to {
-          background-color: var(--maskbg);
-      }
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: var(--maskbg);
+    }
   }
-  
   @keyframes p-component-overlay-leave-animation {
-      from {
-          background-color: var(--maskbg);
-      }
-      to {
-          background-color: transparent;
-      }
+    from {
+      background-color: var(--maskbg);
+    }
+    to {
+      background-color: transparent;
+    }
   }
 }
 // :host ::ng-deep .card {
@@ -216,98 +173,81 @@ p {
 //   height:auto;
 //   color:black;
 //   font-size: xx-small;
-  
 // }
-.card-section23{
-  width:auto;
-  height:auto;
+.card-section23 {
+  width: auto;
+  height: auto;
 }
-.InsideContent{
-    display:flex;
-    align-items: flex-start;
-  }
+.InsideContent {
+  display: flex;
+  align-items: flex-start;
+}
 .InsideContent1 {
-    display: block;
-  }
-  
-.text-green{
-  color:green;
+  display: block;
 }
-
-.abc{
-  width: 400px;;
-  height:420px;
+.text-green {
+  color: green;
 }
-
-
-.newscard1{
-  width:400px;
-  height:250px;
+.abc {
+  width: 400px;
+  ;
+  height: 420px;
+}
+.newscard1 {
+  width: 400px;
+  height: 250px;
 }
 .container {
   margin: 10px;
-  
   margin-right: 0px;
-
- 
-  
 }
-.text-red{
-  color:red;
+.text-red {
+  color: red;
 }
-.text-yellow{
-  color:rgb(196, 196, 5);
+.text-yellow {
+  color: rgb(196, 196, 5);
 }
-card12{
-  width:1100px;
-  height:200px;
-  margin-right:10px;
+card12 {
+  width: 1100px;
+  height: 200px;
+  margin-right: 10px;
   font-size: small;
 }
-.cardbear{
-  display:flex;
-  width:auto;
+.cardbear {
+  display: flex;
+  width: auto;
   font-size: x-small;
   margin-bottom: 10px;
   margin-top: 10px;
-  
 }
-.cardbear1{
-  display:flex;
-  width:auto;
+.cardbear1 {
+  display: flex;
+  width: auto;
   font-size: x-small;
   margin-bottom: 10px;
   margin-top: 10px;
-  
 }
-.cardbear2{
-  display:flex;
-  width:auto;
+.cardbear2 {
+  display: flex;
+  width: auto;
   font-size: x-small;
   margin-bottom: 10px;
   margin-top: 10px;
-  
 }
-
-
 @media (min-width: 424px) {
   .card__face.card__face--front {
     display: flex;
     flex-direction: column;
   }
-
   .table-responsive {
     overflow-x: auto;
   }
-
   #stockChartDefault {
     display: inline-block !important;
   }
-
   #StockChartCandle e-stockchart-row {
     height: 20%;
   }
-
   #StockChartCandle e-stockchart-axis {
     height: 10%;
   }
@@ -315,7 +255,6 @@ card12{
 .card {
   position: relative;
 }
-
 .card .canvas-wrapper {
   position: absolute;
   top: 0;
@@ -329,7 +268,6 @@ card12{
   .card {
     position: relative;
   }
-  
   .card .canvas-wrapper {
     position: absolute;
     top: 0;
@@ -339,5 +277,4 @@ card12{
     opacity: 0.3;
     z-index: auto;
   }
-  
 }
