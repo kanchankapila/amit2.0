@@ -44,7 +44,9 @@
             },
             "allowedCommonJsDependencies": [
               "chart.js",
-              "ng-apexcharts.mjs"
+              "ng-apexcharts",
+              "apexcharts",
+              "JsonpRequest.js"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"

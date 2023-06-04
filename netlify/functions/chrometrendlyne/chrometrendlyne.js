@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const fetch = require('node-fetch')
 const pool = new Pool({
-  connectionString: process.env.POSTGRESS_DATABASE_URL, // Replace with your PostgreSQL database connection string
+  connectionString: process.env.POSTGRESS_DATABASE_URL1, // Replace with your PostgreSQL database connection string
   ssl: {
     rejectUnauthorized: false, // Only set this option if using a self-signed certificate
   },

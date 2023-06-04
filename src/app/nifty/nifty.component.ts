@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { ChartType } from 'chart.js';
@@ -7,6 +7,7 @@ import { RadioButton } from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import { ChartOptions } from 'chart.js';
+
 export interface Nifty50Stocks {
   text1: string;
   text2: string;
@@ -19,22 +20,22 @@ export interface stockhcdatatile {
   y: number;
 }
 export interface nifty50crossovertile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
+  text1: number;
+  text2: number;
+  text3: number;
+  text4: number;
 }
 export interface nifty50crossoverwtile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
+  text1: number;
+  text2: number;
+  text3: number;
+  text4: number;
 }
 export interface nifty50crossovermtile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
+  text1: number;
+  text2: number;
+  text3: number;
+  text4: number;
 }
 export interface nifty50indicatorstile {
   text1: string;
@@ -93,25 +94,17 @@ export interface niftytile { x: any; y: string; color: any; }
   styleUrls: ['./nifty.component.scss']
 })
 export class NiftyComponent implements OnInit {
-  a: any;
-  b: any;
-  c: any;
+  a: number;
+  b: number;
+  c: number;
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('TradingViewWidget1', { static: true }) TradingViewWidget1: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
-  tlbuildup: any;
+
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
   }
   selectedValue: string;
-  ngAfterViewInit() {
-    RadioButton.prototype.select = function () {
-      if (!this.disabled) {
-        this.inputViewChild.nativeElement.checked = true;
-        this.checked = true;
-        this.onModelChange(this.value);
-        this.onClick.emit(null);
-      }
-    };
+ 
     //   const trendlyneScript = document.createElement('script');
     //   trendlyneScript.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
     //   trendlyneScript.charset = 'utf-8';
@@ -153,52 +146,58 @@ export class NiftyComponent implements OnInit {
     //   this.TradingViewWidget1.nativeElement.appendChild(tradingViewScript1);
     // } 
     //   //stockhighcharts: StockChart;
-  }
-  public stockhcdate: Array<any> = [];
+  
+  ngAfterViewInit() {
+    RadioButton.prototype.select = function () {
+      if (!this.disabled) {
+        this.inputViewChild.nativeElement.checked = true;
+        this.checked = true;
+        this.onModelChange(this.value);
+        this.onClick.emit(null);
+      }
+    }}
+  public stockhcdate: Array<{x:number,y:number}> = [];
   public nifty50data: Array<number> = [];
-  public nifty50Labels: Array<any> = [];
+  public nifty50Labels: Array<number> = [];
   public niftypcrdata: Array<number> = [];
-  public niftypcrtime: Array<any> = [];
+  public niftypcrtime: Array<string>=[];
   public niftyvixdata: Array<number> = [];
-  public niftyvixtime: Array<any> = [];
+  public niftyvixtime: Array<number> = [];
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
-  public title1: string = 'Nifty';
+  public title1 = 'Nifty';
   public pointColorMapping: string;
   public nifty505ddata: Array<number> = [];
-  public nifty505dLabels: Array<any> = [];
+  public nifty505dLabels: Array<number> = [];
   public lineChart5dData: Array<any> = [];
   public lineChart5dLabels: Array<number> = [];
   public nifty501mdata: Array<number> = [];
-  public nifty501mLabels: Array<any> = [];
+  public nifty501mLabels: Array<number> = [];
   public lineChart1mData: Array<any> = [];
   public lineChart1mLabels: Array<number> = [];
   public nifty503mdata: Array<number> = [];
-  public nifty503mLabels: Array<any> = [];
+  public nifty503mLabels: Array<number> = [];
   public lineChart3mData: Array<any> = [];
   public lineChart3mLabels: Array<number> = [];
   public nifty506mdata: Array<number> = [];
-  public nifty506mLabels: Array<any> = [];
+  public nifty506mLabels: Array<number> = [];
   public lineChart6mData: Array<any> = [];
   public lineChart6mLabels: Array<number> = [];
   public nifty501yrdata: Array<number> = [];
-  public nifty501yrLabels: Array<any> = [];
+  public nifty501yrLabels: Array<number> = [];
   public lineChart1yrData: Array<any> = [];
   public lineChart1yrLabels: Array<number> = [];
   public lineChartpcrData: Array<any> = [];
-  public lineChartpcrLabels: Array<number> = [];
+  public lineChartpcrLabels: Array<string> = [];
   public lineChartpcrOptions: any;
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
-  axis1: Object[];
-  basicData: any;
-  basicOptions: any;
-  basicData1: any;
-  basicOptions1: any;
-  chart: any;
-  date: any;
-  stockisin: any;
+  axis1: object[];
+ 
+ 
+  date: Date;
+  stockisin: number;
   //tlid:any
   tlid = '1887';
   tlname = 'NIFTY50';
@@ -218,12 +217,12 @@ export class NiftyComponent implements OnInit {
   niftyema: niftyematile[] = [];
   niftysma: niftysmatile[] = [];
   prev_close: number;
-  hours: any;
-  minutes: any;
-  time: any;
-  public primaryXAxis1: Object;
-  public primaryYAxis1: Object;
-  public dataValues: Object[] = [];
+  hours: number;
+  minutes: number;
+  time: number;
+  public primaryXAxis1: object;
+  public primaryYAxis1: object;
+  public dataValues: object[] = [];
   public stockhcdate1: Array<any> = [];
   public lineChartDatan50snrr1: Array<number> = [];
   public lineChartDatan50snrr2: Array<number> = [];
@@ -231,44 +230,43 @@ export class NiftyComponent implements OnInit {
   public lineChartDatan50snrs1: Array<number> = [];
   public lineChartDatan50snrs2: Array<number> = [];
   public lineChartDatan50snrs3: Array<number> = [];
-  public lineChartLabelsn50snrr1: Array<any> = [];
-  public lineChartLabelsn50nrr3: Array<any> = [];
-  public lineChartLabelsn50snrr2: Array<any> = [];
-  public lineChartLabelsn50snrs1: Array<any> = [];
-  public lineChartLabelsn50snrs2: Array<any> = [];
-  public lineChartLabelsn50snrs3: Array<any> = [];
+  public lineChartLabelsn50snrr1: Array<number> = [];
+  public lineChartLabelsn50nrr3: Array<number> = [];
+  public lineChartLabelsn50snrr2: Array<number> = [];
+  public lineChartLabelsn50snrs1: Array<number> = [];
+  public lineChartLabelsn50snrs2: Array<number> = [];
+  public lineChartLabelsn50snrs3: Array<number> = [];
   public lineChartDatan50snrr1w: Array<number> = [];
   public lineChartDatan50snrr2w: Array<number> = [];
   public lineChartDatan50snrr3w: Array<number> = [];
   public lineChartDatan50snrs1w: Array<number> = [];
   public lineChartDatan50snrs2w: Array<number> = [];
   public lineChartDatan50snrs3w: Array<number> = [];
-  public lineChartLabelsn50snrr1w: Array<any> = [];
-  public lineChartLabelsn50nrr3w: Array<any> = [];
-  public lineChartLabelsn50snrr2w: Array<any> = [];
-  public lineChartLabelsn50snrs1w: Array<any> = [];
-  public lineChartLabelsn50snrs2w: Array<any> = [];
-  public lineChartLabelsn50snrs3w: Array<any> = [];
+  public lineChartLabelsn50snrr1w: Array<number> = [];
+  public lineChartLabelsn50nrr3w: Array<number> = [];
+  public lineChartLabelsn50snrr2w: Array<number> = [];
+  public lineChartLabelsn50snrs1w: Array<number> = [];
+  public lineChartLabelsn50snrs2w: Array<number> = [];
+  public lineChartLabelsn50snrs3w: Array<number> = [];
   public lineChartDatan50snrr1m: Array<number> = [];
   public lineChartDatan50snrr2m: Array<number> = [];
   public lineChartDatan50snrr3m: Array<number> = [];
   public lineChartDatan50snrs1m: Array<number> = [];
   public lineChartDatan50snrs2m: Array<number> = [];
   public lineChartDatan50snrs3m: Array<number> = [];
-  public lineChartLabelsn50snrr1m: Array<any> = [];
-  public lineChartLabelsn50nrr3m: Array<any> = [];
-  public lineChartLabelsn50snrr2m: Array<any> = [];
-  public lineChartLabelsn50snrs1m: Array<any> = [];
-  public lineChartLabelsn50snrs2m: Array<any> = [];
-  public lineChartLabelsn50snrs3m: Array<any> = [];
-  public data2: Object[] = [];
-  public data3: Object[] = [];
-  public marker1: any;
-  basicData3: any;
-  basicOptions3: any;
-  stockList: any
+  public lineChartLabelsn50snrr1m: Array<number> = [];
+  public lineChartLabelsn50nrr3m: Array<number> = [];
+  public lineChartLabelsn50snrr2m: Array<number> = [];
+  public lineChartLabelsn50snrs1m: Array<number> = [];
+  public lineChartLabelsn50snrs2m: Array<number> = [];
+  public lineChartLabelsn50snrs3m: Array<number> = [];
+  public data2: object[] = [];
+  public data3: object[] = [];
+  
+  
+  stockList:Array<any>;
   indexid = '1887';
-  duration: any;
+  duration: number;
   public lineChartColors = [
     {
       borderColor: '#2d0365'
@@ -320,45 +318,46 @@ export class NiftyComponent implements OnInit {
       yAxisName: 'yAxis'
     }
   ];
-  public primaryXAxis: Object = {
+  public primaryXAxis: object = {
     valueType: 'Category',
     interval: 1,
     labelIntersectAction: 'Rotate90',
     majorGridLines: { width: 0 }
   };
   //Initializing Primary Y Axis
-  public primaryYAxis: Object = {
+  public primaryYAxis: object = {
     // minimum: 0, maximum: 2, interval: 0.1,
     lineStyle: { width: 0 },
     labelFormat: '{value}'
   };
-  public chartArea: Object = {
+  public chartArea: object = {
     border: {
       width: 0
     }
   };
   // custom code end
-  public legend: Object = {
+  public legend: object = {
     visible: false
   }
-  public marker: Object
-  public axis: Object[]
-  public majorGridLines: Object = {
+  public marker: object
+  public marker1: object
+  public axis: object[]
+  public majorGridLines: object = {
     width: 0
   };
-  public tooltip: Object = {
+  public tooltip: object = {
     enable: true
   };
-  public title: string = 'Nifty vs PCR';
+  public title = 'Nifty vs PCR';
   gettlniftyparams(indexid, selectedValue) {
     // this.indexid='1898';
     this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.tlindexparam.length = 0;
       console.log(nestedItems);
-      for (let val in nestedItems[0].body.parameters) {
+      for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
         } else { continue; }
@@ -371,7 +370,7 @@ export class NiftyComponent implements OnInit {
   getniftysentiments() {
     this.nifty50sentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Daily" })
@@ -379,7 +378,7 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Weekly" })
@@ -387,7 +386,7 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Monthly" })
@@ -397,13 +396,13 @@ export class NiftyComponent implements OnInit {
   }
   getniftyvix() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       /////////////////////Nifty Vix/////////////////////////////////
       this.niftyvixdata.length = 0;
       this.niftyvixtime.length = 0;
-      for (let val in nestedItems[1]['values']) {
+      for (const val in nestedItems[1]['values']) {
         this.niftyvixdata.push(nestedItems[1]['values'][val]['_value'])
         this.niftyvixtime.push(nestedItems[1]['values'][val]['_time'])
       }
@@ -420,7 +419,7 @@ export class NiftyComponent implements OnInit {
   }
   getniftypcr() {
     this.dataApi.getntniftypcrdetails().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       // console.log(this.data2)
@@ -429,7 +428,7 @@ export class NiftyComponent implements OnInit {
       this.niftypcrtime.length = 0;
       this.pcr.length = 0;
       this.nifty.length = 0;
-      for (let val in nestedItems[0]['resultData']['data']) {
+      for (const val in nestedItems[0]['resultData']['data']) {
         this.pcr.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['pcr'] })
         if (nestedItems[0]['resultData']['data'][val]['index_close'] > 18500) {
           this.nifty.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['index_close'], color: 'red' })
@@ -494,7 +493,7 @@ export class NiftyComponent implements OnInit {
   }
   getnifty50smaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       /////////////////////////////EMA/SMA from Kite //////////////////////
@@ -510,8 +509,8 @@ export class NiftyComponent implements OnInit {
     this.http
       .get('https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?pagesize=50&exchange=50&sortby=percentChange&sortorder=desc&indexid=2369&company=true&indexname=Nifty%2050&marketcap=&pageno=1')
       .subscribe(
-        (data5: any) => {
-          let nestedItems = Object.keys(data5).map((key) => {
+        (data5: number) => {
+          const nestedItems = Object.keys(data5).map((key) => {
             return data5[key];
           });
           //////////////////////////////Nifty 50 Stocks ////////////////////////
@@ -530,10 +529,10 @@ export class NiftyComponent implements OnInit {
   }
   getnifty1yr() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty501yrdata.push(nestedItems[1].values[val]["_value"])
         this.nifty501yrLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -589,10 +588,10 @@ export class NiftyComponent implements OnInit {
   }
   getnifty6m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty506mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty506mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -609,10 +608,10 @@ export class NiftyComponent implements OnInit {
   }
   getnifty3m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty503mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty503mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -629,7 +628,7 @@ export class NiftyComponent implements OnInit {
   }
   getnifty5d() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty 5day Resistances and Indicators/////////////
@@ -644,11 +643,11 @@ export class NiftyComponent implements OnInit {
           this.lineChartDatan50snrs1w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
       }
       this.nifty50crossoverw.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.nifty50crossoverw.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
       this.nifty50indicatorsw.length = 0;
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.nifty50indicatorsw.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
@@ -658,12 +657,12 @@ export class NiftyComponent implements OnInit {
     })
     ////////////To get Nifty 1 week Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty505ddata.length = 0;
       this.nifty505dLabels.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty505ddata.push(nestedItems[1].values[val]["_value"])
         this.nifty505dLabels.push(nestedItems[1].values[val]["_time"].slice(0, 6))
       }
@@ -718,7 +717,7 @@ export class NiftyComponent implements OnInit {
   }
   getnifty1m() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty 1 month Resistances and Indicators/////////////
@@ -739,11 +738,11 @@ export class NiftyComponent implements OnInit {
           this.lineChartDatan50snrs1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
       }
       this.nifty50crossoverm.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
       this.nifty50indicatorsm.length = 0;
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
@@ -753,12 +752,12 @@ export class NiftyComponent implements OnInit {
     })
     ////////////To get Nifty 1 month Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty501mdata.length = 0;
       this.nifty501mLabels.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty501mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty501mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -813,13 +812,13 @@ export class NiftyComponent implements OnInit {
   }
   getniftytoday1() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.dataValues.length = 0;
       this.stockhcdate1.length = 0;
       this.prev_close = (nestedItems[1]['prev_close'])
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.stockhcdate1.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
       }
       this.primaryYAxis1 = {
@@ -841,13 +840,16 @@ export class NiftyComponent implements OnInit {
       this.stockhcdate1.map((value: number, index: number) => {
         if (((value['x']).slice(0, 1)) == 0) {
           this.hours = ((value['x']).slice(1, 2))
+          
         }
         else {
           this.hours = ((value['x']).slice(0, 2))
         }
         this.minutes = Number((value['x']).split(':').splice(1))
-        let date = new Date()
+       
+        const date = new Date()
         this.time = ((date.setHours(this.hours, this.minutes)))
+       
         if ((Number(value['y'])) < this.prev_close) {
           this.dataValues.push({
             XValue: new Date(this.time), YValue: Number(value['y']),
@@ -866,12 +868,12 @@ export class NiftyComponent implements OnInit {
   getniftytoday() {
     ////////////To get Nifty Today Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nifty50data.length = 0;
       this.nifty50Labels.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.nifty50data.push(nestedItems[1].values[val]["_value"])
         this.nifty50Labels.push((nestedItems[1].values[val]["_time"]))
         this.stockhcdate.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
@@ -880,7 +882,7 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty Today Resistances and Indicators/////////////
@@ -902,10 +904,10 @@ export class NiftyComponent implements OnInit {
       }
       this.nifty50indicators.length = 0;
       this.nifty50crossover.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.nifty50crossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.nifty50indicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
@@ -966,3 +968,5 @@ export class NiftyComponent implements OnInit {
     this.window.open("/Share?stock=" + this.stockisin, "_blank")
   }
 }
+
+
