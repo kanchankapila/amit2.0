@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@an
 import jsonp from 'jsonp-modernized';
 import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
-import { PeriodsModel, ITooltipRenderEventArgs, IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
+import { PeriodsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -352,13 +352,7 @@ export class ShareComponent implements OnInit {
   public crosshair: Object = {
     enable: true
   };
-  public tooltipRender(args: ITooltipRenderEventArgs): void {
-    if (args.text.split('<br/>')[4]) {
-      let target: number = parseInt(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], 10);
-      let value: string = (target / 100000000).toFixed(1) + 'B';
-      args.text = args.text.replace(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], value);
-    }
-  };
+ 
   public tooltip: object = { enable: true };
   public chartArea: Object = {
     border: {
@@ -375,12 +369,8 @@ export class ShareComponent implements OnInit {
     majorTickLines: { color: 'transparent', width: 0 },
     crosshairTooltip: { enable: true }
   };
-  public axisLabelRender(args: IAxisLabelRenderEventArgs): void {
-    let text: number = parseInt(args.text, 10);
-    if (args.axis.name === 'primaryYAxis1') {
-      args.text = text / 100000000 + 'B';
-    }
-  };
+  
+  
   public periods: PeriodsModel[] = [
     { intervalType: 'Minutes', interval: 1, text: '1m' },
     { intervalType: 'Minutes', interval: 15, text: '15m' },

@@ -164,7 +164,7 @@ export class DataapiService {
   }
 
   tlrefresh() {
-    return this.http.get('https://render-express-e54x.onrender.com/api/trendlynecookie');
+    return this.http.get('https://render-express-e54x.onrender.com/api/trendlynecookiepg');
   }
 
   getntniftypcrdetails() {
