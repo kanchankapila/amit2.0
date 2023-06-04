@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component , ViewEncapsulation, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
@@ -9,6 +9,7 @@ import { Chart } from 'chart.js';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss'],
   encapsulation: ViewEncapsulation.None,
+ 
 })
 export class AnalyticsComponent implements OnInit {
   tlchartList: Chart[] = [];
@@ -139,12 +140,12 @@ export class AnalyticsComponent implements OnInit {
             const maximiseButton = document.createElement('button');
             maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
             maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-            maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             const exitFullscreenButton = document.createElement('button');
             exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
             exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
             exitFullscreenButton.style.display = 'none'; // Hide the button initially
-            exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             // Append the maximise and exit fullscreen buttons to the card body
             tlcard.appendChild(maximiseButton);
             tlcard.appendChild(exitFullscreenButton);
@@ -183,17 +184,6 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            function toggleFullscreen(element) {
-              if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                  console.error(err);
-                });
-              } else {
-                if (document.exitFullscreen) {
-                  document.exitFullscreen();
-                }
-              }
-            }
             for (let val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -252,6 +242,18 @@ export class AnalyticsComponent implements OnInit {
       console.error(err);
     }
   }
+  toggleFullscreen(element) {
+    if (!document.fullscreenElement) {
+      element.requestFullscreen().catch(err => {
+        console.error(err);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+ 
   async getttvolume() {
     try {
       const data5 = await this.dataApi.getttvolume().toPromise(); // convert Observable to Promise
@@ -302,12 +304,12 @@ export class AnalyticsComponent implements OnInit {
           const maximiseButton = document.createElement('button');
           maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
           maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-          maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+          maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
           const exitFullscreenButton = document.createElement('button');
           exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
           exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
           exitFullscreenButton.style.display = 'none'; // Hide the button initially
-          exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+          exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
           // Append the maximise and exit fullscreen buttons to the card body
           tlcard.appendChild(maximiseButton);
           tlcard.appendChild(exitFullscreenButton);
@@ -346,17 +348,7 @@ export class AnalyticsComponent implements OnInit {
           tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
           tlcardshareholding.length = 0; // Clear the tlcardshareholding array
           tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-          function toggleFullscreen(element) {
-            if (!document.fullscreenElement) {
-              element.requestFullscreen().catch(err => {
-                console.error(err);
-              });
-            } else {
-              if (document.exitFullscreen) {
-                document.exitFullscreen();
-              }
-            }
-          }
+         
           for (let val1 in nestedItems1[1]['insightData']['price']) {
             tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
             tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -467,12 +459,12 @@ export class AnalyticsComponent implements OnInit {
             const maximiseButton = document.createElement('button');
             maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
             maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-            maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             const exitFullscreenButton = document.createElement('button');
             exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
             exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
             exitFullscreenButton.style.display = 'none'; // Hide the button initially
-            exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             // Append the maximise and exit fullscreen buttons to the card body
             tlcard.appendChild(maximiseButton);
             tlcard.appendChild(exitFullscreenButton);
@@ -511,17 +503,7 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            function toggleFullscreen(element) {
-              if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                  console.error(err);
-                });
-              } else {
-                if (document.exitFullscreen) {
-                  document.exitFullscreen();
-                }
-              }
-            }
+          
             for (let val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -627,12 +609,12 @@ export class AnalyticsComponent implements OnInit {
             const maximiseButton = document.createElement('button');
             maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
             maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-            maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             const exitFullscreenButton = document.createElement('button');
             exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
             exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
             exitFullscreenButton.style.display = 'none'; // Hide the button initially
-            exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             // Append the maximise and exit fullscreen buttons to the card body
             tlcard.appendChild(maximiseButton);
             tlcard.appendChild(exitFullscreenButton);
@@ -671,17 +653,7 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            function toggleFullscreen(element) {
-              if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                  console.error(err);
-                });
-              } else {
-                if (document.exitFullscreen) {
-                  document.exitFullscreen();
-                }
-              }
-            }
+           
             for (let val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -787,12 +759,12 @@ export class AnalyticsComponent implements OnInit {
             const maximiseButton = document.createElement('button');
             maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
             maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-            maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             const exitFullscreenButton = document.createElement('button');
             exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
             exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
             exitFullscreenButton.style.display = 'none'; // Hide the button initially
-            exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             // Append the maximise and exit fullscreen buttons to the card body
             tlcard.appendChild(maximiseButton);
             tlcard.appendChild(exitFullscreenButton);
@@ -831,17 +803,7 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            function toggleFullscreen(element) {
-              if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                  console.error(err);
-                });
-              } else {
-                if (document.exitFullscreen) {
-                  document.exitFullscreen();
-                }
-              }
-            }
+          
             for (let val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -947,12 +909,12 @@ export class AnalyticsComponent implements OnInit {
             const maximiseButton = document.createElement('button');
             maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
             maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-            maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             const exitFullscreenButton = document.createElement('button');
             exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
             exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
             exitFullscreenButton.style.display = 'none'; // Hide the button initially
-            exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+            exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
             // Append the maximise and exit fullscreen buttons to the card body
             tlcard.appendChild(maximiseButton);
             tlcard.appendChild(exitFullscreenButton);
@@ -991,17 +953,7 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            function toggleFullscreen(element) {
-              if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                  console.error(err);
-                });
-              } else {
-                if (document.exitFullscreen) {
-                  document.exitFullscreen();
-                }
-              }
-            }
+          
             for (let val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
@@ -1114,12 +1066,12 @@ export class AnalyticsComponent implements OnInit {
           const maximiseButton = document.createElement('button');
           maximiseButton.innerHTML = '<i class="pi pi-window-maximize"></i>'; // Use PrimeIcons maximise icon
           maximiseButton.classList.add('p-button', 'p-button-text', 'p-button-rounded');
-          maximiseButton.addEventListener('click', () => toggleFullscreen(tlcard));
+          maximiseButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
           const exitFullscreenButton = document.createElement('button');
           exitFullscreenButton.innerHTML = '<i class="pi pi-window-minimize"></i>'; // Use PrimeIcons exit fullscreen icon
           exitFullscreenButton.classList.add('p-button', 'p-button-text', 'p-button-rounded', 'p-button-secondary');
           exitFullscreenButton.style.display = 'none'; // Hide the button initially
-          exitFullscreenButton.addEventListener('click', () => toggleFullscreen(tlcard));
+          exitFullscreenButton.addEventListener('click', () => this.toggleFullscreen(tlcard));
           // Append the maximise and exit fullscreen buttons to the card body
           tlcard.appendChild(maximiseButton);
           tlcard.appendChild(exitFullscreenButton);
@@ -1158,17 +1110,7 @@ export class AnalyticsComponent implements OnInit {
           tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
           tlcardshareholding.length = 0; // Clear the tlcardshareholding array
           tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-          function toggleFullscreen(element) {
-            if (!document.fullscreenElement) {
-              element.requestFullscreen().catch(err => {
-                console.error(err);
-              });
-            } else {
-              if (document.exitFullscreen) {
-                document.exitFullscreen();
-              }
-            }
-          }
+         
           for (let val1 in nestedItems1[1]['insightData']['price']) {
             tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
             tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);

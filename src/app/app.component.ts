@@ -12,7 +12,8 @@ import { NotificationService } from './notifications.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
+ 
 })
 export class AppComponent implements OnInit {
   notificationData = '{}';
@@ -77,8 +78,8 @@ export class AppComponent implements OnInit {
       return;
     }
     console.log('AppComponent.ngOnInit: Service Worker is enabled');
-    this.#handleUpdates();
-    this.#handleNotifications();
+    this.handleUpdates();
+    this.handleNotifications();
   }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -93,7 +94,7 @@ export class AppComponent implements OnInit {
   sendNotification() {
     this.notificationService.notifications(this.notificationData);
   }
-  #handleUpdates() {
+  handleUpdates() {
     this.updateService.versionUpdates.subscribe((event: VersionEvent) => {
       console.log(event);
       alert(event.type);
@@ -122,7 +123,7 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  async #handleNotifications() {
+  async handleNotifications() {
     try {
       const sub = await this.pushService.requestSubscription({
         serverPublicKey: PUBLIC_VAPID_KEY_OF_SERVER,
