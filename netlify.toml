@@ -1,4 +1,4 @@
-command = "webpack --mode production"
+command = "npm run build"
 publish = "dist/"
 
 base="/"
