@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "nodemon index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
-    "build": "ng build --configuration=production",
+    
+    "build":"webpack --mode production",
     "serve": "ng serve --configuration=production",
     "heroku-postbuild": "ng build --configuration=production",
     "test": "ng test",
