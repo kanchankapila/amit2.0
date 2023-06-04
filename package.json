@@ -37,7 +37,6 @@
     "@angular/service-worker": "^16.0.3",
     "@mdi/font": "^7.2.96",
     "@netlify/functions": "^1.6.0",
-    "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.8",
     "@syncfusion/ej2-angular-charts": "^21.2.8",
     "@syncfusion/ej2-charts": "^21.2.8",

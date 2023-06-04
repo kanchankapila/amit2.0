@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import * as stocks from '../../lists/stocklist';
 import { DatePipe } from '@angular/common';
 import { SelectItem } from 'primeng/api';
@@ -61,7 +61,7 @@ export interface pcrnsebniftytile {
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss',],
-  providers: [NgbDropdownConfig]
+  providers: []
 })
 export class NavbarComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
@@ -127,22 +127,23 @@ export class NavbarComponent implements OnInit {
   sparklinebniftylabel: Array<any> = [];
   sparklinepniftydata: Array<any> = [];
   sparklinepniftylabel: Array<any> = [];
-  dateyesterday: any;
-  dateday5: any;
-  date5: any;
+  dateyesterday: string;
+  dateday5: string;
+  date5: number;
   res;
   // @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
-  tlbuildup: any;
-  tlniftybuildup: any;
-  tlbniftybuildup: any;
-  tlpniftybuildup: any;
+  tlbuildup: string;
+  tlniftybuildup: string;
+  tlbniftybuildup: string;
+  tlpniftybuildup: string;
   tlidnifty: string;
   tlidbnifty: string;
-  tlniftybuildup5: any;
-  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, config: NgbDropdownConfig, private window: Window, private dataApi: DataapiService) {
-    config.placement = 'bottom-right'; this.items = [];
+  tlniftybuildup5: string;
+  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private window: Window, private dataApi: DataapiService) {
+  
+    this.items = [];
     this.stock = stocks.default.Data;
-    for (let val in this.stock) {
+    for (const val in this.stock) {
       this.items.push({ label: this.stock[val].name, value: this.stock[val].isin });
     }
   }
@@ -193,7 +194,7 @@ export class NavbarComponent implements OnInit {
   async getttmmi() {
     try {
       this.dataApi.getttmmi().subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         this.ttmmi.length = 0;
@@ -209,7 +210,7 @@ export class NavbarComponent implements OnInit {
   }
   // toggle sidebar
   toggleSidebar() {
-    let body = document.querySelector('body');
+    const body = document.querySelector('body');
     if ((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
       this.iconOnlyToggled = !this.iconOnlyToggled;
       if (this.iconOnlyToggled) {
@@ -228,7 +229,7 @@ export class NavbarComponent implements OnInit {
   }
   getniftypcr() {
     this.dataApi.getntniftypcrdetails().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pcrnsenifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
@@ -237,7 +238,7 @@ export class NavbarComponent implements OnInit {
   }
   getbankniftypcr() {
     this.dataApi.getntbankniftypcrdetails().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pcrnsebnifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
@@ -247,7 +248,7 @@ export class NavbarComponent implements OnInit {
   getniftytlbuildup(tlidnifty) {
     this.tlidnifty = '1887'
     this.dataApi.gettlbuildup(this.tlidnifty).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.tlniftybuildup = (nestedItems[0]['data_v2'][0]['buildup'])
@@ -257,11 +258,11 @@ export class NavbarComponent implements OnInit {
   getniftytlbuildup5() {
     this.tlidnifty = '1887'
     this.dataApi.gettlbuildup5().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       // this.tlniftybuildup5=(nestedItems[0]['data_v2'][0]['buildup'])
-      for (let val in nestedItems[0]['all']['series']) {
+      for (const val in nestedItems[0]['all']['series']) {
         if (nestedItems[0]['all']['series'][val].code == "NIFTY50") {
           this.tlniftybuildup5 = nestedItems[0]['all']['series'][val].builtup_str
         }
@@ -271,7 +272,7 @@ export class NavbarComponent implements OnInit {
   getbniftytlbuildup(tlidbnifty) {
     this.tlidbnifty = '1898'
     this.dataApi.gettlbuildup(this.tlidbnifty).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.tlbniftybuildup = (nestedItems[0]['data_v2'][0]['buildup'])
@@ -280,13 +281,10 @@ export class NavbarComponent implements OnInit {
   }
   setttvolume() {
     console.log("Set TTVOLMCINSIGHT is hit !!!")
-    this.dataApi.setttvolume().subscribe(data5 => {
-    }
-    );
-  }
+    this.dataApi.setttvolume().subscribe();}
   getmcniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.mcniftyrt.length = 0;
@@ -299,7 +297,7 @@ export class NavbarComponent implements OnInit {
   }
   getmcpharmaniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bcpr').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.mcpniftyrt.length = 0;
@@ -312,7 +310,7 @@ export class NavbarComponent implements OnInit {
   }
   getmcbankniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.mcbniftyrt.length = 0;
@@ -323,13 +321,13 @@ export class NavbarComponent implements OnInit {
   }
   getniftysparkline() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       const sparklineCanvas = this.sparklineChartRef.nativeElement;
       this.sparklineniftydata.length = 0;
       this.sparklineniftylabel.length = 0;
-      for (let val in nestedItems[1]['values']) {
+      for (const val in nestedItems[1]['values']) {
         this.sparklineniftydata.push(nestedItems[1]['values'][val]['_value'])
         this.sparklineniftylabel.push(nestedItems[1]['values'][val]['_time'])
       }
@@ -364,13 +362,13 @@ export class NavbarComponent implements OnInit {
   }
   getbniftysparkline() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       const sparklineCanvas1 = this.sparklineChartRef1.nativeElement;
       this.sparklinebniftydata.length = 0;
       this.sparklinebniftylabel.length = 0;
-      for (let val in nestedItems[1]['values']) {
+      for (const val in nestedItems[1]['values']) {
         this.sparklinebniftydata.push(nestedItems[1]['values'][val]['_value'])
         this.sparklinebniftylabel.push(nestedItems[1]['values'][val]['_time'])
       }
@@ -405,13 +403,13 @@ export class NavbarComponent implements OnInit {
   }
   getpniftysparkline() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       const sparklineCanvas2 = this.sparklineChartRef2.nativeElement;
       this.sparklinepniftydata.length = 0;
       this.sparklinepniftylabel.length = 0;
-      for (let val in nestedItems[1]['values']) {
+      for (const val in nestedItems[1]['values']) {
         this.sparklinepniftydata.push(nestedItems[1]['values'][val]['_value'])
         this.sparklinepniftylabel.push(nestedItems[1]['values'][val]['_time'])
       }
