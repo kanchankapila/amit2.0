@@ -53,6 +53,20 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
+    
+    new HtmlWebpackPlugin({
+      template: 'src/index.html', // Path to your HTML template file
+      filename: 'index.html', // Output file name
+      inject: true, // Inject bundles into the template file
+      minify: {
+        collapseWhitespace: true, // Minify HTML
+        removeComments: true, // Remove comments from HTML
+        removeRedundantAttributes: true, // Remove redundant attributes from HTML tags
+        removeScriptTypeAttributes: true, // Remove script type attributes from script tags
+        removeStyleLinkTypeAttributes: true, // Remove style and link type attributes from style and link tags
+        useShortDoctype: true, // Use short DOCTYPE declaration for HTML5
+      },
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
