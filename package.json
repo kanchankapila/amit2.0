@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "nodemon index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
-    "build": "webpack --mode production",
+    "build": "ng build --configuration=production",
     "serve": "ng serve --configuration=production",
     "heroku-postbuild": "ng build --configuration=production",
     "test": "ng test",
@@ -55,6 +55,7 @@
     "echarts": "^5.4.2",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
+    
     "hammerjs": "^2.0.8",
     "install": "^0.13.0",
     "jsonp-modernized": "^1.0.0",
@@ -69,6 +70,7 @@
     "pg": "^8.11.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.4.1",
+    
     "querystring": "^0.2.1",
     "rxjs": "^7.8.1",
     "screenfull": "^6.0.2",
