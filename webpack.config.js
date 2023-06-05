@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
+const { AngularPWAWebpackPlugin } = require('@angular/pwa');
 
 module.exports = {
   mode: 'production', // Set the mode to production
@@ -48,6 +49,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css',
     }),
-    new WorkboxWebpackPlugin.GenerateSW(), // Generate service worker file
+    new GenerateSW(), // Generate service worker file
+    new AngularPWAWebpackPlugin(), // Generate manifest.json, ngsw-worker.js, and ngsw.json
   ],
 };
