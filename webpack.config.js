@@ -1,19 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
-const { AngularPWAWebpackPlugin } = require('@angular/pwa');
 
 module.exports = {
-  mode: 'production', // Set the mode to production
-  entry: './src/main.ts',
+  mode: 'production',
+  entry: {
+    main: './src/main.ts',
+    polyfills: './src/polyfills.ts',
+  },
   output: {
-    path: path.resolve(__dirname, 'dist/'),
-    filename: '[name].[chunkhash].js',
-    publicPath: '/', // Set the public path to root ('/') to work with Netlify
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[contenthash].js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -32,24 +33,64 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new TerserPlugin(),
-      new OptimizeCSSAssetsPlugin(),
-    ],
     splitChunks: {
       chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
     },
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: 'src/index.html',
       filename: 'index.html',
+      chunks: ['main', 'polyfills'],
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].css',
+      filename: '[name].[contenthash].css',
     }),
-    new GenerateSW(), // Generate service worker file
-    new AngularPWAWebpackPlugin(), // Generate manifest.json, ngsw-worker.js, and ngsw.json
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/assets',
+          to: 'assets',
+        },
+        {
+          from: 'src/manifest.json',
+          to: 'manifest.json',
+        },
+      ],
+    }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: 'ngsw-worker.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('^https://api.example.com'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 300,
+            },
+            networkTimeoutSeconds: 10,
+          },
+        },
+      ],
+    }),
+    new GenerateSW({
+      swDest: 'ngsw-config.json',
+      directoryIndex: '/',
+      navigateFallback: '/index.html',
+      navigateFallbackDenylist: [/^\/__/, /\/[^/?]+\.[^/]+$/],
+      skipWaiting: true,
+      clientsClaim: true,
+    }),
   ],
 };
