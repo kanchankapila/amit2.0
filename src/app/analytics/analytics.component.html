@@ -140,10 +140,26 @@
     </header>
     <div class="chart" id="chart-containerttvolbo"></div>
   </p-dialog>
+  <p-dialog
+  header="NT Volume Breakout"
+  [(visible)]="displayMaximizable6"
+  [modal]="true"
+  [style]="{ width: '100vw', height: '100vh' }"
+  [maximizable]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
   <header style="display: flex; justify-content: center">
+    <h1 class="header-1">TT Volume Breakout</h1>
+    <br /><em>Last Refreshed:{{ this.time1 }}</em>
+  </header>
+  <div class="chart" id="chart-containerntvolbo"></div>
+</p-dialog>
+  <!-- <header style="display: flex; justify-content: center">
     <h1 class="header-1">NT Volume Breakout</h1>
     <br /><em>Last Refreshed:{{ this.time1 }}</em>
   </header>
   <br />
-  <div class="chart" id="chart-containerntvolbo"></div>
+  <div class="chart" id="chart-containerntvolbo"></div> -->
 </div>
