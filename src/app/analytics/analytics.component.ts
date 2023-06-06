@@ -52,9 +52,10 @@ export class AnalyticsComponent implements OnInit {
       this.stockList = stocks.default.Data,
       // this.getmcinsightreadlongunwinding(),
       // this.gettlscreener(this.screenercode),
-      this.getntvolumeread()
+      this.getntvolume1()
     ])
-    setInterval(() => { this.getntvolume() }, 120000);
+    { setInterval(() => { this.getntvolume1() }, 60000); }
+   
     // setInterval(() => { this.getntvolumeread() }, 125000);
   }
   displayMaximizable1: boolean;
@@ -85,7 +86,7 @@ export class AnalyticsComponent implements OnInit {
   displayMaximizable6: boolean;
   showMaximizableDialog6() {
     this.displayMaximizable6 = true;
-    this.getntvolume()
+    this.getntvolume1()
     this.getntvolumeread()
   }
   trackByFunction1(index1, item1) { return item1.text3; }
@@ -1012,9 +1013,13 @@ export class AnalyticsComponent implements OnInit {
       console.error(err);
     }
   }
-  async getntvolume() {
+  async getntvolume1() {
     console.log("NT Volume is hit!!! on analytic components")
-    await this.dataApi.getntvolume();
+    const data6 = await this.http.get('http://localhost:9999/.netlify/functions/ntvolume').toPromise();
+    const nestedItems = Object.keys(data6).map(key => {
+      return data6[key];
+    });
+    console.log(nestedItems)
   }
   async getntvolumeread() {
     try {
