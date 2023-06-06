@@ -65,6 +65,9 @@ export class DataapiService {
   getttmmi() {
     return this.http.get(`${this.baseurl}/.netlify/functions/tickertapeapi`);
   }
+  getntvolume() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/ntvolume`);
+  }
 
   gettlindexparams(indexid, duration) {
     return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?indexid=${indexid}&duration=${duration}`);
@@ -139,9 +142,7 @@ export class DataapiService {
     return this.http.get(`${this.baseurl}/.netlify/functions/trendlynebuildup5`);
   }
 
-  getntvolume() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntvolume`);
-  }
+ 
 
   getntvolumeread() {
     return this.http.get(`${this.baseurl}/.netlify/functions/ntvolumeread`);

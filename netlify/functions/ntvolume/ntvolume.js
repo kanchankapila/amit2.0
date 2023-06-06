@@ -38,7 +38,7 @@ exports.handler = async (event, context) => {
     // Fetch data from the API
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data);
+   
 
     if (data.result === 1) {
       const resultData = data.resultData;
