@@ -1015,7 +1015,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async getntvolume1() {
     console.log("NT Volume is hit!!! on analytic components")
-    const data6 = await this.http.get('http://localhost:9999/.netlify/functions/ntvolume').toPromise();
+    const data6 = await this.http.get('https://stockinsights.netlify.app/.netlify/functions/ntvolume').toPromise();
     const nestedItems = Object.keys(data6).map(key => {
       return data6[key];
     });
