@@ -54,7 +54,7 @@ export class AnalyticsComponent implements OnInit {
       // this.gettlscreener(this.screenercode),
       this.getntvolumeread()
     ])
-    // setInterval(() => { this.getntvolume() }, 120000);
+    setInterval(() => { this.getntvolume() }, 120000);
     // setInterval(() => { this.getntvolumeread() }, 125000);
   }
   displayMaximizable1: boolean;
@@ -104,7 +104,7 @@ export class AnalyticsComponent implements OnInit {
     const tlcardshareholding = [];
     const tlcardshareholdingcolor = [];
     try {
-      for (let val in nestedItems[0]['body']['tableData']) {
+      for (const val in nestedItems[0]['body']['tableData']) {
         const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
         const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
@@ -120,12 +120,12 @@ export class AnalyticsComponent implements OnInit {
             const tlselectedstockdata = [];
             const tlselectedstocklabel = [];
             if (nestedItems[6][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[6]) {
+              for (const val in nestedItems[6]) {
                 tlselectedstockdata.push(nestedItems[6][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else if (nestedItems[5][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[5]) {
+              for (const val in nestedItems[5]) {
                 tlselectedstockdata.push(nestedItems[5][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
@@ -184,11 +184,11 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholdingcolor.length = 0; // Clear the tlcardshareholdingcolor array
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
-            for (let val1 in nestedItems1[1]['insightData']['price']) {
+            for (const val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
             }
-            for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+            for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
               tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
               tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
             }
@@ -257,7 +257,7 @@ export class AnalyticsComponent implements OnInit {
   async getttvolume() {
     try {
       const data5 = await this.dataApi.getttvolume().toPromise(); // convert Observable to Promise
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       const tlcardprice = [];
@@ -265,7 +265,7 @@ export class AnalyticsComponent implements OnInit {
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       this.time1 = new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-      for (let val in nestedItems[0]) {
+      for (const val in nestedItems[0]) {
         const ttvolumemcsymbol = this.stockList.filter(i => i.name === nestedItems[0][val].name)[0]?.mcsymbol;
         const ttvolumemcname = this.stockList.filter(i => i.name === nestedItems[0][val].name)[0]?.name;
         if (ttvolumemcsymbol == '#N/A') {
@@ -284,12 +284,12 @@ export class AnalyticsComponent implements OnInit {
           const ttvolumemcstockdata = [];
           const ttvolumemcstocklabel = [];
           if (nestedItems[6][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[6]) {
+            for (const val in nestedItems[6]) {
               ttvolumemcstockdata.push(nestedItems[6][val]['value']);
               ttvolumemcstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
           } else if (nestedItems[5][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[5]) {
+            for (const val in nestedItems[5]) {
               ttvolumemcstockdata.push(nestedItems[5][val]['value']);
               ttvolumemcstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
@@ -349,11 +349,11 @@ export class AnalyticsComponent implements OnInit {
           tlcardshareholding.length = 0; // Clear the tlcardshareholding array
           tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
          
-          for (let val1 in nestedItems1[1]['insightData']['price']) {
+          for (const val1 in nestedItems1[1]['insightData']['price']) {
             tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
             tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
           }
-          for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+          for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
             tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
             tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
           }
@@ -406,7 +406,7 @@ export class AnalyticsComponent implements OnInit {
   async gettlscreener(screenercode) {
     this.screenercode = '208626';
     this.dataApi.gettlscreeners(this.screenercode).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       console.log(nestedItems)
@@ -423,7 +423,7 @@ export class AnalyticsComponent implements OnInit {
     const tlcardshareholding = [];
     const tlcardshareholdingcolor = [];
     try {
-      for (let val in nestedItems[0]['body']['tableData']) {
+      for (const val in nestedItems[0]['body']['tableData']) {
         const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
         const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
@@ -439,12 +439,12 @@ export class AnalyticsComponent implements OnInit {
             const tlselectedstockdata = [];
             const tlselectedstocklabel = [];
             if (nestedItems[6][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[6]) {
+              for (const val in nestedItems[6]) {
                 tlselectedstockdata.push(nestedItems[6][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else if (nestedItems[5][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[5]) {
+              for (const val in nestedItems[5]) {
                 tlselectedstockdata.push(nestedItems[5][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
@@ -504,11 +504,11 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
           
-            for (let val1 in nestedItems1[1]['insightData']['price']) {
+            for (const val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
             }
-            for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+            for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
               tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
               tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
             }
@@ -573,7 +573,7 @@ export class AnalyticsComponent implements OnInit {
     const tlcardshareholding = [];
     const tlcardshareholdingcolor = [];
     try {
-      for (let val in nestedItems[0]['body']['tableData']) {
+      for (const val in nestedItems[0]['body']['tableData']) {
         const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
         const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
@@ -589,12 +589,12 @@ export class AnalyticsComponent implements OnInit {
             const tlselectedstockdata = [];
             const tlselectedstocklabel = [];
             if (nestedItems[6][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[6]) {
+              for (const val in nestedItems[6]) {
                 tlselectedstockdata.push(nestedItems[6][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else if (nestedItems[5][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[5]) {
+              for (const val in nestedItems[5]) {
                 tlselectedstockdata.push(nestedItems[5][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
@@ -654,11 +654,11 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
            
-            for (let val1 in nestedItems1[1]['insightData']['price']) {
+            for (const val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
             }
-            for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+            for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
               tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
               tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
             }
@@ -723,7 +723,7 @@ export class AnalyticsComponent implements OnInit {
     const tlcardshareholding = [];
     const tlcardshareholdingcolor = [];
     try {
-      for (let val in nestedItems[0]['body']['tableData']) {
+      for (const val in nestedItems[0]['body']['tableData']) {
         const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
         const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
@@ -739,12 +739,12 @@ export class AnalyticsComponent implements OnInit {
             const tlselectedstockdata = [];
             const tlselectedstocklabel = [];
             if (nestedItems[6][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[6]) {
+              for (const val in nestedItems[6]) {
                 tlselectedstockdata.push(nestedItems[6][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else if (nestedItems[5][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[5]) {
+              for (const val in nestedItems[5]) {
                 tlselectedstockdata.push(nestedItems[5][val]['value']);
                 tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
@@ -804,11 +804,11 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
           
-            for (let val1 in nestedItems1[1]['insightData']['price']) {
+            for (const val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
             }
-            for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+            for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
               tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
               tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
             }
@@ -873,7 +873,7 @@ export class AnalyticsComponent implements OnInit {
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       this.time3 = new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-      for (let val in nestedItems[0]['longunwinding']) {
+      for (const val in nestedItems[0]['longunwinding']) {
         const longunwindingstock = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].name)[0]?.mcsymbol;
         const longunwindingstockname = this.stockList.filter(i => i.name === nestedItems[0]['longunwinding'][val].name)[0]?.name;
         if (longunwindingstock !== '#N/A') {
@@ -889,12 +889,12 @@ export class AnalyticsComponent implements OnInit {
             const longunwindingstockdata = [];
             const longunwindingstocklabel = [];
             if (nestedItems[6][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[6]) {
+              for (const val in nestedItems[6]) {
                 longunwindingstockdata.push(nestedItems[6][val]['value']);
                 longunwindingstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else if (nestedItems[5][0].hasOwnProperty('value')) {
-              for (let val in nestedItems[5]) {
+              for (const val in nestedItems[5]) {
                 longunwindingstockdata.push(nestedItems[5][val]['value']);
                 longunwindingstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
@@ -954,11 +954,11 @@ export class AnalyticsComponent implements OnInit {
             tlcardshareholding.length = 0; // Clear the tlcardshareholding array
             tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
           
-            for (let val1 in nestedItems1[1]['insightData']['price']) {
+            for (const val1 in nestedItems1[1]['insightData']['price']) {
               tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
               tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
             }
-            for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+            for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
               tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
               tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
             }
@@ -1013,20 +1013,22 @@ export class AnalyticsComponent implements OnInit {
     }
   }
   async getntvolume() {
+    console.log("NT Volume is hit!!! on analytic components")
     await this.dataApi.getntvolume();
   }
   async getntvolumeread() {
     try {
       const data5 = await this.dataApi.getntvolumeread().toPromise(); // convert Observable to Promise
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       const tlcardprice = [];
       const tlcardpricecolor = [];
       const tlcardshareholding = [];
       const tlcardshareholdingcolor = [];
       this.time1 = new Date(nestedItems[1]).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-      for (let val in nestedItems[0]) {
+      for (const val in nestedItems[0]) {
         // console.log(nestedItems[val].name)
         const ntvolumemcsymbol = this.stockList.filter(i => i.symbol === nestedItems[0][val].symbol)[0]?.mcsymbol;
         const ntvolumemcname = this.stockList.filter(i => i.symbol === nestedItems[0][val].symbol)[0]?.name;
@@ -1046,12 +1048,12 @@ export class AnalyticsComponent implements OnInit {
           const ntvolumemcstockdata = [];
           const ntvolumemcstocklabel = [];
           if (nestedItems[6][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[6]) {
+            for (const val in nestedItems[6]) {
               ntvolumemcstockdata.push(nestedItems[6][val]['value']);
               ntvolumemcstocklabel.push(((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
           } else if (nestedItems[5][0].hasOwnProperty('value')) {
-            for (let val in nestedItems[5]) {
+            for (const val in nestedItems[5]) {
               ntvolumemcstockdata.push(nestedItems[5][val]['value']);
               ntvolumemcstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
             }
@@ -1111,11 +1113,11 @@ export class AnalyticsComponent implements OnInit {
           tlcardshareholding.length = 0; // Clear the tlcardshareholding array
           tlcardpricecolor.length = 0; // Clear the tlcardpricecolor array
          
-          for (let val1 in nestedItems1[1]['insightData']['price']) {
+          for (const val1 in nestedItems1[1]['insightData']['price']) {
             tlcardprice.push(nestedItems1[1]['insightData']['price'][val1].shortDesc);
             tlcardpricecolor.push(nestedItems1[1]['insightData']['price'][val1].color);
           }
-          for (let val2 in nestedItems1[1]['insightData']['shareholding']) {
+          for (const val2 in nestedItems1[1]['insightData']['shareholding']) {
             tlcardshareholding.push(nestedItems1[1]['insightData']['shareholding'][val2].shortDesc);
             tlcardshareholdingcolor.push(nestedItems1[1]['insightData']['shareholding'][val2].color);
           }

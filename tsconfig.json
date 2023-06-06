@@ -2,6 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
+    "removeComments": true,
     "module": "esnext",
     "target": "ES5",
     "esModuleInterop": true,
