@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-
+const fetch = require('node-fetch')
 exports.handler = async (event, context) => {
   const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
 
