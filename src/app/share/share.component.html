@@ -67,15 +67,8 @@
       ></p-button>
     </ng-template>
   </p-dialog>
-  <p-dialog
-    header="Positive"
-    [(visible)]="displayMaximizable1"
-    [modal]="true"
-    [style]="{ width: '100vw', height: '100vh' }"
-    [maximizable]="true"
-    [baseZIndex]="10000"
-    [draggable]="false"
-    [resizable]="false"
+  <p-dialog header="Positive" [(visible)]="displayMaximizable1" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '150vw'}" [style]="{width: '250vw'}" [maximizable]="true" [baseZIndex]="10000">
+    
   >
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
@@ -126,14 +119,15 @@
     </ng-template>
   </p-dialog>
   <p-dialog
-    header="Insights"
-    [(visible)]="displayMaximizable3"
-    [modal]="true"
-    [style]="{ width: '100vw', height: '100vh' }"
-    [maximizable]="true"
-    [baseZIndex]="10000"
-    [draggable]="false"
-    [resizable]="false"
+  header="Insights"
+  [(visible)]="displayMaximizable3"
+  [modal]="true"
+  [breakpoints]="{'960px': '75vw', '424px': '100vw'}"
+  [style]="{maxWidth: '100vw', width: '90vw', top: '10%', left: '10%', transform: 'translate(-10%, -10%)'}" 
+  [maximizable]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
   >
     <p
       *ngFor="let tile of brokertarget; trackBy: trackByFunction10"
@@ -1063,6 +1057,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
     <div class="content card textcenter">
       <div fxLayout="row wrap" fxLayoutGap="5px grid">
@@ -1074,78 +1069,16 @@
           *ngFor="
             let tile of stockindicators;
             let i = index;
-            trackBy: trackByFunction2
+            trackBy: trackByFunctionstockindicators
           "
         >
-          <p-dialog
-            header="{{ tile.text1 }}"
-            [(visible)]="dialogVisible[i]"
-            [style]="{ width: '50vw' }"
-          >
-            <div
-              class="text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
-            >
-              {{ tile.text1 }}<br />{{ tile.text9 }}<br />Tech Score:{{
-                tile.text11
-              }}<br />Analyst Score:{{ tile.text12 }}<br />Risk Score:{{
-                tile.text10
-              }}<br />Current Price:{{ tile.text3 }}<br />Change:{{
-                tile.text2
-              }}%
-            </div>
-            <div
-              class="text-black type1-regular textcenter grid-margin stretch-card"
-            >
-              Target High:{{ tile.text4 }}<br />Target Low:{{ tile.text5
-              }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
-              }}<br />Hold:{{ tile.text8 }}
-            </div>
-            <p-footer>
-              <button
-                type="button"
-                pButton
-                (click)="dialogVisible[i] = false"
-                label="Close"
-              ></button>
-              <button
-                type="button"
-                pButton
-                (click)="maximizeDialog(i)"
-                icon="pi pi-window-maximize"
-                iconPos="right"
-              ></button>
-            </p-footer>
-          </p-dialog>
-          <div class="scene">
-            <div class="card">
-              <div
-                class="card__face card__face--front text-center text-black bg-gradient-bull type1-regular textcenter grid-margin stretch-card"
-                (click)="dialogVisible[i] = true"
-              >
-                {{ tile.text1 }}<br />{{ tile.text9 }}<br />Tech Score:{{
-                  tile.text11
-                }}<br />Analyst Score:{{ tile.text12 }}<br />Risk Score:{{
-                  tile.text10
-                }}<br />Current Price:{{ tile.text3 }}<br />Change:{{
-                  tile.text2
-                }}%
-                <div style="text-align: center"></div>
-              </div>
-              <div
-                class="card__face card__face--back text-center bg-gradient-bull text-black type1-regular textcenter grid-margin stretch-card"
-                (click)="dialogVisible[i] = true"
-              >
-                Target High:{{ tile.text4 }}<br />Target Low:{{ tile.text5
-                }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
-                }}<br />Hold:{{ tile.text8 }}
-                <div style="text-align: center"></div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
   </div>
+
+
   <div fxLayout="row" fxLayout.xs="column">
     <div
       class="col-lg-6 col-xs-4 text-center text-white grid-margin stretch-card"
