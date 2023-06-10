@@ -1,10 +1,9 @@
 const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -19,5 +18,12 @@ module.exports = {
       }),
     ],
   },
- 
+  plugins: [
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
+  ],
 };

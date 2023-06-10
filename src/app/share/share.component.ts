@@ -757,11 +757,11 @@ export class ShareComponent implements OnInit {
   gettlstockparams(indexid, selectedValue) {
     // this.indexid='1898';
     this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.tlindexparam.length = 0;
-      for (let val in nestedItems[0].body.parameters) {
+      for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
         } else { continue; }
@@ -774,7 +774,7 @@ export class ShareComponent implements OnInit {
   async getstocksparkline(mcsymbol) {
     try {
       this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         console.log(nestedItems)
@@ -782,13 +782,13 @@ export class ShareComponent implements OnInit {
         this.sparklinestockdata.length = 0;
         this.sparklinestocklabel.length = 0;
         if (nestedItems[6][0].hasOwnProperty('value')) {
-          for (let val in nestedItems[6]) {
+          for (const val in nestedItems[6]) {
             this.sparklinestockdata.push(nestedItems[6][val]['value'])
             this.sparklinestocklabel.push(nestedItems[6][val]['time'])
           }
         }
         else if (nestedItems[5][0].hasOwnProperty('value')) {
-          for (let val in nestedItems[5]) {
+          for (const val in nestedItems[5]) {
             this.sparklinestockdata.push(nestedItems[5][val]['value'])
             this.sparklinestocklabel.push(nestedItems[5][val]['time'])
           }
@@ -824,19 +824,19 @@ export class ShareComponent implements OnInit {
       console.error(err);
     }
   }
-  opstrarefresh() {
-    this.http.get(this.baseurl + '/.netlify/functions/opstrarefresh').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-      // this.dataApi.getopstrarefresh();
-      console.log("Opstrarefresh is hit")
-    });
-  };
+  // opstrarefresh() {
+  //   this.http.get(this.baseurl + '/.netlify/functions/opstrarefresh').subscribe(data5 => {
+  //     const nestedItems = Object.keys(data5).map(key => {
+  //       return data5[key];
+  //     });
+  //     // console.log(nestedItems)
+  //     // this.dataApi.getopstrarefresh();
+  //     // console.log("Opstrarefresh is hit")
+  //   });
+  // };
   async getkotakview(eqsymbol) {
     this.dataApi.getkotakscore(eqsymbol).subscribe(data => {
-      let nestedItems = Object.keys(data).map(key => {
+      const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
       if (nestedItems[0].length != 0) {
@@ -851,10 +851,10 @@ export class ShareComponent implements OnInit {
         this.sectorid = nestedItems[0][0].SectorId
       }
       this.dataApi.getkotaksectorview(this.sectorid).subscribe(async data => {
-        let nestedItems = Object.keys(data).map(key => {
+        const nestedItems = Object.keys(data).map(key => {
           return data[key];
         });
-        for (let val in nestedItems[0]) {
+        for (const val in nestedItems[0]) {
           if ((this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)).length == 0) {
             continue;
           } else {
@@ -877,11 +877,11 @@ export class ShareComponent implements OnInit {
   }
   async getgnewsapi(bqnames, dateday5, datetoday) {
     this.dataApi.getgnewsapi(this.bqnames, this.dateday5, this.datetoday).subscribe(async data => {
-      let nestedItems = Object.keys(data).map(key => {
+      const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
       this.newscard.length = 0;
-      for (let val in nestedItems[0].articles) {
+      for (const val in nestedItems[0].articles) {
         this.newscard.push({ text1: nestedItems[0].articles[val].title, text2: nestedItems[0].articles[val].url, text3: nestedItems[0].articles[val].urlToImage, text4: nestedItems[0].articles[val].description, text5: nestedItems[0].articles[val].content })
       }
     });
@@ -941,7 +941,7 @@ export class ShareComponent implements OnInit {
   async getetshareholding(stockid) {
     try {
       this.http.get("https://www.bqprime.com/next/feapi/stock/" + this.stockid + "/shareholding-snapshot").subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         this.legendSettingssh = {
@@ -965,7 +965,7 @@ export class ShareComponent implements OnInit {
             type: 'Curve'
           },
         };
-        for (let val in nestedItems[0]['chart']) {
+        for (const val in nestedItems[0]['chart']) {
           this.datash.push({ value: nestedItems[0]['chart'][val].value, DataLabelMappingName: nestedItems[0]['chart'][val].label })
         }
       });
@@ -994,7 +994,7 @@ export class ShareComponent implements OnInit {
           lineStyle: { width: 0 },
         };
         this.datapv.length = 0;
-        for (let val in pricevolume['data']['stock_price_volume_data']['volume']) {
+        for (const val in pricevolume['data']['stock_price_volume_data']['volume']) {
           this.datapv.unshift({ Day: val, cvol: pricevolume['data']['stock_price_volume_data']['volume'][val].cvol, delivery: pricevolume['data']['stock_price_volume_data']['volume'][val].delivery })
         }
       }
@@ -1016,7 +1016,7 @@ export class ShareComponent implements OnInit {
           this.dealsmsg.push({ text1: insight['data']['insightData']['price'][5]['shortDesc'], text2: insight['data']['insightData']['price'][5]['color'] })
         }
         this.shareholdingmsg.length = 0;
-        for (let val in insight['data']['insightData']['shareholding']) {
+        for (const val in insight['data']['insightData']['shareholding']) {
           this.shareholdingmsg.push({ text1: insight['data']['insightData']['shareholding'][val]['shortDesc'], text2: insight['data']['insightData']['shareholding'][val]['color'] })
         }
         if (insight['data']['insightData']['price'].hasOwnProperty('4')) {
@@ -1084,7 +1084,8 @@ export class ShareComponent implements OnInit {
       if (response.ok) {
         const result = await response.json();
         this.stockohlc1yr.length = 0;
-        for (let val in result.c) {
+        for (const val in result.c) {
+          
           this.stockohlc1yr.push({ x: new Date((result.t[val]) * 1000), open: result.o[val], high: result.h[val], low: result.l[val], close: result.c[val], volume: result.v[val] })
         }
         this.data1 = this.stockohlc1yr
@@ -1095,12 +1096,12 @@ export class ShareComponent implements OnInit {
   }
   async getopstrastockpcr(eqsymbol) {
     this.dataApi.getopstrastockpcr(this.eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.opstrastockpcrdata.length = 0;
       this.opstrastockpcrLabels.length = 0;
-      for (let val in nestedItems[0]['data']) {
+      for (const val in nestedItems[0]['data']) {
         this.opstrastockpcrdata.push(nestedItems[0]['data'][val][2]);
         this.opstrastockpcrLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
       }
@@ -1136,12 +1137,12 @@ export class ShareComponent implements OnInit {
   }
   async getopstrastockpcrintra(eqsymbol) {
     this.dataApi.getopstrastockpcrintra(this.eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.opstrastockpcrintradata.length = 0;
       this.opstrastockpcrintraLabels.length = 0;
-      for (let val in nestedItems[0]['data']) {
+      for (const val in nestedItems[0]['data']) {
         // console.log((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0])
         if (this.datetoday1 == (new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]) {
           this.opstrastockpcrintradata.push(nestedItems[0]['data'][val][2]);
@@ -1181,12 +1182,12 @@ export class ShareComponent implements OnInit {
     //     return data5[key];
     //   });
     this.dataApi.getntstock1yr(this.eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.stockohlc.length = 0;
       this.stockohlcvolume.length = 0;
-      for (let val in nestedItems[3]) {
+      for (const val in nestedItems[3]) {
         this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: [nestedItems[3][val].open, nestedItems[3][val].high, nestedItems[3][val].low, nestedItems[3][val].close] })
         this.stockohlcvolume.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: nestedItems[3][val].volume })
       }
@@ -1286,10 +1287,10 @@ export class ShareComponent implements OnInit {
   getshare3m(eqsymbol) {
     ////////////////Nifty 3 months/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=3m').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[0]['results']['quotedata']) {
+      for (const val in nestedItems[0]['results']['quotedata']) {
         this.stock3mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock3mLabels.unshift((new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).split(",").slice(0, 6)[0])
       }
@@ -1314,7 +1315,7 @@ export class ShareComponent implements OnInit {
   // }
   async getmmdata(stockid) {
     this.dataApi.getmmdata(this.stockid).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       // this.http.get('https://www.trading80.com/technical_card/getCardInfo?sid=' + this.stockid + '&se=bse&cardlist=sectPrice_techScore,sectPrice_indiScale,sectIndigraph_graph,sectMacd_macd_w,sectRsi_rsi_w,sectBb_bb_w,sectMa_ma_w,sectKst_kst_w,sectDow_dow_w,sectObv_obv_w').subscribe(data5 => {
@@ -1322,7 +1323,7 @@ export class ShareComponent implements OnInit {
       //     return data5[key];
       //   });
       this.hmsg = (nestedItems[0]['data'].sectPrice_techScore['header_msg'])
-      for (let val in nestedItems[0]['data']['sectPrice_indiScale']) {
+      for (const val in nestedItems[0]['data']['sectPrice_indiScale']) {
         if (nestedItems[0]['data']['sectPrice_indiScale'][val].sid == this.stockid) {
           //this.hmsg.push({ text:nestedItems[0]['data'].sectPrice_techScore['header_msg'], text1: nestedItems[0]['data'].sectPrice_techScore['score'], text2: nestedItems[0]['data'].sectPrice_techScore['tech_text'] })
           // this.score.push({text1:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_clr,text2:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_points,text3:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_text,text4:nestedItems[0]['data']['sectPrice_indiScale'][val].quality_clr, text5: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_rank, text6: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_text})
@@ -1337,7 +1338,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatapricemacdm.length = 0;
       this.lineChartDatagrademacdm.length = 0;
       // this.msg = nestedItems[0]['data']['sectBb_bb_m'].text
-      for (let val in nestedItems[0]['data']['sectMacd_macd_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectMacd_macd_w']["stock"]) {
         this.lineChartDatamacdm.push(nestedItems[0]['data']['sectMacd_macd_w']["stock"][val].macd)
         this.lineChartDatasignalm.push(nestedItems[0]['data']['sectMacd_macd_w']["stock"][val].signal)
         this.lineChartDatapricemacdm.push(nestedItems[0]['data']['sectMacd_macd_w']["stock"][val].price)
@@ -1366,7 +1367,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatalbandm.length = 0;
       this.lineChartDatapricersim.length = 0;
       this.lineChartrsimLabels.length = 0;
-      for (let val in nestedItems[0]['data']['sectRsi_rsi_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectRsi_rsi_w']["stock"]) {
         this.lineChartDatarsim.push(nestedItems[0]['data']['sectRsi_rsi_w']["stock"][val].rsi)
         this.lineChartDataubandm.push(nestedItems[0]['data']['sectRsi_rsi_w']["stock"][val].uband)
         this.lineChartDatalbandm.push(nestedItems[0]['data']['sectRsi_rsi_w']["stock"][val].lband)
@@ -1395,7 +1396,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatamapricem.length = 0;
       this.lineChartDatamadate.length = 0;
       this.lineChartDatamaflag.length = 0;
-      for (let val in nestedItems[0]['data']['sectMa_ma_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectMa_ma_w']["stock"]) {
         this.lineChartDatamaday50m.push(nestedItems[0]['data']['sectMa_ma_w']["stock"][val].day50)
         this.lineChartDatamaday200m.push(nestedItems[0]['data']['sectMa_ma_w']["stock"][val].day200)
         this.lineChartDatamapricem.push(nestedItems[0]['data']['sectMa_ma_w']["stock"][val].price)
@@ -1424,7 +1425,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatabbdma20.length = 0;
       this.lineChartDatabbdate.length = 0;
       this.lineChartDatabbprice.length = 0;
-      for (let val in nestedItems[0]['data']['sectBb_bb_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectBb_bb_w']["stock"]) {
         this.lineChartDatabbuband.push(nestedItems[0]['data']['sectBb_bb_w']["stock"][val].uband)
         this.lineChartDatabblband.push(nestedItems[0]['data']['sectBb_bb_w']["stock"][val].lband)
         this.lineChartDatabbdma20.push(nestedItems[0]['data']['sectBb_bb_w']["stock"][val].dma20)
@@ -1456,7 +1457,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatakstsignal.length = 0;
       this.lineChartDatakstprice.length = 0;
       this.lineChartDatakstdate.length = 0;
-      for (let val in nestedItems[0]['data']['sectKst_kst_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectKst_kst_w']["stock"]) {
         this.lineChartDatakst.push(nestedItems[0]['data']['sectKst_kst_w']["stock"][val].kst)
         this.lineChartDatakstsignal.push(nestedItems[0]['data']['sectKst_kst_w']["stock"][val].signal)
         this.lineChartDatakstprice.push(nestedItems[0]['data']['sectKst_kst_w']["stock"][val].price)
@@ -1485,7 +1486,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDatadowprice.length = 0;
       this.lineChartDatadowscore.length = 0;
       this.lineChartDatadowflag.length = 0;
-      for (let val in nestedItems[0]['data']['sectDow_dow_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectDow_dow_w']["stock"]) {
         this.lineChartDatadowdate.push(nestedItems[0]['data']['sectDow_dow_w']["stock"][val].date)
         this.lineChartDatadowprice.push(nestedItems[0]['data']['sectDow_dow_w']["stock"][val].price)
         this.lineChartDatadowscore.push(nestedItems[0]['data']['sectDow_dow_w']["stock"][val].score)
@@ -1512,7 +1513,7 @@ export class ShareComponent implements OnInit {
       this.lineChartDataobvdate.length = 0;
       this.lineChartDataobv.length = 0;
       this.lineChartDataobvprice.length = 0;
-      for (let val in nestedItems[0]['data']['sectObv_obv_w']["stock"]) {
+      for (const val in nestedItems[0]['data']['sectObv_obv_w']["stock"]) {
         this.lineChartDataobvdate.push(nestedItems[0]['data']['sectObv_obv_w']["stock"][val].date)
         this.lineChartDataobv.push(nestedItems[0]['data']['sectObv_obv_w']["stock"][val].obv)
         this.lineChartDataobvprice.push(nestedItems[0]['data']['sectObv_obv_w']["stock"][val].price)
@@ -1536,6 +1537,9 @@ export class ShareComponent implements OnInit {
     }), err => {
       console.log(err)
     }
+  }
+  trackByFunctionstockindicators(index, item) {
+    return index;
   }
   trackByFunction(index, item) { return item.text2 }
   trackByFunction1(index1, item1) { return item1.text1 }
@@ -1590,10 +1594,10 @@ export class ShareComponent implements OnInit {
   getshare1w(eqsymbol) {
     ////////////////Nifty 1 Week/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[0]['results']['quotedata']) {
+      for (const val in nestedItems[0]['results']['quotedata']) {
         this.stock1wdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock1wLabels.unshift((new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).split(",").slice(0, 6)[0])
       }
@@ -1611,10 +1615,10 @@ export class ShareComponent implements OnInit {
   getshare1m(eqsymbol) {
     ////////////////Nifty 3 months/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1m').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[0]['results']['quotedata']) {
+      for (const val in nestedItems[0]['results']['quotedata']) {
         this.stock1mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock1mLabels.unshift((new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).split(",").slice(0, 6)[0])
       }
@@ -1665,7 +1669,7 @@ export class ShareComponent implements OnInit {
     this.stockDatasma200.length = 0;
     ////////////////Nifty 3 months/////////////////////////////
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol + '&user_id=').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       let val = 0;
@@ -1688,10 +1692,10 @@ export class ShareComponent implements OnInit {
       }
     });
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=6m').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[0]['results']['quotedata']) {
+      for (const val in nestedItems[0]['results']['quotedata']) {
         this.stock6mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock6mLabels.unshift((new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).split(",").slice(0, 6)[0])
       }
@@ -1795,7 +1799,7 @@ export class ShareComponent implements OnInit {
   getstocksentiments(mcsymbol) {
     this.stocksentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.stocksentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Daily" })
@@ -1803,7 +1807,7 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.stocksentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Weekly" })
@@ -1811,7 +1815,7 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.stocksentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Monthly" })
@@ -1821,26 +1825,30 @@ export class ShareComponent implements OnInit {
   }
   getstocktoday1(mcsymbol) {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      let nestedItems1 = Object.keys(data5).map(key => {
+      const nestedItems1 = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pclose = nestedItems1[2].pclose;
       this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         this.dataValues.length = 0;
         this.stockhcdate1.length = 0;
         if (nestedItems[6][0].hasOwnProperty('value')) {
-          for (let val in nestedItems[6]) {
-            this.stockhcdate1.push({ x: (new Date(nestedItems[6][val]["time"] * 1000).toUTCString()), y: (nestedItems[6][val]["value"]) })
+          for (const val in nestedItems[6]) {
+            
+           
+
+            this.stockhcdate1.push({ x: (((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()))), y: (nestedItems[6][val]["value"]) })
           }
-        }
-        else if (nestedItems[5][0].hasOwnProperty('value')) {
-          for (let val in nestedItems[5]) {
-            this.stockhcdate1.push({ x: (new Date(nestedItems[5][val]["time"] * 1000).toUTCString()), y: (nestedItems[5][val]["value"]) })
+        } else if (nestedItems[5][0].hasOwnProperty('value')) {
+        
+          for (const val in nestedItems[5]) {
+            console.log(nestedItems[5][val]["time"])
+            this.stockhcdate1.push({ x: (new Date(nestedItems[5][val]["time"] * 1000).toUTCString()), y: (nestedItems[5][val]["value"]) }) 
           }
-        }
+        } 
         this.primaryYAxis2 = {
           rangePadding: 'None',
           // minimum: 12000,
@@ -1876,19 +1884,21 @@ export class ShareComponent implements OnInit {
   }
   async getstocktoday(mcsymbol, eqsymbol) {
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(this.mcsymbol)
+      console.log(nestedItems)
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
       if (nestedItems[6][0].hasOwnProperty('value')) {
-        for (let val in nestedItems[6]) {
+        for (const val in nestedItems[6]) {
           this.stock1ddata.push(nestedItems[6][val]["value"])
           this.stock1dLabels.push(((new Date(nestedItems[6][val]["time"] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5))
         }
       }
       else if (nestedItems[5][0].hasOwnProperty('value')) {
-        for (let val in nestedItems[5]) {
+        for (const val in nestedItems[5]) {
           this.stock1ddata.push(nestedItems[5][val]["value"])
           this.stock1dLabels.push(((new Date(nestedItems[5][val]["time"] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5))
         }
@@ -1897,7 +1907,7 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pclose = nestedItems[2].pclose;
@@ -1922,10 +1932,10 @@ export class ShareComponent implements OnInit {
       this.stockindicators.length = 0;
       this.stockcrossover.length = 0;
       // console.log(nestedItems)
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.stockcrossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         // if (nestedItems[2]['indicators'][val1]['id'] == 'beta_nse') {
         //   console.log('beta_nse')
         //   this.stockindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
@@ -2016,7 +2026,7 @@ export class ShareComponent implements OnInit {
         .then((responseData => {
           // Response is parsed json
           this.stockohlc1d.length = 0;
-          for (let val in responseData.query.results.quote) {
+          for (const val in responseData.query.results.quote) {
             this.stockohlc1d.push({ x: new Date((responseData.query.results.quote[val].Date)), open: responseData.query.results.quote[val].Open, high: responseData.query.results.quote[val].High, low: responseData.query.results.quote[val].Low, close: responseData.query.results.quote[val].Close, volume: responseData.query.results.quote[val].Volume })
           }
           this.data2 = this.stockohlc1d
@@ -2044,7 +2054,7 @@ export class ShareComponent implements OnInit {
       console.error(err);
     }
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol + '&user_id=').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.stockema.length = 0;
@@ -2348,7 +2358,7 @@ export class ShareComponent implements OnInit {
     axios.get('https://trendlyne.com/web-widget/checklist-widget/Poppins/BEL/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E' + this.tlid)
       .then(response => {
         this.htmlContent1 = response.data;
-        console.log(this.htmlContent);
+        
       })
       .catch(error => {
         console.error(error);
@@ -2374,13 +2384,13 @@ export class ShareComponent implements OnInit {
   async getntstockdetails(eqsymbol) {
     // 
     this.dataApi.getntstockdetails(eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.nr7 = (nestedItems[0]['resultData'].stocktrend['nr7_today'])
       this.delivperc.length = 0;
       this.delivperctime.length = 0;
-      for (let val in nestedItems[0]['resultData'].priceTable) {
+      for (const val in nestedItems[0]['resultData'].priceTable) {
         this.delivperc.unshift(nestedItems[0]['resultData'].priceTable[val].delivery_percentage)
         this.delivperctime.unshift((nestedItems[0]['resultData'].priceTable[val].created_at).split("T")[0])
       }
@@ -2391,7 +2401,7 @@ export class ShareComponent implements OnInit {
         fill: false
       }];
       this.DelivLabels = this.delivperctime;
-      for (let val in nestedItems[0]['resultData'].priceTable) {
+      for (const val in nestedItems[0]['resultData'].priceTable) {
         this.volume.unshift(nestedItems[0]['resultData'].priceTable[val].volume)
         this.volumetime.unshift((nestedItems[0]['resultData'].priceTable[val].created_at).split("T")[0])
       }
@@ -2407,7 +2417,7 @@ export class ShareComponent implements OnInit {
   }
   async getntstockpcrdetails(eqsymbol) {
     this.dataApi.getntstockpcrdetails(eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       if (nestedItems[0]['resultData']['futures'].length != 0) {
@@ -2418,7 +2428,7 @@ export class ShareComponent implements OnInit {
   }
   gettrendlyne3fetch(tlid, eqsymbol, tlname) {
     this.dataApi.gettrendlyne3fetch(this.tlid, this.eqsymbol, this.tlname).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       //  console.log(nestedItems)
@@ -2663,7 +2673,7 @@ export class ShareComponent implements OnInit {
   }
   gettrendlynestocks2(tlid) {
     this.dataApi.gettrendlyne2fetch(this.tlid).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.dscore.push({ text1: nestedItems[0]['body']['stockData'][6], text2: nestedItems[0]['body']['stockData'][9], text3: nestedItems[0]['body']['stockData'][7], text4: nestedItems[0]['body']['stockData'][10], text5: nestedItems[0]['body']['stockData'][8], text6: nestedItems[0]['body']['stockData'][11] })
