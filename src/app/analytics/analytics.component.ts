@@ -89,8 +89,7 @@ export class AnalyticsComponent implements OnInit {
     this.getntvolume1()
     this.getntvolumeread()
   }
-  trackByFunction1(index1, item1) { return item1.text3; }
-  trackByFunction2(index2, item2) { return item2.text3; }
+  
   getRandomNumber() {
     return Math.floor(Math.random() * (100 - 1 + 1)) + 1;
   }

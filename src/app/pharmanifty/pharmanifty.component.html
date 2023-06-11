@@ -65,7 +65,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="30%"
       fxFlex.sm="33%"
-      *ngFor="let tile of tlindexparam; trackBy: trackByFunction12"
+      *ngFor="let tile of tlindexparam; let i = index;
+      trackBy: trackByFunctiontlindexparam"
     >
       <div class="scene">
         <div class="card text-white text-center">
@@ -101,7 +102,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="30"
       fxFlex.sm="33%"
-      *ngFor="let tile of pharmaniftyindicators; trackBy: trackByFunction"
+      *ngFor="let tile of pharmaniftyindicators;  let i = index;
+      trackBy: trackByFunctionpharmaniftyindicators"
     >
       <div class="scene">
         <div class="card text-center text-white">
@@ -158,7 +160,8 @@
               fxFlex.sm="33%"
               *ngFor="
                 let tile of pharmaniftycrossover;
-                trackBy: trackByFunction1
+                let i = index;
+          trackBy: trackByFunctionpharmaniftycrossover
               "
             >
               <mat-card
@@ -180,7 +183,8 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of pniftyema; trackBy: trackByFunction3"
+                *ngFor="let tile of pniftyema; let i = index;
+                trackBy: trackByFunctionpniftyema"
               >
                 <thead>
                   <tr>
@@ -240,7 +244,8 @@
               fxFlex.sm="33%"
               *ngFor="
                 let tile of pharmaniftysentiments;
-                trackBy: trackByFunction2
+                let i = index;
+                trackBy: trackByFunctionpharmaniftysentiments
               "
             >
               <mat-card
@@ -258,7 +263,8 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of pniftysma; trackBy: trackByFunction3"
+                *ngFor="let tile of pniftysma; let i = index;
+                trackBy: trackByFunctionpniftysma"
               >
                 <thead>
                   <tr>
@@ -387,7 +393,8 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of pharmaniftyindicatorsw; trackBy: trackByFunction5"
+          *ngFor="let tile of pharmaniftyindicatorsw; let i = index;
+          trackBy: trackByFunctionpharmaniftyindicatorsw"
         >
           <div class="scene">
             <div class="card text-white text-center">
@@ -444,7 +451,8 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of pharmaniftycrossoverw;
-                    trackBy: trackByFunction1
+                    let i = index;
+                    trackBy: trackByFunctionpharmaniftycrossoverw
                   "
                 >
                   <mat-card
@@ -504,7 +512,8 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of pharmaniftyindicatorsm; trackBy: trackByFunction5"
+          *ngFor="let tile of pharmaniftyindicatorsm;  let i = index;
+          trackBy: trackByFunctionpharmaniftyindicatorsm"
         >
           <div class="scene">
             <div class="card text-white text-center">
@@ -561,7 +570,8 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of pharmaniftycrossoverm;
-                    trackBy: trackByFunction1
+                    let i = index;
+          trackBy: trackByFunctionpharmaniftycrossoverm
                   "
                 >
                   <mat-card
@@ -675,7 +685,8 @@
           fxFlex.xs="33%"
           fxFlex.sm="33%"
           class="text-center"
-          *ngFor="let tile of pharmaniftystocks; trackBy: trackByFunction11"
+          *ngFor="let tile of pharmaniftystocks;  let i = index;
+          trackBy: trackByFunctionpharmaniftystocks"
         >
           <mat-card
             [ngClass]="{

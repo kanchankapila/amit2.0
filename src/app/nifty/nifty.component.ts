@@ -547,45 +547,40 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
   }
-  trackByFunction(index, item) {
-    return item.text2
+  trackByFunctionnifty50Stocks(index) {
+    return index;
   }
-  trackByFunction1(index1, item1) {
-    return item1.text1
+  trackByFunctionnifty50crossoverm(index) {
+    return index;
   }
-  trackByFunction2(index2, item2) {
-    return item2.text1
+  trackByFunctionnifty50indicatorsm(index) {
+    return index;
   }
-  trackByFunction3(index3, item3) {
-    return item3.text1;
+  trackByFunctionnifty50crossoverw(index) {
+    return index;
   }
-  trackByFunction4(index4, item4) {
-    return item4.text2;
+  trackByFunctionnifty50indicatorsw(index) {
+    return index;
   }
-  trackByFunction5(index5, item5) {
-    return item5.text1;
+  trackByFunctionniftysma(index) {
+    return index;
   }
-  trackByFunction6(index6, item6) {
-    return item6.text1;
+  trackByFunctionnifty50sentiments(index) {
+    return index;
   }
-  trackByFunction7(index7, item7) {
-    return item7.text1;
+  trackByFunctionniftyema(index) {
+    return index;
   }
-  trackByFunction8(index8, item8) {
-    return item8.text3;
+  trackByFunctionnifty50crossover(index) {
+    return index;
   }
-  trackByFunction9(index9, item9) {
-    return item9.text3;
+  trackByFunctionnifty50indicators(index) {
+    return index;
   }
-  trackByFunction10(index10, item10) {
-    return item10.text3;
+  trackByFunctiontlindexparam(index) {
+    return index;
   }
-  trackByFunction11(index11, item11) {
-    return item11.text3;
-  }
-  trackByFunction12(index12, item12) {
-    return item12.text2
-  }
+  
   getnifty6m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {

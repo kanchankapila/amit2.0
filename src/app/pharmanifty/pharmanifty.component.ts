@@ -306,7 +306,7 @@ export class PharmaniftyComponent implements OnInit {
   getpharmaniftysentiments() {
     this.pharmaniftysentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmaniftysentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Daily" })
@@ -314,7 +314,7 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmaniftysentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Weekly" })
@@ -322,7 +322,7 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmaniftysentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Monthly" })
@@ -333,12 +333,12 @@ export class PharmaniftyComponent implements OnInit {
   gettlpharmaparams(indexid, selectedValue) {
     // this.indexid='1898';
     this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.tlindexparam.length = 0;
       console.log(nestedItems);
-      for (let val in nestedItems[0].body.parameters) {
+      for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
         } else { continue; }
@@ -350,13 +350,13 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmaniftyvix() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       /////////////////////Nifty Vix/////////////////////////////////
       this.niftyvixdata.length = 0;
       this.niftyvixtime.length = 0;
-      for (let val in nestedItems[1]['values']) {
+      for (const val in nestedItems[1]['values']) {
         this.niftyvixdata.push(nestedItems[1]['values'][val]['_value'])
         this.niftyvixtime.push(nestedItems[1]['values'][val]['_time'])
       }
@@ -373,7 +373,7 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmaniftysmaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20PHARMA').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       /////////////////////////////EMA/SMA from Kite //////////////////////
@@ -387,12 +387,12 @@ export class PharmaniftyComponent implements OnInit {
   }
   getmcpharmaniftystocks() {
     this.http.get('https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?pagesize=25&exchange=NSE&sortby=percentChange&sortorder=desc&indexid=13017&company=true&indexname=Nifty%20Pharma&marketcap=').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       //////////////////////////////Nifty 50 Stocks ////////////////////////
       this.pharmaniftystocks.length = 0;
-      for (let val in nestedItems[0][0]['companies']) {
+      for (const val in nestedItems[0][0]['companies']) {
         this.pharmaniftystocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current, text5: nestedItems[0][0]['companies'][val].symbol })
       }
     }, err => {
@@ -401,10 +401,10 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmanifty1yr() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1yr&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmanifty1yrdata.push(nestedItems[1].values[val]["_value"])
         this.pharmanifty1yrLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -419,64 +419,46 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
   }
-  trackByFunction(index, item) {
-    // console.log( 'TrackBy:', item.text2, 'at index', index );
-    return item.text2
+  trackByFunctionpharmaniftystocks(index) {
+    return index;
   }
-  trackByFunction1(index1, item1) {
-    //console.log( 'TrackBy:', item1.text1, 'at index', index1);
-    return item1.text1
+  trackByFunctiontlindexparam(index) {
+    return index;
   }
-  trackByFunction2(index2, item2) {
-    //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
-    return item2.text1
+  trackByFunctionpharmaniftyindicators(index) {
+    return index;
   }
-  trackByFunction3(index3, item3) {
-    //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
-    return item3.text1;
+  trackByFunctionpharmaniftycrossover(index) {
+    return index;
   }
-  trackByFunction4(index4, item4) {
-    //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
-    item4.text2;
+  trackByFunctionpharmaniftysentiments(index) {
+    return index;
   }
-  trackByFunction5(index5, item5) {
-    //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
-    return item5.text1;
+  trackByFunctionpniftyema(index) {
+    return index;
   }
-  trackByFunction6(index6, item6) {
-    //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-    return item6.text1;
+  trackByFunctionpniftysma(index) {
+    return index;
   }
-  trackByFunction7(index7, item7) {
-    //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
-    return item7.text1;
+  trackByFunctionpharmaniftyindicatorsw(index) {
+    return index;
   }
-  trackByFunction8(index8, item8) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item8.text3;
+  trackByFunctionpharmaniftycrossoverw(index) {
+    return index;
   }
-  trackByFunction9(index9, item9) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item9.text3;
+  trackByFunctionpharmaniftyindicatorsm(index) {
+    return index;
   }
-  trackByFunction10(index10, item10) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item10.text3;
+  trackByFunctionpharmaniftycrossoverm(index) {
+    return index;
   }
-  trackByFunction11(index11, item11) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item11.text3;
-  }
-  trackByFunction12(index12, item12) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item12.text2;
-  }
+  
   getpharmanifty6m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=6m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmanifty6mdata.push(nestedItems[1].values[val]["_value"])
         this.pharmanifty6mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -493,10 +475,10 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmanifty3m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=3m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmanifty3mdata.push(nestedItems[1].values[val]["_value"])
         this.pharmanifty3mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -513,7 +495,7 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmanifty5d() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty 5day Resistances and Indicators/////////////
@@ -528,11 +510,11 @@ export class PharmaniftyComponent implements OnInit {
           this.lineChartDatapnsnrs1w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
       }
       this.pharmaniftycrossoverw.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.pharmaniftycrossoverw.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
       this.pharmaniftyindicatorsw.length = 0;
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.pharmaniftyindicatorsw.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
@@ -542,12 +524,12 @@ export class PharmaniftyComponent implements OnInit {
     })
     ////////////To get Nifty 1 week Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=5d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmanifty5ddata.length = 0;
       this.pharmanifty5dLabels.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmanifty5ddata.push(nestedItems[1].values[val]["_value"])
         this.pharmanifty5dLabels.push(nestedItems[1].values[val]["_time"].slice(0, 6))
       }
@@ -602,7 +584,7 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmanifty1m() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty 1 month Resistances and Indicators/////////////
@@ -623,11 +605,11 @@ export class PharmaniftyComponent implements OnInit {
           this.lineChartDatapnsnrs1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
       }
       this.pharmaniftycrossoverm.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.pharmaniftycrossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
       this.pharmaniftyindicatorsm.length = 0;
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.pharmaniftyindicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
@@ -637,12 +619,12 @@ export class PharmaniftyComponent implements OnInit {
     })
     ////////////To get Nifty 1 month Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmanifty1mdata.length = 0;
       this.pharmanifty1mLabels.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmanifty1mdata.push(nestedItems[1].values[val]["_value"])
         this.pharmanifty1mLabels.push(nestedItems[1].values[val]["_time"])
       }
@@ -697,13 +679,13 @@ export class PharmaniftyComponent implements OnInit {
   }
   getpharmaniftytoday1() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.dataValues.length = 0;
       this.stockhcdate1.length = 0;
       this.prev_close = (nestedItems[1]['prev_close'])
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.stockhcdate1.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
       }
       this.primaryYAxis = {
@@ -730,7 +712,7 @@ export class PharmaniftyComponent implements OnInit {
           this.hours = ((value['x']).slice(0, 2))
         }
         this.minutes = Number((value['x']).split(':').splice(1))
-        let date = new Date()
+        const date = new Date()
         this.time = ((date.setHours(this.hours, this.minutes)))
         if ((Number(value['y'])) < this.prev_close) {
           this.dataValues.push({
@@ -767,14 +749,14 @@ export class PharmaniftyComponent implements OnInit {
     // });
     // console.log( this.dataValues)
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.pharmaniftydata.length = 0;
       this.pharmaniftyLabels.length = 0;
       this.stockhcdate.length = 0;
       this.dataValues.length = 0;
-      for (let val in nestedItems[1].values) {
+      for (const val in nestedItems[1].values) {
         this.pharmaniftydata.push(nestedItems[1].values[val]["_value"])
         this.pharmaniftyLabels.push((nestedItems[1].values[val]["_time"]))
         this.stockhcdate.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
@@ -783,7 +765,7 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       ////////////To get Nifty Today Resistances and Indicators/////////////
@@ -805,10 +787,10 @@ export class PharmaniftyComponent implements OnInit {
       }
       this.pharmaniftyindicators.length = 0;
       this.pharmaniftycrossover.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
+      for (const val in nestedItems[2]['crossover']) {
         this.pharmaniftycrossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
-      for (let val1 in nestedItems[2]['indicators']) {
+      for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
           this.pharmaniftyindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
