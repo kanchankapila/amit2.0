@@ -41,17 +41,18 @@
   ></button>
   <p-dialog
     header="Neutral"
-    [(visible)]="displayMaximizable"
-    [modal]="true"
-    [style]="{ width: '100vw', height: '100vh' }"
-    [maximizable]="true"
-    [baseZIndex]="10000"
-    [draggable]="false"
-    [resizable]="false"
+  [modal]="true"
+[breakpoints]="{'960px': '100%', '424px': '100%'}"
+[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
+[maximizable]="true"
+[baseZIndex]="10000"
+[draggable]="true"
+[resizable]="true"
   >
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-warning card">
-        <div *ngFor="let tile of neutral; trackBy: trackByFunction29">
+        <div *ngFor="let tile of neutral;  let i = index;
+        trackBy: trackByFunctionneutral">
           <p class="text-yellow grid-margin stretch-card">
             {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
           </p>
@@ -67,13 +68,24 @@
       ></p-button>
     </ng-template>
   </p-dialog>
-  <p-dialog header="Positive" [(visible)]="displayMaximizable1" [modal]="true" [breakpoints]="{'960px': '75vw', '424px': '150vw'}" [style]="{width: '250vw'}" [maximizable]="true" [baseZIndex]="10000">
+  <p-dialog 
+  header="Positive" 
+  [(visible)]="displayMaximizable1" 
+ [modal]="true"
+[breakpoints]="{'960px': '100%', '424px': '100%'}"
+[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
+[maximizable]="true"
+[baseZIndex]="10000"
+[draggable]="true"
+[resizable]="true"
+  
     
   >
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
         <h4 class="text-black text-center">Positives</h4>
-        <div *ngFor="let tile of positive; trackBy: trackByFunction27">
+        <div *ngFor="let tile of positive; let i = index;
+        trackBy: trackByFunctionpositive">
           <p class="text-green grid-margin stretch-card">
             {{ tile.text1 }}&nbsp;:{{ tile.text3 }}Cr.
           </p>
@@ -93,16 +105,18 @@
     header="Negative"
     [(visible)]="displayMaximizable2"
     [modal]="true"
-    [style]="{ width: '100vw', height: '100vh' }"
-    [maximizable]="true"
-    [baseZIndex]="10000"
-    [draggable]="false"
-    [resizable]="false"
+[breakpoints]="{'960px': '100%', '424px': '100%'}"
+[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
+[maximizable]="true"
+[baseZIndex]="10000"
+[draggable]="true"
+[resizable]="true"
   >
     <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-danger card">
         <h4 class="text-black text-center">Negatives</h4>
-        <div *ngFor="let tile of negative; trackBy: trackByFunction28">
+        <div *ngFor="let tile of negative; let i = index;
+        trackBy: trackByFunctionnegative">
           <p class="text-red grid-margin stretch-card">
             {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
           </p>
@@ -119,18 +133,19 @@
     </ng-template>
   </p-dialog>
   <p-dialog
-  header="Insights"
-  [(visible)]="displayMaximizable3"
-  [modal]="true"
-  [breakpoints]="{'960px': '75vw', '424px': '100vw'}"
-  [style]="{maxWidth: '100vw', width: '90vw', top: '10%', left: '10%', transform: 'translate(-10%, -10%)'}" 
-  [maximizable]="true"
-  [baseZIndex]="10000"
-  [draggable]="false"
-  [resizable]="false"
+header="Insights"
+[visible]="displayMaximizable3"
+[modal]="true"
+[breakpoints]="{'960px': '100%', '424px': '100%'}"
+[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
+[maximizable]="true"
+[baseZIndex]="10000"
+[draggable]="true"
+[resizable]="true"
   >
     <p
-      *ngFor="let tile of brokertarget; trackBy: trackByFunction10"
+      *ngFor="let tile of brokertarget; let i = index;
+      trackBy: trackByFunctionbrokertarget"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -140,7 +155,8 @@
       {{ tile.text1 }}&nbsp;[{{ tile.text2 }}]
     </p>
     <p
-      *ngFor="let tile of brokertargetupgrade; trackBy: trackByFunction11"
+      *ngFor="let tile of brokertargetupgrade;  let i = index;
+      trackBy: trackByFunctionbrokertargetupgrade"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -150,7 +166,8 @@
       {{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of brokertargetdowngrade; trackBy: trackByFunction12"
+      *ngFor="let tile of brokertargetdowngrade; let i = index;
+      trackBy: trackByFunctionbrokertargetdowngrade"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -160,7 +177,8 @@
       {{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of brokerrecoupgrade; trackBy: trackByFunction13"
+      *ngFor="let tile of brokerrecoupgrade;  let i = index;
+      trackBy: trackByFunctionbrokerrecoupgrade"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -170,7 +188,8 @@
       {{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of brokerrecodowngrade; trackBy: trackByFunction14"
+      *ngFor="let tile of brokerrecodowngrade; let i = index;
+      trackBy: trackByFunctionbrokerrecodowngrade"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -182,7 +201,8 @@
     <h6 style="font-weight: normal">Technicals</h6>
     <h6 style="font-weight: normal">EMA</h6>
     <p
-      *ngFor="let tile of ema_26; trackBy: trackByFunction15"
+      *ngFor="let tile of ema_26; let i = index;
+      trackBy: trackByFunctionema26"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -192,7 +212,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of ema_50; trackBy: trackByFunction16"
+      *ngFor="let tile of ema_50; let i = index;
+      trackBy: trackByFunctionema50"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -202,7 +223,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of ema_100; trackBy: trackByFunction17"
+      *ngFor="let tile of ema_100; let i = index;
+      trackBy: trackByFunctionema100"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -212,7 +234,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of ema_200; trackBy: trackByFunction18"
+      *ngFor="let tile of ema_200;let i = index;
+      trackBy: trackByFunctionema200"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -223,7 +246,8 @@
     </p>
     <h6 style="font-weight: normal">SMA</h6>
     <p
-      *ngFor="let tile of sma_30; trackBy: trackByFunction19"
+      *ngFor="let tile of sma_30; let i = index;
+      trackBy: trackByFunctionsma30"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -233,7 +257,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of sma_50; trackBy: trackByFunction20"
+      *ngFor="let tile of sma_50; let i = index;
+      trackBy: trackByFunctionsma50"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -243,7 +268,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of sma_100; trackBy: trackByFunction21"
+      *ngFor="let tile of sma_100; let i = index;
+      trackBy: trackByFunctionsma100"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -253,7 +279,8 @@
       &rarr;{{ tile.text1 }}
     </p>
     <p
-      *ngFor="let tile of sma_200; trackBy: trackByFunction22"
+      *ngFor="let tile of sma_200; let i = index;
+      trackBy: trackByFunctionsma200"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -264,7 +291,8 @@
     </p>
     <h6 style="font-weight: normal">MACD</h6>
     <p
-      *ngFor="let tile of macd1; trackBy: trackByFunction23"
+      *ngFor="let tile of macd1;let i = index;
+      trackBy: trackByFunctionmacd1"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -275,7 +303,8 @@
     </p>
     <h6 style="font-weight: normal">RSI</h6>
     <p
-      *ngFor="let tile of rsi1; trackBy: trackByFunction25"
+      *ngFor="let tile of rsi1; let i = index;
+      trackBy: trackByFunctionrsi1"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -286,7 +315,8 @@
     </p>
     <h6 style="font-weight: normal">MFI</h6>
     <p
-      *ngFor="let tile of mfi1; trackBy: trackByFunction26"
+      *ngFor="let tile of mfi1; let i = index;
+      trackBy: trackByFunctionmfi1"
       [ngClass]="{
         'text-green': tile.text3 == 'positive',
         'text-red': tile.text3 == 'negative',
@@ -367,7 +397,8 @@
       fxFlex.lg="20%"
       fxFlex.xs="20%"
       fxFlex.sm="33%"
-      *ngFor="let tile of stockpcr; trackBy: trackByFunction43"
+      *ngFor="let tile of stockpcr; let i = index;
+      trackBy: trackByFunctionstockpcr"
       [ngClass]="{
         '  bg-gradient-bear ': 0.8 > tile.text2,
         '  bg-gradient-bull ': tile.text1 > 0.8,
@@ -382,7 +413,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="20%"
       fxFlex.sm="33%"
-      *ngFor="let tile of maxpain; trackBy: trackByFunction44"
+      *ngFor="let tile of maxpain;let i = index;
+      trackBy: trackByFunctionmaxpain"
       class="bg-gradient-bear"
     >
       {{ tile.text1 }}<br />{{ tile.text2 }}
@@ -422,7 +454,8 @@
     </div>
   </div>
   <div
-    *ngFor="let tile of brokertarget; trackBy: trackByFunction10"
+    *ngFor="let tile of brokertarget; let i = index;
+    trackBy: trackByFunctionbrokertarget"
     [ngClass]="{
       'text-green': tile.text3 == 'positive',
       'text-red': tile.text3 == 'negative',
@@ -436,7 +469,8 @@
     <div class="scene col-lg-13 col-xs-6">
       <div
         class="card22 text-center"
-        *ngFor="let tile of stockdetails1; trackBy: trackByFunction42"
+        *ngFor="let tile of stockdetails1; let i = index;
+        trackBy: trackByFunctionstockdetails1"
       >
         <div
           class="card22__face card22__face--front text-center type1-bold content"
@@ -634,7 +668,8 @@
   <br />
   <br />
   <div
-    *ngFor="let tile of fnomsg1; trackBy: trackByFunction46"
+    *ngFor="let tile of fnomsg1;let i = index;
+    trackBy: trackByFunctionfnomsg1"
     [ngClass]="{
       'text-green': tile.text2 == 'positive',
       'text-red': tile.text2 == 'negative',
@@ -644,7 +679,8 @@
     <h4>{{ tile.text1 }}</h4>
   </div>
   <div
-    *ngFor="let tile of dealsmsg; trackBy: trackByFunction47"
+    *ngFor="let tile of dealsmsg;let i = index;
+    trackBy: trackByFunctiondealmsg"
     [ngClass]="{
       'text-green': tile.text2 == 'positive',
       'text-red': tile.text2 == 'negative',
@@ -654,7 +690,8 @@
     <h4>{{ tile.text1 }}</h4>
   </div>
   <div
-    *ngFor="let tile of shareholdingmsg; trackBy: trackByFunction48"
+    *ngFor="let tile of shareholdingmsg; let i = index;
+    trackBy: trackByFunctionshareholdingmsg"
     [ngClass]="{
       'text-green': tile.text2 == 'positive',
       'text-red': tile.text2 == 'negative',
@@ -674,7 +711,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of fscore"
+      *ngFor="let tile of fscore;let i = index;
+      trackBy: trackByFunctionfscore"
       [ngClass]="{
         ' text-center bg-gradient-bull  ': tile.text === 'green' || 'Green',
         'text-center bg-gradient-bear ': tile.text === 'red',
@@ -691,7 +729,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of qscore; trackBy: trackByFunction2"
+      *ngFor="let tile of qscore; let i = index;
+      trackBy: trackByFunctionqscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text === 'green' || 'Green',
         ' text-center bg-gradient-bear  ': tile.text === 'red',
@@ -708,7 +747,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of techscore; trackBy: trackByFunction3"
+      *ngFor="let tile of techscore; let i = index;
+      trackBy: trackByFunctiontechscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text === 'green' || 'Green',
         ' bg-gradient-bear  ': tile.text === 'red',
@@ -723,7 +763,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of vscore; trackBy: trackByFunction4"
+      *ngFor="let tile of vscore; let i = index;
+      trackBy: trackByFunctionvscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text === 'green' || 'Green',
         ' bg-gradient-bear  ': tile.text === 'red',
@@ -738,7 +779,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of divscore; trackBy: trackByFunction34"
+      *ngFor="let tile of divscore; let i = index;
+      trackBy: trackByFunctiondivscore"
       [ngClass]="{
         ' bg-gradient-bear ': tile.text1 < 5,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -753,7 +795,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of growthscore; trackBy: trackByFunction35"
+      *ngFor="let tile of growthscore; let i = index;
+      trackBy: trackByFunctiongrowthscore"
       [ngClass]="{
         ' bg-gradient-bear  ': tile.text1 < 5,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -768,7 +811,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of healthscore; trackBy: trackByFunction36"
+      *ngFor="let tile of healthscore; let i = index;
+      trackBy: trackByFunctionhealthscore"
       [ngClass]="{
         'bg-gradient-bear  ': 5 > tile.text1,
         'bg-gradient-bull ': tile.text1 > 5,
@@ -783,7 +827,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of kvscore; trackBy: trackByFunction38"
+      *ngFor="let tile of kvscore; let i = index;
+      trackBy: trackByFunctionkvscore"
       [ngClass]="{
         ' bg-gradient-bear  ': 5 > tile.text1,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -798,7 +843,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of kqscore; trackBy: trackByFunction39"
+      *ngFor="let tile of kqscore; let i = index;
+      trackBy: trackByFunctionqscore"
       [ngClass]="{
         ' bg-gradient-bear  ': 5 > tile.text1,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -813,7 +859,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of ppscore; trackBy: trackByFunction40"
+      *ngFor="let tile of ppscore; let i = index;
+      trackBy: trackByFunctionppscore"
       [ngClass]="{
         ' bg-gradient-bear  ': 5 > tile.text1,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -828,7 +875,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of volscore; trackBy: trackByFunction6"
+      *ngFor="let tile of volscore;  let i = index;
+      trackBy: trackByFunctionvolscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text2 === 'positive',
         ' bg-gradient-bear  ': tile.text2 === 'negative',
@@ -843,7 +891,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of dscore; trackBy: trackByFunction7"
+      *ngFor="let tile of dscore;  let i = index;
+      trackBy: trackByFunctiondscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text2 === 'positive',
         ' bg-gradient-bear  ': tile.text2 === 'negative',
@@ -858,7 +907,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of mscore; trackBy: trackByFunction5"
+      *ngFor="let tile of mscore;  let i = index;
+      trackBy: trackByFunctionmscore"
       [ngClass]="{
         ' bg-gradient-bull  ': tile.text2 === 'positive',
         ' bg-gradient-bear  ': tile.text2 === 'negative',
@@ -873,7 +923,8 @@
       fxFlex.lg="15%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of omrscore; trackBy: trackByFunction37"
+      *ngFor="let tile of omrscore;  let i = index;
+      trackBy: trackByFunctionomrscore"
       [ngClass]="{
         ' bg-gradient-bear  ': 5 > tile.text1,
         ' bg-gradient-bull  ': tile.text1 > 5,
@@ -887,7 +938,8 @@
       fxFlex="15"
       fxFlex.lg="15%"
       fxFlex.xs="40%"
-      *ngFor="let tile of rbsscore; trackBy: trackByFunction41"
+      *ngFor="let tile of rbsscore;  let i = index;
+      trackBy: trackByFunctionrbsscore"
       [ngClass]="{
         'bg-gradient-bull   ': 20 > tile.text1,
         'bg-gradient-bear   ': tile.text1 > 20,
@@ -968,7 +1020,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of tlindexparam; trackBy: trackByFunction49"
+      *ngFor="let tile of tlindexparam; let i = index;
+      trackBy: trackByFunctiontlindexparam"
     >
       <div class="scene">
         <div class="card text-center text-white">
@@ -1011,7 +1064,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="40"
       fxFlex.sm="33%"
-      *ngFor="let tile of stockindicators; trackBy: trackByFunction7"
+      *ngFor="let tile of stockindicators; let i = index;
+      trackBy: trackByFunctionstockindicators"
     >
       <div class="text-center text-white">
         <div
@@ -1092,7 +1146,8 @@
               fxFlex="30"
               fxFlex.xs="33%"
               fxFlex.sm="33%"
-              *ngFor="let tile of stockcrossover; trackBy: trackByFunction8"
+              *ngFor="let tile of stockcrossover; let i = index;
+              trackBy: trackByFunctionstockcrossover"
             >
               <mat-card
                 class="text-blue type1-bold grid-margin stretch-card"
@@ -1125,7 +1180,8 @@
               fxFlex="30"
               fxFlex.xs="33%"
               fxFlex.sm="33%"
-              *ngFor="let tile of stocksentiments; trackBy: trackByFunction9"
+              *ngFor="let tile of stocksentiments; let i = index;
+              trackBy: trackByFunctionstocksentiments"
             >
               <mat-card
                 style="text-transform: uppercase; font-weight: bold"
@@ -1590,7 +1646,8 @@
           fxFlex.lg="12%"
           fxFlex.xs="30%"
           fxFlex.sm="33%"
-          *ngFor="let tile of sectorstockdetails1; trackBy: trackByFunction45"
+          *ngFor="let tile of sectorstockdetails1;  let i = index;
+          trackBy: trackByFunctionsectorstockdetails1"
         >
           <mat-card
             class="text-blue type1-bold cardbear grid-margin stretch-card"

@@ -353,7 +353,7 @@ export class HomepageComponent implements OnInit {
   }
   refreshtl() {
     this.http.get(this.baseurl + '/.netlify/functions/tlrefresh').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       console.log(nestedItems)
@@ -362,16 +362,16 @@ export class HomepageComponent implements OnInit {
     });
   };
   dialogVisible: boolean[] = [];
-  trackByFunctionpdstocks(index, item) {
+  trackByFunctionpdstocks(index) {
     return index;
   }
-  trackByFunctionssstocks(index, item) {
+  trackByFunctionssstocks(index) {
     return index;
   }
-  trackByFunctionscreener(index, item) {
+  trackByFunctionscreener(index) {
     return index;
   }
-  trackByFunctionglobalmarket(index, item) {
+  trackByFunctionglobalmarket(index) {
     return index;
   }
   maximizeDialog(index: number) {
@@ -385,11 +385,11 @@ export class HomepageComponent implements OnInit {
   }
   getadvdec1() {
     this.http.get<any>('https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.mcadvvalue1.length = 0;
-      for (let val in nestedItems[1]) {
+      for (const val in nestedItems[1]) {
         this.mcadvvalue1 = [Number(nestedItems[1][val].advValue), Number(nestedItems[1][val].decValue)]
       }
       var options = {
@@ -423,13 +423,13 @@ export class HomepageComponent implements OnInit {
   // }
   getetindices() {
     this.dataApi.getetindicesdata().subscribe(data => {
-      let nestedItems = Object.keys(data).map(key => {
+      const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
       this.indicesadvperc.length = 0;
       this.indicesdecperc.length = 0;
       this.indicesname.length = 0;
-      for (let val in nestedItems[0].searchresult) {
+      for (const val in nestedItems[0].searchresult) {
         this.indicesadvperc.push(nestedItems[0].searchresult[val].advancesPerChange)
         this.indicesdecperc.push(nestedItems[0].searchresult[val].declinesPerChange)
         this.indicesname.push(nestedItems[0].searchresult[val].indexName)
@@ -501,13 +501,13 @@ export class HomepageComponent implements OnInit {
   }
   getetsectors() {
     this.dataApi.getetallsectorsdata().subscribe(data => {
-      let nestedItems = Object.keys(data).map(key => {
+      const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
       this.sectorsadvperc.length = 0;
       this.sectorsdecperc.length = 0;
       this.sectorsname.length = 0;
-      for (let val in nestedItems[0].searchresult) {
+      for (const val in nestedItems[0].searchresult) {
         this.sectorsadvperc.push(nestedItems[0].searchresult[val].advancePercentChange)
         this.sectorsdecperc.push(nestedItems[0].searchresult[val].declinePercentChange)
         this.sectorsname.push(nestedItems[0].searchresult[val].sectorName)
@@ -716,11 +716,11 @@ export class HomepageComponent implements OnInit {
     try {
       var c = (selectedValue.split(','));
       this.dataApi.getetpredefinedfilters(c[0], c[1], c[2]).subscribe(async data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         this.pdstocks.length = 0;
-        for (let val in nestedItems[0]['page']) {
+        for (const val in nestedItems[0]['page']) {
           this.pdstocks.push({ text1: nestedItems[0]['page'][val].companyShortName, text2: nestedItems[0]['page'][val].absoluteChange, text3: nestedItems[0]['page'][val].ltp, text4: nestedItems[0]['page'][val].priceTargetHigh, text5: nestedItems[0]['page'][val].priceTargetLow, text6: nestedItems[0]['page'][val].recStrongBuyCnt, text7: nestedItems[0]['page'][val].recSellCnt, text8: nestedItems[0]['page'][val].recHoldCnt, text9: nestedItems[0]['page'][val].recText, text10: nestedItems[0]['page'][val].riskScore, text11: nestedItems[0]['page'][val].techScore, text12: nestedItems[0]['page'][val].analystScore })
         }
       })
@@ -732,11 +732,11 @@ export class HomepageComponent implements OnInit {
     try {
       var d = (selectedValue.split(','));
       this.dataApi.getetstockscorescreeners(d[0], d[1], d[2]).subscribe(async data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
+        const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
         this.ssstocks.length = 0;
-        for (let val in nestedItems[0]['page']) {
+        for (const val in nestedItems[0]['page']) {
           this.ssstocks.push({ text1: nestedItems[0]['page'][val].companyShortName, text2: nestedItems[0]['page'][val].absoluteChange, text3: nestedItems[0]['page'][val].ltp, text4: nestedItems[0]['page'][val].priceTargetHigh, text5: nestedItems[0]['page'][val].priceTargetLow, text6: nestedItems[0]['page'][val].recStrongBuyCnt, text7: nestedItems[0]['page'][val].recSellCnt, text8: nestedItems[0]['page'][val].recHoldCnt, text9: nestedItems[0]['page'][val].recText, text10: nestedItems[0]['page'][val].riskScore, text11: nestedItems[0]['page'][val].techScore, text12: nestedItems[0]['page'][val].analystScore })
         }
       })
@@ -746,13 +746,13 @@ export class HomepageComponent implements OnInit {
   }
   getglobal() {
     this.dataApi.getntglobal().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       // this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {
       this.globalmarket.length = 0;
-      for (let val in nestedItems[0]['resultData']) {
-        for (let val1 in nestedItems[0]['resultData'][val]['data']) {
+      for (const val in nestedItems[0]['resultData']) {
+        for (const val1 in nestedItems[0]['resultData'][val]['data']) {
           this.globalmarket.push({ text1: nestedItems[0]['resultData'][val]['data'][val1].symbol, text2: nestedItems[0]['resultData'][val]['data'][val1].country, text3: nestedItems[0]['resultData'][val]['data'][val1].change_per, text4: nestedItems[0]['resultData'][val]['data'][val1].change_value, text5: nestedItems[0]['resultData'][val]['data'][val1].timestamp })
         }
       }
@@ -760,11 +760,11 @@ export class HomepageComponent implements OnInit {
   }
   getsectors() {
     this.http.get<any>(' https://api.moneycontrol.com/mcapi/v1/indices/ad-ratio/heat-map?period=1D&type=MC&indexId=9&subType=SE').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.sectors.length = 0;
-      for (let val in nestedItems[1].chartData) {
+      for (const val in nestedItems[1].chartData) {
         if (nestedItems[1].chartData[val].id) {
           this.sectors.push({ x: nestedItems[1].chartData[val].name, y: (nestedItems[1].chartData[val].changeP) })
         }
@@ -823,13 +823,13 @@ export class HomepageComponent implements OnInit {
   }
   getadvdec() {
     this.http.get<any>('https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.advData.length = 0;
       this.decData.length = 0;
       this.advLabels.length = 0;
-      for (let val in nestedItems[1]) {
+      for (const val in nestedItems[1]) {
         this.mcadvvalue = nestedItems[1][val].advValue
         this.mcdecvalue = nestedItems[1][val].decValue
         this.advData.push(nestedItems[1][val].decValue)
@@ -858,7 +858,7 @@ export class HomepageComponent implements OnInit {
     // headers = headers.append('cookie','_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=Fpues3hutZZ3i8S6FShRiVvk4uOXbl9tHBfdqByuhssEAISHMY6G5fXkfmwGI4Ov; .trendlyne=e3qcvnv4pt6rsd5avmsbj26fe6lzd8uo')
     // console.log(headers)
     this.http.get<any>('https://trendlyne.com/equity/getStockMetricParameterList/71260').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
+      const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       console.log(nestedItems)

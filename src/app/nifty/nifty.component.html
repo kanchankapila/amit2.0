@@ -65,7 +65,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="40%"
       fxFlex.sm="33%"
-      *ngFor="let tile of tlindexparam; trackBy: trackByFunction12"
+      *ngFor="let tile of tlindexparam;  let i = index;
+      trackBy: trackByFunctiontlindexparam"
     >
       <div class="scene">
         <div class="card text-center text-white">
@@ -109,7 +110,8 @@
       fxFlex.lg="12%"
       fxFlex.xs="40"
       fxFlex.sm="33%"
-      *ngFor="let tile of nifty50indicators; trackBy: trackByFunction"
+      *ngFor="let tile of nifty50indicators;  let i = index;
+      trackBy: trackByFunctionnifty50indicators"
     >
       <div class="scene">
         <div class="card text-center text-white">
@@ -164,7 +166,8 @@
               fxFlex="30"
               fxFlex.xs="33%"
               fxFlex.sm="33%"
-              *ngFor="let tile of nifty50crossover; trackBy: trackByFunction1"
+              *ngFor="let tile of nifty50crossover; let i = index;
+              trackBy: trackByFunctionnifty50crossover"
             >
               <div
                 class="text-blue type1-bold textcenter"
@@ -186,7 +189,8 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of niftyema; trackBy: trackByFunction3"
+                *ngFor="let tile of niftyema;  let i = index;
+                trackBy: trackByFunctionniftyema"
               >
                 <thead>
                   <tr>
@@ -244,7 +248,8 @@
               fxFlex="30"
               fxFlex.xs="33%"
               fxFlex.sm="33%"
-              *ngFor="let tile of nifty50sentiments; trackBy: trackByFunction2"
+              *ngFor="let tile of nifty50sentiments;  let i = index;
+              trackBy: trackByFunctionnifty50sentiments"
             >
               <div
                 class="type1-bold"
@@ -261,7 +266,8 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of niftysma; trackBy: trackByFunction3"
+                *ngFor="let tile of niftysma;  let i = index;
+                trackBy: trackByFunctionniftysma"
               >
                 <thead>
                   <tr>
@@ -431,7 +437,8 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of nifty50indicatorsw; trackBy: trackByFunction5"
+          *ngFor="let tile of nifty50indicatorsw; let i = index;
+          trackBy: trackByFunctionnifty50indicatorsw"
         >
           <div class="scene">
             <div class="card col-lg-13 col-xs-6 text-center text-white">
@@ -488,8 +495,8 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of nifty50crossoverw;
-                    trackBy: trackByFunction1
-                  "
+                    let i = index;
+          trackBy: trackByFunctionnifty50crossoverw"
                 >
                   <div
                     class="text-blue type1-bold text-center text-white"
@@ -549,7 +556,8 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of nifty50indicatorsm; trackBy: trackByFunction8"
+          *ngFor="let tile of nifty50indicatorsm;  let i = index;
+          trackBy: trackByFunctionnifty50indicatorsm"
         >
           <div class="scene">
             <div class="card text-white text-center">
@@ -606,7 +614,8 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of nifty50crossoverm;
-                    trackBy: trackByFunction9
+                    let i = index;
+                    trackBy: trackByFunctionnifty50crossoverm
                   "
                 >
                   <div
@@ -720,7 +729,8 @@
           fxFlex.xs="30"
           fxFlex.sm="50%"
           class="text-center"
-          *ngFor="let tile of nifty50Stocks; trackBy: trackByFunction11"
+          *ngFor="let tile of nifty50Stocks;let i = index;
+          trackBy: trackByFunctionnifty50Stocks"
         >
           <mat-card
             [ngClass]="{

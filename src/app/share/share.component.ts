@@ -1538,59 +1538,142 @@ export class ShareComponent implements OnInit {
       console.log(err)
     }
   }
-  trackByFunctionstockindicators(index, item) {
+  trackByFunctionstockindicators(index) {
     return index;
   }
-  trackByFunction(index, item) { return item.text2 }
-  trackByFunction1(index1, item1) { return item1.text1 }
-  trackByFunction2(index2, item2) { return item2.text1 }
-  trackByFunction3(index3, item3) { return item3.text1; }
-  trackByFunction4(index4, item4) { return item4.text2; }
-  trackByFunction5(index5, item5) { return item5.text1; }
-  trackByFunction6(index6, item6) { return item6.text1; }
-  trackByFunction7(index7, item7) { return item7.text1; }
-  trackByFunction8(index8, item8) { return item8.text3; }
-  trackByFunction9(index9, item9) { return item9.text3; }
-  trackByFunction10(index10, item10) { return item10.text1; }
-  trackByFunction11(index11, item11) { return item11.text3; }
-  trackByFunction12(index12, item12) { return item12.text1 }
-  trackByFunction13(index13, item13) { return item13.text1; }
-  trackByFunction14(index14, item14) { item14.text2; }
-  trackByFunction15(index15, item15) { return item15.text1; }
-  trackByFunction16(index16, item16) { return item16.text1; }
-  trackByFunction17(index17, item17) { return item17.text1; }
-  trackByFunction18(index18, item18) { return item18.text3; }
-  trackByFunction19(index19, item19) { return item19.text3; }
-  trackByFunction20(index20, item20) { return item20.text3; }
-  trackByFunction21(index21, item21) { return item21.text3; }
-  trackByFunction22(index22, item22) { return item22.text2 }
-  trackByFunction23(index23, item23) { return item23.text1 }
-  trackByFunction24(index24, item24) { return item24.text1 }
-  trackByFunction25(index25, item25) { return item25.text1; }
-  trackByFunction26(index26, item26) { return item26.text2; }
-  trackByFunction27(index27, item27) { return item27.text1; }
-  trackByFunction28(index28, item28) { return item28.text1 }
-  trackByFunction29(index29, item29) { return item29.text1; }
-  trackByFunction30(index30, item30) { return item30.text3; }
-  trackByFunction31(index31, item31) { return item31.text3; }
-  trackByFunction32(index32, item32) { return item32.text3; }
-  trackByFunction33(index33, item33) { return item33.text3; }
-  trackByFunction34(index34, item34) { return item34.divscore; }
-  trackByFunction35(index35, item35) { return item35.text3; }
-  trackByFunction36(index36, item36) { return item36.text3; }
-  trackByFunction37(index37, item37) { return item37.text3; }
-  trackByFunction38(index38, item38) { return item38.text3; }
-  trackByFunction39(index39, item39) { return item39.text3; }
-  trackByFunction40(index40, item40) { return item40.text3; }
-  trackByFunction41(index41, item41) { return item41.text3; }
-  trackByFunction42(index42, item42) { return item42.text1; }
-  trackByFunction43(index43, item43) { return item43.text2; }
-  trackByFunction44(index44, item44) { return item44.text2; }
-  trackByFunction45(index45, item45) { return item45.text2; }
-  trackByFunction46(index46, item46) { return item46.text1; }
-  trackByFunction47(index47, item47) { return item47.text1; }
-  trackByFunction48(index48, item48) { return item48.text1; }
-  trackByFunction49(index49, item49) { return item49.text1; }
+  
+  trackByFunctionneutral(index) {
+    return index;
+  }
+  trackByFunctionpositive(index) {
+    return index;
+  }
+  trackByFunctionnegative(index) {
+    return index;
+  }
+  trackByFunctionbrokertarget(index) {
+    return index;
+  }
+  trackByFunctionbrokertargetupgrade(index) {
+    return index;
+  }
+  trackByFunctionbrokertargetdowngrade(index) {
+    return index;
+  }
+  trackByFunctionbrokerrecodowngrade(index) {
+    return index;
+  }
+  trackByFunctionbrokerrecoupgrade(index) {
+    return index;
+  }
+  trackByFunctionema50(index) {
+    return index;
+  }
+  trackByFunctionema26(index) {
+    return index;
+  }
+  trackByFunctionema100(index) {
+    return index;
+  }
+  trackByFunctionema200(index) {
+    return index;
+  }
+  trackByFunctionsma30(index) {
+    return index;
+  }
+  trackByFunctionsma50(index) {
+    return index;
+  }
+  trackByFunctionsma100(index) {
+    return index;
+  }
+  trackByFunctionsma200(index) {
+    return index;
+  }
+  trackByFunctionmacd1(index) {
+    return index;
+  }
+  trackByFunctionrsi1(index) {
+    return index;
+  }
+  trackByFunctionmfi1(index) {
+    return index;
+  }
+  trackByFunctionstockpcr(index) {
+    return index;
+  }
+  trackByFunctionstockdetails1(index) {
+    return index;
+  }
+  trackByFunctionrbsscore(index) {
+    return index;
+  }
+  trackByFunctiondscore(index) {
+    return index;
+  }
+  trackByFunctionkvscore(index) {
+    return index;
+  }
+  trackByFunctionomrscore(index) {
+    return index;
+  }
+  trackByFunctiondealmsg(index) {
+    return index;
+  }
+  trackByFunctionmscore(index) {
+    return index;
+  }
+  trackByFunctionvolscore(index) {
+    return index;
+  }
+  trackByFunctionppscore(index) {
+    return index;
+  }
+  trackByFunctionqscore(index) {
+    return index;
+  }
+  trackByFunctiongrowthscore(index) {
+    return index;
+  }
+  trackByFunctiondivscore(index) {
+    return index;
+  }
+  trackByFunctionfscore(index) {
+    return index;
+  }
+  trackByFunctiontechscore(index) {
+    return index;
+  }
+  trackByFunctiondealsmsg(index) {
+    return index;
+  }
+  trackByFunctionfnomsg1(index) {
+    return index;
+  }
+  trackByFunctionshareholdingmsg(index) {
+    return index;
+  }
+  trackByFunctionmaxpain(index) {
+    return index;
+  }
+  trackByFunctionvscore(index) {
+    return index;
+  }
+  trackByFunctionhealthscore(index) {
+    return index;
+  }
+  trackByFunctionsectorstockdetails1(index) {
+    return index;
+  }
+  trackByFunctionstocksentiments(index) {
+    return index;
+  }
+  trackByFunctionstockcrossover(index) {
+    return index;
+  }
+  trackByFunctiontlindexparam(index) {
+    return index;
+  }
   getshare1w(eqsymbol) {
     ////////////////Nifty 1 Week/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w').subscribe(data5 => {
@@ -1610,7 +1693,7 @@ export class ShareComponent implements OnInit {
       borderWidth: 1,
       fill: false
     }];
-    this.stock1wLabels = this.stock1wLabels;
+    
   }
   getshare1m(eqsymbol) {
     ////////////////Nifty 3 months/////////////////////////////
