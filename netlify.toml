@@ -8,8 +8,8 @@ from="/*"
 to="/index.html"
 status=200
 
-[[plugins]]
-package = "netlify-plugin-chromium"
+
+
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
