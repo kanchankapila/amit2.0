@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +23,7 @@ import { DialogModule } from 'primeng/dialog';
     HomepageRoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    NgChartsModule,
+    BaseChartDirective,
     NgApexchartsModule,
     MatCardModule,
     RadioButtonModule,

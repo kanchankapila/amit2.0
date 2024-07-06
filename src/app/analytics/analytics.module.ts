@@ -6,7 +6,7 @@ import { AnalyticsComponent } from './analytics.component';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { DialogModule } from 'primeng/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,7 +27,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     // NgbModule,
     MatCardModule,
     MatButtonModule,
-    NgChartsModule,
+    BaseChartDirective,
     TabViewModule,
     DialogModule,
     MatCheckboxModule,
