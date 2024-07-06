@@ -9,7 +9,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MatCardModule } from '@angular/material/card';
 import { CardModule } from 'primeng/card';
 import { NgApexchartsModule } from "ng-apexcharts";
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 
 
 import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
@@ -49,7 +49,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     SidebarModule,
     
     TabViewModule,
-    NgChartsModule,
+    BaseChartDirective,
     StockChartAllModule,
     RangeNavigatorAllModule,
     ChartAllModule,

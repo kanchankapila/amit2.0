@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NiftyRoutingModule } from './nifty-routing.module';
 import { NiftyComponent } from './nifty.component';
 import { MatCardModule } from '@angular/material/card';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
@@ -28,7 +28,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
-    NgChartsModule,
+    BaseChartDirective,
     TabViewModule,
     ChartModule,
     RadioButtonModule,
