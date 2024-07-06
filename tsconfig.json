@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "removeComments": true,
     "module": "esnext",
-    "target": "ES5",
+    "target": "ES2022",
     "esModuleInterop": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
