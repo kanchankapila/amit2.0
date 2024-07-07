@@ -41,6 +41,7 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true,
     "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
