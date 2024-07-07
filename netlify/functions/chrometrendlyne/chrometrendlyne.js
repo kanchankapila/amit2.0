@@ -1,5 +1,5 @@
-const { Pool } = await import('pg').then(pg => pg.default);
-const { default: fetch } = await import('node-fetch');
+const { Pool } = require('pg');
+const { default: fetch } = require('node-fetch');
 
 const pool = new Pool({
   connectionString: process.env.POSTGRESS_DATABASE_URL1,
@@ -13,7 +13,7 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
   try {
     client = await pool.connect();
 
-    const result = await client.query('SELECT csrf, time, trnd FROM cookie ');
+    const result = await client.query('SELECT csrf, time, trnd FROM cookie');
     const rows = result.rows;
     for (const row of rows) {
       const { csrf, time, trnd } = row;
@@ -34,12 +34,11 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
         "x-requested-with": "XMLHttpRequest",
-        "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=` + process.env.trnd + `; csrftoken=` + process.env.csrf + `; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
+        "cookie": `_gid=GA1.2.437560219.1668751717; .trendlyne=${process.env.trnd}; csrftoken=${process.env.csrf}; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
       },
       referrer: `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
       referrerPolicy: "strict-origin-when-cross-origin",
       body: null,
-      method: "GET",
       mode: "cors",
       credentials: "include"
     });
