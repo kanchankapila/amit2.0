@@ -1,12 +1,12 @@
-const fetch = require('node-fetch')
-
-// const handler = async function () {
-  const ntstockdetailsfetch = async (eqsymbol,event, context,callback) => {
-    
+const handler = async (event, context, callback) => {
   try {
+    // Dynamically import node-fetch using import()
+    const fetch = (await import('node-fetch')).default;
+
+    const eqsymbol = event.queryStringParameters.eqsymbol;
     const response = await fetch('https://api.niftytrader.in/webapi/Live/stockAnalysis', {
-      method: 'POST', // Don't forget this line
-      "headers": {
+      method: 'POST',
+      headers: {
         "accept": "application/json, text/plain, */*",
         "accept-language": "en-US,en;q=0.9",
         "content-type": "application/json",
@@ -17,51 +17,31 @@ const fetch = require('node-fetch')
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-site"
       },
-      "referrer": "https://www.niftytrader.in/",
-      "referrerPolicy": "strict-origin-when-cross-origin",
-      "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-      "method": "POST",
-      "mode": "cors",
-      "credentials": "omit"
-    
-    })
+      referrer: "https://www.niftytrader.in/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: JSON.stringify({ symbol: eqsymbol }),
+      mode: "cors",
+      credentials: "omit"
+    });
+
     if (!response.ok) {
-      // NOT res.status >= 200 && res.status < 300
-      return { statusCode: response.status, body: response.statusText }
+      return { statusCode: response.status, body: response.statusText };
     }
-    const data = await response.json()
-    process.env.data9=JSON.stringify({data})
+
+    const data = await response.json();
+    process.env.data9 = JSON.stringify({ data });
+
     return {
       statusCode: 200,
-      body: JSON.stringify({data}),
-    }
+      body: JSON.stringify({ data }),
+    };
   } catch (error) {
-    // output to netlify function log
-    console.log(error)
+    console.error(error);
     return {
       statusCode: 500,
-      // Could be a custom message or object i.e. JSON.stringify(err)
       body: JSON.stringify({ msg: error.message }),
-    }
+    };
   }
-}
-
-
-const handler = async (event) => {
- 
-  const eqsymbol = (event.queryStringParameters.eqsymbol);
- 
-  
-  await ntstockdetailsfetch(eqsymbol);
-
- return {
-   statusCode: 200,
-   body: process.env.data9,
-  
- 
- };
 };
 
-module.exports = { handler }
-
-
+module.exports = { handler };

@@ -1,14 +1,16 @@
-const { Client } = require('pg');
-
 exports.handler = async (event, context) => {
-  const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
-
   try {
+    // Importing pg dynamically
+    const { Client } = await import('pg').then(module => module.default);
+    const fetch = await import('node-fetch').then(module => module.default);
+
+    const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
+
     await client.connect();
 
     const tableName = 'NTVOLUME';
 
-    // Retrieve data for symbols with ratio greater than 1 and positive change_percent
+    // Query to retrieve data for symbols with ratio greater than 1 and positive change_percent
     const query = `
       SELECT
         data->>'symbol_name' AS symbol,
@@ -39,14 +41,12 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-      body: (data),
-      time: time.rows[0].time
+        body: data,
+        time: time.rows[0].time
       })
     };
   } catch (error) {
-    console.log('Error occurred while querying data:', error);
-
-    await client.end();
+    console.error('Error occurred while querying data:', error);
 
     return {
       statusCode: 500,

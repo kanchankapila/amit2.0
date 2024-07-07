@@ -1,26 +1,26 @@
-const { Pool } = require('pg');
-const fetch = require('node-fetch')
+const { Pool } = await import('pg').then(pg => pg.default);
+const fetch = await import('node-fetch').then(module => module.default);
+
 const pool = new Pool({
   connectionString: process.env.POSTGRESS_DATABASE_URL1, // Replace with your PostgreSQL database connection string
   ssl: {
     rejectUnauthorized: false, // Only set this option if using a self-signed certificate
   },
 });
+
 const trendlyne = async (tlid, tlname, eqsymbol) => {
   try {
     const client = await pool.connect();
    
-      const result = await client.query('SELECT csrf, time, trnd FROM cookie ');
-      const rows = result.rows;
-      for (const row of rows) {
-        const { csrf, time, trnd } = row;
-        process.env.csrf=csrf
-        process.env.trnd=trnd
-        process.env.time=time
+    const result = await client.query('SELECT csrf, time, trnd FROM cookie ');
+    const rows = result.rows;
+    for (const row of rows) {
+      const { csrf, time, trnd } = row;
+      process.env.csrf = csrf;
+      process.env.trnd = trnd;
+      process.env.time = time;
+    }
       
-      };
-      
-  
     const response = await fetch(`https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
       method: 'GET',
       headers: {
@@ -33,8 +33,7 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
         "x-requested-with": "XMLHttpRequest",
-        // "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=${trnd['trnd']}; csrftoken=${csrf['csrf']}; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
-        "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=`+process.env.trnd+`; csrftoken=`+process.env.csrf+`; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
+        "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=` + process.env.trnd + `; csrftoken=` + process.env.csrf + `; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
       },
       "referrer": `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
       "referrerPolicy": "strict-origin-when-cross-origin",
@@ -43,6 +42,7 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
       "mode": "cors",
       "credentials": "include"
     });
+
     if (!response.ok) {
       return { statusCode: response.status, body: response.statusText };
     }
@@ -61,9 +61,6 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
       statusCode: 500,
       body: JSON.stringify({ msg: error.message }),
     };
-  } finally {
-      
-     
   }
 };
 
