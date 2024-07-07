@@ -1,17 +1,18 @@
 const { Pool } = await import('pg').then(pg => pg.default);
-const fetch = await import('node-fetch').then(module => module.default);
+const { default: fetch } = await import('node-fetch');
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRESS_DATABASE_URL1, // Replace with your PostgreSQL database connection string
+  connectionString: process.env.POSTGRESS_DATABASE_URL1,
   ssl: {
-    rejectUnauthorized: false, // Only set this option if using a self-signed certificate
+    rejectUnauthorized: false,
   },
 });
 
 const trendlyne = async (tlid, tlname, eqsymbol) => {
+  let client;
   try {
-    const client = await pool.connect();
-   
+    client = await pool.connect();
+
     const result = await client.query('SELECT csrf, time, trnd FROM cookie ');
     const rows = result.rows;
     for (const row of rows) {
@@ -20,7 +21,7 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
       process.env.trnd = trnd;
       process.env.time = time;
     }
-      
+
     const response = await fetch(`https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
       method: 'GET',
       headers: {
@@ -35,21 +36,22 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
         "x-requested-with": "XMLHttpRequest",
         "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=` + process.env.trnd + `; csrftoken=` + process.env.csrf + `; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
       },
-      "referrer": `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
-      "referrerPolicy": "strict-origin-when-cross-origin",
-      "body": null,
-      "method": "GET",
-      "mode": "cors",
-      "credentials": "include"
+      referrer: `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "include"
     });
 
     if (!response.ok) {
       return { statusCode: response.status, body: response.statusText };
     }
+
     await client.release();
     const data = await response.json();
     let compressedData = JSON.stringify({ data });
-    compressedData = compressedData.replace(/\s/g, ""); // this line removes whitespace 
+    compressedData = compressedData.replace(/\s/g, ""); // Remove whitespace
     process.env.trendlyne = compressedData;
     return {
       statusCode: 200,
@@ -61,6 +63,10 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
       statusCode: 500,
       body: JSON.stringify({ msg: error.message }),
     };
+  } finally {
+    if (client) {
+      client.release();
+    }
   }
 };
 
