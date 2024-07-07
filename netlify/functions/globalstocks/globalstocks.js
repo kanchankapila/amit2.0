@@ -1,29 +1,31 @@
-const fetch = require("node-fetch");
-
 const handler = async function () {
   try {
+    const fetch = await import('node-fetch').then(module => module.default);
+
     const response = await fetch('https://api.niftytrader.in/webapi/Index/globalStock', {
       headers: { Accept: 'application/json' },
-    })
+    });
+
     if (!response.ok) {
-      return { statusCode: response.status, body: response.statusText }
+      return { statusCode: response.status, body: response.statusText };
     }
-    const data = await response.json()
+
+    const data = await response.json();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({data}),
-    }
+      body: JSON.stringify({ data }),
+    };
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "*", // Allow from anywhere 
-    },
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({ msg: error.message }),
-    }
+    };
   }
-}
+};
 
-module.exports = { handler }
+module.exports = { handler };
