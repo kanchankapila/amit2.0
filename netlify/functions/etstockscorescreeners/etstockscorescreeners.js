@@ -1,11 +1,12 @@
-const fetch = require('node-fetch');
-const qs = require('querystring');
-
 exports.handler = async (event, context, callback) => {
-  const selectedvalue = event.queryStringParameters.selectedvalue;
-  const filter = event.queryStringParameters.filter;
-  const order = (event.queryStringParameters.order);
   try {
+    const fetch = await import('node-fetch').then(module => module.default);
+    const qs = await import('querystring').then(module => module.default);
+
+    const selectedvalue = event.queryStringParameters.selectedvalue;
+    const filter = event.queryStringParameters.filter;
+    const order = event.queryStringParameters.order;
+
     let args;
     args = event.body;
     const response = await fetch('https://etmarketsapis.indiatimes.com/ET_Screeners/getFilteredData', {
@@ -19,18 +20,26 @@ exports.handler = async (event, context, callback) => {
         Referer: 'https://economictimes.indiatimes.com/',
         'Referrer-Policy': 'strict-origin-when-cross-origin'
       },
-      
-      body: `{"stockScoreFilterName":"${selectedvalue}","sortedField":"${filter}","pageSize":"20","sortedOrder":"${order}","pageNumber":1,"exchangeId":"50","isBankingSector":"false","fieldNames":"*"}`,
+      body: JSON.stringify({
+        stockScoreFilterName: selectedvalue,
+        sortedField: filter,
+        pageSize: "20",
+        sortedOrder: order,
+        pageNumber: 1,
+        exchangeId: "50",
+        isBankingSector: "false",
+        fieldNames: "*"
+      }),
       method: 'POST'
     });
-   
+
     if (!response.ok) {
       return { statusCode: response.status, body: response.statusText };
     }
-    
+
     const data = await response.json();
     process.env.data = JSON.stringify({ data });
-    
+
     return {
       statusCode: 200,
       headers: {
@@ -39,8 +48,8 @@ exports.handler = async (event, context, callback) => {
         /* Required for cookies, authorization headers with HTTPS */
         'Access-Control-Allow-Credentials': true
       },
-      body: JSON.stringify({data}),
-     };
+      body: JSON.stringify({ data }),
+    };
   } catch (error) {
     console.log(error);
     return {

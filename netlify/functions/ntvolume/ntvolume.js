@@ -1,10 +1,14 @@
 const { Client } = require('pg');
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
+
 exports.handler = async (event, context) => {
   const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
 
   try {
     const start = Date.now();
+
+    // Dynamically import node-fetch using import()
+    const fetch = (await import('node-fetch')).default;
 
     // API endpoint URL
     const apiUrl = 'https://webapi.niftytrader.in/webapi/Resource/nse-break-out-data';
@@ -38,7 +42,6 @@ exports.handler = async (event, context) => {
     // Fetch data from the API
     const response = await fetch(apiUrl);
     const data = await response.json();
-   
 
     if (data.result === 1) {
       const resultData = data.resultData;

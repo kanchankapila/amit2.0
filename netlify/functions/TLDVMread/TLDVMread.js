@@ -3,9 +3,11 @@ const { Pool } = require('pg');
 exports.handler = async function(event, context) {
   const pool = new Pool({
     connectionString: process.env.POSTGRESS_DATABASE_URL1, // Update with your PostgreSQL connection URL
+    ssl: {
+      rejectUnauthorized: false, // Only set this option if using a self-signed certificate
+    },
   });
 
-  const dbName = 'DVM'; // Update with your database name
   const tableName = 'DVM'; // Update with your table name
 
   try {
@@ -20,13 +22,14 @@ exports.handler = async function(event, context) {
         AND (obj_item->>'MomentumScore')::numeric > '60'
         AND (obj_item->>'VolatilityScore')::numeric > '50'
     `;
+    
     const result = await client.query(query);
     const time = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
-    
 
     console.log('Aggregation query result:', result.rows);
     console.log('Time:', time.rows[0].time);
-    await client.end();
+
+    await client.release();
 
     const response = {
       statusCode: 200,
@@ -38,10 +41,13 @@ exports.handler = async function(event, context) {
 
     return response;
   } catch (err) {
-    console.error(err);
+    console.error('Error executing PostgreSQL query:', err);
+
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal server error' })
     };
+  } finally {
+    await pool.end(); // Close the pool to release resources
   }
 };

@@ -1,18 +1,17 @@
-const fetch = require('node-fetch')
-const qs=require('querystring')
-// const handler = async function () {
-  exports.handler = async (event, context,callback) => {
-    const selectedvalue = (event.queryStringParameters.selectedvalue);
-    const filter = (event.queryStringParameters.filter);
-    const order = (event.queryStringParameters.order);
+exports.handler = async (event, context, callback) => {
   try {
-   
-   console.log(selectedvalue)
-    
+    const fetch = await import('node-fetch').then(module => module.default);
+    const qs = await import('querystring');
+
+    const selectedvalue = event.queryStringParameters.selectedvalue;
+    const filter = event.queryStringParameters.filter;
+    const order = event.queryStringParameters.order;
+
+    console.log(selectedvalue);
+
     let args;
-    args = (event.body);
-    
-    //  console.log(JSON.stringify(event.body))
+    args = event.body;
+
     const response = await fetch("https://etmarketsapis.indiatimes.com/ET_Screeners/getFilteredData", {
       headers: {
         "accept": "application/json, text/javascript, */*; q=0.01",
@@ -22,37 +21,39 @@ const qs=require('querystring')
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-site"
       },
-     
-      body: `{"predefinedFilterName":"${selectedvalue}","sortedField":"${filter}","pageSize":"20","sortedOrder":"${order}","pageNumber":1,"exchangeId":"50","isBankingSector":"false","fieldNames":"*"}`,
+      body: JSON.stringify({
+        predefinedFilterName: selectedvalue,
+        sortedField: filter,
+        pageSize: "20",
+        sortedOrder: order,
+        pageNumber: 1,
+        exchangeId: "50",
+        isBankingSector: "false",
+        fieldNames: "*"
+      }),
       method: 'POST'
     });
-    
-    
+
     if (!response.ok) {
-      // NOT res.status >= 200 && res.status < 300
-      return { statusCode: response.status, body: response.statusText }
+      return { statusCode: response.status, body: response.statusText };
     }
-    const data = await response.json()
-   
-    process.env.data2 = JSON.stringify({ data })
-    
+
+    const data = await response.json();
+    process.env.data2 = JSON.stringify({ data });
+
     return {
       statusCode: 200,
       headers: {
-        /* Required for CORS support to work */
         "Access-Control-Allow-Origin": "*",
-        /* Required for cookies, authorization headers with HTTPS */
         "Access-Control-Allow-Credentials": true
       },
-      body: JSON.stringify({data}),
-     }
+      body: JSON.stringify({ data }),
+    };
   } catch (error) {
-    // output to netlify function log
-    console.log(error)
+    console.log(error);
     return {
       statusCode: 500,
-      // Could be a custom message or object i.e. JSON.stringify(err)
       body: JSON.stringify({ msg: error.message }),
-    }
+    };
   }
-}
+};
