@@ -1,7 +1,8 @@
-const fetch = require("node-fetch");
-
 const handler = async function () {
   try {
+    // Dynamically import 'node-fetch'
+    const fetch = await import('node-fetch').then(module => module.default);
+
     const response = await fetch('https://api.tickertape.in/mmi/now', {
       headers: { Accept: 'application/json' },
     });

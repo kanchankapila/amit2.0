@@ -8,20 +8,22 @@
 <br />
 <br />
 <br />
-<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12"> <!-- Adjusted column classes for responsiveness -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="cardnew">
     <h4 class="mb-4">Global Markets</h4>
-    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+    <div fxLayout="row wrap" fxLayoutGap="30px">
       <div
-        fxFlex="50%"  
-        fxFlex.sm="33%" 
+        fxFlex="calc(100% / 6)"
+        fxFlex.md="calc(100% / 4)"
+        fxFlex.sm="calc(100% / 3)"
+        fxFlex.xs="100%" 
         *ngFor="let tile of globalmarket; let i = index; trackBy: trackByFunctionglobalmarket"
       >
         <mat-card
           class="text-blue type1-bold cardnew text-center"
           [ngClass]="{
             'bg-gradient-bull': tile.text3 > 0,
-            'bg-gradient-bear': 0 > tile.text3,
+            'bg-gradient-bear': tile.text3 < 0,
             'bg-gradient-warning': tile.text3 === 0
           }"
         >
@@ -31,6 +33,7 @@
     </div>
   </div>
 </div>
+
 
 
 <div fxLayout="row" fxLayout.xs="column">
