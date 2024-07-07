@@ -90,7 +90,7 @@
     "@angular-eslint/schematics": "18.1.0",
     "@angular-eslint/template-parser": "18.1.0",
     "@angular/cli": "^18.0.7",
-    "@angular/compiler-cli": "^18.0.4",
+    "@angular/compiler-cli": "^18.0.6",
     "@angular/localize": "^18.0.6",
     "@types/jquery": "^3.5.30",
     "@typescript-eslint/eslint-plugin": "7.15.0",
