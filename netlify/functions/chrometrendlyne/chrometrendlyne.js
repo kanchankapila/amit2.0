@@ -1,5 +1,5 @@
 const chromium = require('sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const axios = require('axios');
 
 exports.handler = async function(event, context) {
