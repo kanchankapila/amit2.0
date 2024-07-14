@@ -17,9 +17,8 @@ package = "netlify-plugin-chromium"
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-[[functions]]
-  name = "chrometrendlyne"
-  timeout = 26
+[[plugins]]
+package = "netlify-plugin-lighthouse"
 
 [functions."ttvolbreakoutsched"]
 schedule = "@hourly"

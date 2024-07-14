@@ -15,6 +15,8 @@ export class DataapiService {
   }
 
   ngOninit(): any {
+    console.log(window.location.hostname)
+    this.baseurl = "http://localhost:9999";
     this.setBaseUrl();
   }
 
@@ -177,11 +179,16 @@ export class DataapiService {
   }
 
   getntglobal() {
+    
     return this.http.get(`${this.baseurl}/.netlify/functions/globalstocks`);
   }
 
   gettrendlyne3fetch(tlid, tlname, eqsymbol) {
     return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne?tlid=${tlid}&tlname=${tlname}&eqsymbol=${eqsymbol}`);
+  }
+
+  chrometrendlyne() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne`);
   }
 
   gettrendlyne2fetch(tlid) {

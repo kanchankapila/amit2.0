@@ -460,5 +460,13 @@ export class NavbarComponent implements OnInit {
   }
   navigateanalytics() {
     this.window.open("/analytics", "_blank")
+
+  }
+  chrometrendlyne(){
+    this.dataApi.chrometrendlyne().subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+  })
   }
 }
