@@ -1,81 +1,87 @@
-const { Pool } = require('pg');
-const { default: fetch } = require('node-fetch');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
+const axios = require('axios');
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRESS_DATABASE_URL1,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-const trendlyne = async (tlid, tlname, eqsymbol) => {
-  let client;
+exports.handler = async function(event, context) {
+  let browser = null;
+  console.log('spawning chrome headless');
+  
   try {
-    client = await pool.connect();
+    const start = Date.now();
+    const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath;
 
-    const result = await client.query('SELECT csrf, time, trnd FROM cookie');
-    const rows = result.rows;
-    for (const row of rows) {
-      const { csrf, time, trnd } = row;
-      process.env.csrf = csrf;
-      process.env.trnd = trnd;
-      process.env.time = time;
-    }
-
-    const response = await fetch(`https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
-      method: 'GET',
-      headers: {
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "accept-language": "en-US,en;q=0.9",
-        "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"Windows\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "x-requested-with": "XMLHttpRequest",
-        "cookie": `_gid=GA1.2.437560219.1668751717; .trendlyne=${process.env.trnd}; csrftoken=${process.env.csrf}; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
-      },
-      referrer: `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
-      referrerPolicy: "strict-origin-when-cross-origin",
-      body: null,
-      mode: "cors",
-      credentials: "include"
+    browser = await puppeteer.launch({
+      args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: executablePath,
+      headless: true,
+      ignoreHTTPSErrors: true,
     });
 
-    if (!response.ok) {
-      return { statusCode: response.status, body: response.statusText };
+    const page = await browser.newPage();
+    await page.setCacheEnabled(true);
+
+    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/';
+    await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+
+    await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+    await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+    
+    // Parallelize the extraction of cookies
+    const [cookies] = await Promise.all([
+      page.cookies()
+    ]);
+
+    let trnd = '';
+    let csrf = '';
+
+    for (let cookie of cookies) {
+      if (cookie.name === '.trendlyne') {
+        trnd = cookie.value;
+      }
+      if (cookie.name === 'csrftoken') {
+        csrf = cookie.value;
+      }
     }
 
-    await client.release();
-    const data = await response.json();
-    let compressedData = JSON.stringify({ data });
-    compressedData = compressedData.replace(/\s/g, ""); // Remove whitespace
-    process.env.trendlyne = compressedData;
+    console.log(`Trendlyne cookie: ${trnd}`);
+    console.log(`CSRF token: ${csrf}`);
+
+    // Parallelize the database operations
+    // await Promise.all([
+    //   await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action/updateOne', {
+    //     collection: 'cookie',
+    //     database: 'Trendlynecookie',
+    //     dataSource: 'Cluster0',
+    //     filter: {},
+    //     update: {
+    //       $set: {
+    //         csrf: csrf,
+    //         trnd: trnd,
+    //         time: start
+    //       }
+    //     },
+    //     upsert: true
+    //   })
+    // ]);
+
+    const timeTaken = Date.now() - start;
+    console.log(`Total time taken: ${timeTaken} milliseconds`);
+
     return {
       statusCode: 200,
-      body: process.env.trendlyne,
+      body: JSON.stringify({ message: 'Trendlyne cookie data updated successfully', timeTaken })
     };
+
   } catch (error) {
     console.error(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ msg: error.message }),
+      body: JSON.stringify({ msg: error.message })
     };
   } finally {
-    if (client) {
-      client.release();
+    if (browser) {
+      await browser.close();
     }
   }
 };
 
-const handler = async (event) => {
-  const { tlid, tlname, eqsymbol } = event.queryStringParameters;
-  await trendlyne(tlid, tlname, eqsymbol);
-  return {
-    statusCode: 200,
-    body: process.env.trendlyne,
-  };
-};
-
-module.exports = { handler };
