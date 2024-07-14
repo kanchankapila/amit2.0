@@ -42,6 +42,7 @@
     "@netlify/functions": "^2.8.1",
     "@popperjs/core": "^2.11.8",
     "@sanity/client": "^0.147.3",
+    "@sparticuz/chromium": "github:sparticuz/chromium",
     "@syncfusion/ej2-angular-charts": "^26.1.40",
     "@types/chart.js": "^2.9.41",
     "@types/node": "^20.14.10",
