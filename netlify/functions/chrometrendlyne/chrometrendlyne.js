@@ -1,4 +1,4 @@
-const chromium = require('sparticuz/chromium');
+const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 
