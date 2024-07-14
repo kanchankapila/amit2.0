@@ -17,8 +17,7 @@ package = "netlify-plugin-chromium"
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-[[plugins]]
-package = "netlify-plugin-lighthouse"
+
 
 [functions."ttvolbreakoutsched"]
 schedule = "@hourly"
