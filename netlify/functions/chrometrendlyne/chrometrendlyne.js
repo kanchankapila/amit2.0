@@ -8,8 +8,7 @@ exports.handler = async function(event, context) {
   
   try {
     const start = Date.now();
-    const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath;
-
+     const executablePath =  await chromium.executablePath;
     browser = await puppeteer.launch({
       args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
       executablePath: executablePath,
