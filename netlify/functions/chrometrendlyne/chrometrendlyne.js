@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer-core");
-const chromium = require("chromium");
+const chromium = require("@sparticuz/chromium");
 
 
 (async () => {
@@ -8,12 +8,12 @@ const chromium = require("chromium");
 
   try {
     const start = Date.now();
-    // const executablePath = await chromium.executablePath; // Ensure this is resolved
+     const executablePath = await  process.env.CHROME_PATH
 
     browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+      executablePath:executablePath  ,
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
