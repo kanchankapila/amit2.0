@@ -1,18 +1,20 @@
-const chromium = require('@sparticuz/chromium');
+const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer-core');
 const axios = require('axios');
+require('dotenv').config();
 
-exports.handler = async function(event, context) {
+(async () => {
   let browser = null;
-  console.log('spawning chrome headless');
-  
+  console.log('Spawning Chrome headless');
+
   try {
     const start = Date.now();
-     const executablePath =  await chromium.executablePath;
+    const executablePath = await chromium.executablePath; // Ensure this is resolved
+
     browser = await puppeteer.launch({
-      args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+      args: chromium.args,
       executablePath: executablePath,
-      headless: true,
+      headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
 
@@ -25,10 +27,7 @@ exports.handler = async function(event, context) {
     await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
     await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
     
-    // Parallelize the extraction of cookies
-    const [cookies] = await Promise.all([
-      page.cookies()
-    ]);
+    const cookies = await page.cookies();
 
     let trnd = '';
     let csrf = '';
@@ -45,42 +44,29 @@ exports.handler = async function(event, context) {
     console.log(`Trendlyne cookie: ${trnd}`);
     console.log(`CSRF token: ${csrf}`);
 
-   
-    await Promise.all([
-      await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action', {
-        collection: 'cookie',
-        database: 'Trendlynecookie',
-        dataSource: 'Cluster0',
-        filter: {},
-        update: {
-          $set: {
-            csrf: csrf,
-            trnd: trnd,
-            time: start
-          }
-        },
-        upsert: true
-      })
-    ]);
+    await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action', {
+      collection: 'cookie',
+      database: 'Trendlynecookie',
+      dataSource: 'Cluster0',
+      filter: {},
+      update: {
+        $set: {
+          csrf: csrf,
+          trnd: trnd,
+          time: start
+        }
+      },
+      upsert: true
+    });
 
     const timeTaken = Date.now() - start;
     console.log(`Total time taken: ${timeTaken} milliseconds`);
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Trendlyne cookie data updated successfully', timeTaken })
-    };
-
   } catch (error) {
     console.error(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ msg: error.message })
-    };
   } finally {
     if (browser) {
       await browser.close();
     }
   }
-};
-
+})();
