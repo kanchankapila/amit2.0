@@ -46,7 +46,7 @@ exports.handler = async function(event, context) {
     console.log(`Trendlyne cookie: ${trnd}`);
     console.log(`CSRF token: ${csrf}`);
 
-    Parallelize the database operations
+   
     await Promise.all([
       await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action', {
         collection: 'cookie',
