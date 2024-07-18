@@ -22,7 +22,6 @@ package = "netlify-plugin-chromium"
 [functions."ttvolbreakoutsched"]
 schedule = "@hourly"
 
-[functions."tlrefresh"]
-schedule = "@daily"
+
 
 
