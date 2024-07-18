@@ -1,7 +1,6 @@
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
-const axios = require('axios');
-require('dotenv').config();
+const puppeteer = require("puppeteer-core");
+const chromium = require("chromium");
+
 
 (async () => {
   let browser = null;
@@ -9,11 +8,12 @@ require('dotenv').config();
 
   try {
     const start = Date.now();
-    const executablePath = await chromium.executablePath; // Ensure this is resolved
+    // const executablePath = await chromium.executablePath; // Ensure this is resolved
 
     browser = await puppeteer.launch({
       args: chromium.args,
-      executablePath: executablePath,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
@@ -44,20 +44,20 @@ require('dotenv').config();
     console.log(`Trendlyne cookie: ${trnd}`);
     console.log(`CSRF token: ${csrf}`);
 
-    await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action', {
-      collection: 'cookie',
-      database: 'Trendlynecookie',
-      dataSource: 'Cluster0',
-      filter: {},
-      update: {
-        $set: {
-          csrf: csrf,
-          trnd: trnd,
-          time: start
-        }
-      },
-      upsert: true
-    });
+    // await axios.post('https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action', {
+    //   collection: 'cookie',
+    //   database: 'Trendlynecookie',
+    //   dataSource: 'Cluster0',
+    //   filter: {},
+    //   update: {
+    //     $set: {
+    //       csrf: csrf,
+    //       trnd: trnd,
+    //       time: start
+    //     }
+    //   },
+    //   upsert: true
+    // });
 
     const timeTaken = Date.now() - start;
     console.log(`Total time taken: ${timeTaken} milliseconds`);
