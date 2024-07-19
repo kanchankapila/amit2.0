@@ -446,6 +446,9 @@ export class NavbarComponent implements OnInit {
   navigatenifty() {
     this.window.open("/nifty", "_blank")
   }
+  navigateinsights() {
+    this.window.open("/Insights", "_blank")
+  }
   navigatehomepage() {
     this.window.open("/homepage", "_blank")
   }
