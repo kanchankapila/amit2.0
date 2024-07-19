@@ -73,3 +73,43 @@
 // // .cardnew{
 // //   width: 100%
 // // }
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Gap between buttons */
+  padding: 20px;
+}
+
+/* Button styles */
+.responsive-button {
+  flex: 1 1 auto; /* Allow buttons to grow and shrink */
+  padding: 10px;
+  font-size: 1em; /* Use relative units for font size */
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Adjust button size and font size for larger screens */
+@media (min-width: 768px) {
+  .responsive-button {
+      font-size: 1.2em; /* Larger font size on bigger screens */
+      padding: 15px;
+  }
+}
+
+/* Adjust button size and font size for smaller screens */
+@media (max-width: 767px) {
+  .responsive-button {
+      font-size: 0.9em; /* Smaller font size on smaller screens */
+      padding: 8px;
+  }
+}
