@@ -14,6 +14,7 @@ const routes: Routes = [
    { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
   { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) },
+  { path: 'Insights', loadChildren: () => import('./Insights/Insights.module').then(m => m.InsightsModule) },
   
 
 ];
