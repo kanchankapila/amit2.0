@@ -263,3 +263,113 @@ body {
     color: #446;
   }
 }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.grid-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  perspective: 1000px;
+  flex: 1 1 120px; /* Default flex basis */
+  min-width: 120px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Maintain a square aspect ratio */
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px; /* Default font size */
+  color: white;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.bg-gradient-bull .card-front, .bg-gradient-bull .card-back {
+  background: linear-gradient(45deg, green, limegreen);
+  color: white;
+}
+
+.bg-gradient-bear .card-front, .bg-gradient-bear .card-back {
+  background: linear-gradient(45deg, red, darkred);
+  color: white;
+}
+
+.bg-gradient-warning .card-front, .bg-gradient-warning .card-back {
+  background: linear-gradient(45deg, orange, yellow);
+  color: black;
+}
+
+.yellow .card-front, .yellow .card-back {
+  background-color: #f1c40f; /* Yellow */
+}
+
+.orange .card-front, .orange .card-back {
+  background-color: #e67e22; /* Orange */
+}
+
+/* Responsive layout */
+@media (min-width: 992px) {
+  .container {
+    flex-wrap: nowrap; /* Ensure all cards are in one line on larger screens */
+  }
+}
+
+@media (max-width: 991px) {
+  .grid-container {
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    flex: 1 1 100px; /* Smaller flex basis on mobile */
+    min-width: 100px;
+  }
+
+  .card-front, .card-back {
+    font-size: 12px; /* Reduced font size for mobile */
+  }
+}
