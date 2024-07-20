@@ -1,6 +1,25 @@
 
 <br />
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="grid-wrapper">
+  
+    <div class="grid-container">
+      <div class="card" *ngFor="let tile of globalmarket; let i = index; trackBy: trackByFunctionglobalmarket" 
+           [ngClass]="{
+             'bg-gradient-bull': tile.text3 > 0,
+             'bg-gradient-bear': tile.text3 < 0,
+             'bg-gradient-warning': tile.text3 === 0
+           }">
+        <div class="card-inner">
+          <div class="card-front">&nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text1 }}<br />&nbsp;{{ tile.text3 }}%<br />&nbsp;{{ tile.text4 }}</div>
+         
+        </div>
+      </div>
+    </div>
+  
+  
+</div>
+
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="cardnew">
     <h4 class="mb-4">Global Markets</h4>
     <div fxLayout="row wrap" fxLayoutGap="30px">
@@ -24,7 +43,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
