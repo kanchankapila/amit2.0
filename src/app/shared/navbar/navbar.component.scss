@@ -113,3 +113,26 @@ body {
       padding: 8px;
   }
 }
+//For Nifty Cards
+.card-containertopcards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card-wrappertopcards {
+  flex: 1 1 30%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .card-wrappertopcards {
+    flex: 1 1 100%;
+    font-size: 0.8em; /* Reduce font size for mobile */
+  }
+
+  .card-bodytopcards {
+    font-size: 0.8em; /* Reduce font size for mobile */
+  }
+}
