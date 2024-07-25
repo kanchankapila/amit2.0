@@ -46,9 +46,8 @@
 </div> -->
 
 
-
-<div fxLayout="row" fxLayout.xs="column">
-  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
+<div class="card-containeradvdec">
+  <div class="card-columnadvdec">
     <div class="cardnew">
       <div class="card-body">
         <div class="table-responsive">
@@ -62,7 +61,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
+  <div class="card-columnadvdec">
     <div class="cardnew">
       <div id="chart" *ngIf="chartOptions5">
         <apx-chart
@@ -82,6 +81,7 @@
     </div>
   </div>
 </div>
+
 <div fxLayout="row" fxLayout.xs="column">
   <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5">
     <div class="cardnew">
@@ -171,70 +171,51 @@
     (onClick)="onClick6($event)"
   ></p-radioButton>
 </div>
-<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-  <div class="content card textcenter">
-    <div fxLayout="row wrap" fxLayoutGap="5px grid">
-      <div
-        fxFlex="20"
-        fxFlex.lg="12%"
-        fxFlex.xs="50"
-        fxFlex.sm="33%"
-        *ngFor="
-          let tile of screener;
-          let i = index;
-          trackBy: trackByFunctionscreener
-        "
-      >
-        <div class="scene">
-          <div class="card">
-            <div
-              class="card__face cardnew card__face--front bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
-              [ngClass]="{
-                'bg-gradient-bull text-black': tile.text4 > 0,
-                'bg-gradient-bear': 0 > tile.text4,
-                'bg-gradient-warning': tile.text4 === 0
-              }"
-            >
-              {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{
-                tile.text4
-              }})%<br />Volume:{{ tile.text11 }}K
-              <div style="text-align: center"></div>
-            </div>
-            <div
-              class="card__face cardnew card__face--back bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
-              [ngClass]="{
-                'bg-gradient-bull text-black': tile.text4 > 0,
-                'bg-gradient-bear': 0 > tile.text4,
-                'bg-gradient-warning': tile.text4 === 0
-              }"
-            >
-              52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
-              <div style="text-align: center"></div>
-            </div>
+<div class="grid-wrapper">
+  
+    <div class="grid-container">
+      <div class="card" *ngFor="let tile of screener; let i = index; trackBy: trackByFunctionscreener" 
+           [ngClass]="{
+             'bg-gradient-bull': tile.text4 > 0,
+             'bg-gradient-bear': tile.text4 < 0,
+             'bg-gradient-warning': tile.text4 === 0
+           }">
+        <div class="card-inner">
+          <div class="card-front">{{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{tile.text4}})%<br />Volume:{{ tile.text11 }}K
           </div>
+                  <div class="card-back"> 52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}</div>
+         
         </div>
-        <p-dialog
-          header="{{ tile.text1 }}"
-          [(visible)]="dialogVisible[i]"
-          [style]="{ width: '100vw', height: '100vh' }"
-        >
+      </div>
+    </div>
+  
+  
+</div>
+<!-- <div class="grid-wrapperets">
+  <div class="grid-containerets">
+    <div
+      class="cardets"
+      *ngFor="let tile of screener; let i = index; trackBy: trackByFunctionscreener"
+    >
+      <div class="card-innerets">
+        <div class="card-frontets">
           <div
-            class="text-black bg-gradient-bull cardnew type1-regular text-center grid-margin"
+            class="text-center text-black type1-regular grid-margin"
+            (click)="dialogVisible[i] = true"
             [ngClass]="{
               'bg-gradient-bull text-black': tile.text4 > 0,
               'bg-gradient-bear': 0 > tile.text4,
               'bg-gradient-warning': tile.text4 === 0
             }"
           >
-            {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{
-              tile.text4
-            }})%<br />Volume:{{ tile.text11 }}K
+            {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{tile.text4}})%<br />Volume:{{ tile.text11 }}K
             <div style="text-align: center"></div>
           </div>
+        </div>
+        <div class="card-backets">
           <div
-            class="text-black type1-regular cardnew bg-gradient-bull text-center grid-margin"
+            class="text-center text-black type1-regular"
+            (click)="dialogVisible[i] = true"
             [ngClass]="{
               'bg-gradient-bull text-black': tile.text4 > 0,
               'bg-gradient-bear': 0 > tile.text4,
@@ -244,26 +225,58 @@
             52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
             <div style="text-align: center"></div>
           </div>
-          <p-footer>
-            <button
-              type="button"
-              pButton
-              (click)="dialogVisible[i] = false"
-              label="Close"
-            ></button>
-            <button
-              type="button"
-              pButton
-              (click)="maximizeDialog(i)"
-              icon="pi pi-window-maximize"
-              iconPos="right"
-            ></button>
-          </p-footer>
-        </p-dialog>
+        </div>
       </div>
+      <p-dialog
+        header="{{ tile.text1 }}"
+        [(visible)]="dialogVisible[i]"
+        [style]="{ width: '100vw', height: '100vh' }"
+      >
+        <div
+          class="text-black bg-gradient-bull type1-regular text-center grid-margin"
+          [ngClass]="{
+            'bg-gradient-bull text-black': tile.text4 > 0,
+            'bg-gradient-bear': 0 > tile.text4,
+            'bg-gradient-warning': tile.text4 === 0
+          }"
+        >
+          {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{
+          tile.text4
+          }})%<br />Volume:{{ tile.text11 }}K
+          <div style="text-align: center"></div>
+        </div>
+        <div
+          class="text-black type1-regular bg-gradient-bull text-center"
+          [ngClass]="{
+            'bg-gradient-bull text-black': tile.text4 > 0,
+            'bg-gradient-bear': 0 > tile.text4,
+            'bg-gradient-warning': tile.text4 === 0
+          }"
+        >
+          52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
+          <div style="text-align: center"></div>
+        </div>
+        <p-footer>
+          <button
+            type="button"
+            pButton
+            (click)="dialogVisible[i] = false"
+            label="Close"
+          ></button>
+          <button
+            type="button"
+            pButton
+            (click)="maximizeDialog(i)"
+            icon="pi pi-window-maximize"
+            iconPos="right"
+          ></button>
+        </p-footer>
+      </p-dialog>
     </div>
   </div>
-</div>
+</div> -->
+
+
 <p>Pre-Defined Filters</p>
 <div fxLayout="row" fxLayout.xs="column">
   <p-radioButton
@@ -339,7 +352,37 @@
     (onClick)="onClick4($event)"
   ></p-radioButton>
 </div>
-<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+
+<div class="grid-wrapper">
+  
+  <div class="grid-container">
+    <div class="card" *ngFor="let tile of pdstocks;let i = index;trackBy: trackByFunctionpdstocks" 
+         [ngClass]="{
+           'bg-gradient-bull': tile.text2 > 0,
+           'bg-gradient-bear': 0 > tile.text2 ,
+           'bg-gradient-warning': tile.text2 === 0
+         }">
+      <div class="card-inner">
+        <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
+        <div style="text-align: center"></div>
+      
+        </div>
+                <div class="card-back">  Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+                }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{
+                  tile.text4
+                }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
+                  tile.text6
+                }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
+                <div style="text-align: center"></div>
+       
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
   <div class="content card textcenter">
     <div fxLayout="row wrap" fxLayoutGap="5px grid">
       <div
@@ -418,7 +461,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <p>Stock Score Filters</p>
 <div fxLayout="row" fxLayout.xs="column">
   <p-radioButton
@@ -494,7 +537,7 @@
     (onClick)="onClick5($event)"
   ></p-radioButton>
 </div>
-<div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+<!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
   <div class="content card textcenter">
     <div fxLayout="row wrap" fxLayoutGap="5px grid">
       <div
@@ -572,7 +615,37 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="grid-wrapper">
+  
+  <div class="grid-container">
+    <div class="card" *ngFor="let tile of ssstocks;let i = index;trackBy: trackByFunctionssstocks" 
+         [ngClass]="{
+           'bg-gradient-bull': tile.text2 > 0,
+           'bg-gradient-bear': 0 > tile.text2 ,
+           'bg-gradient-warning': tile.text2 === 0
+         }">
+      <div class="card-inner">
+        <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
+        
+        <div style="text-align: center"></div>
+      
+        </div>
+                <div class="card-back">   Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+                }}<br />Target High:{{ tile.text4 }}<br />Target Low:{{
+                  tile.text5
+                }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
+                }}<br />Hold:{{ tile.text8 }}
+                <div style="text-align: center"></div>
+       
+      </div>
+    </div>
+    </div>
+  </div>
+
+
 </div>
+
 <div fxLayout="row" fxLayout.xs="column">
   <div class="page-content">
     <h2 style="color: green">Top Gainers</h2>

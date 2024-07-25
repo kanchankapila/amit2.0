@@ -39,6 +39,7 @@ exports.handler = async (event, context, callback) => {
 
     const data = await response.json();
     process.env.data = JSON.stringify({ data });
+    console.log(process.env.data)
 
     return {
       statusCode: 200,
