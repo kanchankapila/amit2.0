@@ -321,6 +321,7 @@ export class HomepageComponent implements OnInit {
   }
   onClick6(event) {
     this.getetscreeners(this.selectedValue)
+    
   }
   ReadMore: boolean = true
   //hiding info box
@@ -580,12 +581,13 @@ export class HomepageComponent implements OnInit {
   async getetscreeners(selectedValue) {
     try {
       const a = selectedValue.split(',');
-      const response = await fetch(`https://etmarketsapis.indiatimes.com/ET_Stats/${a[0]}?pagesize=25&sort=${a[1]}&sortby=percentchange&sortorder=${a[2]}&marketcap=largecap%2Cmidcap%2Csmallcap&duration=${a[3]}&pageno=1&index=2346`, {
+      const response = await fetch(`https://etmarketsapis.indiatimes.com/ET_Stats/${a[0]}?pagesize=25&marketcap=largecap&duration=1%20day&sort=intraday&sortby=percentchange&sortorder=desc`, {
         method: 'GET',
         headers: {}
       });
       if (response.ok) {
         const result = await response.json();
+        console.log(result)
         this.screener.length = 0;
         for (const key in result['searchresult']) {
           this.screener.push({
@@ -719,6 +721,7 @@ export class HomepageComponent implements OnInit {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
+      
         this.pdstocks.length = 0;
         for (const val in nestedItems[0]['page']) {
           this.pdstocks.push({ text1: nestedItems[0]['page'][val].companyShortName, text2: nestedItems[0]['page'][val].absoluteChange, text3: nestedItems[0]['page'][val].ltp, text4: nestedItems[0]['page'][val].priceTargetHigh, text5: nestedItems[0]['page'][val].priceTargetLow, text6: nestedItems[0]['page'][val].recStrongBuyCnt, text7: nestedItems[0]['page'][val].recSellCnt, text8: nestedItems[0]['page'][val].recHoldCnt, text9: nestedItems[0]['page'][val].recText, text10: nestedItems[0]['page'][val].riskScore, text11: nestedItems[0]['page'][val].techScore, text12: nestedItems[0]['page'][val].analystScore })
@@ -735,6 +738,7 @@ export class HomepageComponent implements OnInit {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
+        console.log(nestedItems)
         this.ssstocks.length = 0;
         for (const val in nestedItems[0]['page']) {
           this.ssstocks.push({ text1: nestedItems[0]['page'][val].companyShortName, text2: nestedItems[0]['page'][val].absoluteChange, text3: nestedItems[0]['page'][val].ltp, text4: nestedItems[0]['page'][val].priceTargetHigh, text5: nestedItems[0]['page'][val].priceTargetLow, text6: nestedItems[0]['page'][val].recStrongBuyCnt, text7: nestedItems[0]['page'][val].recSellCnt, text8: nestedItems[0]['page'][val].recHoldCnt, text9: nestedItems[0]['page'][val].recText, text10: nestedItems[0]['page'][val].riskScore, text11: nestedItems[0]['page'][val].techScore, text12: nestedItems[0]['page'][val].analystScore })
