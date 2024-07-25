@@ -57,6 +57,7 @@ export class DataapiService {
   }
 
   getetstockscorescreeners(selectedValue, filter, order) {
+   
     return this.http.get(`${this.baseurl}/.netlify/functions/etstockscorescreeners?selectedvalue=${selectedValue}&filter=${filter}&order=${order}`);
   }
 
@@ -188,7 +189,7 @@ export class DataapiService {
   }
 
   chrometrendlyne() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne`);
+    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
   }
 
   gettrendlyne2fetch(tlid) {
