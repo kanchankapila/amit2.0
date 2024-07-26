@@ -495,7 +495,7 @@ export class HomepageComponent implements OnInit {
         legend: {
           position: "top",
           horizontalAlign: "left",
-          offsetX: 40
+          offsetX: 90
         }
       }
     });
@@ -573,7 +573,7 @@ export class HomepageComponent implements OnInit {
         legend: {
           position: "top",
           horizontalAlign: "center",
-          offsetX: 40
+          offsetX: 0
         }
       };
     });

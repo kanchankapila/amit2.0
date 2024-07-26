@@ -82,8 +82,8 @@
   </div>
 </div>
 
-<div fxLayout="row" fxLayout.xs="column">
-  <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5">
+<div class="containercard">
+  <div class="col">
     <div class="cardnew">
       <div id="chart" class="chart1" *ngIf="chartOptions6">
         <apx-chart
@@ -101,7 +101,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6 col-md-10 col-sm-6 col-xs-5">
+  <div class="col">
     <div class="cardnew">
       <div class="chart1" id="chart1" *ngIf="chartOptions1">
         <apx-chart
@@ -121,7 +121,7 @@
   </div>
 </div>
 <p>ET Screeners</p>
-<div fxLayout="row" fxLayout.xs="column">
+<div class="button-container">
   <p-radioButton
     class="btn btn-responsive btn-outline-success"
     name="groupname"
@@ -278,7 +278,7 @@
 
 
 <p>Pre-Defined Filters</p>
-<div fxLayout="row" fxLayout.xs="column">
+<div class="button-container">
   <p-radioButton
     class="btn btn-responsive btn-outline-success"
     name="groupname"
@@ -352,6 +352,7 @@
     (onClick)="onClick4($event)"
   ></p-radioButton>
 </div>
+
 
 <div class="grid-wrapper">
   
@@ -463,7 +464,7 @@
   </div>
 </div> -->
 <p>Stock Score Filters</p>
-<div fxLayout="row" fxLayout.xs="column">
+<div class="button-container">
   <p-radioButton
     class="btn btn-responsive btn-outline-danger"
     name="groupname"
@@ -537,6 +538,8 @@
     (onClick)="onClick5($event)"
   ></p-radioButton>
 </div>
+
+
 <!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
   <div class="content card textcenter">
     <div fxLayout="row wrap" fxLayoutGap="5px grid">
@@ -645,8 +648,7 @@
 
 
 </div>
-
-<div fxLayout="row" fxLayout.xs="column">
+<div class="containertable">
   <div class="page-content">
     <h2 style="color: green">Top Gainers</h2>
     <div class="bg-gradient-bull shadow-sm p-3">
