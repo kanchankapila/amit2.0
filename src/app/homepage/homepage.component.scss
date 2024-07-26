@@ -513,3 +513,47 @@ body {
     font-size: 12px; /* Reduced font size for mobile */
   }
 }
+//For Table
+.containertable {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.page-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .p-datatable th, .p-datatable td {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .p-datatable th p-sortIcon, .p-datatable th p-columnFilter {
+    font-size: 10px;
+  }
+}
+//For heatmap
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Adds spacing between buttons */
+}
+
+.btn {
+  flex: 1;
+  margin: 5px;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+  }
+}

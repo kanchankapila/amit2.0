@@ -4,7 +4,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {HttpClientModule} from '@angular/common/http';
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseChartDirective } from 'ng2-charts';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { MatCardModule } from '@angular/material/card';
@@ -22,7 +22,7 @@ import { DialogModule } from 'primeng/dialog';
     CommonModule,
     HomepageRoutingModule,
     HttpClientModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     BaseChartDirective,
     NgApexchartsModule,
     MatCardModule,
