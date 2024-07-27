@@ -298,7 +298,7 @@ export class NiftyComponent implements OnInit {
       this.getniftytoday(),
       this.getniftytoday1(),
       this.getniftyvix(),
-      //this.gettlniftyparams(this.indexid,this.duration)
+      //  this.gettlniftyparams(this.indexid,this.duration)
       this.getniftysentiments(),
       this.getnifty1yr(),
     ])
@@ -358,9 +358,9 @@ export class NiftyComponent implements OnInit {
       this.tlindexparam.length = 0;
       console.log(nestedItems);
       for (const val in nestedItems[0].body.parameters) {
-        if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
+         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
-        } else { continue; }
+         } else { continue; }
       };
     })
   }
@@ -418,66 +418,19 @@ export class NiftyComponent implements OnInit {
     })
   }
   getniftypcr() {
-    this.dataApi.getntniftypcrdetails().subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
+   
+     this.dataApi.getntniftypcrdetails().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      // console.log(this.data2)
-      //      /////////////////////NIfty PCR from niftytraders////////////////////
+      console.log(nestedItems[0]['resultData'])
+      /////////////////////NIfty PCR from niftytraders////////////////////
       this.niftypcrdata.length = 0;
       this.niftypcrtime.length = 0;
-      this.pcr.length = 0;
-      this.nifty.length = 0;
-      for (const val in nestedItems[0]['resultData']['data']) {
-        this.pcr.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['pcr'] })
-        if (nestedItems[0]['resultData']['data'][val]['index_close'] > 18500) {
-          this.nifty.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['index_close'], color: 'red' })
-          this.pointColorMapping = 'color';
-          this.axis1 = [{
-            majorGridLines: { width: 0 },
-            majorTickLines: { width: 5 },
-            rowIndex: 0, opposedPosition: true,
-            minimum: this.a, maximum: this.b, interval: 30,
-            lineStyle: { width: 10, color: 'red' },
-            name: 'yAxis',
-            labelFormat: '{value}'
-          }];
-          this.marker1 = {
-            visible: true,
-            width: 2,
-            height: 2,
-            border: { width: 2, color: 'red' }
-          };
-          this.marker = this.marker1;
-          this.axis = this.axis1
-        } else if (nestedItems[0]['resultData']['data'][val]['index_close'] < 18500) {
-          this.nifty.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['index_close'], color: 'green' })
-          this.pointColorMapping = 'color';
-          this.axis1 = [{
-            majorGridLines: { width: 0 },
-            majorTickLines: { width: 5 },
-            rowIndex: 0, opposedPosition: true,
-            minimum: this.a, maximum: this.b, interval: 30,
-            lineStyle: { width: 10, color: 'green' },
-            name: 'yAxis',
-            labelFormat: '{value}'
-          }];
-          this.marker1 = {
-            visible: true,
-            width: 10,
-            height: 10,
-            border: { width: 5, color: 'green' }
-          };
-          this.marker1 = this.marker;
-          this.axis = this.axis1
-        }
+      for (let val in nestedItems[0]['resultData']['data']) {
         this.niftypcrdata.push(nestedItems[0]['resultData']['data'][val]['pcr'])
         this.niftypcrtime.push(new Date(nestedItems[0]['resultData']['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
-        this.a = (nestedItems[0]['resultData']['data'][val]['index_close'] - 100)
-        this.b = (nestedItems[0]['resultData']['data'][val]['index_close'] + 1000)
       }
-      this.data2 = this.pcr;
-      this.data3 = this.nifty;
       this.lineChartpcrData = [{
         label: 'PCR',
         data: this.niftypcrdata,
@@ -486,16 +439,88 @@ export class NiftyComponent implements OnInit {
         maintainAspectRatio: false
       }];
       this.lineChartpcrLabels = this.niftypcrtime;
-    }
-      , err => {
-        console.log(err)
-      })
+    }, err => {
+      console.log(err)
+    })
   }
+  //     const nestedItems = Object.keys(data5).map(key => {
+  //       return data5[key];
+  //     });
+  //     console.log(nestedItems)
+  //     //      /////////////////////NIfty PCR from niftytraders////////////////////
+  //     this.niftypcrdata.length = 0;
+  //     this.niftypcrtime.length = 0;
+  //     this.pcr.length = 0;
+  //     this.nifty.length = 0;
+  //     for (const val in nestedItems[0]['resultData']['data']) {
+  //       this.pcr.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['pcr'] })
+  //       if (nestedItems[0]['resultData']['data'][val]['index_close'] > 18500) {
+  //         this.nifty.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['index_close'], color: 'red' })
+  //         this.pointColorMapping = 'color';
+  //         this.axis1 = [{
+  //           majorGridLines: { width: 0 },
+  //           majorTickLines: { width: 5 },
+  //           rowIndex: 0, opposedPosition: true,
+  //           minimum: this.a, maximum: this.b, interval: 30,
+  //           lineStyle: { width: 10, color: 'red' },
+  //           name: 'yAxis',
+  //           labelFormat: '{value}'
+  //         }];
+  //         this.marker1 = {
+  //           visible: true,
+  //           width: 2,
+  //           height: 2,
+  //           border: { width: 2, color: 'red' }
+  //         };
+  //         this.marker = this.marker1;
+  //         this.axis = this.axis1
+  //       } else if (nestedItems[0]['resultData']['data'][val]['index_close'] < 18500) {
+  //         this.nifty.push({ x: new Date(nestedItems[0]['resultData']['data'][val]['time']).getTime(), y: nestedItems[0]['resultData']['data'][val]['index_close'], color: 'green' })
+  //         this.pointColorMapping = 'color';
+  //         this.axis1 = [{
+  //           majorGridLines: { width: 0 },
+  //           majorTickLines: { width: 5 },
+  //           rowIndex: 0, opposedPosition: true,
+  //           minimum: this.a, maximum: this.b, interval: 30,
+  //           lineStyle: { width: 10, color: 'green' },
+  //           name: 'yAxis',
+  //           labelFormat: '{value}'
+  //         }];
+  //         this.marker1 = {
+  //           visible: true,
+  //           width: 10,
+  //           height: 10,
+  //           border: { width: 5, color: 'green' }
+  //         };
+  //         this.marker1 = this.marker;
+  //         this.axis = this.axis1
+  //       }
+  //       this.niftypcrdata.push(nestedItems[0]['resultData']['data'][val]['pcr'])
+  //       this.niftypcrtime.push(new Date(nestedItems[0]['resultData']['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
+  //       this.a = (nestedItems[0]['resultData']['data'][val]['index_close'] - 100)
+  //       this.b = (nestedItems[0]['resultData']['data'][val]['index_close'] + 1000)
+  //     }
+  //     this.data2 = this.pcr;
+  //     this.data3 = this.nifty;
+  //     this.lineChartpcrData = [{
+  //       label: 'PCR',
+  //       data: this.niftypcrdata,
+  //       borderWidth: 1,
+  //       fill: false,
+  //       maintainAspectRatio: false
+  //     }];
+  //     this.lineChartpcrLabels = this.niftypcrtime;
+  //   }
+  //     , err => {
+  //       console.log(err)
+  //     })
+  // }
   getnifty50smaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       /////////////////////////////EMA/SMA from Kite //////////////////////
       this.niftyema.length = 0;
       this.niftysma.length = 0;
@@ -505,14 +530,13 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
   }
-  getMcNifty50Stocks(): void {
-    this.http
-      .get('https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?pagesize=50&exchange=50&sortby=percentChange&sortorder=desc&indexid=2369&company=true&indexname=Nifty%2050&marketcap=&pageno=1')
-      .subscribe(
-        (data5: number) => {
-          const nestedItems = Object.keys(data5).map((key) => {
-            return data5[key];
-          });
+  getMcNifty50Stocks(){
+    this.http.get('https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?pagesize=50&exchange=50&sortby=percentChange&sortorder=desc&indexid=2369&company=true&indexname=Nifty%2050&marketcap=&pageno=1').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+          
+      console.log(nestedItems)
           //////////////////////////////Nifty 50 Stocks ////////////////////////
           this.nifty50Stocks = nestedItems[0][0]['companies'].map((company: any) => ({
             text1: company.companyShortName,

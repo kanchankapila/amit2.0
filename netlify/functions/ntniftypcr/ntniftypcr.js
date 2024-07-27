@@ -1,9 +1,9 @@
 const handler = async function () {
   try {
     // Dynamically import node-fetch using import()
-    const fetch = await import('node-fetch');
+    const fetch = (await import('node-fetch')).default;
     
-    const response = await fetch.default('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr', {
+    const response = await fetch('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr', {
       headers: { Accept: 'application/json' },
     });
 
