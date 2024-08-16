@@ -73,7 +73,12 @@ export class DataapiService {
   }
 
   gettlindexparams(indexid, duration) {
+    console.log(indexid, duration)
     return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?indexid=${indexid}&duration=${duration}`);
+  }
+  getinvestingindicators(indexid, duration) {
+    
+    return this.http.get(`${this.baseurl}/.netlify/functions/investingindicators?indexid=${indexid}&duration=${duration}`);
   }
 
   getkite1(timeframe, eqsymbol) {

@@ -1,13 +1,6 @@
 <div class="gap-div">
-  <div class="InsideContent">
-    <p-radioButton
-      name="groupname"
-      value="5"
-      label="5 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
+  <!-- <div class="InsideContent">
+   <br />
     <p-radioButton
       name="groupname"
       value="10"
@@ -56,47 +49,139 @@
       (onClick)="onClick($event)"
     ></p-radioButton
     ><br />
-  </div>
+  </div> -->
+  
+  
   <h4 class="text-black text-center">Technical Indicators</h4>
-  <div fxLayout="row wrap" fxLayoutGap="5px grid" class="col-lg-13 col-xs-3">
+  <!-- <div class="card-containerii">
     <div
-      style="text-transform: uppercase; font-weight: bold; margin: 10px"
-      fxFlex="15"
-      fxFlex.lg="12%"
-      fxFlex.xs="40%"
-      fxFlex.sm="33%"
-      *ngFor="let tile of tlindexparam;  let i = index;
-      trackBy: trackByFunctiontlindexparam"
+      class="cardii-wrapper"
+      *ngFor="let tile of investingindicators1m; let i = index; trackBy: trackByFunctioninvestingindicators1m"
     >
-      <div class="scene">
-        <div class="card text-center text-white">
-          <div
-            class="card__face card__face--front text-blue type1-regular"
-            [ngClass]="{
-              'bg-gradient-bull': tile.text3 === 'positive',
-              'bg-gradient-bear': tile.text3 === 'negative',
-              'bg-gradient-warning': tile.text3 === 'neutral'
-            }"
-          >
-            {{ tile.text1 }}
-            <div style="text-align: center"></div>
-          </div>
-          <div
-            class="card__face card__face--back text-blue type1-regular"
-            [ngClass]="{
-              'bg-gradient-bull': tile.text3 === 'positive',
-              'bg-gradient-bear': tile.text3 === 'negative',
-              'bg-gradient-warning': tile.text3 === 'neutral'
-            }"
-          >
-            &nbsp;&nbsp;&nbsp;
-            <h2>{{ tile.text2 }}</h2>
-            <div style="text-align: center"></div>
-          </div>
-        </div>
+      <div class="card-text">{{ tile.text1 }}</div>
+      <div
+        class="cardii"
+        [ngClass]="{
+          'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+          'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+          'cardii-yellow': tile.text1.includes('neutral')
+        }"
+      >
+        1 min
       </div>
     </div>
-  </div>
+  </div> -->
+  <div class="card-containerii">
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators1m; let i = index; trackBy: trackByFunctioninvestingindicators1m"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >1min<br />
+      {{ tile.text1 }}
+    </div>
+  
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators5m; let i = index; trackBy: trackByFunctioninvestingindicators5m"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >5min<br />
+      {{ tile.text1 }}
+    </div>
+
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators15m; let i = index; trackBy: trackByFunctioninvestingindicators15m"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >15min<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators30m; let i = index; trackBy: trackByFunctioninvestingindicators30m"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >30min<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators1h; let i = index; trackBy: trackByFunctioninvestingindicators1h"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >1hr<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators5h; let i = index; trackBy: trackByFunctioninvestingindicators5h"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >5hr<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators1d; let i = index; trackBy: trackByFunctioninvestingindicators1d"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >1day<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators1w; let i = index; trackBy: trackByFunctioninvestingindicators1w"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >1week<br />
+      {{ tile.text1 }}
+    </div>
+    
+    <div
+      class="cardii"
+      *ngFor="let tile of investingindicators1mo; let i = index; trackBy: trackByFunctioninvestingindicators1mo"
+      [ngClass]="{
+        'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
+        'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
+        'cardii-yellow': tile.text1.includes('neutral')
+      }"
+    >1month<br />
+      {{ tile.text1 }}
+    </div>
+  
+</div>
   <h4 class="text-black text-center">Daily Technical Indicators</h4>
   <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
     <div
