@@ -63,3 +63,73 @@ cardpcr {
   height: 80vh;
   width: 80vw;
 }
+//investingindiacators
+.card-containerii {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.cardii-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  margin: 10px;
+}
+
+.cardii-text {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.cardii {
+  width: 10%;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.cardii:hover {
+  transform: scale(1.05);
+}
+
+.cardii-green {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.cardii-red {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.cardii-yellow {
+  background-color: #ffeb3b; /* Yellow */
+  color: black;
+}
+
+@media (max-width: 1200px) {
+  .cardii {
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardii {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .cardii {
+    width: 90%;
+  }
+}
