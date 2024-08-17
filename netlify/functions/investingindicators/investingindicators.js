@@ -4,7 +4,10 @@ const investingindicators = async (indexid, duration) => {
       headers: {
         "accept": "application/json",
         "content-type": "application/json",
-        "Referer": "https://in.investing.com/"
+        "Referer": "https://in.investing.com/",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
       },
       method: "GET"
     });
