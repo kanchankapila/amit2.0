@@ -9,7 +9,7 @@ exports.handler = async function (event, context) {
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath("/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome"),
+    executablePath: await chromium.executablePath(),
     headless: chromium.headless,
   });
    // Do stuff with headless chrome

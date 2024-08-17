@@ -10,6 +10,9 @@ status=200
 
 [[plugins]]
 package = "netlify-plugin-chromium"
+inputs:
+      setChromePathInEnv: false
+      
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
