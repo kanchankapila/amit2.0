@@ -176,7 +176,7 @@ export class DataapiService {
   }
 
   tlrefresh() {
-    return this.http.get('https://render-express-e54x.onrender.com/api/trendlynecookiepg');
+    return this.http.get('${this.baseurl}/.netlify/functions/tlrefresh');
   }
 
   getntniftypcrdetails() {
