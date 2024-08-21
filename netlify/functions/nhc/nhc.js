@@ -1,5 +1,6 @@
 const chromeLauncher = require('chrome-launcher');
 const puppeteer = require('puppeteer-core');
+
 const axios = require('axios');
 require('dotenv').config();
 
@@ -44,7 +45,7 @@ exports.handler = async function (event, context) {
 
     // Extract the necessary cookies
     cookies.forEach(cookie => {
-      if (cookie.name === 'trnd') trnd = cookie.value;
+      if (cookie.name === '.trendlyne') trnd = cookie.value;
       if (cookie.name === 'csrftoken') csrf = cookie.value;
     });
 
