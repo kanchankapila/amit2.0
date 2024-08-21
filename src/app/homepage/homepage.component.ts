@@ -277,6 +277,7 @@ export class HomepageComponent implements OnInit {
   };
   async ngOnInit() {
     await Promise.all([
+      this.getnhc(),
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -352,6 +353,16 @@ export class HomepageComponent implements OnInit {
     this.ReadMore3 = !this.ReadMore3; //not equal to condition
     this.visible3 = !this.visible3
   }
+  getnhc() {
+    this.dataApi.getnhc().subscribe(data5 => {
+           let nestedItems = Object.keys(data5).map(key => {
+             return data5[key];
+           });
+      console.log(nestedItems)
+      // this.dataApi.getopstrarefresh();
+      console.log("nhc is hit")
+    });
+  };
   refreshtl() {
     this.http.get(this.baseurl + '/.netlify/functions/tlrefresh').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
