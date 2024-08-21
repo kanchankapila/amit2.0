@@ -71,6 +71,9 @@ export class DataapiService {
   getntvolume() {
     return this.http.get(`${this.baseurl}/.netlify/functions/ntvolume`);
   }
+  getnhc() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/nhc`);
+  }
 
   gettlindexparams(indexid, duration) {
     console.log(indexid, duration)
