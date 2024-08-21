@@ -52,6 +52,7 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
     "chrome-aws-lambda": "^10.1.0",
+    "chrome-launcher": "^1.1.2",
     "chromium": "^3.0.3",
     "compass-mixins": "^0.12.12",
     "domparser": "^0.1.1",
@@ -73,7 +74,6 @@
     "pg": "^8.12.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.3",
-   
     "puppeteer-core": "^21.1.1",
     "querystring": "^0.2.1",
     "rxjs": "^7.8.1",
