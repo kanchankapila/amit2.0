@@ -278,6 +278,7 @@ export class HomepageComponent implements OnInit {
   async ngOnInit() {
     await Promise.all([
       this.getnhc(),
+      this.gettlrefresh(),
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -355,6 +356,16 @@ export class HomepageComponent implements OnInit {
   }
   getnhc() {
     this.dataApi.getnhc().subscribe(data5 => {
+           let nestedItems = Object.keys(data5).map(key => {
+             return data5[key];
+           });
+      console.log(nestedItems)
+      // this.dataApi.getopstrarefresh();
+      console.log("nhc is hit")
+    });
+  };
+  gettlrefresh() {
+    this.dataApi.tlrefresh().subscribe(data5 => {
            let nestedItems = Object.keys(data5).map(key => {
              return data5[key];
            });
