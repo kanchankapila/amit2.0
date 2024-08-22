@@ -74,6 +74,9 @@ export class DataapiService {
   getnhc() {
     return this.http.get(`${this.baseurl}/.netlify/functions/nhc`);
   }
+  getnhc1() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/nhc1`);
+  }
 
   gettlindexparams(indexid, duration) {
     console.log(indexid, duration)

@@ -278,6 +278,7 @@ export class HomepageComponent implements OnInit {
   async ngOnInit() {
     await Promise.all([
       this.getnhc(),
+      this.getnhc1(),
       this.gettlrefresh(),
       this.getglobal(),
       this.getadvdec(),
@@ -371,6 +372,12 @@ export class HomepageComponent implements OnInit {
       
      
     };
+    getnhc1() {
+      this.dataApi.getnhc1().subscribe();
+        console.log("nhc1 is hit....")
+        
+       
+      };
   
   refreshtl() {
     this.http.get(this.baseurl + '/.netlify/functions/tlrefresh').subscribe(data5 => {
