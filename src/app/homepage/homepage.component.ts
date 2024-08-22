@@ -366,15 +366,12 @@ export class HomepageComponent implements OnInit {
     });
   };
   gettlrefresh() {
-    this.dataApi.tlrefresh().subscribe(data5 => {
-           let nestedItems = Object.keys(data5).map(key => {
-             return data5[key];
-           });
+    this.dataApi.tlrefresh().subscribe();
       console.log("TL refresh is hit....")
-      // this.dataApi.getopstrarefresh();
+      
      
-    });
-  };
+    };
+  
   refreshtl() {
     this.http.get(this.baseurl + '/.netlify/functions/tlrefresh').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
