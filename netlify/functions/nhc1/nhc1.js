@@ -1,82 +1,40 @@
-const chromium = require("@sparticuz/chromium");
-const puppeteer = require('puppeteer-core');
 const fs = require('fs');
-const zlib = require('zlib');
 const path = require('path');
-const util = require('util');
-
-const decompress = util.promisify(zlib.brotliDecompress);
-
-chromium.setHeadlessMode = true;
-chromium.setGraphicsMode = false;
 
 exports.handler = async function (event, context) {
-  let browser = null;
-
   try {
-    // Path to the compressed chromium binary
-    const cwd = process.cwd();
-  console.log(cwd)
-  const tempChromiumPath1 = path.resolve(cwd,'chromium')
+    // Define the path to the node_modules directory
+    const nodeModulesPath = path.resolve(__dirname, '../node_modules');
+    const tmpPath = path.resolve(__dirname, '../tmp');
 
-    const compressedChromiumPath = path.resolve(cwd, 'node_modules', '@sparticuz', 'chromium', 'bin','chromium.br');
-    // Path where the deflated binary will be saved
-    const deflatedChromiumPath = '/tmp/chromium';
+    // Read the contents of the node_modules directory
+    const files = fs.readdirSync(nodeModulesPath);
+    const files1 = fs.readdirSync(tmpPath);
 
-    // Check if the deflated chromium already exists, otherwise deflate it
-    if (!fs.existsSync(deflatedChromiumPath)) {
-      console.log('Deflating chromium binary...');
-      const compressedBuffer = fs.readFileSync(compressedChromiumPath);
-      const deflatedBuffer = await decompress(compressedBuffer);
-      fs.writeFileSync(deflatedChromiumPath, deflatedBuffer);
-      fs.chmodSync(deflatedChromiumPath, '755'); // Ensure it's executable
-    } else {
-      console.log('Chromium binary already deflated.');
-    }
+    // Check for specific subdirectory (e.g., @sparticuz or puppeteer-core)
+    const sparticuzPath = path.resolve(nodeModulesPath, '@sparticuz');
+    const puppeteerCorePath = path.resolve(nodeModulesPath, 'puppeteer-core');
+    const tPath = path.resolve(tmpPath, 'chromium');
+   
+    const tPathFiles = fs.existsSync(tPath) ? fs.readdirSync(tPath) : 'chromium file does not exist';
+    const sparticuzFiles = fs.existsSync(sparticuzPath) ? fs.readdirSync(sparticuzPath) : 'Directory does not exist';
+    const puppeteerCoreFiles = fs.existsSync(puppeteerCorePath) ? fs.readdirSync(puppeteerCorePath) : 'Directory does not exist';
 
-    const executablePath = deflatedChromiumPath;
-
-    // Launch headless Chrome with the appropriate configuration
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: executablePath,
-      headless: chromium.headless,
-    });
-
-    // Do stuff with headless chrome
-    const page = await browser.newPage();
-    const targetUrl = 'https://davidwells.io';
-
-    await page.goto(targetUrl, {
-      waitUntil: ["domcontentloaded", "networkidle0"]
-    });
-
-    await page.waitForSelector('#phenomic');
-
-    const theTitle = await page.title();
-
-    console.log('Done on page', theTitle);
-
+    // Return the file list in the response
     return {
       statusCode: 200,
       body: JSON.stringify({
-        status: "The 'Element' function works!",
-        title: theTitle
-      }),
+        node_modules: files,
+        '@sparticuz': sparticuzFiles,
+        'puppeteer-core': puppeteerCoreFiles,
+        'tmp':tPathFiles
+      })
     };
   } catch (error) {
-    console.error('Error', error);
+    console.error('Error reading node_modules directory:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: error.message,
-      }),
+      body: JSON.stringify({ error: error.message })
     };
-  } finally {
-    // Close the browser if it was successfully opened
-    if (browser !== null) {
-      await browser.close();
-    }
   }
 };
