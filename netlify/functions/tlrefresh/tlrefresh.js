@@ -1,4 +1,4 @@
-const chromium = require('@sparticuz/chromium-min');
+const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 const axios = require('axios');
 require('dotenv').config();
@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
 
     // Launch Puppeteer with @sparticuz/chromium
     browser = await puppeteer.launch({
-      executablePath: await chromium.executablePath(), // Use @sparticuz/chromium executable path
+      executablePath: await chromium.executablePath(""), // Use @sparticuz/chromium executable path
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       headless: chromium.headless,
