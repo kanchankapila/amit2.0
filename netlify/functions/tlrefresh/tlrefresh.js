@@ -9,12 +9,14 @@ exports.handler = async function (event, context) {
   
   const cwd = process.cwd();
   console.log(cwd)
+
+  console.log("dirname",__dirname)
   const tempChromiumPath1 = path.resolve(cwd,'chromium')
   const binPath3 = path.resolve(cwd, 'netlify','functions')
   const files3 = fs.readdirSync(binPath3);
   console.log('Files in /node_modules:', files3);
-  const binPath = path.resolve(__dirname, '../node_modules');
-  const files2 = fs.readdirSync(__dirname, '../tmp');
+  const binPath = path.resolve(__dirname, '..','node_modules');
+  const files2 = fs.readdirSync(__dirname, '..','tmp');
   
   console.log('Files in tmp:',files2 );
   
