@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
 
     // Launch Puppeteer with @sparticuz/chromium
     browser = await puppeteer.launch({
-      executablePath: await chromium.executablePath("/opt/build/repo/node_modules/@sparticuz/chromium/bin/chromium.br"), // Use @sparticuz/chromium executable path
+      executablePath: await chromium.executablePath(), // Use @sparticuz/chromium executable path
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       headless: chromium.headless,
