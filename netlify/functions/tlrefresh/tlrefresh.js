@@ -10,9 +10,9 @@ exports.handler = async function (event, context) {
   const cwd = process.cwd();
   console.log(cwd)
   const tempChromiumPath1 = path.resolve(cwd,'chromium')
-  const binPath = path.resolve(cwd, 'opt','build','repo','node_modules', '@sparticuz', 'chromium', 'bin');
+  const binPath = path.resolve(cwd, 'var','task','netlify','functions','node_modules', '@sparticuz', 'chromium', 'bin');
   const files2 = fs.readdirSync(cwd);
-  const binPath3 = path.resolve(cwd, 'opt','build','repo')
+  const binPath3 = path.resolve(cwd, 'var','task','netlify')
   console.log('Files in cwd:',files2 );
   const files3 = fs.readdirSync(binPath3);
   console.log('Files in /opt/build/repo:', files3);
