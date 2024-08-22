@@ -1,78 +1,76 @@
 const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer');
-const axios = require('axios');
-require('dotenv').config();
-
+const puppeteer = require('puppeteer-core');
+const fs = require('fs');
+const path = require('path');
+const brotli = require('brotli');
 exports.handler = async function (event, context) {
   let browser = null;
-  console.log('Launching headless Chrome with @sparticuz/chromium');
+  const tempChromiumPath = '/tmp/chromium';
+  
+  const cwd = process.cwd();
+  console.log(cwd)
+  const tempChromiumPath1 = path.resolve(cwd,'chromium')
+  const binPath = path.resolve(cwd, 'opt','build','repo','node_modules', '@sparticuz', 'chromium', 'bin');
+  const files2 = fs.readdirSync(cwd);
+  const binPath3 = path.resolve(cwd, 'opt','build','repo')
+  console.log('Files in cwd:',files2 );
+  const files3 = fs.readdirSync(binPath3);
+  console.log('Files in /opt/build/repo:', files3);
 
   try {
-    const start = Date.now();
+    // Check if Chromium is already deflated and exists in /tmp
+    if (!fs.existsSync(tempChromiumPath)) {
+      console.log('Chromium not found in /tmp, extracting...');
+      console.log("0")
+     
+      
+      
+      // Get the path to the compressed Chromium binary in node_modules
+      const compressedChromiumPath =  path.resolve(cwd,  'node_modules', '@sparticuz', 'chromium', 'bin', 'chromium.br');
+      console.log(compressedChromiumPath)
+   
+      const binPath1 = path.resolve(cwd);
+  
+  
+        const files = fs.readdirSync(binPath);
+        console.log('Files in chromium/bin:', files);
+     
+    
+      console.log("1")
+      // Read the compressed binary
+      const compressedBuffer = fs.readFileSync(compressedChromiumPath);
+      console.log("2")
+      // Decompress the binary using Sparticuz's decompress method
+      const decompressedBuffer = brotli.decompress(compressedBuffer);
+      console.log("3")
+      // Write the decompressed binary to /tmp/chromium
+      fs.writeFileSync(tempChromiumPath1, decompressedBuffer);
+      fs.chmodSync(tempChromiumPath1, '755'); // Ensure it's executable
+      
+      console.log('Chromium extracted to /tmp/chromium.');
+      const files1 = fs.readdirSync(binPath);
+        console.log('Files in chromium/bin:', files1);
+    } else {
+      console.log('Chromium already exists in /tmp.');
+    }
 
-    // Launch Puppeteer with @sparticuz/chromium
+    // Launch Puppeteer with the Chromium binary in /tmp/chromium
     browser = await puppeteer.launch({
-      executablePath: await chromium.executablePath(), // Use @sparticuz/chromium executable path
       args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
+      executablePath: tempChromiumPath1,
       headless: chromium.headless,
     });
 
+    // Use Puppeteer as needed
     const page = await browser.newPage();
+    await page.goto('https://google.com', { waitUntil: 'networkidle2' });
 
-    // Open login page
-    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/';
-    await page.goto(targetUrl, { waitUntil: 'networkidle2' });
-
-    // Input login credentials
-    await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
-    await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
-    // Uncomment below line if you want to simulate clicking login
-    // await page.click('button[type="submit"]');
-
-    // Wait for login to complete
-    // await page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-
-    // Get cookies after login
-    const cookies = await page.cookies();
-    let trnd = '';
-    let csrf = '';
-
-    // Extract the necessary cookies
-    cookies.forEach((cookie) => {
-      if (cookie.name === '.trendlyne') trnd = cookie.value;
-      if (cookie.name === 'csrftoken') csrf = cookie.value;
-    });
-
-    console.log(`Trendlyne cookie: ${trnd}`);
-    console.log(`CSRF token: ${csrf}`);
-
-    // Optionally store cookies via Axios (uncomment if necessary)
-    // await axios.post('https://your-mongodb-api-endpoint.com', {
-    //   collection: 'cookie',
-    //   database: 'Trendlynecookie',
-    //   dataSource: 'Cluster0',
-    //   filter: {},
-    //   update: {
-    //     $set: {
-    //       csrf: csrf,
-    //       trnd: trnd,
-    //       time: start,
-    //     },
-    //   },
-    //   upsert: true,
-    // });
-
-    const timeTaken = Date.now() - start;
-    console.log(`Total time taken: ${timeTaken} milliseconds`);
+    const pageTitle = await page.title();
+    console.log('Page title:', pageTitle);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: 'Success',
-        csrf,
-        trnd,
-      }),
+      body: JSON.stringify({ message: 'Success', title: pageTitle }),
     };
   } catch (error) {
     console.error('Error:', error);
