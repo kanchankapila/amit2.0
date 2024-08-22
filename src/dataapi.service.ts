@@ -176,7 +176,7 @@ export class DataapiService {
   }
 
   tlrefresh() {
-    return this.http.get('${this.baseurl}/.netlify/functions/tlrefresh');
+    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
   }
 
   getntniftypcrdetails() {

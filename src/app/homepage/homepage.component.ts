@@ -290,7 +290,8 @@ export class HomepageComponent implements OnInit {
       this.getglobal(),
       this.getadvdec1(),
       this.getetindices(),
-      this.getetsectors()])
+      this.getetsectors(),
+      this.refreshtl()])
     // this.getetstockscorescreeners();
     // this.getetpredefinedfilters
     setInterval(() => { this.getadvdec1() }, 30000);
@@ -369,9 +370,9 @@ export class HomepageComponent implements OnInit {
            let nestedItems = Object.keys(data5).map(key => {
              return data5[key];
            });
-      console.log(nestedItems)
+      console.log("TL refresh is hit....")
       // this.dataApi.getopstrarefresh();
-      console.log("nhc is hit")
+     
     });
   };
   refreshtl() {
