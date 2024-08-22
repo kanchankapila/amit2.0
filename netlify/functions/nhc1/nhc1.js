@@ -2,44 +2,35 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async function (event, context) {
-  try {
-    // Define different possible paths to the node_modules directory
-    const possiblePaths = [
-      path.resolve(__dirname, '../node_modules'), // one directory up
-      path.resolve(__dirname, '../../node_modules'), // two directories up
-      path.resolve(__dirname, '../../../node_modules'), // three directories up
-      path.resolve(process.cwd(), 'node_modules') // process current working directory
-    ];
-
-    let nodeModulesPath;
-    let files = null;
-
-    // Try each path until you find the node_modules directory
-    for (const possiblePath of possiblePaths) {
-      if (fs.existsSync(possiblePath)) {
-        nodeModulesPath = possiblePath;
-        files = fs.readdirSync(nodeModulesPath);
-        break;
+  const walkSync = (dir, filelist = []) => {
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+      const filePath = path.join(dir, file);
+      if (fs.statSync(filePath).isDirectory()) {
+        filelist = walkSync(filePath, filelist); // Recursively scan directories
+      } else {
+        filelist.push(filePath); // Add file to the list
       }
-    }
+    });
+    return filelist;
+  };
 
-    if (!files) {
-      throw new Error('node_modules directory not found.');
-    }
+  try {
+    // Start from the root directory
+    const rootDirectory = '/';
+    const filesAndDirectories = walkSync(rootDirectory);
 
-    // Return the file list in the response
     return {
       statusCode: 200,
       body: JSON.stringify({
-        node_modules: files,
-        path: nodeModulesPath
-      })
+        filesAndDirectories
+      }),
     };
   } catch (error) {
-    console.error('Error reading node_modules directory:', error);
+    console.error('Error reading files:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
