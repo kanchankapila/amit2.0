@@ -3,31 +3,36 @@ const path = require('path');
 
 exports.handler = async function (event, context) {
   try {
-    // Define the path to the node_modules directory
-    const nodeModulesPath = path.resolve(__dirname, '../node_modules');
-    const tmpPath = path.resolve(__dirname, '../tmp');
+    // Define different possible paths to the node_modules directory
+    const possiblePaths = [
+      path.resolve(__dirname, '../node_modules'), // one directory up
+      path.resolve(__dirname, '../../node_modules'), // two directories up
+      path.resolve(__dirname, '../../../node_modules'), // three directories up
+      path.resolve(process.cwd(), 'node_modules') // process current working directory
+    ];
 
-    // Read the contents of the node_modules directory
-    const files = fs.readdirSync(nodeModulesPath);
-    const files1 = fs.readdirSync(tmpPath);
+    let nodeModulesPath;
+    let files = null;
 
-    // Check for specific subdirectory (e.g., @sparticuz or puppeteer-core)
-    const sparticuzPath = path.resolve(nodeModulesPath, '@sparticuz');
-    const puppeteerCorePath = path.resolve(nodeModulesPath, 'puppeteer-core');
-    const tPath = path.resolve(tmpPath, 'chromium');
-   
-    const tPathFiles = fs.existsSync(tPath) ? fs.readdirSync(tPath) : 'chromium file does not exist';
-    const sparticuzFiles = fs.existsSync(sparticuzPath) ? fs.readdirSync(sparticuzPath) : 'Directory does not exist';
-    const puppeteerCoreFiles = fs.existsSync(puppeteerCorePath) ? fs.readdirSync(puppeteerCorePath) : 'Directory does not exist';
+    // Try each path until you find the node_modules directory
+    for (const possiblePath of possiblePaths) {
+      if (fs.existsSync(possiblePath)) {
+        nodeModulesPath = possiblePath;
+        files = fs.readdirSync(nodeModulesPath);
+        break;
+      }
+    }
+
+    if (!files) {
+      throw new Error('node_modules directory not found.');
+    }
 
     // Return the file list in the response
     return {
       statusCode: 200,
       body: JSON.stringify({
         node_modules: files,
-        '@sparticuz': sparticuzFiles,
-        'puppeteer-core': puppeteerCoreFiles,
-        'tmp':tPathFiles
+        path: nodeModulesPath
       })
     };
   } catch (error) {
