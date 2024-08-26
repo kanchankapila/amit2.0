@@ -1,20 +1,22 @@
-const fetch = require('node-fetch');
-const { Pool } = require('pg');
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRESS_DATABASE_URL1, // Replace with your PostgreSQL database connection string
-  ssl: {
-    rejectUnauthorized: false, // Only set this option if using a self-signed certificate
-  },
-});
+const { MongoClient } = require('mongodb');
 
 const tlsscreener = async (screenercode) => {
-  const client = await pool.connect();
-
+  const uri = process.env.MONGODB_ATLAS_CLUSTER_URI; // MongoDB connection string
+  const dbName = 'Trendlyne'; // Update with your database name
+  const collectionName = 'cookie'; // Update with your collection name
+  let client;
+  const fetch = await import('node-fetch').then(module => module.default);
   try {
-    // Query PostgreSQL for necessary data (csrf, trnd, time)
-    const result = await client.query('SELECT csrf, time, trnd FROM cookie');
-    const rows = result.rows;
+    // Connect to MongoDB
+    client = await MongoClient.connect(uri);
+    console.log('Connected successfully to MongoDB');
+
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+
+    // Query MongoDB for necessary data (csrf, trnd, time)
+    const rows = await collection.find().toArray();
     for (const row of rows) {
       const { csrf, time, trnd } = row;
       process.env.csrf = csrf;
@@ -26,7 +28,6 @@ const tlsscreener = async (screenercode) => {
     const response = await fetch(`https://kayal.trendlyne.com/broker-webview/kayal/all-in-one-screener-data-get/?perPageCount=200&pageNumber=0&screenpk=${screenercode}&groupType=all&groupName=`, {
       headers: {
         Accept: 'application/json',
-        // Add any necessary headers here
       },
     });
 
@@ -48,8 +49,10 @@ const tlsscreener = async (screenercode) => {
       body: JSON.stringify({ msg: error.message }),
     };
   } finally {
-    // Release the PostgreSQL client back to the pool
-    client.release();
+    // Close MongoDB connection
+    if (client) {
+      await client.close();
+    }
   }
 };
 
