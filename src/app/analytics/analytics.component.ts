@@ -50,8 +50,8 @@ export class AnalyticsComponent implements OnInit {
   async ngOnInit() {
     await Promise.all([
       this.stockList = stocks.default.Data,
-      // this.getmcinsightreadlongunwinding(),
-      // this.gettlscreener(this.screenercode),
+      this.getmcinsightreadlongunwinding(),
+       this.gettlscreener(this.screenercode),
       this.getntvolume1()
     ])
     { setInterval(() => { this.getntvolume1() }, 60000); }
@@ -99,14 +99,15 @@ export class AnalyticsComponent implements OnInit {
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
+    console.log(nestedItems)
     const tlcardprice = [];
     const tlcardpricecolor = [];
     const tlcardshareholding = [];
     const tlcardshareholdingcolor = [];
     try {
       for (const val in nestedItems[0]['body']['tableData']) {
-        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
-        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
+        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][2]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
+        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][2]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
           try {
             const data6 = await this.http.get('https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=' + tlscreenerstock + '&type=d').toPromise();
