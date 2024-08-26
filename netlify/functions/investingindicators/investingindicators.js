@@ -2,14 +2,22 @@ const investingindicators = async (indexid, duration) => {
   try {
     const response = await fetch(`https://api.investing.com/api/financialdata/technical/analysis/${indexid}/${duration}`, {
       headers: {
-        "accept": "application/json",
+        "accept": "*/*",
+        "accept-language": "en-US,en;q=0.9",
         "content-type": "application/json",
+        "domain-id": "in",
+        "priority": "u=1, i",
+        "sec-ch-ua": "\"Not)A;Brand\";v=\"99\", \"Google Chrome\";v=\"127\", \"Chromium\";v=\"127\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
         "Referer": "https://in.investing.com/",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type"
+        "Referrer-Policy": "strict-origin-when-cross-origin"
       },
-      method: "GET"
+      "body": null,
+      "method": "GET"
     });
 
     if (!response.ok) {
