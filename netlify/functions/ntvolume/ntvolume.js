@@ -1,8 +1,9 @@
-const { Client } = require('pg');
-const fetch = require('node-fetch');
+const { MongoClient } = require('mongodb');
 
 exports.handler = async (event, context) => {
-  const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
+  const uri = process.env.MONGODB_ATLAS_CLUSTER_URI; // MongoDB Atlas connection URI
+  const dbName = 'NTVOLUME'; // Replace with your actual DB name
+  const collectionName = 'volume'; // Replace with your actual collection name
 
   try {
     const start = Date.now();
@@ -12,32 +13,14 @@ exports.handler = async (event, context) => {
 
     // API endpoint URL
     const apiUrl = 'https://webapi.niftytrader.in/webapi/Resource/nse-break-out-data';
-    const tableName = 'NTVOLUME';
 
-    await client.connect();
+    // Connect to MongoDB
+    const client = await MongoClient.connect(uri);
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
 
-    // Create the table if it doesn't exist
-    const createTableQuery = `
-      CREATE TABLE IF NOT EXISTS ${tableName} (
-        id SERIAL PRIMARY KEY,
-        data JSONB,
-        time TIMESTAMP
-      )
-    `;
-    await client.query(createTableQuery);
-
-    // Start a transaction
-    await client.query('BEGIN');
-
-    // Delete existing data from the table
-    const deleteQuery = `DELETE FROM ${tableName}`;
-    await client.query(deleteQuery);
-
-    // Create an index on the "symbol_name" field
-    const createIndexQuery = `
-      CREATE INDEX IF NOT EXISTS symbol_name_idx ON ${tableName} (((data->>'symbol_name')))
-    `;
-    await client.query(createIndexQuery);
+    // Delete existing data from the collection
+    await collection.deleteMany({});
 
     // Fetch data from the API
     const response = await fetch(apiUrl);
@@ -46,28 +29,23 @@ exports.handler = async (event, context) => {
     if (data.result === 1) {
       const resultData = data.resultData;
 
-      // Prepare the INSERT query and values
-      const insertQuery = `
-        INSERT INTO ${tableName} (data, time) VALUES ${resultData
-          .map((_, index) => `($${index * 2 + 1}, $${index * 2 + 2})`)
-          .join(', ')}
-      `;
+      // Prepare the documents to be inserted
+      const documents = resultData.map((item, index) => ({
+        data: item,
+        time: new Date(start + index * 1000)
+      }));
 
-      const insertValues = [];
-      resultData.forEach((item, index) => {
-        insertValues.push(JSON.stringify(item), new Date(start + index * 1000));
-      });
-
-      // Execute the INSERT query within the transaction
-      await client.query(insertQuery, insertValues);
-
-      // Commit the transaction
-      await client.query('COMMIT');
+      // Insert the documents into the MongoDB collection
+      await collection.insertMany(documents);
 
       console.log('Data updated successfully');
+      
+      // Close the MongoDB client connection
+      await client.close();
+
       return {
         statusCode: 200,
-        body: 'Data stored successfully in PostgreSQL',
+        body: 'Data stored successfully in MongoDB',
       };
     } else {
       return {
@@ -78,14 +56,9 @@ exports.handler = async (event, context) => {
   } catch (error) {
     console.log('Error while fetching data:', error);
 
-    // Rollback the transaction in case of an error
-    await client.query('ROLLBACK');
-
     return {
       statusCode: 500,
-      body: 'Error occurred while storing data in PostgreSQL',
+      body: 'Error occurred while storing data in MongoDB',
     };
-  } finally {
-    await client.end();
   }
 };

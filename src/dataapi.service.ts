@@ -124,9 +124,7 @@ export class DataapiService {
     return this.http.get(`${this.baseurl}/.netlify/functions/TLDVMread`);
   }
 
-  getmcinsightread() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/mcinsightread`);
-  }
+  
 
   settldvm() {
     return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM');
