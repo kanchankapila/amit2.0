@@ -1,32 +1,33 @@
-const handler = async (event, context) => {
+const { MongoClient } = require('mongodb');
+
+const handler = async function (event) {
   try {
     // Dynamic import of 'node-fetch'
     const fetch = await import('node-fetch').then(module => module.default);
 
-    // Dynamic import of 'pg' Pool
-    const { Pool } = await import('pg');
+    // MongoDB connection details
+    const uri = process.env.MONGODB_ATLAS_CLUSTER_URI;
+    const dbName = 'Trendlyne'; // Update with your database name
+    const collectionName = 'cookie'; // Update with your collection name
+    let client;
 
-    const pool = new Pool({
-      connectionString: process.env.POSTGRESS_DATABASE_URL1,
-      ssl: {
-        rejectUnauthorized: false
-      }
-    });
+    const trendlynebuildup5 = async (tlid) => {
+      client = await MongoClient.connect(uri);
+      console.log('Connected successfully to MongoDB');
+      const db = client.db(dbName);
+      const collection = db.collection(collectionName);
 
-    const trendlynebuildup5 = async () => {
-      let client;
       try {
-        client = await pool.connect();
-
-        // Fetch CSRF token and other necessary data from PostgreSQL
-        const result = await client.query('SELECT csrf, time, trnd FROM cookie');
-        const rows = result.rows;
+        // Retrieve CSRF token and other necessary data from MongoDB
+        const rows = await collection.find().toArray();
         for (const row of rows) {
           const { csrf, time, trnd } = row;
           process.env.csrf = csrf;
           process.env.trnd = trnd;
           process.env.time = time;
         }
+
+
 
         // Fetch expiration date for futures
         const response1 = await fetch("https://api.moneycontrol.com/mcapi/v1/fno/futures/getExpDts?id=IDF01");

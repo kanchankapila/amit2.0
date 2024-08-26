@@ -1,48 +1,57 @@
+const { MongoClient } = require('mongodb');
+
 exports.handler = async (event, context) => {
+  const uri = process.env.MONGODB_ATLAS_CLUSTER_URI; // MongoDB Atlas connection URI
+  const dbName = 'NTVOLUME'; // Replace with your actual DB name
+  const collectionName = 'volume'; // Replace with your actual collection name
+
   try {
-    // Importing pg dynamically
-    const { Client } = await import('pg').then(module => module.default);
-    const fetch = await import('node-fetch').then(module => module.default);
+    // Connect to MongoDB
+    const client = await MongoClient.connect(uri);
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
 
-    const client = new Client({ connectionString: process.env.POSTGRESS_DATABASE_URL1 });
+    // Aggregation query to filter documents where ratio > 1 and change_percent > 0
+    const result = await collection.aggregate([
+      {
+        $match: {
+          'data.ratio': { $gt: 1 },
+          'data.change_percent': { $gt: 0 }
+        }
+      },
+      {
+        $project: {
+          symbol: '$data.symbol_name',
+          open: { $toDouble: '$data.open' },
+          high: { $toDouble: '$data.high' },
+          low: { $toDouble: '$data.low' },
+          close: { $toDouble: '$data.close' },
+          ratio: { $toDouble: '$data.ratio' },
+          last_trade_price: { $toDouble: '$data.last_trade_price' },
+          volume: { $toDouble: '$data.volume' },
+          avg_daily_volume: { $toDouble: '$data.avg_daily_volume' },
+          total_volume: { $toDouble: '$data.total_volume' },
+          change: { $toDouble: '$data.change' },
+          change_percent: { $toDouble: '$data.change_percent' },
+          high52: { $toDouble: '$data.high52' },
+          low52: { $toDouble: '$data.low52' }
+        }
+      }
+    ]).toArray();
 
-    await client.connect();
+    // Get the time field from the first document in the collection
+    const timeDoc = await collection.findOne({}, { projection: { time: 1 } });
+    const time = timeDoc ? timeDoc.time : null;
 
-    const tableName = 'NTVOLUME';
+    // Close the MongoDB client connection
+    await client.close();
 
-    // Query to retrieve data for symbols with ratio greater than 1 and positive change_percent
-    const query = `
-      SELECT
-        data->>'symbol_name' AS symbol,
-        (data->>'open')::float AS open,
-        (data->>'high')::float AS high,
-        (data->>'low')::float AS low,
-        (data->>'close')::float AS close,
-        (data->>'ratio')::float AS ratio,
-        (data->>'last_trade_price')::float AS last_trade_price,
-        (data->>'volume')::float AS volume,
-        (data->>'avg_daily_volume')::float AS avg_daily_volume,
-        (data->>'total_volume')::float AS total_volume,
-        (data->>'change')::float AS change,
-        (data->>'change_percent')::float AS change_percent,
-        (data->>'high52')::float AS high52,
-        (data->>'low52')::float AS low52
-      FROM ${tableName}
-      WHERE (data->>'ratio')::float > 1 AND (data->>'change_percent')::float > 0
-    `;
-
-    const result = await client.query(query);
-    const time = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
-    console.log('Time:', time.rows[0].time);
-    const data = result.rows;
-
-    await client.end();
-
+    // Return the result
     return {
       statusCode: 200,
       body: JSON.stringify({
-        body: data,
-        time: time.rows[0].time
+        body: result,
+        time: time
       })
     };
   } catch (error) {
@@ -50,7 +59,10 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body: 'Error occurred while querying data from PostgreSQL',
+      body: JSON.stringify({
+        error: 'Error occurred while querying data from MongoDB',
+        details: error.message
+      }),
     };
   }
 };

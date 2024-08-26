@@ -1,42 +1,55 @@
+const { MongoClient } = require('mongodb');
+
 exports.handler = async (event, context) => {
   try {
-    const { Client } = await import('pg').then(module => module.default);
-
-    const connectionString = process.env.POSTGRESS_DATABASE_URL; // Update with your PostgreSQL connection string
+    const uri = process.env.MONGODB_ATLAS_CLUSTER_URI; // Update with your MongoDB Atlas connection string
     const dbName = 'Tickertape'; // Update with your database name
-    const tableName = 'Volume'; // Update with your table name
+    const collectionName = 'Volume'; // Update with your collection name
 
-    const client = new Client({ connectionString });
-    await client.connect();
-    console.log('Connected successfully to PostgreSQL');
+    // Connect to MongoDB
+    const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+    console.log('Connected successfully to MongoDB');
 
-    const query = `
-      SELECT obj_item->>'sid' AS sid, obj_item->>'Name' AS Name, (obj_item->>'volBreakout')::numeric AS volBreakout
-      FROM ${tableName},
-          jsonb_array_elements(${tableName}.obj) AS obj_item
-      WHERE (obj_item->>'volBreakout')::numeric > 600;
-    `;
+    // Perform aggregation query
+    const aggregationPipeline = [
+      { $unwind: '$obj' }, // Unwind the array
+      { $match: { 'obj.volBreakout': { $gt: 600 } } }, // Match documents with volBreakout > 600
+      {
+        $project: {
+          sid: '$obj.sid',
+          Name: '$obj.Name',
+          volBreakout: { $toDouble: '$obj.volBreakout' },
+        },
+      },
+    ];
 
-    const result = await client.query(query);
-    const timeResult = await client.query(`SELECT time FROM ${tableName} LIMIT 1`);
-    const time = timeResult.rows.length > 0 ? timeResult.rows[0].time : null;
+    const result = await collection.aggregate(aggregationPipeline).toArray();
 
-    await client.end();
-    console.log('Aggregation query result:', result.rows);
+    // Fetch the "time" field from the collection
+    const timeDoc = await collection.findOne({}, { projection: { time: 1 } });
+    const time = timeDoc ? timeDoc.time : null;
+
+    // Close the MongoDB connection
+    await client.close();
+
+    console.log('Aggregation query result:', result);
     console.log('Time:', time);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        result: result.rows,
+        result: result,
         time: time
-      })
+      }),
     };
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };

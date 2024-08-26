@@ -1,25 +1,25 @@
-const handler = async function () {
+const { MongoClient } = require('mongodb');
+
+const handler = async function (event) {
   try {
     // Dynamic import of 'node-fetch'
     const fetch = await import('node-fetch').then(module => module.default);
 
-    // Dynamic import of 'pg' Pool
-    const { Pool } = await import('pg');
-
-    const pool = new Pool({
-      connectionString: process.env.POSTGRESS_DATABASE_URL1,
-      ssl: {
-        rejectUnauthorized: false
-      }
-    });
+    // MongoDB connection details
+    const uri = process.env.MONGODB_ATLAS_CLUSTER_URI;
+    const dbName = 'Trendlyne'; // Update with your database name
+    const collectionName = 'cookie'; // Update with your collection name
+    let client;
 
     const trendlynebuildup = async (tlid) => {
-      const client = await pool.connect();
+      client = await MongoClient.connect(uri);
+      console.log('Connected successfully to MongoDB');
+      const db = client.db(dbName);
+      const collection = db.collection(collectionName);
 
       try {
-        // Retrieve CSRF token and other necessary data from PostgreSQL
-        const result = await client.query('SELECT csrf, time, trnd FROM cookie');
-        const rows = result.rows;
+        // Retrieve CSRF token and other necessary data from MongoDB
+        const rows = await collection.find().toArray();
         for (const row of rows) {
           const { csrf, time, trnd } = row;
           process.env.csrf = csrf;
@@ -39,6 +39,7 @@ const handler = async function () {
         const month = date.toLocaleString('default', { month: 'short' });
         const year = date.getFullYear();
         const formattedDate = `${day}-${month}-${year}`;
+        console.log(formattedDate);
 
         // Fetch data from Trendlyne API
         const response = await fetch(`https://trendlyne.com/futures-options/api/derivative/buildup-15/${formattedDate}-near/${tlid}/`, {
@@ -77,10 +78,12 @@ const handler = async function () {
           body: JSON.stringify({ msg: error.message }),
         };
       } finally {
-        // Release the PostgreSQL client back to the pool
-        client.release();
+        // Close MongoDB connection
+        if (client) {
+          await client.close();
+        }
       }
-    }
+    };
 
     const { tlid } = event.queryStringParameters;
     const result = await trendlynebuildup(tlid);

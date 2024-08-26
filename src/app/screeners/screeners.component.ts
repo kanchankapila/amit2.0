@@ -280,8 +280,8 @@ export class ScreenersComponent implements OnInit {
     try {
       console.log(nestedItems[0]['body']);
       for (let val in nestedItems[0]['body']['tableData']) {
-        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
-        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][0]).replace('Ltd.', 'Limited')))[0]?.name;
+        const tlscreenerstock = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][2]).replace('Ltd.', 'Limited')))[0]?.mcsymbol;
+        const tlscreenerstockname = this.stockList.filter(i => i.name === ((nestedItems[0]['body']['tableData'][val][2]).replace('Ltd.', 'Limited')))[0]?.name;
         if (tlscreenerstock !== '#N/A') {
           try {
             const data6 = await this.http.get('https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=' + tlscreenerstock + '&type=d').toPromise();
@@ -306,7 +306,7 @@ export class ScreenersComponent implements OnInit {
                 tlselectedstocklabel.push(((new Date(nestedItems[5][val]['time'] * 1000).toUTCString()).split(" ").slice(0, 6)[4]).slice(0, 5));
               }
             } else {
-              console.log(nestedItems[0]['body']['tableData'][val][0] + "First")
+              console.log(nestedItems[0]['body']['tableData'][val][2] + "First")
               continue;
             }
             const tlchartContainer = document.getElementById('tlchart-container');
@@ -412,7 +412,7 @@ export class ScreenersComponent implements OnInit {
             console.error(err);
           }
         } else {
-          console.log(nestedItems[0]['body']['tableData'][val][0]);
+          console.log(nestedItems[0]['body']['tableData'][val][2]);
           continue;
         }
       }
