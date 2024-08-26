@@ -133,6 +133,10 @@ export class DataapiService {
   setttvolume() {
     return this.http.get('https://render-express-e54x.onrender.com/api/ttvolnmcinsight');
   }
+  getmcinsightread() {
+   return this.http.get(`${this.baseurl}/.netlify/functions/mcinsightread`)
+   }
+
 
   getttvolume() {
     return this.http.get(`${this.baseurl}/.netlify/functions/TTVolumeread`);
