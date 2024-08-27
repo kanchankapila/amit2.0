@@ -1,101 +1,79 @@
-const chromium = require('@sparticuz/chromium')
-const puppeteer = require('puppeteer-core')
-const axios = require('axios');
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
+const fs = require('fs');
 
-exports.handler = async (event,context,callback) => {
-  
-    let browser = null
-    console.log('spawning chrome headless')
-    try {
-      const start = Date.now();
-      const executablePath =  await chromium.executablePath()
- 
-      // setup
-      browser = await puppeteer.launch({
-             args: chromium.args,
-           
-        executablePath: executablePath,
-         headless:chromium.headless,
-          ignoreHTTPSErrors: true,
-            ignoreDefaultArgs: ["--disable-extensions","--single-process"]
-      })
- 
-      // Use page cache when loading page.
-      page = await browser.newPage();
-      await page.setCacheEnabled(true)
-      
-      const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
- 
-      await page.goto(targetUrl, {
-        waitUntil: ["domcontentloaded"]
-      })
- 
-     
-         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
-         
-         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
-       
-          
-    cookie = await page.cookies()
-    // console.log(cookie)
-    for (let val in cookie){
-     
-        if (cookie[val].name == '.trendlyne'){
-          process.env.trnd=cookie[val].value
-         console.log( process.env.trnd)
-       }}
-       for (let val in cookie){
-       if (cookie[val].name == 'csrftoken'){
-         process.env.csrf=cookie[val].value
-        console.log( process.env.csrf)
+exports.handler = async function (event, context) {
+  let browser = null;
+
+  try {
+    console.log("Starting Puppeteer...");
+
+    // Get the executable path from @sparticuz/chromium
+    const executablePath = await chromium.executablePath();
+    console.log("Chromium executable path:", executablePath);
+
+    // Launch Puppeteer with the specified Chromium binary
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: executablePath,
+      headless: true,
+      ignoreHTTPSErrors: true,
+    });
+
+    const page = await browser.newPage();
+    console.log("Navigating to Trendlyne...");
+
+    // Navigate to the login page
+    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/';
+    await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+
+    console.log("Filling in login form...");
+
+    // Fill in login form
+    await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+    await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+
+    // Wait for the login to be processed and cookies to be set
+    await page.waitForTimeout(3000); // Adjust this timeout as needed
+
+    // Get cookies
+    const cookies = await page.cookies();
+    console.log("Cookies received:", cookies);
+
+    let trnd = '';
+    let csrf = '';
+
+    // Extract the cookies
+    cookies.forEach(cookie => {
+      if (cookie.name === '.trendlyne') {
+        trnd = cookie.value;
+        process.env.trnd = trnd;
       }
-    }
-   
-      const data = {
-        "collection": "cookie",
-        "database": "Trendlynecookie",
-        "dataSource": "Cluster0",
-        "filter":{},
-        "update":{$set: {
-          "csrf":  process.env.csrf,
-          "trnd":  process.env.trnd,
-          "time": start
-        }},
-        "upsert":true
-        };
-        const config = {
-          method: 'post',
-          url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Request-Headers': '*',
-            'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
-            'Accept': 'application/ejson'
-          },
-          data,
-      };
-      const result = await axios(config);
-            
-      // return response data
-      callback(null, {
-          statusCode: 200,
-          body: "Inserted"
-      });
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
- 
-     
-    } catch (error) {
-      console.log(error);
-     
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ msg: error.message }),
-      };
-    } finally {
-      if (browser) {
-          await browser.close();
-        // await client.close();
+      if (cookie.name === 'csrftoken') {
+        csrf = cookie.value;
+        process.env.csrf = csrf;
       }
+    });
+
+    console.log("Trendlyne cookie:", trnd);
+    console.log("CSRF token:", csrf);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Success',
+        cookies: { trnd, csrf },
+      }),
+    };
+  } catch (error) {
+    console.error('Error:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
+  } finally {
+    if (browser !== null) {
+      await browser.close();
     }
-  };
+  }
+};
