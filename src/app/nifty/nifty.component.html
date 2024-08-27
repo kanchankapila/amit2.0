@@ -804,7 +804,7 @@
       </div>
     </p-tabPanel>
   </p-tabView>
-  <div class="col-lg-15 col-xs-6">
+  <!-- <div class="col-lg-15 col-xs-6">
     <div class="content card">
       <h4 class="card-title text-black text-center">NIFTY 50 STOCKS</h4>
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
@@ -834,17 +834,25 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- <div fxLayout="row" fxLayout.xs="column">
-      <blockquote class="trendlyne-widgets abc" 
-                  [attr.data-get-url]="'https://trendlyne.com/web-widget/checklist-widget/Poppins/NIFTY50/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'"
-                  data-theme="light" 
-                  #trendlyneWidget>
-      </blockquote>
-      <blockquote class="abc" 
-      href='https://in.tradingview.com/symbols/NSE-NIFTY/technicals/'
-      #TradingViewWidget>
-      </blockquote>    
-       </div>  
-    -->
+  </div> -->
+  <div class="grid-wrappernt">
+  
+    <div class="grid-containernt">
+      <div class="cardnt" *ngFor="let tile of nifty50Stocks;let i = index;trackBy: trackByFunctionnifty50Stocks" 
+           [ngClass]="{
+            'bg-gradient-bullnt': tile.text3 > 0,
+            ' bg-gradient-bearnt' : 0 > tile.text3,
+            'bg-gradient-warningnt': tile.text3 === 0
+          }"
+            (click)="changestockpage(tile.text5)"
+           >
+        <div class="card-innernt">
+          <div class="card-frontnt text-center">{{ tile.text1 }}<br>{{ tile.text4 }}<br>{{ tile.text2 }}&nbsp;({{ tile.text3 }}%) </div>
+          
+        </div>
+    </div>
+  
+  
+</div>
+</div>
 </div>
