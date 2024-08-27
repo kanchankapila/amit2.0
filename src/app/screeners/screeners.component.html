@@ -708,49 +708,24 @@
      </div>
      </div>
    </div> -->
-    <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
-      <div class="content card textcenter">
-        <div fxLayout="row wrap" fxLayoutGap="10px grid">
-          <div
-            fxFlex="20"
-            fxFlex.lg="12%"
-            fxFlex.xs="50"
-            fxFlex.sm="33%"
-            *ngFor="let tile of screenerstocks; trackBy: trackByFunction42"
-          >
-            <div class="scene">
-              <div class="card">
-                <div
-                  class="card__face card__face--front text-blue text-blue type1-bold grid-margin stretch-card type1-bold textcenter grid-margin stretch-card"
-                  [ngClass]="{
-                    'cardbear bg-gradient-bull': tile.text2 > 0,
-                    'cardbear2 bg-gradient-bear2': 0 > tile.text2,
-                    'cardbear3 bg-gradient-neutral': tile.text2 === 0
-                  }"
-                >
-                  &nbsp;&nbsp;&nbsp;{{ tile.text12 }}<br />{{ tile.text1
-                  }}<br />Price Change:{{ tile.text2 }}<br />Current Volume:{{
-                    tile.text4
-                  }}<br />20d Avg Vol:{{ tile.text3 }}
-                </div>
-                <div
-                  class="card__face card__face--back text-blue type1-bold text-blue text-blue type1-bold grid-margin stretch-card type1-bold textcenter grid-margin stretch-card textcenter grid-margin stretch-card"
-                  [ngClass]="{
-                    'cardbear bg-gradient-bull': tile.text2 > 0,
-                    'cardbear2 bg-gradient-bear2': 0 > tile.text2,
-                    'cardbear3 bg-gradient-neutral': tile.text2 === 0
-                  }"
-                >
-                  &nbsp;&nbsp;&nbsp;{{ tile.text12 }}<br />{{ tile.text1
-                  }}<br />Price Change:{{ tile.text2 }}<br />Current Volume:{{
-                    tile.text4
-                  }}<br />20d Avg Vol:{{ tile.text3 }}
-                </div>
-              </div>
-            </div>
-          </div>
+   <div class="grid-wrappernt">
+  
+    <div class="grid-containernt">
+      <div class="cardnt" *ngFor="screenerstocks; let i = index; trackBy: trackByFunction42" 
+           [ngClass]="{
+            'bg-gradient-bullnt': tile.text2 > 0,
+                    'bg-gradient-bearnt': 0 > tile.text2,
+                    'bg-gradient-warningnt': tile.text2 === 0
+           }">
+        <div class="card-innernt">
+          <div class="card-frontnt">&nbsp;&nbsp;&nbsp;{{ tile.text12 }}<br />{{ tile.text1}}<br />Price Change:{{ tile.text2 }}<br />Current Volume:{{tile.text4}}<br />20d Avg Vol:{{ tile.text3 }}
+         
         </div>
       </div>
     </div>
+  
+  
+</div>
+    
   </p-dialog>
 </div>
