@@ -646,48 +646,26 @@
       </div>
     </p-tabPanel>
   </p-tabView>
-  <div class="col-lg-15 col-xs-9">
-    <div class="content card">
-      <h4 class="card-title text-black text-center">BANK NIFTY STOCKS</h4>
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div
-          style="text-transform: uppercase; font-weight: bold"
-          fxFlex="15%"
-          fxFlex.xs="33%"
-          fxFlex.sm="33%"
-          class="text-center"
-          *ngFor="let tile of bankniftystocks; trackBy: trackByFunction11"
-        >
-          <mat-card
-            [ngClass]="{
-              'bg-gradient-bull  text-black mat-elevation-z4': tile.text3 > 0,
-              'bg-gradient-bear  text-black mat-elevation-z4': 0 > tile.text3
-            }"
-          >
-            <h6>{{ tile.text1 }}</h6>
-            {{ tile.text4 }}<br />{{ tile.text2 }}&nbsp;({{ tile.text3 }}%)
-            <mat-card-actions>
-              <button
-                mat-button
-                class="matbutton"
-                (click)="changestockpage(tile.text5)"
-              >
-                Graph
-              </button>
-            </mat-card-actions>
-          </mat-card>
+  
+
+  <div class="grid-wrappernt">
+  
+    <div class="grid-containernt">
+      <div class="cardnt" *ngFor="let tile of bankniftystocks; trackBy: trackByFunction11" 
+           [ngClass]="{
+            'bg-gradient-bullnt': tile.text3 > 0,
+            ' bg-gradient-bearnt' : 0 > tile.text3,
+            'bg-gradient-warningnt': tile.text3 === 0
+          }"
+            (click)="changestockpage(tile.text5)"
+           >
+        <div class="card-innernt">
+          <div class="card-frontnt text-center">{{ tile.text1 }}<br>{{ tile.text4 }}<br>{{ tile.text2 }}&nbsp;({{ tile.text3 }}%) </div>
+          
         </div>
-      </div>
     </div>
-  </div>
-  <div fxLayout="row" fxLayout.xs="column">
-    <blockquote
-      class="trendlyne-widgets abc"
-      [attr.data-get-url]="
-        'https://trendlyne.com/web-widget/checklist-widget/Poppins/BANKNIFTY/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E'
-      "
-      data-theme="light"
-      #trendlyneWidget
-    ></blockquote>
-  </div>
+  
+  
+</div>
+</div>
 </div>
