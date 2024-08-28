@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const apiUrl = 'https://ap-south-1.aws.data.mongodb-api.com/app/data-lhekmvb/endpoint/data/v1/action/find';
+const apiUrl = process.env.mongoapiurl;
 const apiKey = process.env.mongoapikey; // Your MongoDB Data API key
 const database = 'Trendlynecookie';
 const collection = 'cookie';
