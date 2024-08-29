@@ -205,7 +205,7 @@ p {
   color: red;
 }
 .text-yellow {
-  color: rgb(196, 196, 5);
+  color: yellow;
 }
 card12 {
   width: 1100px;
@@ -278,3 +278,128 @@ card12 {
     z-index: auto;
   }
 }
+
+//cardglass
+/* Basic scene styling */
+.sceneglass {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+/* Card container */
+.cardglass {
+  width: 1300px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.8s;
+}
+
+/* Glassmorphism effect */
+.cardglass__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.bg-red{
+  background: linear-gradient(
+    135deg,
+    rgba(255, 236, 210, 0.8), /* #FFECD2 */
+    rgba(252, 182, 159, 0.6)  /* #FCB69F */
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.bg-green{
+  background: linear-gradient(
+    135deg,
+    rgba(191, 240, 152, 0.8),  /* #BFF098 (light green) */
+    rgba(111, 214, 255, 0.8)   /* #6FD6FF (light blue) */
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.bg-yellow{
+  background: linear-gradient(
+    135deg,
+    rgba(169, 241, 223, 0.8),  /* #A9F1DF */
+    rgba(255, 187, 187, 0.6)   /* #FFBBBB */
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Front and back face */
+.cardglass__face--front {
+  transform: rotateY(0deg);
+}
+
+.cardglass__face--back {
+  transform: rotateY(180deg);
+}
+
+/* Rotate card when flipped */
+.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Responsive design */
+@media (max-width: 360px) {
+  .cardglass{
+    width: 360px;
+    height: 300px;
+  }
+}
+/* Wrapper for the card content */
+
+
+/* Top-right positioning for tile.text1 */
+.top-left {
+  position: absolute;
+  top: 10px; /* Adjust the top position as needed */
+  left: 10px; /* Adjust the right position as needed */
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 10px; /* Adjust the top position as needed */
+  left: 10px; /* Adjust the right position as needed */
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Center positioning for the other text */
+.center-text {
+  text-align: center;
+}
+
+.center-text h6 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
