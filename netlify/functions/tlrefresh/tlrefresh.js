@@ -9,7 +9,7 @@ exports.handler = async function (event, context) {
     console.log("Starting Puppeteer...");
 
     // Get the executable path from @sparticuz/chromium
-    const executablePath = await chromium.executablePath();
+    const executablePath = await chromium.executablePath;
     console.log("Chromium executable path:", executablePath);
 
     // Launch Puppeteer with the specified Chromium binary
