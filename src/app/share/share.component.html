@@ -1,4 +1,233 @@
 <div class="gap-div">
+  <!-- <div class="scene col-lg-13 col-xs-6">
+  <div
+    class="card22 text-center"
+    *ngFor="let tile of stockdetails1; let i = index;
+    trackBy: trackByFunctionstockdetails1"
+  >
+    <div
+      class="card22__face card22__face--front text-center type1-bold content"
+      [ngClass]="{
+        'bg-gradient-bull text-center text-green': tile.text3 > 0,
+        'bg-gradient-bear text-center text-red': 0 > tile.text3,
+        'bg-gradient-warning text-center text-yellow': tile.text3 == 0
+      }"
+    >
+      <div
+        style="text-transform: uppercase; font-weight: bold"
+        class="InsideContent1"
+      >
+        <h4>{{ tile.text1 }}</h4>
+        <br />
+        <h6>
+          {{ tile.text4 }}&nbsp;&nbsp;{{
+            tile.text2
+          }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
+        </h6>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas #sparklineChart></canvas>
+      </div>
+    </div>
+    <div
+      style="text-transform: uppercase; font-weight: bold"
+      class="card22__face card22__face--back type1-bold content"
+      [ngClass]="{
+        'bg-gradient-bull text-center text-green': tile.text3 > 0,
+        'bg-gradient-bear text-center text-red': 0 > tile.text3,
+        'bg-gradient-warning text-center text-yellow': tile.text3 == 0
+      }"
+    >
+      <div class="InsideContent1">
+        <h6>
+          52 wk High:{{ tile.text5 }}<br />
+          52 wk Low:{{ tile.text6 }}<br />
+          Upper Circuit:{{ tile.text7 }}<br />
+          Lower Circuit:{{ tile.text8 }}<br />
+        </h6>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+  <div class="sceneglass">
+    <div class="cardglass" [ngClass]="{ 'is-flipped': isFlipped }" (click)="toggleFlip()" *ngFor="let tile of stockdetails1; let i = index; trackBy: trackByFunctionstockdetails1">
+      <div class="cardglass__face cardglass__face--front" [ngClass]="{
+        'bg-green text-green': tile.text3 > 0,
+        'bg-red text-red': 0 > tile.text3,
+        'bg-yellow text-yellow': tile.text3 == 0
+      }" >
+      
+        <canvas #sparklineChart></canvas>
+     
+        <h4 class="top-left">{{ tile.text1 }}</h4>
+        <div class="center-text">
+          <h6>
+            {{ tile.text4 }}&nbsp;&nbsp;{{ tile.text2 }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
+          </h6>
+        </div>
+        <h6 class="bottom-left">
+          52 H: {{ tile.text5 }}&nbsp;&nbsp;52 L: {{ tile.text6 }}&nbsp;&nbsp;UC: {{ tile.text7 }}&nbsp;&nbsp;LC: {{ tile.text8 }}
+        </h6>
+      
+        
+      </div>
+      <div class="cardglass__face cardglass__face--back">
+        <h4>Back Side</h4>
+        <p>This is the back of the card.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div fxLayout="row" fxLayout.xs="column">
+     <br />
+    <br />
+    <br />
+    <div class="scene">
+      <div class="card22 content">
+        <div
+          class="card22__face card22__face--front text-center type1-bold card content"
+        >
+          <div id="chart" *ngIf="chartOptions2">
+            <apx-chart
+              [series]="chartOptions2.series"
+              [chart]="chartOptions2.chart"
+              [dataLabels]="chartOptions2.dataLabels"
+              [plotOptions]="chartOptions2.plotOptions"
+              [yaxis]="chartOptions2.yaxis"
+              [xaxis]="chartOptions2.xaxis"
+              [legend]="chartOptions2.legend"
+              [colors]="chartOptions2.colors"
+              [grid]="chartOptions2.grid"
+              [title]="chartOptions2.title"
+            ></apx-chart>
+          </div>
+        </div>
+        <div
+          class="card22__face card22__face--back text-center type1-bold card content"
+        >
+          <div id="chart" *ngIf="chartOptions3">
+            <apx-chart
+              [series]="chartOptions3.series"
+              [chart]="chartOptions3.chart"
+              [dataLabels]="chartOptions3.dataLabels"
+              [plotOptions]="chartOptions3.plotOptions"
+              [yaxis]="chartOptions3.yaxis"
+              [xaxis]="chartOptions3.xaxis"
+              [legend]="chartOptions3.legend"
+              [colors]="chartOptions3.colors"
+              [grid]="chartOptions3.grid"
+              [title]="chartOptions3.title"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scene">
+      <div class="card22 text-center text-white">
+        <div class="card22__face card22__face--front type1-bold card content">
+          <h4 class="text-black text-center">Stock Today with S/R</h4>
+          <div class="table-responsive">
+            <div style="display: flex">
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [type]="lineChartType"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="card22__face card22__face--back type1-bold card content">
+          <h4 class="text-black text-center">Stock Today</h4>
+          <div class="table-responsive">
+            <div style="display: flex">
+              <canvas
+                baseChart
+                style="min-height: 250px"
+                class="table"
+                [datasets]="stockData"
+                [labels]="stockLabels"
+                [type]="stockChartType"
+                [options]="stockChartOptions"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scene" *ngIf="datapv">
+      <div class="card22 content">
+        <div
+          class="card22__face card22__face--front text-center type1-bold card content"
+        >
+          <ejs-chart
+            style="display: block"
+            [chartArea]="chartArea"
+            id="chart"
+            [primaryXAxis]="primaryXAxispv"
+            [primaryYAxis]="primaryYAxispv"
+            [title]="titlepv"
+          >
+            <e-series-collection>
+              <e-series
+                [dataSource]="datapv"
+                type="Bar"
+                xName="Day"
+                yName="cvol"
+                name="Current Volume"
+                columnS0cing="0.1"
+              >
+              </e-series>
+              <e-series
+                [dataSource]="datapv"
+                type="Bar"
+                xName="Day"
+                yName="delivery"
+                name="Delivery"
+                columnSpacing="0.1"
+              >
+              </e-series>
+            </e-series-collection>
+          </ejs-chart>
+        </div>
+        <div
+          class="card22__face card22__face--back text-center type1-bold card content"
+        >
+          <ejs-accumulationchart
+            id=""
+            #pie
+            style="display: block"
+            [legendSettings]="legendSettingssh"
+            [tooltip]="tooltipsh"
+            [title]="titlesh"
+            [enableBorderOnMouseMove]="false"
+          >
+            <e-accumulation-series-collection>
+              <e-accumulation-series
+                *ngIf="datash"
+                name="Project"
+                [dataSource]="datash"
+                xName="DataLabelMappingName"
+                yName="value"
+                [startAngle]="startAngle"
+                innerRadius="40%"
+                [radius]="radius"
+                [dataLabel]="dataLabelsh"
+                explode="true"
+                explodeOffset="10%"
+                [explodeIndex]="0"
+              >
+              </e-accumulation-series>
+            </e-accumulation-series-collection>
+          </ejs-accumulationchart>
+        </div>
+      </div>
+    </div>
+  </div>
   <button
     pButton
     pRipple
@@ -465,205 +694,7 @@ header="Insights"
     <h4>{{ tile.text1 }}&nbsp;[{{ tile.text2 }}]</h4>
   </div>
   <br />
-  <div fxLayout="row" fxLayout.xs="column">
-    <div class="scene col-lg-13 col-xs-6">
-      <div
-        class="card22 text-center"
-        *ngFor="let tile of stockdetails1; let i = index;
-        trackBy: trackByFunctionstockdetails1"
-      >
-        <div
-          class="card22__face card22__face--front text-center type1-bold content"
-          [ngClass]="{
-            'bg-gradient-bull text-center text-green': tile.text3 > 0,
-            'bg-gradient-bear text-center text-red': 0 > tile.text3,
-            'bg-gradient-warning text-center text-yellow': tile.text3 == 0
-          }"
-        >
-          <div
-            style="text-transform: uppercase; font-weight: bold"
-            class="InsideContent1"
-          >
-            <h4>{{ tile.text1 }}</h4>
-            <br />
-            <h6>
-              {{ tile.text4 }}&nbsp;&nbsp;{{
-                tile.text2
-              }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
-            </h6>
-          </div>
-          <div class="canvas-wrapper">
-            <canvas #sparklineChart></canvas>
-          </div>
-        </div>
-        <div
-          style="text-transform: uppercase; font-weight: bold"
-          class="card22__face card22__face--back type1-bold content"
-          [ngClass]="{
-            'bg-gradient-bull text-center text-green': tile.text3 > 0,
-            'bg-gradient-bear text-center text-red': 0 > tile.text3,
-            'bg-gradient-warning text-center text-yellow': tile.text3 == 0
-          }"
-        >
-          <div class="InsideContent1">
-            <h6>
-              52 wk High:{{ tile.text5 }}<br />
-              52 wk Low:{{ tile.text6 }}<br />
-              Upper Circuit:{{ tile.text7 }}<br />
-              Lower Circuit:{{ tile.text8 }}<br />
-            </h6>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <br />
-    <br />
-    <div class="scene">
-      <div class="card22 content">
-        <div
-          class="card22__face card22__face--front text-center type1-bold card content"
-        >
-          <div id="chart" *ngIf="chartOptions2">
-            <apx-chart
-              [series]="chartOptions2.series"
-              [chart]="chartOptions2.chart"
-              [dataLabels]="chartOptions2.dataLabels"
-              [plotOptions]="chartOptions2.plotOptions"
-              [yaxis]="chartOptions2.yaxis"
-              [xaxis]="chartOptions2.xaxis"
-              [legend]="chartOptions2.legend"
-              [colors]="chartOptions2.colors"
-              [grid]="chartOptions2.grid"
-              [title]="chartOptions2.title"
-            ></apx-chart>
-          </div>
-        </div>
-        <div
-          class="card22__face card22__face--back text-center type1-bold card content"
-        >
-          <div id="chart" *ngIf="chartOptions3">
-            <apx-chart
-              [series]="chartOptions3.series"
-              [chart]="chartOptions3.chart"
-              [dataLabels]="chartOptions3.dataLabels"
-              [plotOptions]="chartOptions3.plotOptions"
-              [yaxis]="chartOptions3.yaxis"
-              [xaxis]="chartOptions3.xaxis"
-              [legend]="chartOptions3.legend"
-              [colors]="chartOptions3.colors"
-              [grid]="chartOptions3.grid"
-              [title]="chartOptions3.title"
-            ></apx-chart>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="scene">
-      <div class="card22 text-center text-white">
-        <div class="card22__face card22__face--front type1-bold card content">
-          <h4 class="text-black text-center">Stock Today with S/R</h4>
-          <div class="table-responsive">
-            <div style="display: flex">
-              <canvas
-                baseChart
-                style="min-height: 250px"
-                class="table"
-                [type]="lineChartType"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="card22__face card22__face--back type1-bold card content">
-          <h4 class="text-black text-center">Stock Today</h4>
-          <div class="table-responsive">
-            <div style="display: flex">
-              <canvas
-                baseChart
-                style="min-height: 250px"
-                class="table"
-                [datasets]="stockData"
-                [labels]="stockLabels"
-                [type]="stockChartType"
-                [options]="stockChartOptions"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="scene" *ngIf="datapv">
-      <div class="card22 content">
-        <div
-          class="card22__face card22__face--front text-center type1-bold card content"
-        >
-          <ejs-chart
-            style="display: block"
-            [chartArea]="chartArea"
-            id="chart"
-            [primaryXAxis]="primaryXAxispv"
-            [primaryYAxis]="primaryYAxispv"
-            [title]="titlepv"
-          >
-            <e-series-collection>
-              <e-series
-                [dataSource]="datapv"
-                type="Bar"
-                xName="Day"
-                yName="cvol"
-                name="Current Volume"
-                columnS0cing="0.1"
-              >
-              </e-series>
-              <e-series
-                [dataSource]="datapv"
-                type="Bar"
-                xName="Day"
-                yName="delivery"
-                name="Delivery"
-                columnSpacing="0.1"
-              >
-              </e-series>
-            </e-series-collection>
-          </ejs-chart>
-        </div>
-        <div
-          class="card22__face card22__face--back text-center type1-bold card content"
-        >
-          <ejs-accumulationchart
-            id=""
-            #pie
-            style="display: block"
-            [legendSettings]="legendSettingssh"
-            [tooltip]="tooltipsh"
-            [title]="titlesh"
-            [enableBorderOnMouseMove]="false"
-          >
-            <e-accumulation-series-collection>
-              <e-accumulation-series
-                *ngIf="datash"
-                name="Project"
-                [dataSource]="datash"
-                xName="DataLabelMappingName"
-                yName="value"
-                [startAngle]="startAngle"
-                innerRadius="40%"
-                [radius]="radius"
-                [dataLabel]="dataLabelsh"
-                explode="true"
-                explodeOffset="10%"
-                [explodeIndex]="0"
-              >
-              </e-accumulation-series>
-            </e-accumulation-series-collection>
-          </ejs-accumulationchart>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
   <br />
   <br />
   <br />
@@ -1686,4 +1717,4 @@ header="Insights"
   </blockquote>   
   </div>      
    -->
-</div>
+   </div>

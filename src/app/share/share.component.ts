@@ -156,6 +156,7 @@ export interface tlindexparamtile { text1: string; text2: string; text3: string;
 @Injectable()
 export class ShareComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
+  isFlipped = false;
   sparklineChart: Chart;
   public width: string
   // custom code end
@@ -770,6 +771,9 @@ export class ShareComponent implements OnInit {
   }
   onClick(event) {
     this.gettlstockparams(this.indexid, this.selectedValue)
+  }
+  toggleFlip() {
+    this.isFlipped = !this.isFlipped;
   }
   async getstocksparkline(mcsymbol) {
     try {
@@ -1928,7 +1932,7 @@ export class ShareComponent implements OnInit {
         } else if (nestedItems[5][0].hasOwnProperty('value')) {
         
           for (const val in nestedItems[5]) {
-            console.log(nestedItems[5][val]["time"])
+            
             this.stockhcdate1.push({ x: (new Date(nestedItems[5][val]["time"] * 1000).toUTCString()), y: (nestedItems[5][val]["value"]) }) 
           }
         } 
@@ -2514,7 +2518,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      //  console.log(nestedItems)
+       console.log(nestedItems)
       if (nestedItems[0].body.hasOwnProperty('_avg_target')) {
         this.brokertarget.push({ text1: nestedItems[0].body['broker_avg_target']['lt1'], text2: nestedItems[0].body['broker_avg_target']['st1'], text3: nestedItems[0].body['broker_avg_target']['color1'] })
       } if (nestedItems[0].body.hasOwnProperty('ema_26')) {
