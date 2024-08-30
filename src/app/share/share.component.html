@@ -50,35 +50,43 @@
   </div>
 </div> -->
 
-  <div class="sceneglass">
-    <div class="cardglass" [ngClass]="{ 'is-flipped': isFlipped }" (click)="toggleFlip()" *ngFor="let tile of stockdetails1; let i = index; trackBy: trackByFunctionstockdetails1">
-      <div class="cardglass__face cardglass__face--front" [ngClass]="{
-        'bg-green text-green': tile.text3 > 0,
-        'bg-red text-red': 0 > tile.text3,
-        'bg-yellow text-yellow': tile.text3 == 0
-      }" >
-      
-        <canvas #sparklineChart></canvas>
-     
-        <h4 class="top-left">{{ tile.text1 }}</h4>
-        <div class="center-text">
-          <h6>
-            {{ tile.text4 }}&nbsp;&nbsp;{{ tile.text2 }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
-          </h6>
-        </div>
-        <h6 class="bottom-left">
-          52 H: {{ tile.text5 }}&nbsp;&nbsp;52 L: {{ tile.text6 }}&nbsp;&nbsp;UC: {{ tile.text7 }}&nbsp;&nbsp;LC: {{ tile.text8 }}
-        </h6>
-      
-        
-      </div>
-      <div class="cardglass__face cardglass__face--back">
-        <h4>Back Side</h4>
-        <p>This is the back of the card.</p>
-      </div>
-    </div>
-  </div>
+<div class="sceneglass">
+  <div class="cardglass" 
   
+       [ngClass]="{ 'is-flipped': isFlipped }" 
+       (click)="toggleFlip()" 
+       *ngFor="let tile of stockdetails1; let i = index; trackBy: trackByFunctionstockdetails1">
+    
+    <div class="cardglass__face cardglass__face--front" 
+         [ngClass]="{
+           'bg-green text-green': tile.text3 > 0,
+           'bg-red text-red': 0 > tile.text3,
+           'bg-yellow text-yellow': tile.text3 == 0
+         }">
+      
+     
+      
+      <!-- Top-left Text -->
+      <h4 class="top-left">{{ tile.text1 }}</h4>
+      
+      <!-- Center Text -->
+      <div class="center-text">
+        <h6>
+          {{ tile.text4 }}&nbsp;&nbsp;{{ tile.text2 }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
+        </h6>
+      </div>
+      
+      <!-- Bottom-left Text -->
+      <h6 class="bottom-left">
+        52 H: {{ tile.text5 }}&nbsp;&nbsp;52 L: {{ tile.text6 }}&nbsp;&nbsp;UC: {{ tile.text7 }}&nbsp;&nbsp;LC: {{ tile.text8 }}
+      </h6>
+      <canvas #sparklineChart></canvas>
+    </div>
+    
+   
+  </div>
+</div>
+
   <div fxLayout="row" fxLayout.xs="column">
      <br />
     <br />

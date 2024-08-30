@@ -286,7 +286,7 @@ card12 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
+  height: 40vh;
 }
 
 /* Card container */
@@ -297,6 +297,10 @@ card12 {
   transform-style: preserve-3d;
   transform: rotateY(0deg);
   transition: transform 0.8s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Glassmorphism effect */
@@ -305,7 +309,8 @@ card12 {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   backface-visibility: hidden;
   border-radius: 20px;
@@ -316,47 +321,81 @@ card12 {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.bg-red{
-  background: linear-gradient(
-    135deg,
-    rgba(255, 236, 210, 0.8), /* #FFECD2 */
-    rgba(252, 182, 159, 0.6)  /* #FCB69F */
-  );
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.bg-green{
-  background: linear-gradient(
-    135deg,
-    rgba(191, 240, 152, 0.8),  /* #BFF098 (light green) */
-    rgba(111, 214, 255, 0.8)   /* #6FD6FF (light blue) */
-  );
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.bg-yellow{
-  background: linear-gradient(
-    135deg,
-    rgba(169, 241, 223, 0.8),  /* #A9F1DF */
-    rgba(255, 187, 187, 0.6)   /* #FFBBBB */
-  );
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+/* Center text positioning */
+.center-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  text-align: center;
 }
 
-/* Front and back face */
-.cardglass__face--front {
-  transform: rotateY(0deg);
+/* Responsive design */
+@media (max-width: 360px) {
+  .cardglass {
+    width: 360px;
+    height: 300px;
+  }
+
+  .center-text {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height:30px;
+  }
 }
 
-.cardglass__face--back {
-  transform: rotateY(180deg);
+/* Top-left positioning */
+.top-left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+/* Bottom-left positioning */
+.bottom-left {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+/* Background colors for card faces */
+.bg-red {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 236, 210, 0.8),
+    rgba(252, 182, 159, 0.6)
+  );
+}
+
+.bg-green {
+  background: linear-gradient(
+    135deg,
+    rgba(191, 240, 152, 0.8),
+    rgba(111, 214, 255, 0.8)
+  );
+}
+
+.bg-yellow {
+  background: linear-gradient(
+    135deg,
+    rgba(169, 241, 223, 0.8),
+    rgba(255, 187, 187, 0.6)
+  );
 }
 
 /* Rotate card when flipped */
@@ -364,42 +403,4 @@ card12 {
   transform: rotateY(180deg);
 }
 
-/* Responsive design */
-@media (max-width: 360px) {
-  .cardglass{
-    width: 360px;
-    height: 300px;
-  }
-}
-/* Wrapper for the card content */
-
-
-/* Top-right positioning for tile.text1 */
-.top-left {
-  position: absolute;
-  top: 10px; /* Adjust the top position as needed */
-  left: 10px; /* Adjust the right position as needed */
-  margin: 0;
-  font-size: 2.2rem;
-  font-weight: bold;
-}
-.bottom-left {
-  position: absolute;
-  bottom: 10px; /* Adjust the top position as needed */
-  left: 10px; /* Adjust the right position as needed */
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-/* Center positioning for the other text */
-.center-text {
-  text-align: center;
-}
-
-.center-text h6 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: normal;
-}
 

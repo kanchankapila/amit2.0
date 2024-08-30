@@ -690,7 +690,7 @@ export class ShareComponent implements OnInit {
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
     await Promise.all([
-      this.getstocksparkline(this.mcsymbol),
+      // this.getstocksparkline(this.mcsymbol),
       this.getopstrastockpcr(this.eqsymbol),
       this.getHtmlFromApi(this.tlid),
       this.getHtmlFromApi1(),
@@ -731,6 +731,7 @@ export class ShareComponent implements OnInit {
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     setInterval(() => { this.getmcpricevolume(this.mcsymbol) }, 3000);
+   
     //  setInterval(() => {this.opstrarefresh()},60000);
     setInterval(() => { this.getopstrastockpcr(this.eqsymbol) }, 60000);
     setInterval(() => { this.getopstrastockpcrintra(this.eqsymbol) }, 60000);
@@ -1059,6 +1060,7 @@ export class ShareComponent implements OnInit {
         this.stockdetails1.length = 0;
         await this.stockdetails1.push({ text1: result1.data['SC_FULLNM'], text2: result1.data['pricechange'], text3: result1.data['pricepercentchange'], text4: result1.data['pricecurrent'], text5: result1.data['52H'], text6: result1.data['52L'], text7: result1.data['upper_circuit_limit'], text8: result1.data['lower_circuit_limit'] })
       }
+      await this.getstocksparkline(this.mcsymbol)
     } catch (err) {
       console.error(err);
     }
