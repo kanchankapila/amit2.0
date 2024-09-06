@@ -243,7 +243,7 @@ export class BankniftyComponent implements OnInit {
   async ngOnInit() {
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
-    // this.gettlbniftyparams(this.indexid,this.duration)
+    // this.gettlbniftyparams(this.indexid)
     await Promise.all([
       this.getmcbankniftystocks(),
       this.getbankniftysmaema(),
@@ -289,9 +289,9 @@ export class BankniftyComponent implements OnInit {
       console.log(err)
     })
   }
-  gettlbniftyparams(indexid, selectedValue) {
+  gettlbniftyparams(indexid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.gettlindexparams(this.indexid).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -477,7 +477,7 @@ export class BankniftyComponent implements OnInit {
     })
   }
   onClick(event) {
-    this.gettlbniftyparams(this.indexid, this.selectedValue)
+    this.gettlbniftyparams(this.indexid)
   }
   getbanknifty3m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=3m&type=area').subscribe(data5 => {

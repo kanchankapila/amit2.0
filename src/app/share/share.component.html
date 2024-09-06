@@ -1,63 +1,13 @@
 <div class="gap-div">
-  <!-- <div class="scene col-lg-13 col-xs-6">
-  <div
-    class="card22 text-center"
-    *ngFor="let tile of stockdetails1; let i = index;
-    trackBy: trackByFunctionstockdetails1"
-  >
-    <div
-      class="card22__face card22__face--front text-center type1-bold content"
-      [ngClass]="{
-        'bg-gradient-bull text-center text-green': tile.text3 > 0,
-        'bg-gradient-bear text-center text-red': 0 > tile.text3,
-        'bg-gradient-warning text-center text-yellow': tile.text3 == 0
-      }"
-    >
-      <div
-        style="text-transform: uppercase; font-weight: bold"
-        class="InsideContent1"
-      >
-        <h4>{{ tile.text1 }}</h4>
-        <br />
-        <h6>
-          {{ tile.text4 }}&nbsp;&nbsp;{{
-            tile.text2
-          }}&nbsp;&nbsp;&nbsp;&nbsp;{{ tile.text3 }}%
-        </h6>
-      </div>
-      <div class="canvas-wrapper">
-        <canvas #sparklineChart></canvas>
-      </div>
-    </div>
-    <div
-      style="text-transform: uppercase; font-weight: bold"
-      class="card22__face card22__face--back type1-bold content"
-      [ngClass]="{
-        'bg-gradient-bull text-center text-green': tile.text3 > 0,
-        'bg-gradient-bear text-center text-red': 0 > tile.text3,
-        'bg-gradient-warning text-center text-yellow': tile.text3 == 0
-      }"
-    >
-      <div class="InsideContent1">
-        <h6>
-          52 wk High:{{ tile.text5 }}<br />
-          52 wk Low:{{ tile.text6 }}<br />
-          Upper Circuit:{{ tile.text7 }}<br />
-          Lower Circuit:{{ tile.text8 }}<br />
-        </h6>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="sceneglass">
-  <div class="cardglass" 
+ 
+<div class="scenestock">
+  <div class="cardstock" 
   
        [ngClass]="{ 'is-flipped': isFlipped }" 
        (click)="toggleFlip()" 
        *ngFor="let tile of stockdetails1; let i = index; trackBy: trackByFunctionstockdetails1">
     
-    <div class="cardglass__face cardglass__face--front" 
+    <div class="cardstock__face cardstock__face--front" 
          [ngClass]="{
            'bg-green text-green': tile.text3 > 0,
            'bg-red text-red': 0 > tile.text3,
@@ -82,95 +32,157 @@
       </h6>
       <canvas #sparklineChart></canvas>
     </div>
+    <div class="cardstock__face cardstock__face--back"
+    [ngClass]="{
+      'bg-green': tile.text3 > 0,
+      'bg-red': 0 > tile.text3,
+      'bg-yellow': tile.text3 == 0
+    }">
     
-   
+    <!-- Loop through dscore once and display all values one below the other -->
+    <div *ngFor="let tile of dscore; let i = index; trackBy: trackByFunctiondscore" style="font-weight: bold;">
+        
+        <!-- Durability -->
+        <p [ngClass]="{
+              'text-green': tile.text2 === 'positive',
+              'text-red': tile.text2 === 'negative',
+              'text-yellow': tile.text2 === 'neutral'
+            }">
+            &nbsp;Durability: {{ tile.text1 }}
+        </p>
+
+        <!-- Valuation -->
+        <p [ngClass]="{
+              'text-green': tile.text4 === 'positive',
+              'text-red': tile.text4 === 'negative',
+              'text-yellow': tile.text4 === 'neutral'
+            }">
+            &nbsp;Valuation: {{ tile.text3 }}
+        </p>
+
+        <!-- Momentum -->
+        <p [ngClass]="{
+              'text-green': tile.text6 === 'positive',
+              'text-red': tile.text6 === 'negative',
+              'text-yellow': tile.text6 === 'neutral'
+            }">
+            &nbsp;Momentum: {{ tile.text5 }}
+        </p>
+    </div>
+</div>
+
+  
+    
   </div>
 </div>
 
-  <div fxLayout="row" fxLayout.xs="column">
+  
      <br />
     <br />
     <br />
-    <div class="scene">
-      <div class="card22 content">
-        <div
-          class="card22__face card22__face--front text-center type1-bold card content"
-        >
-          <div id="chart" *ngIf="chartOptions2">
-            <apx-chart
-              [series]="chartOptions2.series"
-              [chart]="chartOptions2.chart"
-              [dataLabels]="chartOptions2.dataLabels"
-              [plotOptions]="chartOptions2.plotOptions"
-              [yaxis]="chartOptions2.yaxis"
-              [xaxis]="chartOptions2.xaxis"
-              [legend]="chartOptions2.legend"
-              [colors]="chartOptions2.colors"
-              [grid]="chartOptions2.grid"
-              [title]="chartOptions2.title"
-            ></apx-chart>
+    <div class="container">
+      <!-- Scenesmaema Section -->
+      <div class="scenesmaema">
+        <div class="cardsmaema" [ngClass]="{'is-flipped': isFlippedema}" (click)="toggleFlipema()">
+          <!-- Front Face -->
+          <div class="cardsmaema__face cardsmaema__face--front card">
+            <!-- Chart Section -->
+            <div id="chart" *ngIf="chartOptions2">
+              <apx-chart
+                [series]="chartOptions2.series"
+                [chart]="chartOptions2.chart"
+                [dataLabels]="chartOptions2.dataLabels"
+                [plotOptions]="chartOptions2.plotOptions"
+                [yaxis]="chartOptions2.yaxis"
+                [xaxis]="chartOptions2.xaxis"
+                [legend]="chartOptions2.legend"
+                [colors]="chartOptions2.colors"
+                [grid]="chartOptions2.grid"
+                [title]="chartOptions2.title"
+              ></apx-chart>
+            </div>
+    
+            <!-- Text Section -->
+            <div class="text-container">
+              <div
+                *ngFor="let tile of stockcrossover; trackBy: trackByFunctionstockcrossover"
+                [ngClass]="{
+                  'text-green': tile.text3 === 'Bullish' || tile.text3 === 'Oversold' || tile.text3 === 'Strong Trend' || tile.text3 === 'High Volatility',
+                  'text-red': tile.text3 === 'Bearish' || tile.text3 === 'Overbought' || tile.text3 === 'Weak Trend' || tile.text3 === 'Low Volatility',
+                  'text-yellow': tile.text3 === 'Neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text2 }}: {{ tile.text3 }}</span>
+              </div>
+              <div
+                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+                [ngClass]="{
+                  'text-green': tile.text2 === 'positive',
+                  'text-red': tile.text2 === 'negative',
+                  'text-yellow': tile.text2 === 'neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text1 }}</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Back Face -->
+          <div class="cardsmaema__face cardsmaema__face--back card">
+            <div id="chart" *ngIf="chartOptions3">
+              <apx-chart
+                [series]="chartOptions3.series"
+                [chart]="chartOptions3.chart"
+                [dataLabels]="chartOptions3.dataLabels"
+                [plotOptions]="chartOptions3.plotOptions"
+                [yaxis]="chartOptions3.yaxis"
+                [xaxis]="chartOptions3.xaxis"
+                [legend]="chartOptions3.legend"
+                [colors]="chartOptions3.colors"
+                [grid]="chartOptions3.grid"
+                [title]="chartOptions3.title"
+              ></apx-chart>
+            </div>
+            <div class="text-container">
+              <div
+                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+                [ngClass]="{
+                  'text-green': tile.text4 === 'positive',
+                  'text-red': tile.text4 === 'negative',
+                  'text-yellow': tile.text4 === 'neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text3 }}</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div
-          class="card22__face card22__face--back text-center type1-bold card content"
-        >
-          <div id="chart" *ngIf="chartOptions3">
-            <apx-chart
-              [series]="chartOptions3.series"
-              [chart]="chartOptions3.chart"
-              [dataLabels]="chartOptions3.dataLabels"
-              [plotOptions]="chartOptions3.plotOptions"
-              [yaxis]="chartOptions3.yaxis"
-              [xaxis]="chartOptions3.xaxis"
-              [legend]="chartOptions3.legend"
-              [colors]="chartOptions3.colors"
-              [grid]="chartOptions3.grid"
-              [title]="chartOptions3.title"
-            ></apx-chart>
+      </div>
+    
+      <!-- Scenestocktoday Section -->
+      <div class="scenestocktoday">
+        <div class="cardstocktoday" [ngClass]="{'is-flipped': isFlippedstocktoday}" (click)="toggleFlipstocktoday()">
+          <!-- Front Face -->
+          <div class="cardstocktoday__face cardstocktoday__face--front card">
+            <canvas baseChart  class="table" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"></canvas>
+          </div>
+    
+          <!-- Back Face -->
+          <div class="cardstocktoday__face cardstocktoday__face--back card">
+            <canvas baseChart  class="table" [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions"></canvas>
           </div>
         </div>
       </div>
     </div>
-    <div class="scene">
-      <div class="card22 text-center text-white">
-        <div class="card22__face card22__face--front type1-bold card content">
-          <h4 class="text-black text-center">Stock Today with S/R</h4>
-          <div class="table-responsive">
-            <div style="display: flex">
-              <canvas
-                baseChart
-                style="min-height: 250px"
-                class="table"
-                [type]="lineChartType"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="card22__face card22__face--back type1-bold card content">
-          <h4 class="text-black text-center">Stock Today</h4>
-          <div class="table-responsive">
-            <div style="display: flex">
-              <canvas
-                baseChart
-                style="min-height: 250px"
-                class="table"
-                [datasets]="stockData"
-                [labels]="stockLabels"
-                [type]="stockChartType"
-                [options]="stockChartOptions"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    
     <div class="scene" *ngIf="datapv">
       <div class="card22 content">
         <div
-          class="card22__face card22__face--front text-center type1-bold card content"
+          class="card22__face card22__face--front text-center type1-bold"
         >
           <ejs-chart
             style="display: block"
@@ -235,7 +247,7 @@
         </div>
       </div>
     </div>
-  </div>
+  
   <button
     pButton
     pRipple
@@ -278,6 +290,7 @@
   ></button>
   <p-dialog
     header="Neutral"
+    [(visible)]="displayMaximizable" 
   [modal]="true"
 [breakpoints]="{'960px': '100%', '424px': '100%'}"
 [style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
@@ -796,22 +809,7 @@ header="Insights"
     >
       <br />Technicals<br />{{ tile.text2 }}<br />{{ tile.text1 }}
     </div>
-    <div
-      style="text-transform: uppercase; font-weight: bold; margin: 10px"
-      fxFlex="15"
-      fxFlex.lg="15%"
-      fxFlex.xs="40%"
-      fxFlex.sm="33%"
-      *ngFor="let tile of vscore; let i = index;
-      trackBy: trackByFunctionvscore"
-      [ngClass]="{
-        ' bg-gradient-bull  ': tile.text === 'green' || 'Green',
-        ' bg-gradient-bear  ': tile.text === 'red',
-        ' bg-gradient-warning  ': tile.text === 'yellow' || 'Yellow'
-      }"
-    >
-      <br />Valuation<br />{{ tile.text2 }}<br />&nbsp;{{ tile.text1 }}
-    </div>
+   
     <div
       style="text-transform: uppercase; font-weight: bold; margin: 10px"
       fxFlex="15"
@@ -922,24 +920,9 @@ header="Insights"
         ' bg-gradient-warning  ': tile.text2 === 'neutral'
       }"
     >
-      <br />Volatility<br />&nbsp;&nbsp;{{ tile.text1 }}
+      <br />Valuation<br />&nbsp;&nbsp;{{ tile.text1 }}
     </div>
-    <div
-      style="text-transform: uppercase; font-weight: bold; margin: 10px"
-      fxFlex="15"
-      fxFlex.lg="15%"
-      fxFlex.xs="40%"
-      fxFlex.sm="33%"
-      *ngFor="let tile of dscore;  let i = index;
-      trackBy: trackByFunctiondscore"
-      [ngClass]="{
-        ' bg-gradient-bull  ': tile.text2 === 'positive',
-        ' bg-gradient-bear  ': tile.text2 === 'negative',
-        ' bg-gradient-warning  ': tile.text2 === 'neutral'
-      }"
-    >
-      <br />Durability<br />&nbsp;&nbsp;{{ tile.text1 }}
-    </div>
+  
     <div
       style="text-transform: uppercase; font-weight: bold; margin: 10px"
       fxFlex="15"
@@ -1178,33 +1161,9 @@ header="Insights"
     >
       <div class="content card">
         <div class="block">
-          <h4 class="text-black text-center">Crossover</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid">
-            <div
-              style="text-transform: uppercase; font-weight: bold"
-              fxFlex="30"
-              fxFlex.xs="33%"
-              fxFlex.sm="33%"
-              *ngFor="let tile of stockcrossover; let i = index;
-              trackBy: trackByFunctionstockcrossover"
-            >
-              <mat-card
-                class="text-blue type1-bold grid-margin stretch-card"
-                [ngClass]="{
-                  'bg-gradient-bull': tile.text3 === 'Bullish',
-                  'bg-gradient-bull1': tile.text3 === 'Oversold',
-                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
-                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
-                  'bg-gradient-bear': tile.text3 === 'Bearish',
-                  'bg-gradient-bear1': tile.text3 === 'Overbought',
-                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
-                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
-                  'bg-gradient-warning': tile.text3 === 'Neutral'
-                }"
-                >{{ tile.text2 }}<br />{{ tile.text3 }}
-              </mat-card>
-            </div>
-          </div>
+             
+            
+          
         </div>
       </div>
     </div>

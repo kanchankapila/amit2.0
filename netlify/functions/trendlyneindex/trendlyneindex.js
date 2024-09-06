@@ -7,7 +7,7 @@ const collection = 'cookie';
 
 
 
-const trendlyneindex = async (indexid, duration) => {
+const trendlyneindex = async (tlid) => {
   try{
   const query = {
     collection,
@@ -26,7 +26,7 @@ const trendlyneindex = async (indexid, duration) => {
   const { documents } = response.data;
   const { csrf, time, trnd } = documents[0]; // Assuming you have at least one document
 
-const fetchResponse  = await axios.get(`https://trendlyne.com/equity/api/stock/adv-technical-analysis/${indexid}/${duration}/`, {
+const fetchResponse  = await axios.get(`https://trendlyne.com/equity/api/stock/adv-technical-analysis/${tlid}/24/`, {
   headers: {
 
 
@@ -65,8 +65,8 @@ const fetchResponse  = await axios.get(`https://trendlyne.com/equity/api/stock/a
 
 exports.handler = async (event, context) => {
   try {
-    const { indexid, duration } = event.queryStringParameters;
-    const result = await trendlyneindex(indexid, duration);
+    const { tlid } = event.queryStringParameters;
+    const result = await trendlyneindex(tlid);
 
     return {
       statusCode: 200,

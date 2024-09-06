@@ -245,7 +245,7 @@ export class PharmaniftyComponent implements OnInit {
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
     await Promise.all([
-      // this.gettlpharmaparams(this.indexid,this.duration)
+      // this.gettlpharmaparams(this.indexid)
       this.getpharmaniftytoday(),
       this.getpharmaniftytoday1(),
       this.getmcpharmaniftystocks(),
@@ -330,9 +330,9 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
   }
-  gettlpharmaparams(indexid, selectedValue) {
+  gettlpharmaparams(indexid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.gettlindexparams(this.indexid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -346,7 +346,7 @@ export class PharmaniftyComponent implements OnInit {
     })
   }
   onClick(event) {
-    this.gettlpharmaparams(this.indexid, this.selectedValue)
+    this.gettlpharmaparams(this.indexid)
   }
   getpharmaniftyvix() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {

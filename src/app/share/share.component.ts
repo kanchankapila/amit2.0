@@ -103,8 +103,7 @@ export interface stocksmatile { text1: string; text2: string; text3: string; tex
 export interface stocksentimentstiles { text1: string; text2: string; }
 export interface stockhcdatatile { x: number; y: number; }
 export interface stockcrossovertile { text1: any; text2: any; text3: any; text4: any; }
-export interface stockcrossoverwtile { text1: any; text2: any; text3: any; text4: any; }
-export interface stockcrossovermtile { text1: any; text2: any; text3: any; text4: any; }
+
 export interface stockohlctile { x: number; y: [any]; }
 export interface stockohlc1yrtile { x: any; open: number, high: number, low: number, close: number, volume: number; }
 export interface stockohlc1dtile { x: any; open: number, high: number, low: number, close: number, volume: number; }
@@ -147,6 +146,7 @@ export interface sectorstockdetailstile { text1: any; text2: any; text3: any; te
 export interface stockpcrtile { text1: any; text2: any; }
 export interface maxpaintile { text1: any; text2: any; }
 export interface tlindexparamtile { text1: string; text2: string; text3: string; }
+export interface tlindexparamemasmatile { text1: string; text2: string; text3: string; text4: string; }
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -157,6 +157,8 @@ export interface tlindexparamtile { text1: string; text2: string; text3: string;
 export class ShareComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
   isFlipped = false;
+  isFlippedema = false;
+  isFlippedstocktoday = false;
   sparklineChart: Chart;
   public width: string
   // custom code end
@@ -339,6 +341,7 @@ export class ShareComponent implements OnInit {
   public lineChartDataubandm: Array<number> = [];
   public lineChartDatalbandm: Array<number> = [];
   tlindexparam: tlindexparamtile[] = [];
+  tlindexparamemasma: tlindexparamemasmatile[] = [];
   public columnTooltip: boolean = false;
   public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
   public chartAreapv: Object = {
@@ -397,8 +400,7 @@ export class ShareComponent implements OnInit {
   public trendlineType: string[] = [];
   public exportType: string[] = [];
   stockcrossover: stockcrossovertile[] = [];
-  stockcrossoverw: stockcrossoverwtile[] = [];
-  stockcrossoverm: stockcrossovermtile[] = [];
+  
   vscore: vscoretile[] = [];
   foundContent: foundContenttile[] = [];
   fscore: fscoretile[] = [];
@@ -700,12 +702,12 @@ export class ShareComponent implements OnInit {
       this.getstocktoday(this.mcsymbol, this.eqsymbol),
       this.getmcpricevolume(this.mcsymbol),
       this.getetshareholding(this.stockid),
-      this.gettrendlynestocks2(this.tlid),
+      // this.gettrendlynestocks2(this.tlid),
       //this.gettrendlynestocks3(this.tlid)
       this.getshare3m(this.eqsymbol),
       // this.getzerodha(),
       // this.getkotak(),
-      this.gettlstockparams(this.tlid, this.duration),
+      this.gettlstockparams(this.tlid),
       // this.gettrendlynestocksti(this.tlid),
       this.getkotakview(this.eqsymbol),
       this.getmcstockinsight(this.mcsymbol),
@@ -756,25 +758,37 @@ export class ShareComponent implements OnInit {
   showMaximizableDialog4() {
     this.displayMaximizable4 = true;
   }
-  gettlstockparams(indexid, selectedValue) {
+  gettlstockparams(tlid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.gettlindexparams(this.tlid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems[0].body.parameters['ma_signal'])
       this.tlindexparam.length = 0;
       for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
         } else { continue; }
       };
+     
+        
+          this.tlindexparamemasma.push({ text1: nestedItems[0].body.parameters['ma_signal']['ema_insight'], text2:nestedItems[0].body.parameters['ma_signal']['ema_insight_color'], text3:nestedItems[0].body.parameters['ma_signal']['sma_insight'],text4:nestedItems[0].body.parameters['ma_signal']['sma_insight_color']  })
+        
+      
     })
   }
   onClick(event) {
-    this.gettlstockparams(this.indexid, this.selectedValue)
+   
   }
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
+  }
+  toggleFlipema() {
+    this.isFlippedema = !this.isFlippedema;
+  }
+  toggleFlipstocktoday() {
+    this.isFlippedstocktoday = !this.isFlippedstocktoday;
   }
   async getstocksparkline(mcsymbol) {
     try {
@@ -782,7 +796,7 @@ export class ShareComponent implements OnInit {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        console.log(nestedItems)
+       
         const sparklineCanvas = this.sparklineChartRef.nativeElement;
         this.sparklinestockdata.length = 0;
         this.sparklinestocklabel.length = 0;
@@ -1061,6 +1075,7 @@ export class ShareComponent implements OnInit {
         await this.stockdetails1.push({ text1: result1.data['SC_FULLNM'], text2: result1.data['pricechange'], text3: result1.data['pricepercentchange'], text4: result1.data['pricecurrent'], text5: result1.data['52H'], text6: result1.data['52L'], text7: result1.data['upper_circuit_limit'], text8: result1.data['lower_circuit_limit'] })
       }
       await this.getstocksparkline(this.mcsymbol)
+      await this.gettrendlynestocks2(this.tlid)
     } catch (err) {
       console.error(err);
     }
@@ -1680,6 +1695,9 @@ export class ShareComponent implements OnInit {
   trackByFunctiontlindexparam(index) {
     return index;
   }
+  trackByFunctiontlindexparamemasma(index) {
+    return index;
+  }
   getshare1w(eqsymbol) {
     ////////////////Nifty 1 Week/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w').subscribe(data5 => {
@@ -1976,8 +1994,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(this.mcsymbol)
-      console.log(nestedItems)
+     
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
       if (nestedItems[6][0].hasOwnProperty('value')) {
@@ -1999,6 +2016,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       this.pclose = nestedItems[2].pclose;
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
@@ -2020,7 +2038,7 @@ export class ShareComponent implements OnInit {
       }
       this.stockindicators.length = 0;
       this.stockcrossover.length = 0;
-      // console.log(nestedItems)
+      console.log(nestedItems)
       for (const val in nestedItems[2]['crossover']) {
         this.stockcrossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
@@ -2569,14 +2587,14 @@ export class ShareComponent implements OnInit {
           this.neutral.push({ text1: nestedItems[0].body['MCAP_Q']['lt1'], text2: nestedItems[0].body['MCAP_Q']['title'], text3: nestedItems[0].body['MCAP_Q']['value'] })
         }
       }
-      if (nestedItems[0].body['NP_Q']['lt2']) {
-        if (nestedItems[0].body['NP_Q']['color1'] == 'positive') {
+      if (nestedItems[0].body['NP_Q_GROWTH']['lt1 ']) {
+        if (nestedItems[0].body['NP_Q_GROWTH']['color1'] == 'positive') {
           this.positive.push({ text1: nestedItems[0].body['NP_Q']['value'], text2: nestedItems[0].body['NP_Q']['lt2'], text3: nestedItems[0].body['NP_Q']['st2'] })
         }
-        if (nestedItems[0].body['NP_Q']['color1'] == 'negative') {
+        if (nestedItems[0].body['NP_Q_GROWTH']['color1'] == 'negative') {
           this.negative.push({ text1: nestedItems[0].body['NP_Q']['value'], text2: nestedItems[0].body['NP_Q']['lt2'], text3: nestedItems[0].body['NP_Q']['st2'] })
         }
-        if (nestedItems[0].body['NP_Q']['color1'] == 'neutral') {
+        if (nestedItems[0].body['NP_Q_GROWTH']['color1'] == 'neutral') {
           this.neutral.push({ text1: nestedItems[0].body['NP_Q']['value'], text2: nestedItems[0].body['NP_Q']['lt2'], text3: nestedItems[0].body['NP_Q']['st2'] })
         }
       }
@@ -2765,7 +2783,12 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
+      this.dscore.length=0;
+      this.volscore.length=0;
+      this.mscore.length=0;
       this.dscore.push({ text1: nestedItems[0]['body']['stockData'][6], text2: nestedItems[0]['body']['stockData'][9], text3: nestedItems[0]['body']['stockData'][7], text4: nestedItems[0]['body']['stockData'][10], text5: nestedItems[0]['body']['stockData'][8], text6: nestedItems[0]['body']['stockData'][11] })
+   
       this.volscore.push({ text1: nestedItems[0]['body']['stockData'][7], text2: nestedItems[0]['body']['stockData'][10] })
       this.mscore.push({ text1: nestedItems[0]['body']['stockData'][8], text2: nestedItems[0]['body']['stockData'][11] })
     }, err => {
