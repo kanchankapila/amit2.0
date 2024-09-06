@@ -78,9 +78,9 @@ export class DataapiService {
     return this.http.get(`${this.baseurl}/.netlify/functions/nhc1`);
   }
 
-  gettlindexparams(indexid, duration) {
-    console.log(indexid, duration)
-    return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?indexid=${indexid}&duration=${duration}`);
+  gettlindexparams(tlid) {
+    
+    return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?tlid=${tlid}`);
   }
   getinvestingindicators(indexid, duration) {
     
