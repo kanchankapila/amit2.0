@@ -140,6 +140,7 @@ export interface omrscoretile { text1: string; text2: string; }
 export interface growthscoretile { text1: string; text2: string; }
 export interface healthscoretile { text1: string; text2: string; }
 export interface ppscoretile { text1: string; text2: string; }
+
 export interface sectorstockstile { text1: string; text2: string; text3: string; }
 export interface stockdetailstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 export interface sectorstockdetailstile { text1: any; text2: any; text3: any; text4: any; }
@@ -156,9 +157,15 @@ export interface tlindexparamemasmatile { text1: string; text2: string; text3: s
 @Injectable()
 export class ShareComponent implements OnInit {
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
+  displayMaximizableneutral:boolean=false;
+  displayMaximizablepositive:boolean=false;
+  displayMaximizablenegative:boolean=false;
+  displayMaximizableinsight: boolean=false;
+  displayMaximizablestocknews: boolean=false;
   isFlipped = false;
   isFlippedema = false;
   isFlippedstocktoday = false;
+  isFlippedvolume = false;
   sparklineChart: Chart;
   public width: string
   // custom code end
@@ -406,8 +413,14 @@ export class ShareComponent implements OnInit {
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
   dscore: dscoretile[] = [];
+  reln50: any;
+  relsector: any;
   previousclose: Array<number> = [];
   pclose: any;
+  high:any;
+  close:any;
+  low:any;
+  open:any;
   volscore: volscoretile[] = [];
   mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
@@ -738,25 +751,25 @@ export class ShareComponent implements OnInit {
     setInterval(() => { this.getopstrastockpcr(this.eqsymbol) }, 60000);
     setInterval(() => { this.getopstrastockpcrintra(this.eqsymbol) }, 60000);
   }
-  displayMaximizable: boolean;
-  showMaximizableDialog() {
-    this.displayMaximizable = true;
+  
+  showMaximizableDialogneutral() {
+    this.displayMaximizableneutral = true;
   }
-  displayMaximizable1: boolean;
-  showMaximizableDialog1() {
-    this.displayMaximizable1 = true;
+
+  showMaximizableDialogpositive() {
+    this.displayMaximizablepositive = true;
   }
-  displayMaximizable2: boolean;
-  showMaximizableDialog2() {
-    this.displayMaximizable2 = true;
+  
+  showMaximizableDialognegative() {
+    this.displayMaximizablenegative = true;
   }
-  displayMaximizable3: boolean;
-  showMaximizableDialog3() {
-    this.displayMaximizable3 = true;
+  
+  showMaximizableDialogInsight() {
+    this.displayMaximizableinsight = true;
   }
-  displayMaximizable4: boolean;
-  showMaximizableDialog4() {
-    this.displayMaximizable4 = true;
+  
+  showMaximizableDialogStocknews() {
+    this.displayMaximizablestocknews = true;
   }
   gettlstockparams(tlid) {
     // this.indexid='1898';
@@ -764,7 +777,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems[0].body.parameters['ma_signal'])
+      console.log(nestedItems)
       this.tlindexparam.length = 0;
       for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
@@ -789,6 +802,9 @@ export class ShareComponent implements OnInit {
   }
   toggleFlipstocktoday() {
     this.isFlippedstocktoday = !this.isFlippedstocktoday;
+  }
+  toggleFlipvolume() {
+    this.isFlippedvolume = !this.isFlippedvolume;
   }
   async getstocksparkline(mcsymbol) {
     try {
@@ -899,10 +915,13 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
+      console.log(nestedItems)
       this.newscard.length = 0;
       for (const val in nestedItems[0].articles) {
         this.newscard.push({ text1: nestedItems[0].articles[val].title, text2: nestedItems[0].articles[val].url, text3: nestedItems[0].articles[val].urlToImage, text4: nestedItems[0].articles[val].description, text5: nestedItems[0].articles[val].content })
+      
       }
+      console.log(this.newscard)
     });
   }
   sleep(ms: number): Promise<void> {
@@ -1028,8 +1047,10 @@ export class ShareComponent implements OnInit {
         headers: {
         }
       });
+    
       if (response.ok) {
         const insight = await response.json();
+        console.log(insight)
         if (insight['data']['insightData']['price'].hasOwnProperty('5')) {
           this.dealsmsg.length = 0;
           this.dealsmsg.push({ text1: insight['data']['insightData']['price'][5]['shortDesc'], text2: insight['data']['insightData']['price'][5]['color'] })
@@ -1936,6 +1957,11 @@ export class ShareComponent implements OnInit {
         return data5[key];
       });
       this.pclose = nestedItems1[2].pclose;
+      this.close = nestedItems1[2].close;
+      this.high = nestedItems1[2].high;
+      this.low = nestedItems1[2].low;
+      this.open = nestedItems1[2].open;
+
       this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
@@ -2016,7 +2042,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     
       this.pclose = nestedItems[2].pclose;
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
@@ -2038,7 +2064,7 @@ export class ShareComponent implements OnInit {
       }
       this.stockindicators.length = 0;
       this.stockcrossover.length = 0;
-      console.log(nestedItems)
+    
       for (const val in nestedItems[2]['crossover']) {
         this.stockcrossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
@@ -2539,6 +2565,10 @@ export class ShareComponent implements OnInit {
         return data5[key];
       });
        console.log(nestedItems)
+      
+       this.reln50=nestedItems[0].body['relp_nifty50_qtrChangeP'].value
+       this.relsector=nestedItems[0].body['relp_sector_qtrChangeP'].value
+       
       if (nestedItems[0].body.hasOwnProperty('_avg_target')) {
         this.brokertarget.push({ text1: nestedItems[0].body['broker_avg_target']['lt1'], text2: nestedItems[0].body['broker_avg_target']['st1'], text3: nestedItems[0].body['broker_avg_target']['color1'] })
       } if (nestedItems[0].body.hasOwnProperty('ema_26')) {
@@ -2783,7 +2813,7 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+      
       this.dscore.length=0;
       this.volscore.length=0;
       this.mscore.length=0;
