@@ -1,5 +1,5 @@
 <div class="gap-div">
- 
+
 <div class="scenestock">
   <div class="cardstock" 
   
@@ -15,9 +15,19 @@
          }">
       
      
-      
+         <h6 class="top-right" [ngClass]="{
+          'text-green': reln50 > 0,
+          'text-red': 0 > reln50,
+          'text-yellow': reln50 == 0,
+          'text-green': relsector > 0,
+          'text-red': 0 > relsector,
+          'text-yellow': relsector == 0,
+
+        }" >vs. Nifty50:{{reln50}}%&nbsp;&nbsp;vs. Sector:{{relsector}}%</h6>
       <!-- Top-left Text -->
       <h4 class="top-left">{{ tile.text1 }}</h4>
+       
+     
       
       <!-- Center Text -->
       <div class="center-text">
@@ -28,7 +38,7 @@
       
       <!-- Bottom-left Text -->
       <h6 class="bottom-left">
-        52 H: {{ tile.text5 }}&nbsp;&nbsp;52 L: {{ tile.text6 }}&nbsp;&nbsp;UC: {{ tile.text7 }}&nbsp;&nbsp;LC: {{ tile.text8 }}
+        O:{{open}}&nbsp;C:{{close}}&nbsp;H:{{high}}&nbsp;L:{{low}}&nbsp;P Close:{{pclose}}&nbsp; 52 H: {{ tile.text5 }}&nbsp;&nbsp;52 L: {{ tile.text6 }}&nbsp;&nbsp;UC: {{ tile.text7 }}&nbsp;&nbsp;LC: {{ tile.text8 }}
       </h6>
       <canvas #sparklineChart></canvas>
     </div>
@@ -75,263 +85,54 @@
     
   </div>
 </div>
+<br />
+    <br />
+<button
+pButton
+pRipple
+type="button"
+(click)="showMaximizableDialogneutral()"
+label="Neutral"
+class="p-button-raised p-button-warning p-button-text"
+></button>
+<p-dialog
+header="Neutral" 
+[(visible)]="displayMaximizableneutral" 
+[modal]="true" 
+[closable]="true" 
+[maximizable]="true" 
+[responsive]="true" 
+[style]="{width: '50vw'}">
 
-  
-     <br />
-    <br />
-    <br />
-    <div class="container">
-      <!-- Scenesmaema Section -->
-      <div class="scenesmaema">
-        <div class="cardsmaema" [ngClass]="{'is-flipped': isFlippedema}" (click)="toggleFlipema()">
-          <!-- Front Face -->
-          <div class="cardsmaema__face cardsmaema__face--front card">
-            <!-- Chart Section -->
-            <div id="chart" *ngIf="chartOptions2">
-              <apx-chart
-                [series]="chartOptions2.series"
-                [chart]="chartOptions2.chart"
-                [dataLabels]="chartOptions2.dataLabels"
-                [plotOptions]="chartOptions2.plotOptions"
-                [yaxis]="chartOptions2.yaxis"
-                [xaxis]="chartOptions2.xaxis"
-                [legend]="chartOptions2.legend"
-                [colors]="chartOptions2.colors"
-                [grid]="chartOptions2.grid"
-                [title]="chartOptions2.title"
-              ></apx-chart>
-            </div>
-    
-            <!-- Text Section -->
-            <div class="text-container">
-              <div
-                *ngFor="let tile of stockcrossover; trackBy: trackByFunctionstockcrossover"
-                [ngClass]="{
-                  'text-green': tile.text3 === 'Bullish' || tile.text3 === 'Oversold' || tile.text3 === 'Strong Trend' || tile.text3 === 'High Volatility',
-                  'text-red': tile.text3 === 'Bearish' || tile.text3 === 'Overbought' || tile.text3 === 'Weak Trend' || tile.text3 === 'Low Volatility',
-                  'text-yellow': tile.text3 === 'Neutral'
-                }"
-                class="text-item"
-              >
-                <span>{{ tile.text2 }}: {{ tile.text3 }}</span>
-              </div>
-              <div
-                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
-                [ngClass]="{
-                  'text-green': tile.text2 === 'positive',
-                  'text-red': tile.text2 === 'negative',
-                  'text-yellow': tile.text2 === 'neutral'
-                }"
-                class="text-item"
-              >
-                <span>{{ tile.text1 }}</span>
-              </div>
-            </div>
-          </div>
-    
-          <!-- Back Face -->
-          <div class="cardsmaema__face cardsmaema__face--back card">
-            <div id="chart" *ngIf="chartOptions3">
-              <apx-chart
-                [series]="chartOptions3.series"
-                [chart]="chartOptions3.chart"
-                [dataLabels]="chartOptions3.dataLabels"
-                [plotOptions]="chartOptions3.plotOptions"
-                [yaxis]="chartOptions3.yaxis"
-                [xaxis]="chartOptions3.xaxis"
-                [legend]="chartOptions3.legend"
-                [colors]="chartOptions3.colors"
-                [grid]="chartOptions3.grid"
-                [title]="chartOptions3.title"
-              ></apx-chart>
-            </div>
-            <div class="text-container">
-              <div
-                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
-                [ngClass]="{
-                  'text-green': tile.text4 === 'positive',
-                  'text-red': tile.text4 === 'negative',
-                  'text-yellow': tile.text4 === 'neutral'
-                }"
-                class="text-item"
-              >
-                <span>{{ tile.text3 }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <!-- Scenestocktoday Section -->
-      <div class="scenestocktoday">
-        <div class="cardstocktoday" [ngClass]="{'is-flipped': isFlippedstocktoday}" (click)="toggleFlipstocktoday()">
-          <!-- Front Face -->
-          <div class="cardstocktoday__face cardstocktoday__face--front card">
-            <canvas baseChart  class="table" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"></canvas>
-          </div>
-    
-          <!-- Back Face -->
-          <div class="cardstocktoday__face cardstocktoday__face--back card">
-            <canvas baseChart  class="table" [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-          </div>
-        </div>
+  <div class="col-lg-10 grid-margin stretch-card">
+    <div class="content bg-gradient-warning card">
+      <div *ngFor="let tile of neutral;  let i = index;
+      trackBy: trackByFunctionneutral">
+        <p class="text-yellow grid-margin stretch-card">
+          {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
+        </p>
       </div>
     </div>
-    
-    
-    <div class="scene" *ngIf="datapv">
-      <div class="card22 content">
-        <div
-          class="card22__face card22__face--front text-center type1-bold"
-        >
-          <ejs-chart
-            style="display: block"
-            [chartArea]="chartArea"
-            id="chart"
-            [primaryXAxis]="primaryXAxispv"
-            [primaryYAxis]="primaryYAxispv"
-            [title]="titlepv"
-          >
-            <e-series-collection>
-              <e-series
-                [dataSource]="datapv"
-                type="Bar"
-                xName="Day"
-                yName="cvol"
-                name="Current Volume"
-                columnS0cing="0.1"
-              >
-              </e-series>
-              <e-series
-                [dataSource]="datapv"
-                type="Bar"
-                xName="Day"
-                yName="delivery"
-                name="Delivery"
-                columnSpacing="0.1"
-              >
-              </e-series>
-            </e-series-collection>
-          </ejs-chart>
-        </div>
-        <div
-          class="card22__face card22__face--back text-center type1-bold card content"
-        >
-          <ejs-accumulationchart
-            id=""
-            #pie
-            style="display: block"
-            [legendSettings]="legendSettingssh"
-            [tooltip]="tooltipsh"
-            [title]="titlesh"
-            [enableBorderOnMouseMove]="false"
-          >
-            <e-accumulation-series-collection>
-              <e-accumulation-series
-                *ngIf="datash"
-                name="Project"
-                [dataSource]="datash"
-                xName="DataLabelMappingName"
-                yName="value"
-                [startAngle]="startAngle"
-                innerRadius="40%"
-                [radius]="radius"
-                [dataLabel]="dataLabelsh"
-                explode="true"
-                explodeOffset="10%"
-                [explodeIndex]="0"
-              >
-              </e-accumulation-series>
-            </e-accumulation-series-collection>
-          </ejs-accumulationchart>
-        </div>
-      </div>
-    </div>
-  
-  <button
+  </div>
+
+</p-dialog>
+<button
     pButton
     pRipple
     type="button"
-    (click)="showMaximizableDialog()"
-    label="Neutral"
-    class="p-button-raised p-button-warning p-button-text"
-  ></button>
-  <button
-    pButton
-    pRipple
-    type="button"
-    (click)="showMaximizableDialog1()"
+    (click)="showMaximizableDialogpositive()"
     label="Positives"
     class="p-button-raised p-button-success p-button-text"
   ></button>
-  <button
-    pButton
-    pRipple
-    type="button"
-    (click)="showMaximizableDialog2()"
-    label="Negatives"
-    class="p-button-raised p-button-danger p-button-text"
-  ></button>
-  <button
-    pButton
-    pRipple
-    type="button"
-    (click)="showMaximizableDialog3()"
-    label="Insights"
-    class="p-button-raised p-button-secondary p-button-text"
-  ></button>
-  <button
-    pButton
-    pRipple
-    type="button"
-    (click)="showMaximizableDialog4()"
-    label="Stock News"
-    class="p-button-raised p-button-primary p-button-text"
-  ></button>
-  <p-dialog
-    header="Neutral"
-    [(visible)]="displayMaximizable" 
-  [modal]="true"
-[breakpoints]="{'960px': '100%', '424px': '100%'}"
-[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
-[maximizable]="true"
-[baseZIndex]="10000"
-[draggable]="true"
-[resizable]="true"
-  >
-    <div class="col-lg-10 grid-margin stretch-card">
-      <div class="content bg-gradient-warning card">
-        <div *ngFor="let tile of neutral;  let i = index;
-        trackBy: trackByFunctionneutral">
-          <p class="text-yellow grid-margin stretch-card">
-            {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <ng-template pTemplate="footer">
-      <p-button
-        icon="pi pi-check"
-        (click)="displayMaximizable = false"
-        label="Close"
-        class="p-button-text"
-      ></p-button>
-    </ng-template>
-  </p-dialog>
   <p-dialog 
   header="Positive" 
-  [(visible)]="displayMaximizable1" 
- [modal]="true"
-[breakpoints]="{'960px': '100%', '424px': '100%'}"
-[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
-[maximizable]="true"
-[baseZIndex]="10000"
-[draggable]="true"
-[resizable]="true"
-  
-    
-  >
-    <div class="col-lg-10 grid-margin stretch-card">
+  [(visible)]="displayMaximizablepositive" 
+  [modal]="true" 
+  [closable]="true" 
+  [maximizable]="true" 
+  [responsive]="true" 
+  [style]="{width: '50vw'}">
+  <div class="col-lg-10 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
         <h4 class="text-black text-center">Positives</h4>
         <div *ngFor="let tile of positive; let i = index;
@@ -342,57 +143,57 @@
         </div>
       </div>
     </div>
-    <ng-template pTemplate="footer">
-      <p-button
-        icon="pi pi-check"
-        (click)="displayMaximizable1 = false"
-        label="Close"
-        class="p-button-text"
-      ></p-button>
-    </ng-template>
-  </p-dialog>
-  <p-dialog
-    header="Negative"
-    [(visible)]="displayMaximizable2"
-    [modal]="true"
-[breakpoints]="{'960px': '100%', '424px': '100%'}"
-[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
-[maximizable]="true"
-[baseZIndex]="10000"
-[draggable]="true"
-[resizable]="true"
-  >
-    <div class="col-lg-10 grid-margin stretch-card">
-      <div class="content bg-gradient-danger card">
-        <h4 class="text-black text-center">Negatives</h4>
-        <div *ngFor="let tile of negative; let i = index;
-        trackBy: trackByFunctionnegative">
-          <p class="text-red grid-margin stretch-card">
-            {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
-          </p>
-        </div>
+   
+  </p-dialog> 
+  <button
+  pButton
+  pRipple
+  type="button"
+  (click)="showMaximizableDialognegative()"
+  label="Negatives"
+  class="p-button-raised p-button-danger p-button-text"
+></button>
+<p-dialog
+  header="Negative"
+  [(visible)]="displayMaximizablenegative"
+  [modal]="true" 
+  [closable]="true" 
+  [maximizable]="true" 
+  [responsive]="true" 
+  [style]="{width: '50vw'}">
+>
+  <div class="col-lg-10 grid-margin stretch-card">
+    <div class="content bg-gradient-danger card">
+      <h4 class="text-black text-center">Negatives</h4>
+      <div *ngFor="let tile of negative; let i = index;
+      trackBy: trackByFunctionnegative">
+        <p class="text-red grid-margin stretch-card">
+          {{ tile.text2 }}<br />{{ tile.text3 }}&nbsp;{{ tile.text1 }}
+        </p>
       </div>
     </div>
-    <ng-template pTemplate="footer">
-      <p-button
-        icon="pi pi-check"
-        (click)="displayMaximizable2 = false"
-        label="Close"
-        class="p-button-text"
-      ></p-button>
-    </ng-template>
-  </p-dialog>
+  </div>
+  
+</p-dialog>
+<!-- Insight Button -->
+  <button
+    pButton
+    pRipple
+    type="button"
+    (click)="showMaximizableDialogInsight()"
+    label="Insights"
+    class="p-button-raised p-button-secondary p-button-text"
+  ></button>
+  
   <p-dialog
 header="Insights"
-[visible]="displayMaximizable3"
+[visible]="displayMaximizableinsight"
 [modal]="true"
-[breakpoints]="{'960px': '100%', '424px': '100%'}"
-[style]="{width: '100%', height: '100%', top: '0', left: '0', transform: 'none'}"
-[maximizable]="true"
-[baseZIndex]="10000"
-[draggable]="true"
-[resizable]="true"
-  >
+[closable]="true" 
+[maximizable]="true" 
+[responsive]="true" 
+[style]="{width: '50vw'}">
+  
     <p
       *ngFor="let tile of brokertarget; let i = index;
       trackBy: trackByFunctionbrokertarget"
@@ -568,32 +369,43 @@ header="Insights"
       *ngFor="let tile of mfi1; let i = index;
       trackBy: trackByFunctionmfi1"
       [ngClass]="{
-        'text-green': tile.text3 == 'positive',
-        'text-red': tile.text3 == 'negative',
-        'text-yellow': tile.text3 == 'neutral'
+        'text-green': tile.text1 == 'positive',
+        'text-red': tile.text1 == 'negative',
+        'text-yellow': tile.text1 == 'neutral'
       }"
     >
-      &rarr;{{ tile.text1 }}
+      &rarr;{{ tile.text2 }}
     </p>
     <ng-template pTemplate="footer">
       <p-button
         icon="pi pi-check"
-        (click)="displayMaximizable3 = false"
+        (click)="showMaximizableDialogInsight()"
         label="Close"
         class="p-button-text"
       ></p-button>
     </ng-template>
+    
   </p-dialog>
+  <!-- Insight Button End -->
+
+  <!-- Stock News Button -->
+  <button
+    pButton
+    pRipple
+    type="button"
+    (click)="showMaximizableDialogStocknews()"
+    label="Stock News"
+    class="p-button-raised p-button-primary p-button-text"
+  ></button>
   <p-dialog
     header="Stock News"
-    [(visible)]="displayMaximizable4"
-    [modal]="true"
-    [style]="{ width: '100vw', height: '100vh' }"
-    [maximizable]="true"
-    [baseZIndex]="10000"
-    [draggable]="false"
-    [resizable]="false"
-  >
+    [(visible)]="displayMaximizablestocknews"
+    [modal]="true" 
+  [closable]="true" 
+  [maximizable]="true" 
+  [responsive]="true" 
+  [style]="{width: '50vw'}">
+  
     <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
       <div class="content card">
         <div class="grid-margin stretch-card">
@@ -634,6 +446,228 @@ header="Insights"
       ></p-button>
     </ng-template>
   </p-dialog>
+  <!-- Stock News Button End -->
+  
+     <br />
+    <br />
+    <br />
+    <div class="container">
+      <!-- Scenesmaema Section -->
+      <div class="scenesmaema">
+        <div class="cardsmaema" [ngClass]="{'is-flipped': isFlippedema}" (click)="toggleFlipema()">
+          <!-- Front Face -->
+          <div class="cardsmaema__face cardsmaema__face--front card">
+            <!-- Chart Section -->
+            <div id="chart" *ngIf="chartOptions2">
+              <apx-chart
+                [series]="chartOptions2.series"
+                [chart]="chartOptions2.chart"
+                [dataLabels]="chartOptions2.dataLabels"
+                [plotOptions]="chartOptions2.plotOptions"
+                [yaxis]="chartOptions2.yaxis"
+                [xaxis]="chartOptions2.xaxis"
+                [legend]="chartOptions2.legend"
+                [colors]="chartOptions2.colors"
+                [grid]="chartOptions2.grid"
+                [title]="chartOptions2.title"
+              ></apx-chart>
+            </div>
+    
+            <!-- Text Section -->
+            <div class="text-container">
+              <div
+                *ngFor="let tile of stockcrossover; trackBy: trackByFunctionstockcrossover"
+                [ngClass]="{
+                  'text-green': tile.text3 === 'Bullish' || tile.text3 === 'Oversold' || tile.text3 === 'Strong Trend' || tile.text3 === 'High Volatility',
+                  'text-red': tile.text3 === 'Bearish' || tile.text3 === 'Overbought' || tile.text3 === 'Weak Trend' || tile.text3 === 'Low Volatility',
+                  'text-yellow': tile.text3 === 'Neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text2 }}: {{ tile.text3 }}</span>
+              </div>
+              <div
+                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+                [ngClass]="{
+                  'text-green': tile.text2 === 'positive',
+                  'text-red': tile.text2 === 'negative',
+                  'text-yellow': tile.text2 === 'neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text1 }}</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Back Face -->
+          <div class="cardsmaema__face cardsmaema__face--back card">
+            <div id="chart" *ngIf="chartOptions3">
+              <apx-chart
+                [series]="chartOptions3.series"
+                [chart]="chartOptions3.chart"
+                [dataLabels]="chartOptions3.dataLabels"
+                [plotOptions]="chartOptions3.plotOptions"
+                [yaxis]="chartOptions3.yaxis"
+                [xaxis]="chartOptions3.xaxis"
+                [legend]="chartOptions3.legend"
+                [colors]="chartOptions3.colors"
+                [grid]="chartOptions3.grid"
+                [title]="chartOptions3.title"
+              ></apx-chart>
+            </div>
+            <div class="text-container">
+              <div
+                *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+                [ngClass]="{
+                  'text-green': tile.text4 === 'positive',
+                  'text-red': tile.text4 === 'negative',
+                  'text-yellow': tile.text4 === 'neutral'
+                }"
+                class="text-item"
+              >
+                <span>{{ tile.text3 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Scenestocktoday Section -->
+      <div class="scenestocktoday">
+        <div class="cardstocktoday" [ngClass]="{'is-flipped': isFlippedstocktoday}" (click)="toggleFlipstocktoday()">
+          <!-- Front Face -->
+          <div class="cardstocktoday__face cardstocktoday__face--front card">
+            <canvas baseChart  class="table" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"></canvas>
+          </div>
+    
+          <!-- Back Face -->
+          <div class="cardstocktoday__face cardstocktoday__face--back card">
+            <canvas baseChart  class="table" [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="scenesmaema">
+      <div class="cardsmaema" [ngClass]="{'is-flipped': isFlippedvolume}" (click)="toggleFlipvolume()">
+        <!-- Front Face -->
+        <div class="cardsmaema__face cardsmaema__face--front card">
+          <!-- Chart Section -->
+          <div  *ngIf="datapv">
+            <ejs-chart
+            style="display: block"
+            [chartArea]="chartArea"
+            id="chart"
+            [primaryXAxis]="primaryXAxispv"
+            [primaryYAxis]="primaryYAxispv"
+            [title]="titlepv"
+          >
+            <e-series-collection>
+              <e-series
+                [dataSource]="datapv"
+                type="Bar"
+                xName="Day"
+                yName="cvol"
+                name="Current Volume"
+                columnS0cing="0.1"
+              >
+              </e-series>
+              <e-series
+                [dataSource]="datapv"
+                type="Bar"
+                xName="Day"
+                yName="delivery"
+                name="Delivery"
+                columnSpacing="0.1"
+              >
+              </e-series>
+            </e-series-collection>
+          </ejs-chart>
+
+          </div>
+  
+          <!-- Text Section -->
+          <div class="text-container">
+            <div
+              *ngFor="let tile of stockcrossover; trackBy: trackByFunctionstockcrossover"
+              [ngClass]="{
+                'text-green': tile.text3 === 'Bullish' || tile.text3 === 'Oversold' || tile.text3 === 'Strong Trend' || tile.text3 === 'High Volatility',
+                'text-red': tile.text3 === 'Bearish' || tile.text3 === 'Overbought' || tile.text3 === 'Weak Trend' || tile.text3 === 'Low Volatility',
+                'text-yellow': tile.text3 === 'Neutral'
+              }"
+              class="text-item"
+            >
+              <span>{{ tile.text2 }}: {{ tile.text3 }}</span>
+            </div>
+            <div
+              *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+              [ngClass]="{
+                'text-green': tile.text2 === 'positive',
+                'text-red': tile.text2 === 'negative',
+                'text-yellow': tile.text2 === 'neutral'
+              }"
+              class="text-item"
+            >
+              <span>{{ tile.text1 }}</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Back Face -->
+        <div class="cardsmaema__face cardsmaema__face--back card">
+          <ejs-accumulationchart
+            id=""
+            #pie
+            style="display: block"
+            [legendSettings]="legendSettingssh"
+            [tooltip]="tooltipsh"
+            [title]="titlesh"
+            [enableBorderOnMouseMove]="false"
+          >
+            <e-accumulation-series-collection>
+              <e-accumulation-series
+                *ngIf="datash"
+                name="Project"
+                [dataSource]="datash"
+                xName="DataLabelMappingName"
+                yName="value"
+                [startAngle]="startAngle"
+                innerRadius="40%"
+                [radius]="radius"
+                [dataLabel]="dataLabelsh"
+                explode="true"
+                explodeOffset="10%"
+                [explodeIndex]="0"
+              >
+              </e-accumulation-series>
+            </e-accumulation-series-collection>
+          </ejs-accumulationchart>
+          <div class="text-container">
+            <div
+              *ngFor="let tile of tlindexparamemasma; trackBy: trackByFunctiontlindexparamemasma"
+              [ngClass]="{
+                'text-green': tile.text4 === 'positive',
+                'text-red': tile.text4 === 'negative',
+                'text-yellow': tile.text4 === 'neutral'
+              }"
+              class="text-item"
+            >
+              <span>{{ tile.text3 }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    
+
+  
+  
+  
+  
+ 
+  
   <br />
   <br />
   <div
