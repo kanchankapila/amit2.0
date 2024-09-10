@@ -18,12 +18,17 @@
          <h6 class="top-right" [ngClass]="{
           'text-green': reln50 > 0,
           'text-red': 0 > reln50,
-          'text-yellow': reln50 == 0,
+          'text-yellow': reln50 == 0
+          
+
+        }" >vs. Nifty50:{{reln50}}%</h6><br /><br /><br />
+        <h6  [ngClass]="{
           'text-green': relsector > 0,
           'text-red': 0 > relsector,
-          'text-yellow': relsector == 0,
+          'text-yellow': relsector == 0
+          
 
-        }" >vs. Nifty50:{{reln50}}%&nbsp;&nbsp;vs. Sector:{{relsector}}%</h6>
+        }" >vs. Sector:{{relsector}}%</h6>
       <!-- Top-left Text -->
       <h4 class="top-left">{{ tile.text1 }}</h4>
        
