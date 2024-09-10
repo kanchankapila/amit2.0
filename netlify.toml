@@ -23,8 +23,8 @@ package = "netlify-plugin-chromium"
   node_bundler = "esbuild"
 
 
-[functions."ttvolbreakoutsched"]
-schedule = "@hourly"
+[functions."tlcookierefreshvercel"]
+schedule = "@daily"
 
 
 
