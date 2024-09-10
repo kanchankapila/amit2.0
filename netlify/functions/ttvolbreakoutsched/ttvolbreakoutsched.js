@@ -1,8 +1,8 @@
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
 exports.handler = async () => {
   try {
-    const fetch = await import('node-fetch').then(module => module.default);
-
-    const response = await fetch('https://render-express-e54x.onrender.com/api/ttvolnmcinsight', {
+    const response = await fetch('https://stockinsights-vercel-et2egtre5-amitkapila1s-projects.vercel.app/trendlynecookie', {
       headers: { Accept: 'application/json' },
     });
 
@@ -16,6 +16,7 @@ exports.handler = async () => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+        "Content-Type": "application/json" // Explicitly setting content type
       },
       body: JSON.stringify({ data }),
     };
@@ -25,10 +26,9 @@ exports.handler = async () => {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+        "Content-Type": "application/json" // Explicitly setting content type
       },
       body: JSON.stringify({ msg: error.message }),
     };
   }
 };
-
-module.exports = { handler };
