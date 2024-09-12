@@ -291,7 +291,7 @@ export class BankniftyComponent implements OnInit {
   }
   gettlbniftyparams(indexid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.indexid).subscribe(data5 => {
+    this.dataApi.getTlIndexParams(this.indexid).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -332,7 +332,7 @@ export class BankniftyComponent implements OnInit {
     //   let nestedItems = Object.keys(data5).map(key => {
     //     return data5[key];
     //   });
-    this.dataApi.getntbankniftypcrdetails().subscribe(data5 => {
+    this.dataApi.getNtBankNiftyPcrDetails().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -404,57 +404,39 @@ export class BankniftyComponent implements OnInit {
       console.log(err)
     })
   }
-  trackByFunction(index, item) {
-    // console.log( 'TrackBy:', item.text2, 'at index', index );
-    return item.text2
+ 
+  trackByFunctionbankniftyindicators(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction1(index1, item1) {
-    //console.log( 'TrackBy:', item1.text1, 'at index', index1);
-    return item1.text1
+  trackByFunctionbankniftycrossover(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction2(index2, item2) {
-    //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
-    return item2.text1
+  trackByFunctionbniftyema(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction3(index3, item3) {
-    //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
-    return item3.text1;
+  trackByFunctionbankniftysentiments(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction4(index4, item4) {
-    //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
-    item4.text2;
+  trackByFunctionbniftysma(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction5(index5, item5) {
-    //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
-    return item5.text1;
+  trackByFunctionbankniftyindicatorsw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction6(index6, item6) {
-    //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-    return item6.text1;
+  trackByFunctionbankniftycrossoverw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction7(index7, item7) {
-    //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
-    return item7.text1;
+  trackByFunctionbankniftyindicatorsm(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction8(index8, item8) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item8.text3;
+  trackByFunctionbankniftycrossoverm(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction9(index9, item9) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item9.text3;
+  trackByFunctionbankniftystocks(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunction10(index10, item10) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item10.text3;
-  }
-  trackByFunction11(index11, item11) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item11.text3;
-  }
-  trackByFunction12(index12, item12) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item12.text2;
+  trackByFunctiontlindexparambn(index: number, item: any): any {
+    return item.id; 
   }
   getbanknifty6m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=6m&type=area').subscribe(data5 => {

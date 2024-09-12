@@ -6,208 +6,182 @@ import { HttpClient } from "@angular/common/http";
 })
 export class DataapiService {
   public href: string = "";
-  baseurl: any;
-  stock: any;
-  dbname: any;
+  baseurl: string;
 
   constructor(private http: HttpClient) {
-    this.setBaseUrl();
+    this.setBaseUrl(); // Initialize baseurl based on hostname
   }
 
-  ngOninit(): any {
-    console.log(window.location.hostname)
-    this.baseurl = "http://localhost:9999";
-    this.setBaseUrl();
+  // Set the base URL depending on whether the app is running locally or on a server
+  private setBaseUrl(): void {
+    this.baseurl = (window.location.hostname === "localhost")
+      ? "http://localhost:9999"
+      : "https://stockinsights.netlify.app";
   }
 
-  setBaseUrl(): void {
-    if (window.location.hostname === "localhost") {
-      this.baseurl = "http://localhost:9999";
-    } else {
-      this.baseurl = "https://stockinsights.netlify.app";
-    }
-  }
+  // API calls
 
-  getopstrastockpcr(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/opstrarefresh1?eqsymbol=${eqsymbol}`);
-  }
-
-  getopstrastockpcrintra(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/opstrarefresh2?eqsymbol=${eqsymbol}`);
-  }
-
-  test1() {
+  getTest1() {
     return this.http.get('https://kayal.trendlyne.com/clientapi/kayal/content/checklist-bypk/2633/');
   }
-
-  getnteodscreeners(ntoptions) {
+//Screeners Component
+  getNteodScreeners(ntoptions: any) {
     return this.http.post(`${this.baseurl}/.netlify/functions/ntscreeners`, ntoptions);
   }
 
-  gettrendlynepostdvm() {
+  getTrendlynePostDvm() {
     return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM');
   }
 
-  setOpstracookie() {
+  setOpstraCookie() {
     return this.http.get('https://render-express-e54x.onrender.com/api/Opstracookie');
   }
 
-  getgnewsapi(bqnames, dateday5, datetoday) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/news?bqnames=${bqnames}&dateday5=${dateday5}&datetoday=${datetoday}`);
-  }
 
-  getetstockscorescreeners(selectedValue, filter, order) {
-   
-    return this.http.get(`${this.baseurl}/.netlify/functions/etstockscorescreeners?selectedvalue=${selectedValue}&filter=${filter}&order=${order}`);
-  }
 
-  getetpredefinedfilters(selectedValue, filter, order) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/etpredefinedFilters?selectedvalue=${selectedValue}&filter=${filter}&order=${order}`);
-  }
-
-  getttmmi() {
+//Navbar Component
+  getTtmmi() {
     return this.http.get(`${this.baseurl}/.netlify/functions/tickertapeapi`);
   }
-  getntvolume() {
+
+  getNtVolume() {
     return this.http.get(`${this.baseurl}/.netlify/functions/ntvolume`);
   }
-  getnhc() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/nhc`);
-  }
-  getnhc1() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/nhc1`);
-  }
 
-  gettlindexparams(tlid) {
-    
+  
+//Bank Nifty,Pharma Nifty,Share Component
+  getTlIndexParams(tlid: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?tlid=${tlid}`);
   }
-  getinvestingindicators(indexid, duration) {
-    
+//Nifty Component
+  getInvestingIndicators(indexid: string, duration: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/investingindicators?indexid=${indexid}&duration=${duration}`);
   }
+//Nifty Component,Navbar Component
+getNtNiftyPcrDetails() {
+  return this.http.get(`${this.baseurl}/.netlify/functions/ntniftypcr`);
+}
 
-  getkite1(timeframe, eqsymbol) {
+  getKite1(timeframe: string, eqsymbol: string) {
     return this.http.get(`${this.baseurl}/kite1?timeframe=${timeframe}&eqsymbol=${eqsymbol}`);
   }
-
-  getkotakscore(stock) {
+//Share Component
+  getKotakScore(stock: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/KotakScoreRead?stock=${stock}`);
   }
+//Share Component
+getKotakSectorView(sector: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/KotakSectorRead?sector=${sector}`);
+}
+//Share Component
+getGNewsApi(bqnames: string, dateday5: string, datetoday: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/news?bqnames=${bqnames}&dateday5=${dateday5}&datetoday=${datetoday}`);
+}
+//Share Component
+getOpstraStockPcr(eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/opstrafetchstockpcr?eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getOpstraStockPcrIntra(eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/opstrafetchstockpcrintra?eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getNtStock1Yr(eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/ntstock1yr?eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getMmData(stockid: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/mmdata?stockid=${stockid}`);
+}
+//Share Component
+getNtStockDetails(eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/ntstockdetails?eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getNtStockPcrDetails(eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/ntstockpcrdetails?eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getTrendlyne3Fetch(tlid: string, tlname: string, eqsymbol: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne?tlid=${tlid}&tlname=${tlname}&eqsymbol=${eqsymbol}`);
+}
+//Share Component
+getTrendlyne2Fetch(tlid: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/trendlyne2?tlid=${tlid}`);
+}
 
-  getopstrarefresh() {
+
+  getOpstraRefresh() {
     return this.http.get(`${this.baseurl}/.netlify/functions/opstrarefresh`);
   }
 
-  getkotaksectorview(sector) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/KotakSectorRead?sector=${sector}`);
-  }
 
-  test() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/node-fetch`);
-  }
-
-  getkitestockreports() {
-    return this.http.get(`${this.baseurl}/kitestockreports`);
-  }
-
-  gettlscreeners(screenercode) {
-    console.log(screenercode);
+  //Analytics Component,Screeners Component
+  getTlScreeners(screenercode: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/tlstockscreeners?screenercode=${screenercode}`);
   }
+//Share Component
 
-  getntstock1yr(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntstock1yr?eqsymbol=${eqsymbol}`);
-  }
 
-  gettldvm() {
+  getTlDvm() {
     return this.http.get(`${this.baseurl}/.netlify/functions/TLDVMread`);
+  }
+//Navbar Component
+  // setTtVolume() {
+  //   return this.http.get('https://render-express-e54x.onrender.com/api/ttvolnmcinsight');
+  // }
+  //Analytics Component
+  getTtVolume() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/TTVolumeread`);
+  }
+//Homepage Component
+  getEtIndicesData() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/etallindices`);
+  }
+//Homepage Component
+  getEtAllSectorsData() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/etallsectors`);
+  }
+//Hompeage Component
+getEtPredefinedFilters(selectedValue: string, filter: string, order: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/etpredefinedFilters?selectedvalue=${selectedValue}&filter=${filter}&order=${order}`);
+}
+//Homepage Component
+getEtStockScoreScreeners(selectedValue: string, filter: string, order: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/etstockscorescreeners?selectedvalue=${selectedValue}&filter=${filter}&order=${order}`);
+}
+//Homepage Component
+getNtGlobal() {
+  return this.http.get(`${this.baseurl}/.netlify/functions/globalstocks`);
+}
+//Navbar Component
+  getTlBuildup(tlid: string) {
+    return this.http.get(`${this.baseurl}/.netlify/functions/trendlynebuildup?tlid=${tlid}`);
+  }
+//Navbar Component
+  getTlBuildup5() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/trendlynebuildup5`);
+  }
+  //Analytics Component
+  getNtVolumeRead() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/ntvolumeread`);
   }
 
   
 
-  settldvm() {
-    return this.http.get('https://render-express-e54x.onrender.com/api/trendlyneDVM');
-  }
 
-  setttvolume() {
-    return this.http.get('https://render-express-e54x.onrender.com/api/ttvolnmcinsight');
-  }
- 
-
-
-  getttvolume() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/TTVolumeread`);
-  }
-
-  getetindicesdata() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/etallindices`);
-  }
-
-  getetallsectorsdata() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/etallsectors`);
-  }
-
-  gettlbuildup(tlid) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/trendlynebuildup?tlid=${tlid}`);
-  }
-
-  gettlbuildup5() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/trendlynebuildup5`);
-  }
 
  
 
-  getntvolumeread() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntvolumeread`);
-  }
+ 
 
-  getntstockpcrdetails(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntstockpcrdetails?eqsymbol=${eqsymbol}`);
-  }
-
-  getntstockdetails(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntstockdetails?eqsymbol=${eqsymbol}`);
-  }
-
-  getmmdata(stockid) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/mmdata?stockid=${stockid}`);
-  }
-
-  refreshtl() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
-  }
-
-  tlrefresh() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
-  }
-
-  getntniftypcrdetails() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/ntniftypcr`);
-  }
-
-  getntbankniftypcrdetails() {
+ 
+//Banknifty Component,Navbar Component
+  getNtBankNiftyPcrDetails() {
     return this.http.get(`${this.baseurl}/.netlify/functions/ntbankniftypcr`);
   }
 
-  getntglobal() {
-    
-    return this.http.get(`${this.baseurl}/.netlify/functions/globalstocks`);
-  }
 
-  gettrendlyne3fetch(tlid, tlname, eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne?tlid=${tlid}&tlname=${tlname}&eqsymbol=${eqsymbol}`);
-  }
 
-  chrometrendlyne() {
-    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
-  }
-
-  gettrendlyne2fetch(tlid) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/trendlyne2?tlid=${tlid}`);
-  }
-
-  getopstrafetchstockpcr(eqsymbol) {
-    return this.http.get(`${this.baseurl}/.netlify/functions/opstrafetchstockpcr?stock=${eqsymbol}`);
-  }
+ 
 }

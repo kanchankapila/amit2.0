@@ -95,7 +95,7 @@
                 'bg-gradient-success small-text': tile.text4 > 0,
                 'bg-gradient-danger': 0 > tile.text4
               }"
-              *ngFor="let tile of mcniftyrt"
+              *ngFor="let tile of mcniftyrt; let i = index; trackBy: trackByFunctionmcniftyrt"
             >
               &nbsp;NIFTY <br />&nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text3 | number : '1.2-2' }}&nbsp;{{ tile.text4 | number : '1.2-2' }}% <br />&nbsp;Adv:{{ tile.text5 }}&nbsp;&nbsp;Dec:{{ tile.text6 }}
             </div>
@@ -120,7 +120,7 @@
                 'bg-gradient-success ': tile.text4 > 0,
                 'bg-gradient-danger ': 0 > tile.text4
               }"
-              *ngFor="let tile of mcbniftyrt"
+              *ngFor="let tile of mcbniftyrt; let i = index; trackBy: trackByFunctionmcbniftyrt"
             >
               &nbsp;BANK NIFTY <br />&nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text3 | number : '1.2-2' }}&nbsp;{{ tile.text4 | number : '1.2-2' }}%<br />&nbsp;Adv:{{ tile.text5 }}&nbsp;&nbsp;Dec:{{ tile.text6 }}
             </div>
@@ -144,7 +144,7 @@
                 'bg-gradient-success mb-1 ': tile.text4 > 0,
                 'bg-gradient-danger mb-1 ': 0 > tile.text4
               }"
-              *ngFor="let tile of mcpniftyrt"
+              *ngFor="let tile of mcpniftyrt; let i = index; trackBy: trackByFunctionmcpniftyrt"
             >
               &nbsp;Pharma N <br />&nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text3 | number : '1.2-2' }}&nbsp;{{ tile.text4 | number : '1.2-2' }}%<br />&nbsp;Adv:{{ tile.text5 }}&nbsp;&nbsp;Dec:{{ tile.text6 }}
             </div>
@@ -318,7 +318,7 @@
     <div class="InsideContent newsframe row card-group">
       <p-card
         class="col-4"
-        *ngFor="let news of newscard"
+        *ngFor="let news of newscard; let i = index; trackBy: trackByFunctionnewscardnav"
         header="{{ news.text1 }}"
         subheader="{{ news.text4 }}"
         [style]="{ width: '400px', margin: '5px' }"
