@@ -12,13 +12,19 @@ export class DataapiService {
     this.setBaseUrl(); // Initialize baseurl based on hostname
   }
 
-  // Set the base URL depending on whether the app is running locally or on a server
-  private setBaseUrl(): void {
-    this.baseurl = (window.location.hostname === "localhost")
-      ? "http://localhost:9999"
-      : "https://stockinsights.netlify.app";
-  }
+  ngOninit(): any {
+    console.log(window.location.hostname)
+    this.baseurl = "http://localhost:9999";
+    this.setBaseUrl();
 
+  }
+  setBaseUrl(): void {
+    if (window.location.hostname === "localhost") {
+      this.baseurl = "http://localhost:9999";
+    } else {
+      this.baseurl = "https://stockinsights.netlify.app";
+    }
+  }
   // API calls
 
   getTest1() {
@@ -39,7 +45,7 @@ export class DataapiService {
 
 
 
-//Navbar Component
+//Navbar Components
   getTtmmi() {
     return this.http.get(`${this.baseurl}/.netlify/functions/tickertapeapi`);
   }
