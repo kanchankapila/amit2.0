@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "amitnginx": {
+    "amit2.0": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -97,6 +97,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              
               "budgets": [
                 {
                   "type": "initial",
@@ -118,11 +119,11 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "amitnginx:build:development"
+            "browserTarget": "amit2.0:build:development"
           },
           "configurations": {
             "production": {
-              "browserTarget": "amitnginx:build:production"
+              "browserTarget": "amit2.0:build:production"
             }
           }
         },

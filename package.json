@@ -1,5 +1,5 @@
 {
-  "name": "amitnginx",
+  "name": "amit2.0",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -114,6 +114,7 @@
     "prettier": "3.3.2",
     "terser-webpack-plugin": "^5.3.10",
     "typescript": "^5.4.4",
-    "webpack": "^5.92.1"
+    "webpack": "^5.92.1",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

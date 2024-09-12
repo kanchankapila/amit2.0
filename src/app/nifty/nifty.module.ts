@@ -8,8 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
-import { ChartModule as SyncfusionChartModule,DateTimeService,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
-
+// import { ChartModule as SyncfusionChartModule,DateTimeService,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
+import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusion-shared-chart.module';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 
@@ -21,7 +21,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
   ],
   imports: [
     CommonModule,
-    SyncfusionChartModule, 
+   
      
     
     NiftyRoutingModule,
@@ -32,12 +32,13 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     TabViewModule,
     ChartModule,
     RadioButtonModule,
-    FormsModule
+    FormsModule,
+    SyncfusionSharedChartModule
    
 
   ],
   providers:[
-     MultiColoredLineSeriesService,DateTimeService
+     
   ]
 })
 export class NiftyModule { }

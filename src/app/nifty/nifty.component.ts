@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { ChartType } from 'chart.js';
-import { ChartAnnotationSettingsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
+// import { ChartAnnotationSettingsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
 import { RadioButton } from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
@@ -352,15 +352,15 @@ export class NiftyComponent implements OnInit {
     setInterval(() => { this.getniftytoday1() }, 3000);
     setInterval(() => { this.gettlniftyparams(this.indexid,this.duration) }, 30000);
   }
-  public annotations: ChartAnnotationSettingsModel[] = [
-    {
-      coordinateUnits: 'Point',
-      verticalAlignment: 'Top',
-    }, {
-      coordinateUnits: 'Point',
-      yAxisName: 'yAxis'
-    }
-  ];
+  // public annotations: ChartAnnotationSettingsModel[] = [
+  //   {
+  //     coordinateUnits: 'Point',
+  //     verticalAlignment: 'Top',
+  //   }, {
+  //     coordinateUnits: 'Point',
+  //     yAxisName: 'yAxis'
+  //   }
+  // ];
   public primaryXAxis: object = {
     valueType: 'Category',
     interval: 1,
