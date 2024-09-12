@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnifiedTopology: true });
+const client1 = new MongoClient(process.env.MONGODB_ATLAS_CLUSTER_URI);
 
 const opstraintra = async (eqsymbol) => {
   try {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection('cookie').findOne({}, { projection: { _id: 0, jsessionid: 1 } });
-
+    console.log(jsessionid)
     const response = await fetch(`https://opstra.definedge.com/api/futures/pcrintra/chart/${eqsymbol}`, {
       headers: {
         accept: 'application/json, text/plain, */*',
@@ -18,7 +18,8 @@ const opstraintra = async (eqsymbol) => {
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
-        cookie: `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741; JSESSIONID=${jsessionid.jsessionid}; _gat=1;`,
+        'cookie': `_ga=GA1.1.809222793.1724492013; _ga_50VZ2CLHRH=GS1.1.1724575021.1.1.1724575050.0.0.0; JSESSIONID=${jsessionid.jsessionid}; _ga_6D0ZQ437SD=GS1.1.1726029893.7.1.1726029945.0.0.0`,
+        // `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741; JSESSIONID=${jsessionid.jsessionid}; _gat=1;`,
       },
       method: 'GET',
       body: null,

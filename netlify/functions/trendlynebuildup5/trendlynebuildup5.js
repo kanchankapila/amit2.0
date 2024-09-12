@@ -48,16 +48,17 @@ const handler = async function (event) {
           headers: {
             "accept": "application/json, text/javascript, */*; q=0.01",
             "accept-language": "en-US,en;q=0.9",
-            "sec-ch-ua": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
+            "sec-ch-ua-mobile": "?1",
+            "sec-ch-ua-platform": "\"Android\"",
             "sec-fetch-dest": "empty",
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-origin",
             "x-requested-with": "XMLHttpRequest",
-            "cookie": `_gid=GA1.2.1330229069.1671722517; g_state={\"i_l\":0}; csrftoken=${process.env.csrf}; .trendlyne=${process.env.trnd}; _gat=1; _ga_7F29Q8ZGH0=GS1.1.1671722518.6.1.1671722626.0.0.0; AWSALB=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; AWSALBCORS=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; _ga=GA1.2.521023439.1671467978`,
-            "Referer": `https://trendlyne.com/futures-options/api/heatmap/${formattedDate}-near/all/price/`,
-            "Referrer-Policy": "strict-origin-when-cross-origin"
+            "cookie": `_ga=GA1.1.1667715230.1722073196; _ga_J2YW7VJGYP=GS1.1.1724684711.1.1.1724684877.0.0.0; _ga_8MLP1KVCSX=GS1.1.1724910003.1.0.1724910003.0.0.0; _clck=l9t1r7%7C2%7Cfoq%7C0%7C1702; TLCDay=0; TLCWeek=0;csrftoken=${process.env.csrf};.trendlyne=${process.env.trnd}; _ga_7F29Q8ZGH0=GS1.1.1726064901.26.1.1726066721.60.0.0`,
+            "Referer": "https://trendlyne.com/",
+            "Referrer-Policy": "origin"
           }
         });
 
@@ -65,9 +66,9 @@ const handler = async function (event) {
           return { statusCode: response.status, body: response.statusText };
         }
 
-        const tlbuildup = await response.json();
+        const tlbuildup5 = await response.json();
 
-        process.env.trendlynebuildup5 = JSON.stringify({ tlbuildup });
+        process.env.trendlynebuildup5 = JSON.stringify({ tlbuildup5 });
         return {
           statusCode: 200,
           body: process.env.trendlynebuildup5,
@@ -81,7 +82,7 @@ const handler = async function (event) {
       } finally {
         // Ensure client is released in case of errors
         if (client) {
-          await client.release();
+          await client.close();
         }
       }
     };
