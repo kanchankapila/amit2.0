@@ -395,7 +395,7 @@ export class NiftyComponent implements OnInit {
   async gettlniftyparams(indexid, selectedValue) {
      this.indexid='17940';
      this.selectedValue='1m'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(async data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(async data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -409,7 +409,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='5m'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -423,7 +423,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='15m'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -437,7 +437,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
     this.selectedValue='30m'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -451,7 +451,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='1h'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -465,7 +465,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='5h'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -479,7 +479,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='1d'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -493,7 +493,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='1w'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -507,7 +507,7 @@ export class NiftyComponent implements OnInit {
     })
     await sleep(3000);
      this.selectedValue='1mo'
-    this.dataApi.getinvestingindicators(this.indexid, this.selectedValue).subscribe(data5 => {
+    this.dataApi.getInvestingIndicators(this.indexid, this.selectedValue).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -575,7 +575,7 @@ export class NiftyComponent implements OnInit {
   }
   getniftypcr() {
    
-     this.dataApi.getntniftypcrdetails().subscribe(data5 => {
+     this.dataApi.getNtNiftyPcrDetails().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -727,62 +727,62 @@ export class NiftyComponent implements OnInit {
       console.log(err)
     })
   }
-  trackByFunctionnifty50Stocks(index) {
-    return index;
+  trackByFunctionnifty50Stocks(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50crossoverm(index) {
-    return index;
+  trackByFunctionnifty50crossoverm(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50indicatorsm(index) {
-    return index;
+  trackByFunctionnifty50indicatorsm(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50crossoverw(index) {
-    return index;
+  trackByFunctionnifty50crossoverw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50indicatorsw(index) {
-    return index;
+  trackByFunctionnifty50indicatorsw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionniftysma(index) {
-    return index;
+  trackByFunctionniftysma(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50sentiments(index) {
-    return index;
+  trackByFunctionnifty50sentiments(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionniftyema(index) {
-    return index;
+  trackByFunctionniftyema(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50crossover(index) {
-    return index;
+  trackByFunctionnifty50crossover(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnifty50indicators(index) {
-    return index;
+  trackByFunctionnifty50indicators(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators1m(index) {
-    return index;
+  trackByFunctioninvestingindicators1m(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators5m(index) {
-    return index;
+  trackByFunctioninvestingindicators5m(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators15m(index) {
-    return index;
+  trackByFunctioninvestingindicators15m(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators30m(index) {
-    return index;
+  trackByFunctioninvestingindicators30m(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators1h(index) {
-    return index;
+  trackByFunctioninvestingindicators1h(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators5h(index) {
-    return index;
+  trackByFunctioninvestingindicators5h(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators1d(index) {
-    return index;
+  trackByFunctioninvestingindicators1d(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators1w(index) {
-    return index;
+  trackByFunctioninvestingindicators1w(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctioninvestingindicators1mo(index) {
-    return index;
+  trackByFunctioninvestingindicators1mo(index: number, item: any): any {
+    return item.id; 
   }
  
   getnifty6m() {

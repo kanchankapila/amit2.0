@@ -277,9 +277,8 @@ export class HomepageComponent implements OnInit {
   };
   async ngOnInit() {
     await Promise.all([
-      this.getnhc(),
-      this.getnhc1(),
-      this.gettlrefresh(),
+      
+      
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -291,8 +290,7 @@ export class HomepageComponent implements OnInit {
       this.getglobal(),
       this.getadvdec1(),
       this.getetindices(),
-      this.getetsectors(),
-      this.refreshtl()])
+      this.getetsectors()])
     // this.getetstockscorescreeners();
     // this.getetpredefinedfilters
     setInterval(() => { this.getadvdec1() }, 30000);
@@ -302,7 +300,7 @@ export class HomepageComponent implements OnInit {
     setInterval(() => { this.getetsectors() }, 30000);
     setInterval(() => { this.getglobal() }, 30000);
     setInterval(() => { this.getadvdec() }, 30000);
-    setInterval(() => { this.refreshtl() }, 432000000);
+   
     //  this.getetscreeners(this.selectedValue)
   }
   onClick(event) {
@@ -356,51 +354,19 @@ export class HomepageComponent implements OnInit {
     this.ReadMore3 = !this.ReadMore3; //not equal to condition
     this.visible3 = !this.visible3
   }
-  getnhc() {
-    this.dataApi.getnhc().subscribe(data5 => {
-           let nestedItems = Object.keys(data5).map(key => {
-             return data5[key];
-           });
-      console.log(nestedItems)
-      // this.dataApi.getopstrarefresh();
-      console.log("nhc is hit")
-    });
-  };
-  gettlrefresh() {
-    this.dataApi.tlrefresh().subscribe();
-      console.log("TL refresh is hit....")
-      
-     
-    };
-    getnhc1() {
-      this.dataApi.getnhc1().subscribe();
-        console.log("nhc1 is hit....")
-        
-       
-      };
-  
-  refreshtl() {
-    this.http.get(this.baseurl + '/.netlify/functions/tlrefresh').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-      // this.dataApi.getopstrarefresh();
-      console.log("TLrefresh is hit")
-    });
-  };
+
   dialogVisible: boolean[] = [];
-  trackByFunctionpdstocks(index) {
-    return index;
+  trackByFunctionpdstocks(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionssstocks(index) {
-    return index;
+  trackByFunctionssstocks(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionscreener(index) {
-    return index;
+  trackByFunctionscreener(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionglobalmarket(index) {
-    return index;
+  trackByFunctionglobalmarket(index: number, item: any): any {
+    return item.id; 
   }
   maximizeDialog(index: number) {
     const dialog = document.getElementsByClassName('ui-dialog-content')[index] as HTMLElement;
@@ -450,7 +416,7 @@ export class HomepageComponent implements OnInit {
   //   })
   // }
   getetindices() {
-    this.dataApi.getetindicesdata().subscribe(data => {
+    this.dataApi.getEtIndicesData().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
@@ -528,7 +494,7 @@ export class HomepageComponent implements OnInit {
     });
   }
   getetsectors() {
-    this.dataApi.getetallsectorsdata().subscribe(data => {
+    this.dataApi.getEtAllSectorsData().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
@@ -744,7 +710,7 @@ export class HomepageComponent implements OnInit {
   async getetpredefinedscreeners(selectedValue) {
     try {
       var c = (selectedValue.split(','));
-      this.dataApi.getetpredefinedfilters(c[0], c[1], c[2]).subscribe(async data5 => {
+      this.dataApi.getEtPredefinedFilters(c[0], c[1], c[2]).subscribe(async data5 => {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
@@ -761,7 +727,7 @@ export class HomepageComponent implements OnInit {
   async getetstockscorescreeners(selectedValue) {
     try {
       var d = (selectedValue.split(','));
-      this.dataApi.getetstockscorescreeners(d[0], d[1], d[2]).subscribe(async data5 => {
+      this.dataApi.getEtStockScoreScreeners(d[0], d[1], d[2]).subscribe(async data5 => {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
@@ -776,7 +742,7 @@ export class HomepageComponent implements OnInit {
     }
   }
   getglobal() {
-    this.dataApi.getntglobal().subscribe(data5 => {
+    this.dataApi.getNtGlobal().subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });

@@ -263,13 +263,12 @@ export class ScreenersComponent implements OnInit {
   showMaximizableDialog1() {
     this.displayMaximizable1 = true;
   }
-  trackByFunction42(index42, item42) {
-    // console.log( 'TrackBy:', item.text2, 'at index', index );
-    return item42.text2
+  trackByFunctionscreenerstocks(index: number, item: any): any {
+    return item.id; 
   }
   async gettlscreeners(selectedOption: string) {
     this.screenercode = selectedOption;
-    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const data5 = await this.dataApi.getTlScreeners(this.screenercode).toPromise();
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
@@ -421,7 +420,7 @@ export class ScreenersComponent implements OnInit {
     }
   }
   getnteodscreeners(SMA1: string) {
-    this.dataApi.getnteodscreeners(SMA1).subscribe(data5 => {
+    this.dataApi.getNteodScreeners(SMA1).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });

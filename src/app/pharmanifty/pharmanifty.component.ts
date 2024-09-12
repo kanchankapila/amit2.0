@@ -332,7 +332,7 @@ export class PharmaniftyComponent implements OnInit {
   }
   gettlpharmaparams(indexid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.indexid).subscribe(data5 => {
+    this.dataApi.getTlIndexParams(this.indexid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -419,38 +419,38 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
   }
-  trackByFunctionpharmaniftystocks(index) {
-    return index;
+  trackByFunctionpharmaniftystocks(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiontlindexparam(index) {
-    return index;
+  trackByFunctiontlindexparam(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftyindicators(index) {
-    return index;
+  trackByFunctionpharmaniftyindicators(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftycrossover(index) {
-    return index;
+  trackByFunctionpharmaniftycrossover(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftysentiments(index) {
-    return index;
+  trackByFunctionpharmaniftysentiments(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpniftyema(index) {
-    return index;
+  trackByFunctionpniftyema(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpniftysma(index) {
-    return index;
+  trackByFunctionpniftysma(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftyindicatorsw(index) {
-    return index;
+  trackByFunctionpharmaniftyindicatorsw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftycrossoverw(index) {
-    return index;
+  trackByFunctionpharmaniftycrossoverw(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftyindicatorsm(index) {
-    return index;
+  trackByFunctionpharmaniftyindicatorsm(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpharmaniftycrossoverm(index) {
-    return index;
+  trackByFunctionpharmaniftycrossoverm(index: number, item: any): any {
+    return item.id; 
   }
   
   getpharmanifty6m() {

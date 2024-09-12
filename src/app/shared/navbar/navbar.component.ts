@@ -167,8 +167,8 @@ export class NavbarComponent implements OnInit {
     { setInterval(() => { this.getttmmi() }, 60000); }
     await Promise.all([
       this.getniftytlbuildup(this.tlidnifty),
-      this.getniftytlbuildup5(),
-      this.getbniftytlbuildup(this.tlidbnifty),
+      // this.getniftytlbuildup5(),
+      // this.getbniftytlbuildup(this.tlidbnifty),
       // this.getpniftytlbuildup('1905'),
       this.getniftysparkline(),
       this.getbniftysparkline(),
@@ -193,7 +193,7 @@ export class NavbarComponent implements OnInit {
   }
   async getttmmi() {
     try {
-      this.dataApi.getttmmi().subscribe(data5 => {
+      this.dataApi.getTtmmi().subscribe(data5 => {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
@@ -227,8 +227,21 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
+ 
+  trackByFunctionmcniftyrt(index: number, item: any): any {
+    return item.id; 
+  } 
+  trackByFunctionmcbniftyrt(index: number, item: any): any {
+    return item.id; 
+  } 
+  trackByFunctionmcpniftyrt(index: number, item: any): any {
+    return item.id; 
+  } 
+  trackByFunctionnewscardnav(index: number, item: any): any {
+    return item.id; 
+  }
   getniftypcr() {
-    this.dataApi.getntniftypcrdetails().subscribe(data5 => {
+    this.dataApi.getNtNiftyPcrDetails().subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -237,7 +250,7 @@ export class NavbarComponent implements OnInit {
     })
   }
   getbankniftypcr() {
-    this.dataApi.getntbankniftypcrdetails().subscribe(data5 => {
+    this.dataApi.getNtBankNiftyPcrDetails().subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -247,7 +260,7 @@ export class NavbarComponent implements OnInit {
   }
   getniftytlbuildup(tlidnifty) {
     this.tlidnifty = '1887'
-    this.dataApi.gettlbuildup(this.tlidnifty).subscribe(data5 => {
+    this.dataApi.getTlBuildup(this.tlidnifty).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -257,7 +270,7 @@ export class NavbarComponent implements OnInit {
   }
   getniftytlbuildup5() {
     this.tlidnifty = '1887'
-    this.dataApi.gettlbuildup5().subscribe(data5 => {
+    this.dataApi.getTlBuildup5().subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -271,17 +284,18 @@ export class NavbarComponent implements OnInit {
   }
   getbniftytlbuildup(tlidbnifty) {
     this.tlidbnifty = '1898'
-    this.dataApi.gettlbuildup(this.tlidbnifty).subscribe(data5 => {
+    this.dataApi.getTlBuildup(this.tlidbnifty).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      this.tlbniftybuildup = (nestedItems[0]['data_v2'][0]['buildup'])
-      // console.log(this.tlbniftybuildup)
+      console.log(nestedItems[0]['data_v2'])
+      this.tlbniftybuildup = (nestedItems[0]['data_v2'][1]['buildup'])
+      console.log(this.tlbniftybuildup)
     });
   }
-  setttvolume() {
-    console.log("Set TTVOLMCINSIGHT is hit !!!")
-    this.dataApi.setttvolume().subscribe();}
+  // setttvolume() {
+  //   console.log("Set TTVOLMCINSIGHT is hit !!!")
+  //   this.dataApi.setttvolume().subscribe();}
   getmcniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
@@ -295,7 +309,7 @@ export class NavbarComponent implements OnInit {
       console.log(err)
     })
   }
-  getmcpharmaniftyrealtime() {
+   getmcpharmaniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bcpr').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -442,7 +456,7 @@ export class NavbarComponent implements OnInit {
       });
     });
   }
-  tlrefresh() { this.dataApi.tlrefresh() }
+ 
   navigatenifty() {
     this.window.open("/nifty", "_blank")
   }
@@ -465,8 +479,5 @@ export class NavbarComponent implements OnInit {
     this.window.open("/analytics", "_blank")
 
   }
-  chrometrendlyne(){
-    this.dataApi.chrometrendlyne().subscribe();
   
-  }
 }

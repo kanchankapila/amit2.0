@@ -65,7 +65,7 @@
       fxFlex.lg="12%"
       fxFlex.xs="30%"
       fxFlex.sm="33%"
-      *ngFor="let tile of tlindexparam; trackBy: trackByFunction12"
+      *ngFor="let tile of tlindexparam; trackBy: trackByFunctiontlindexparambn"
     >
       <div class="scene">
         <div class="card text-white text-center">
@@ -101,7 +101,7 @@
       fxFlex.lg="12%"
       fxFlex.xs="30"
       fxFlex.sm="33%"
-      *ngFor="let tile of bankniftyindicators; trackBy: trackByFunction"
+      *ngFor="let tile of bankniftyindicators; trackBy: trackByFunctionbankniftyindicators"
     >
       <div class="scene">
         <div class="card text-white text-center">
@@ -156,7 +156,7 @@
               fxFlex="30"
               fxFlex.xs="33%"
               fxFlex.sm="33%"
-              *ngFor="let tile of bankniftycrossover; trackBy: trackByFunction1"
+              *ngFor="let tile of bankniftycrossover; trackBy: trackByFunctionbankniftycrossover"
             >
               <mat-card
                 class="type1-bold"
@@ -177,7 +177,7 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of bniftyema; trackBy: trackByFunction3"
+                *ngFor="let tile of bniftyema; trackBy: trackByFunctionbniftyema"
               >
                 <thead>
                   <tr>
@@ -237,7 +237,7 @@
               fxFlex.sm="33%"
               *ngFor="
                 let tile of bankniftysentiments;
-                trackBy: trackByFunction2
+                trackBy: trackByFunctionbankniftysentiments
               "
             >
               <mat-card
@@ -255,7 +255,7 @@
             <div class="table-responsive pt-3">
               <table
                 class="table table-bordered"
-                *ngFor="let tile of bniftysma; trackBy: trackByFunction3"
+                *ngFor="let tile of bniftysma; trackBy: trackByFunctionbniftysma"
               >
                 <thead>
                   <tr>
@@ -372,7 +372,7 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of bankniftyindicatorsw; trackBy: trackByFunction5"
+          *ngFor="let tile of bankniftyindicatorsw; trackBy: trackByFunctionbankniftyindicatorsw"
         >
           <div class="scene">
             <div class="card text-white text-center">
@@ -429,7 +429,7 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of bankniftycrossoverw;
-                    trackBy: trackByFunction1
+                    trackBy: trackByFunctionbankniftycrossoverw
                   "
                 >
                   <mat-card
@@ -485,7 +485,7 @@
           fxFlex.lg="12%"
           fxFlex.xs="40"
           fxFlex.sm="33%"
-          *ngFor="let tile of bankniftyindicatorsm; trackBy: trackByFunction8"
+          *ngFor="let tile of bankniftyindicatorsm; trackBy: trackByFunctionbankniftyindicatorsm"
         >
           <div class="scene">
             <div class="card text-center text-white">
@@ -542,7 +542,7 @@
                   fxFlex.sm="33%"
                   *ngFor="
                     let tile of bankniftycrossoverm;
-                    trackBy: trackByFunction9
+                    trackBy: trackByFunctionbankniftycrossoverm
                   "
                 >
                   <mat-card
@@ -651,7 +651,7 @@
   <div class="grid-wrappernt">
   
     <div class="grid-containernt">
-      <div class="cardnt" *ngFor="let tile of bankniftystocks; trackBy: trackByFunction11" 
+      <div class="cardnt" *ngFor="let tile of bankniftystocks; trackBy: trackByFunctionbankniftystocks" 
            [ngClass]="{
             'bg-gradient-bullnt': tile.text3 > 0,
             ' bg-gradient-bearnt' : 0 > tile.text3,

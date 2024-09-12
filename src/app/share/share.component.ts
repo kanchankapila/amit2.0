@@ -217,7 +217,7 @@ export class ShareComponent implements OnInit {
   public visible2: Boolean = false;
   baseurl: any
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
-    this.dialogVisible = this.pdstocks.map(() => false);
+    
     if (window.location.hostname === "localhost") {
       this.baseurl = "http://localhost:8888"
     } else {
@@ -722,7 +722,7 @@ export class ShareComponent implements OnInit {
       // this.getkotak(),
       this.gettlstockparams(this.tlid),
       // this.gettrendlynestocksti(this.tlid),
-      this.getkotakview(this.eqsymbol),
+      // this.getkotakview(this.eqsymbol),
       this.getmcstockinsight(this.mcsymbol),
       this.getmcstockrealtime(this.mcsymbol),
       this.getshare1m(this.eqsymbol),
@@ -748,8 +748,8 @@ export class ShareComponent implements OnInit {
     setInterval(() => { this.getmcpricevolume(this.mcsymbol) }, 3000);
    
     //  setInterval(() => {this.opstrarefresh()},60000);
-    setInterval(() => { this.getopstrastockpcr(this.eqsymbol) }, 60000);
-    setInterval(() => { this.getopstrastockpcrintra(this.eqsymbol) }, 60000);
+    // setInterval(() => { this.getopstrastockpcr(this.eqsymbol) }, 60000);
+    // setInterval(() => { this.getopstrastockpcrintra(this.eqsymbol) }, 60000);
   }
   
   showMaximizableDialogneutral() {
@@ -773,11 +773,11 @@ export class ShareComponent implements OnInit {
   }
   gettlstockparams(tlid) {
     // this.indexid='1898';
-    this.dataApi.gettlindexparams(this.tlid).subscribe(data5 => {
+    this.dataApi.getTlIndexParams(this.tlid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+      // console.log(nestedItems)
       this.tlindexparam.length = 0;
       for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
@@ -812,7 +812,10 @@ export class ShareComponent implements OnInit {
         const nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-       
+        if (this.sparklineChart) {
+          // Destroy the existing chart if it already exists
+          this.sparklineChart.destroy();
+        }
         const sparklineCanvas = this.sparklineChartRef.nativeElement;
         this.sparklinestockdata.length = 0;
         this.sparklinestocklabel.length = 0;
@@ -859,49 +862,41 @@ export class ShareComponent implements OnInit {
       console.error(err);
     }
   }
-  // opstrarefresh() {
-  //   this.http.get(this.baseurl + '/.netlify/functions/opstrarefresh').subscribe(data5 => {
-  //     const nestedItems = Object.keys(data5).map(key => {
-  //       return data5[key];
+  /////////////////////////////// Kotak /////////////////////////////////////////////////
+ 
+  // async getkotakview(eqsymbol) {
+  //   this.dataApi.getKotakScore(eqsymbol).subscribe(data => {
+  //     const nestedItems = Object.keys(data).map(key => {
+  //       return data[key];
   //     });
-  //     // console.log(nestedItems)
-  //     // this.dataApi.getopstrarefresh();
-  //     // console.log("Opstrarefresh is hit")
-  //   });
-  // };
-  async getkotakview(eqsymbol) {
-    this.dataApi.getkotakscore(eqsymbol).subscribe(data => {
-      const nestedItems = Object.keys(data).map(key => {
-        return data[key];
-      });
-      if (nestedItems[0].length != 0) {
-        this.divscore.push({ text1: nestedItems[0][0].DividendScore, text2: "Dividend" })
-        this.growthscore.push({ text1: nestedItems[0][0].GrowthScore, text2: "Growth" })
-        this.healthscore.push({ text1: nestedItems[0][0].HealthScore, text2: "Health" }),
-          this.omrscore.push({ text1: nestedItems[0][0].OverallMarketRank, text2: "Market Rank" }),
-          this.kqscore.push({ text1: nestedItems[0][0].QualityScore, text2: "Quality" }),
-          this.rbsscore.push({ text1: nestedItems[0][0].RankBySector, text2: "Sector Rank" }),
-          this.kvscore.push({ text1: nestedItems[0][0].ValueScore, text2: "Value" }),
-          this.ppscore.push({ text1: nestedItems[0][0].PastPerformanceScore, text2: "Past Performance" })
-        this.sectorid = nestedItems[0][0].SectorId
-      }
-      this.dataApi.getkotaksectorview(this.sectorid).subscribe(async data => {
-        const nestedItems = Object.keys(data).map(key => {
-          return data[key];
-        });
-        for (const val in nestedItems[0]) {
-          if ((this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)).length == 0) {
-            continue;
-          } else {
-            this.mcsymbol1 = (this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)[0].mcsymbol)
-            await this.getmcstockrealtime1(this.mcsymbol1)
-          }
-        }
-      });
-    }, err => {
-      console.log(err)
-    })
-  }
+  //     if (nestedItems[0].length != 0) {
+  //       this.divscore.push({ text1: nestedItems[0][0].DividendScore, text2: "Dividend" })
+  //       this.growthscore.push({ text1: nestedItems[0][0].GrowthScore, text2: "Growth" })
+  //       this.healthscore.push({ text1: nestedItems[0][0].HealthScore, text2: "Health" }),
+  //         this.omrscore.push({ text1: nestedItems[0][0].OverallMarketRank, text2: "Market Rank" }),
+  //         this.kqscore.push({ text1: nestedItems[0][0].QualityScore, text2: "Quality" }),
+  //         this.rbsscore.push({ text1: nestedItems[0][0].RankBySector, text2: "Sector Rank" }),
+  //         this.kvscore.push({ text1: nestedItems[0][0].ValueScore, text2: "Value" }),
+  //         this.ppscore.push({ text1: nestedItems[0][0].PastPerformanceScore, text2: "Past Performance" })
+  //       this.sectorid = nestedItems[0][0].SectorId
+  //     }
+  //     this.dataApi.getKotakSectorView(this.sectorid).subscribe(async data => {
+  //       const nestedItems = Object.keys(data).map(key => {
+  //         return data[key];
+  //       });
+  //       for (const val in nestedItems[0]) {
+  //         if ((this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)).length == 0) {
+  //           continue;
+  //         } else {
+  //           this.mcsymbol1 = (this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)[0].mcsymbol)
+  //           await this.getmcstockrealtime1(this.mcsymbol1)
+  //         }
+  //       }
+  //     });
+  //   }, err => {
+  //     console.log(err)
+  //   })
+  // }
   getkotak() {
     this.http.get<any>('https://kayal.trendlyne.com/broker-webview/all-in-one-screener-get/kayal/?perPageCount=25&pageNumber=0&screenpk=82596&groupType=all&groupName=').subscribe(data5 => {
       // let nestedItems = Object.keys(data5).map(key => {
@@ -911,52 +906,22 @@ export class ShareComponent implements OnInit {
     })
   }
   async getgnewsapi(bqnames, dateday5, datetoday) {
-    this.dataApi.getgnewsapi(this.bqnames, this.dateday5, this.datetoday).subscribe(async data => {
+    this.dataApi.getGNewsApi(this.bqnames, this.dateday5, this.datetoday).subscribe(async data => {
       const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
-      console.log(nestedItems)
+      // console.log(nestedItems)
       this.newscard.length = 0;
       for (const val in nestedItems[0].articles) {
         this.newscard.push({ text1: nestedItems[0].articles[val].title, text2: nestedItems[0].articles[val].url, text3: nestedItems[0].articles[val].urlToImage, text4: nestedItems[0].articles[val].description, text5: nestedItems[0].articles[val].content })
       
       }
-      console.log(this.newscard)
+      // console.log(this.newscard)
     });
   }
   sleep(ms: number): Promise<void> {
     return new Promise<void>(resolve => setTimeout(resolve, ms));
   }
-  pdstocks = [
-    {
-      text1: 'Stock 1',
-      text2: '2.5',
-      text3: '$25.00',
-      text4: '$30.00',
-      text5: '$20.00',
-      text6: '10',
-      text7: '5',
-      text8: '7',
-      text9: 'Company A',
-      text10: '5',
-      text11: '8',
-      text12: '9'
-    },
-    {
-      text1: 'Stock 2',
-      text2: '-1.5',
-      text3: '$50.00',
-      text4: '$55.00',
-      text5: '$45.00',
-      text6: '8',
-      text7: '2',
-      text8: '10',
-      text9: 'Company B',
-      text10: '6',
-      text11: '7',
-      text12: '8'
-    }
-  ];
   dialogVisible: boolean[] = [];
   maximizeDialog(index: number) {
     const dialog = document.getElementsByClassName('ui-dialog-content')[index] as HTMLElement;
@@ -1050,7 +1015,7 @@ export class ShareComponent implements OnInit {
     
       if (response.ok) {
         const insight = await response.json();
-        console.log(insight)
+        // console.log(insight)
         if (insight['data']['insightData']['price'].hasOwnProperty('5')) {
           this.dealsmsg.length = 0;
           this.dealsmsg.push({ text1: insight['data']['insightData']['price'][5]['shortDesc'], text2: insight['data']['insightData']['price'][5]['color'] })
@@ -1136,11 +1101,13 @@ export class ShareComponent implements OnInit {
       console.error(err);
     }
   }
-  async getopstrastockpcr(eqsymbol) {
-    this.dataApi.getopstrastockpcr(this.eqsymbol).subscribe(data5 => {
+   getopstrastockpcr(eqsymbol) {
+    this.dataApi.getOpstraStockPcr(this.eqsymbol).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log("Opstra is hit!!!")
+      console.log(nestedItems)
       this.opstrastockpcrdata.length = 0;
       this.opstrastockpcrLabels.length = 0;
       for (const val in nestedItems[0]['data']) {
@@ -1148,6 +1115,7 @@ export class ShareComponent implements OnInit {
         this.opstrastockpcrLabels.push((new Date(nestedItems[0]['data'][val][0]).toLocaleString()).split(",")[0]);
       }
     });
+    console.log( this.opstrastockpcrdata)
     this.chartOptions4 = {
       series: [{
         data: this.opstrastockpcrdata
@@ -1177,11 +1145,12 @@ export class ShareComponent implements OnInit {
     }];
     this.opstrastockLabels = this.opstrastockpcrLabels;
   }
-  async getopstrastockpcrintra(eqsymbol) {
-    this.dataApi.getopstrastockpcrintra(this.eqsymbol).subscribe(data5 => {
+   getopstrastockpcrintra(eqsymbol) {
+    this.dataApi.getOpstraStockPcrIntra(this.eqsymbol).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       this.opstrastockpcrintradata.length = 0;
       this.opstrastockpcrintraLabels.length = 0;
       for (const val in nestedItems[0]['data']) {
@@ -1223,7 +1192,7 @@ export class ShareComponent implements OnInit {
     //   let nestedItems = Object.keys(data5).map(key => {
     //     return data5[key];
     //   });
-    this.dataApi.getntstock1yr(this.eqsymbol).subscribe(data5 => {
+    this.dataApi.getNtStock1Yr(this.eqsymbol).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -1356,7 +1325,7 @@ export class ShareComponent implements OnInit {
   //   });
   // }
   async getmmdata(stockid) {
-    this.dataApi.getmmdata(this.stockid).subscribe(data5 => {
+    this.dataApi.getMmData(this.stockid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -1580,144 +1549,144 @@ export class ShareComponent implements OnInit {
       console.log(err)
     }
   }
-  trackByFunctionstockindicators(index) {
-    return index;
+  trackByFunctionstockindicators(index: number, item: any): any {
+    return item.id; 
   }
   
-  trackByFunctionneutral(index) {
-    return index;
+  trackByFunctionneutral(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionpositive(index) {
-    return index;
+  trackByFunctionpositive(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionnegative(index) {
-    return index;
+  trackByFunctionnegative(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionbrokertarget(index) {
-    return index;
+  trackByFunctionbrokertarget(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionbrokertargetupgrade(index) {
-    return index;
+  trackByFunctionbrokertargetupgrade(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionbrokertargetdowngrade(index) {
-    return index;
+  trackByFunctionbrokertargetdowngrade(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionbrokerrecodowngrade(index) {
-    return index;
+  trackByFunctionbrokerrecodowngrade(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionbrokerrecoupgrade(index) {
-    return index;
+  trackByFunctionbrokerrecoupgrade(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionema50(index) {
-    return index;
+  trackByFunctionema50(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionema26(index) {
-    return index;
+  trackByFunctionema26(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionema100(index) {
-    return index;
+  trackByFunctionema100(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionema200(index) {
-    return index;
+  trackByFunctionema200(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionsma30(index) {
-    return index;
+  trackByFunctionsma30(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionsma50(index) {
-    return index;
+  trackByFunctionsma50(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionsma100(index) {
-    return index;
+  trackByFunctionsma100(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionsma200(index) {
-    return index;
+  trackByFunctionsma200(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionmacd1(index) {
-    return index;
+  trackByFunctionmacd1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionrsi1(index) {
-    return index;
+  trackByFunctionrsi1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionmfi1(index) {
-    return index;
+  trackByFunctionmfi1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionstockpcr(index) {
-    return index;
+  trackByFunctionstockpcr(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionstockdetails1(index) {
-    return index;
+  trackByFunctionstockdetails1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionrbsscore(index) {
-    return index;
+  trackByFunctionrbsscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiondscore(index) {
-    return index;
+  trackByFunctiondscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionkvscore(index) {
-    return index;
+  trackByFunctionkvscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionomrscore(index) {
-    return index;
+  trackByFunctionomrscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiondealmsg(index) {
-    return index;
+  trackByFunctiondealmsg(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionmscore(index) {
-    return index;
+  trackByFunctionmscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionvolscore(index) {
-    return index;
+  trackByFunctionvolscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionppscore(index) {
-    return index;
+  trackByFunctionppscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionqscore(index) {
-    return index;
+  trackByFunctionqscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiongrowthscore(index) {
-    return index;
+  trackByFunctiongrowthscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiondivscore(index) {
-    return index;
+  trackByFunctiondivscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionfscore(index) {
-    return index;
+  trackByFunctionfscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiontechscore(index) {
-    return index;
+  trackByFunctiontechscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiondealsmsg(index) {
-    return index;
+  trackByFunctiondealsmsg(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionfnomsg1(index) {
-    return index;
+  trackByFunctionfnomsg1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionshareholdingmsg(index) {
-    return index;
+  trackByFunctionshareholdingmsg(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionmaxpain(index) {
-    return index;
+  trackByFunctionmaxpain(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionvscore(index) {
-    return index;
+  trackByFunctionvscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionhealthscore(index) {
-    return index;
+  trackByFunctionhealthscore(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionsectorstockdetails1(index) {
-    return index;
+  trackByFunctionsectorstockdetails1(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionstocksentiments(index) {
-    return index;
+  trackByFunctionstocksentiments(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctionstockcrossover(index) {
-    return index;
+  trackByFunctionstockcrossover(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiontlindexparam(index) {
-    return index;
+  trackByFunctiontlindexparam(index: number, item: any): any {
+    return item.id; 
   }
-  trackByFunctiontlindexparamemasma(index) {
-    return index;
+  trackByFunctiontlindexparamemasma(index: number, item: any): any {
+    return item.id; 
   }
   getshare1w(eqsymbol) {
     ////////////////Nifty 1 Week/////////////////////////////
@@ -2499,7 +2468,7 @@ export class ShareComponent implements OnInit {
   }
   async getmcforecast(mcsymbol) {
     try {
-      const response = await fetch(" https://api.moneycontrol.com/mcapi/v1/stock/estimates/price-forecast?scId=" + this.mcsymbol + "&ex=N&deviceType=W", {
+      const response = await fetch("https://api.moneycontrol.com/mcapi/v1/stock/estimates/price-forecast?scId=" + this.mcsymbol + "&ex=N&deviceType=W", {
         method: 'GET',
         headers: {
         }
@@ -2516,7 +2485,7 @@ export class ShareComponent implements OnInit {
   }
   async getntstockdetails(eqsymbol) {
     // 
-    this.dataApi.getntstockdetails(eqsymbol).subscribe(data5 => {
+    this.dataApi.getNtStockDetails(eqsymbol).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -2549,7 +2518,7 @@ export class ShareComponent implements OnInit {
     )
   }
   async getntstockpcrdetails(eqsymbol) {
-    this.dataApi.getntstockpcrdetails(eqsymbol).subscribe(data5 => {
+    this.dataApi.getNtStockPcrDetails(eqsymbol).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -2560,11 +2529,11 @@ export class ShareComponent implements OnInit {
     })
   }
   gettrendlyne3fetch(tlid, eqsymbol, tlname) {
-    this.dataApi.gettrendlyne3fetch(this.tlid, this.eqsymbol, this.tlname).subscribe(data5 => {
+    this.dataApi.getTrendlyne3Fetch(this.tlid, this.eqsymbol, this.tlname).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-       console.log(nestedItems)
+      //  console.log(nestedItems)
       
        this.reln50=nestedItems[0].body['relp_nifty50_qtrChangeP'].value
        this.relsector=nestedItems[0].body['relp_sector_qtrChangeP'].value
@@ -2809,7 +2778,7 @@ export class ShareComponent implements OnInit {
     })
   }
   gettrendlynestocks2(tlid) {
-    this.dataApi.gettrendlyne2fetch(this.tlid).subscribe(data5 => {
+    this.dataApi.getTrendlyne2Fetch(this.tlid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });

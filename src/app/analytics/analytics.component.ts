@@ -51,7 +51,7 @@ export class AnalyticsComponent implements OnInit {
     await Promise.all([
       this.stockList = stocks.default.Data,
      
-      //  this.gettlscreener(this.screenercode),
+      //  this.getTlScreeners(this.screenercode),
       this.getntvolume1()
     ])
     { setInterval(() => { this.getntvolume1() }, 60000); }
@@ -81,7 +81,7 @@ export class AnalyticsComponent implements OnInit {
   displayMaximizable5: boolean;
   showMaximizableDialog5() {
     this.displayMaximizable5 = true;
-    this.getttvolume()
+    this.getTtVolume()
   }
   displayMaximizable6: boolean;
   showMaximizableDialog6() {
@@ -95,7 +95,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async gettldvm() {
     this.screenercode = '9818'
-    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const data5 = await this.dataApi.getTlScreeners(this.screenercode).toPromise();
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
@@ -255,9 +255,9 @@ export class AnalyticsComponent implements OnInit {
     }
   }
  
-  async getttvolume() {
+  async getTtVolume() {
     try {
-      const data5 = await this.dataApi.getttvolume().toPromise(); // convert Observable to Promise
+      const data5 = await this.dataApi.getTtVolume().toPromise(); // convert Observable to Promise
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -407,7 +407,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async gettlscreener(screenercode) {
     this.screenercode = '208626';
-    this.dataApi.gettlscreeners(this.screenercode).subscribe(data5 => {
+    this.dataApi.getTlScreeners(this.screenercode).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -416,7 +416,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async getmcinsightreadshortcovering() {
     this.screenercode = '208625'
-    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const data5 = await this.dataApi.getTlScreeners(this.screenercode).toPromise();
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
@@ -566,7 +566,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async getmcinsightreadlongbuildup() {
     this.screenercode = '208626'
-    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const data5 = await this.dataApi.getTlScreeners(this.screenercode).toPromise();
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
@@ -716,7 +716,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async getmcinsightreadshortbuildup() {
     this.screenercode = '208631'
-    const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+    const data5 = await this.dataApi.getTlScreeners(this.screenercode).toPromise();
     const nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
@@ -866,7 +866,7 @@ export class AnalyticsComponent implements OnInit {
   }
   // async getmcinsightreadlongunwinding() {
   //   this.screenercode = '208631'
-  //   const data5 = await this.dataApi.gettlscreeners(this.screenercode).toPromise();
+  //   const data5 = await this.dataApi.getTlScreenerss(this.screenercode).toPromise();
   //   const nestedItems = Object.keys(data5).map(key => {
   //     return data5[key];
   //   });
@@ -1025,7 +1025,7 @@ export class AnalyticsComponent implements OnInit {
   }
   async getntvolumeread() {
     try {
-      const data5 = await this.dataApi.getntvolumeread().toPromise(); // convert Observable to Promise
+      const data5 = await this.dataApi.getNtVolumeRead().toPromise(); // convert Observable to Promise
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
