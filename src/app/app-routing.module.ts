@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
   { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) },
   { path: 'Insights', loadChildren: () => import('./Insights/Insights.module').then(m => m.InsightsModule) },
+  { path: 'charts', loadChildren: () => import('./syncfusion-shared-chart/syncfusion-shared-chart.module').then(m => m.SyncfusionSharedChartModule) },
   
 
 ];
