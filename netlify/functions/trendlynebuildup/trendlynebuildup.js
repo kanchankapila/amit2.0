@@ -55,7 +55,7 @@ const handler = async function (event) {
             "sec-fetch-site": "same-origin",
             "x-requested-with": "XMLHttpRequest",
             "cookie": `_gid=GA1.2.1330229069.1671722517; g_state={\"i_l\":0}; csrftoken=${process.env.csrf}; .trendlyne=${process.env.trnd}; _gat=1; _ga_7F29Q8ZGH0=GS1.1.1671722518.6.1.1671722626.0.0.0; AWSALB=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; AWSALBCORS=7RplLmOAQ47mXZ/TMrgzOcUsq1dWrX5lk93GPzw7lpnPfQHeKd+rHhAzYOVPnDtcvYSu3ZtvVl7BSruOVfjlTjZn+Qbn8uvgIOzQ1h4mE+yUA0aF9Wq5Bk4LLsj+; _ga=GA1.2.521023439.1671467978`,
-            "Referer": `https://trendlyne.com/futures-options/derivative/buildup-15-minutes/${formattedDate}-near/${tlid}/`,
+            "Referer": `https://trendlyne.com/`,
             "Referrer-Policy": "strict-origin-when-cross-origin"
           }
         });
