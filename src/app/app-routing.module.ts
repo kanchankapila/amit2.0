@@ -26,7 +26,7 @@ const routes: Routes = [
     data: { preload: false }  // Defer preloading
   },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
-  { path: 'share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
+  { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
   { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
   { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) },
