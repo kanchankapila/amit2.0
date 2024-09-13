@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
   { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) },
-  { path: 'insights', loadChildren: () => import('./insights/insights.module').then(m => m.InsightsModule) },
+  { path: 'insights', loadChildren: () => import('./Insights/Insights.module').then(m => m.InsightsModule) },
   { path: 'charts', loadChildren: () => import('./syncfusion-shared-chart/syncfusion-shared-chart.module').then(m => m.SyncfusionSharedChartModule) },
   { path: 'ng2charts', loadChildren: () => import('./ng2-shared-chart/ng2-shared-chart.module').then(m => m.Ng2SharedChartModule) },
   { path: 'ngapex', loadChildren: () => import('./apexcharts-shared-module/apexcharts-shared-module.module').then(m => m.ApexchartsSharedModuleModule) },
