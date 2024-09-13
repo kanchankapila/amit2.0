@@ -9,13 +9,12 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MatCardModule } from '@angular/material/card';
 import { CardModule } from 'primeng/card';
 import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
-import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxechartssharedModule } from '../ngxechartsshared/ngxechartsshared.module';
 import { ApexchartsSharedModuleModule } from '../apexcharts-shared-module/apexcharts-shared-module.module'
 import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusion-shared-chart.module';
 // import { StockChartAllModule,AccumulationChartAllModule, RangeNavigatorAllModule, ChartAllModule } from '@syncfusion/ej2-angular-charts';
@@ -31,9 +30,8 @@ import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusi
   ],
   imports: [
     CommonModule,
-    
     ShareRoutingModule,
-   
+    NgxechartssharedModule,
     RadioButtonModule, 
     MatCardModule,
     DialogModule,
@@ -44,17 +42,12 @@ import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusi
     MatButtonModule,
     Ng2SharedChartModule,
     ButtonModule,
-    HttpClientModule,
     SidebarModule,
     Ng2SharedChartModule,
     TabViewModule,
     ApexchartsSharedModuleModule,
-    SyncfusionSharedChartModule,
-    HttpClientJsonpModule,
-    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
-    
-   
-  ],
+    SyncfusionSharedChartModule
+   ],
   schemas: [],
   providers: [DatePipe]
  

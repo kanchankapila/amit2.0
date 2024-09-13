@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'charts', loadChildren: () => import('./syncfusion-shared-chart/syncfusion-shared-chart.module').then(m => m.SyncfusionSharedChartModule) },
   { path: 'ng2charts', loadChildren: () => import('./ng2-shared-chart/ng2-shared-chart.module').then(m => m.Ng2SharedChartModule)},
   { path: 'ngapex', loadChildren: () => import('./apexcharts-shared-module/apexcharts-shared-module.module').then(m => m.ApexchartsSharedModuleModule)},
+  { path: 'ngxecharts', loadChildren: () => import('./ngxechartsshared/ngxechartsshared.module').then(m => m.NgxechartssharedModule)},
   
 
 ];
