@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NiftyRoutingModule } from './nifty-routing.module';
 import { NiftyComponent } from './nifty.component';
 import { MatCardModule } from '@angular/material/card';
-import { BaseChartDirective } from 'ng2-charts';
+import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
-// import { ChartModule as SyncfusionChartModule,DateTimeService,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
+
 import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusion-shared-chart.module';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
@@ -21,18 +21,15 @@ import {RadioButtonModule} from 'primeng/radiobutton';
   ],
   imports: [
     CommonModule,
-   
-     
-    
     NiftyRoutingModule,
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
-    BaseChartDirective,
     TabViewModule,
     ChartModule,
     RadioButtonModule,
     FormsModule,
+    Ng2SharedChartModule,
     SyncfusionSharedChartModule
    
 

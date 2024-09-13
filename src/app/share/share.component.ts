@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import Chart from 'chart.js/auto';
 import { ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
-import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from 'ng-apexcharts';
 type ApexXAxis = {
   type?: "category" | "datetime" | "numeric";
   categories?: any;
