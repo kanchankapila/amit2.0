@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
+import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
@@ -27,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
     }),
   ],
   providers: [
-    { provide: Window, useValue: window },
+    { provide: Window, useValue: window },CustomPreloadingStrategy
   ],
   bootstrap: [AppComponent]
 })
