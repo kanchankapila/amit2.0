@@ -8,9 +8,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
+
 import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusion-shared-chart.module';
-import { FormsModule } from '@angular/forms';
-import { RadioButtonModule } from 'primeng/radiobutton';
+import {FormsModule} from '@angular/forms';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     FormsModule,
     Ng2SharedChartModule,
     SyncfusionSharedChartModule
-   ],
+   
+
+  ],
   providers:[
      
   ]

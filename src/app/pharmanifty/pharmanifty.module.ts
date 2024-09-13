@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SyncfusionSharedChartModule } from '../syncfusion-shared-chart/syncfusion-shared-chart.module';
+import { ChartModule as SyncfusionChartModule , AccumulationChartModule, DateTimeService,DateTimeCategoryService,RangeNavigatorModule,MultiColoredLineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { PharmaniftyRoutingModule } from './pharmanifty-routing.module';
 import { PharmaniftyComponent } from './pharmanifty.component';
 import { MatCardModule } from '@angular/material/card';
-import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
+import { BaseChartDirective } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
@@ -23,14 +23,14 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    SyncfusionSharedChartModule,
+    BaseChartDirective,
     TabViewModule,
     ChartModule,
     RadioButtonModule,
-    Ng2SharedChartModule,
-    ChartModule
+    SyncfusionChartModule,
+    ChartModule, AccumulationChartModule, RangeNavigatorModule
 
   ],
-  providers:[]
+  providers:[MultiColoredLineSeriesService,DateTimeCategoryService,DateTimeService]
 })
 export class PharmaniftyModule { }
