@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-import { BaseChartDirective } from 'ng2-charts';
+import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
 
 
 const routes : Routes = [
@@ -28,7 +28,7 @@ const routes : Routes = [
     DropdownModule,
     FormsModule,
     CommonModule,
-    BaseChartDirective,
+    Ng2SharedChartModule,
     HttpClientModule,
     ButtonModule,
     BrowserModule,
