@@ -1,15 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PeriodSelectorService,RangeTooltipService,DateTimeCategoryService, DateTimeService,MultiColoredLineSeriesService,ChartModule, LineSeriesService, CategoryService } from '@syncfusion/ej2-angular-charts';
+import { StockChartAllModule,AccumulationChartAllModule, RangeNavigatorAllModule, ChartAllModule,PeriodSelectorService,RangeTooltipService,DateTimeCategoryService, DateTimeService,MultiColoredLineSeriesService,ChartModule, LineSeriesService, CategoryService } from '@syncfusion/ej2-angular-charts';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ChartModule // Syncfusion ChartModule for creating charts
+    ChartModule,
+    StockChartAllModule,
+    AccumulationChartAllModule, 
+    RangeNavigatorAllModule,
+    ChartAllModule// Syncfusion ChartModule for creating charts
   ],
   exports: [
-    ChartModule // Re-exporting so other modules can use it
+    ChartModule,
+    StockChartAllModule,
+    AccumulationChartAllModule, 
+    RangeNavigatorAllModule,
+    ChartAllModule // Re-exporting so other modules can use it
   ],
   providers: [
     LineSeriesService,  // Registering necessary services for charts
