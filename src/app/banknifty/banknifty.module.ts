@@ -6,9 +6,9 @@ import { BankniftyComponent } from './banknifty.component';
 import {FormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
 import { MatCardModule } from '@angular/material/card';
-import { BaseChartDirective } from 'ng2-charts';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
@@ -23,10 +23,9 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     CommonModule,
     BankniftyRoutingModule,
     FlexLayoutModule,
-    // NgbModule,
     MatCardModule,
     MatButtonModule,
-    BaseChartDirective,
+    Ng2SharedChartModule,
     TabViewModule,
     ChartModule,
     MatCheckboxModule,
