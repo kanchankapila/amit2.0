@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
+import { BaseChartDirective } from 'ng2-charts';
 
 
 const routes : Routes = [
@@ -27,8 +28,8 @@ const routes : Routes = [
     DropdownModule,
     FormsModule,
     CommonModule,
-    Ng2SharedChartModule,
-  
+    BaseChartDirective,
+    HttpClientModule,
     ButtonModule,
     BrowserModule,
     RouterModule.forChild(routes)
