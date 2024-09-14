@@ -3,17 +3,17 @@
 /*-------------------------------------------------------------------*/
 /* === Import Bootstrap functions and variables === */
 
-@import "../../../node_modules/bootstrap/scss/functions";
-@import "../../../node_modules/bootstrap/scss/variables";
+// @import "../../../node_modules/bootstrap/scss/functions";
+// @import "../../../node_modules/bootstrap/scss/variables";
 
 /*-------------------------------------------------------------------*/
 /* === Import template variables === */
-@import './variables';
+// @import './variables';
 
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-@import "../../../node_modules/compass-mixins/lib/compass";
-@import "../../../node_modules/compass-mixins/lib/animate";
+// @import "../../../node_modules/compass-mixins/lib/compass";
+// @import "../../../node_modules/compass-mixins/lib/animate";
 
 /*-------------------------------------------------------------------*/
 /* === Boostrap Main SCSS === */
@@ -24,26 +24,26 @@
 // @import "./mixins/misc";
 // @import "./mixins/animation";
 
-@import "./mixins/cards";
+// @import "./mixins/cards";
 
-@import "./mixins/text";
+// @import "./mixins/text";
 
-@import "./functions";
+// @import "./functions";
 
-@import "./utilities";
+// @import "./utilities";
 
-@import "./mixins/buttons";
+// @import "./mixins/buttons";
 /*-------------------------------------------------------------------*/
 /* === Components === */
 
 // @import "./components/bootstrap-progress";
 
-@import "./components/cards";
+// @import "./components/cards";
 
 
 
 
 // @import './navbar';
 // @import './sidebar';
-@import './layouts';
-@import './vertical-wrapper';
+// @import './layouts';
+// @import './vertical-wrapper';
