@@ -1314,7 +1314,7 @@ header="Insights"
   <div class="control-section">
     <div>
       <div class="table-responsive">
-        <ejs-stockchart
+        <!-- <ejs-stockchart
           id="stockChartDefault"
           [enablePeriodSelector]="enable"
           [chartArea]="chartArea"
@@ -1337,14 +1337,14 @@ header="Insights"
             >
             </e-stockchart-series>
           </e-stockchart-series-collection>
-        </ejs-stockchart>
+        </ejs-stockchart> -->
       </div>
     </div>
   </div>
   <div class="control-section">
     <div>
       <div class="table-responsive">
-        <ejs-stockchart
+        <!-- <ejs-stockchart
           id="StockChartCandle"
           [chartArea]="chartArea"
           [primaryXAxis]="primaryXAxis1"
@@ -1393,37 +1393,55 @@ header="Insights"
             >
             </e-stockchart-series>
           </e-stockchart-series-collection>
-        </ejs-stockchart>
+        </ejs-stockchart> -->
       </div>
     </div>
   </div>
   <p-tabView [scrollable]="true">
     <p-tabPanel header="Today">
-      <div class="Content card">
-        <ejs-chart
-          *ngIf="dataValues"
-          style="display: block"
-          id="chart1"
-          [title]="title"
-          [primaryXAxis]="primaryXAxis2"
-          [primaryYAxis]="primaryYAxis2"
-          [tooltip]="tooltip"
-          [chartArea]="chartArea"
+      <ejs-chart
+      style="display: block; height: 500px;"
+      id="chart1"
+      [title]="title"
+      [primaryXAxis]="primaryXAxis2"
+      [primaryYAxis]="primaryYAxis2"
+      [tooltip]="tooltip"
+      [chartArea]="chartArea"
+    >
+      <e-series-collection>
+        <!-- Stock Data Series (Primary Y Axis) -->
+        <e-series
+          [dataSource]="dataValues"
+          type="MultiColoredLine"
+          xName="XValue"
+          yName="YValue"
+          name="Stock Time"
+          width="1.5"
+          pointColorMapping="color"
         >
-          <e-series-collection>
-            <e-series
-              [dataSource]="dataValues"
-              type="MultiColoredLine"
-              xName="XValue"
-              yName="YValue"
-              name="Time"
-              width="0.5"
-              pointColorMapping="color"
-            >
-            </e-series>
-          </e-series-collection>
-        </ejs-chart>
-      </div>
+        </e-series>
+    
+        <!-- Nifty Data Series (Secondary Y Axis) -->
+        <e-series
+          [dataSource]="stocktodayniftydataValues"
+          type="MultiColoredLine"
+          xName="XValue"
+          yName="YValue"
+          name="Nifty Time"
+          width="1.5"
+          yAxisName="secondaryYAxis" 
+          pointColorMapping="color"
+        >
+        </e-series>
+      </e-series-collection>
+    
+      <!-- Define Secondary Y Axis (parallel to Primary Y Axis) -->
+      <e-axes>
+        <e-axis [name]="'secondaryYAxis'" [title]="'Nifty Price'">
+        </e-axis>
+      </e-axes>
+    </ejs-chart>
+    
     </p-tabPanel>
     <p-tabPanel header="1 Week">
       <div class="col-lg-15 col-xs-5 grid-margin stretch-card">

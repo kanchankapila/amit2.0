@@ -41,7 +41,7 @@
     "@mdi/font": "^7.4.47",
     "@netlify/functions": "^2.8.1",
     "@popperjs/core": "^2.11.8",
-    "@syncfusion/ej2-angular-charts": "^26.1.40",
+    "@syncfusion/ej2-angular-charts": "^26.2.14",
     "@types/chart.js": "^2.9.41",
     "@types/node": "^20.14.10",
     "apexcharts": "^3.50.0",

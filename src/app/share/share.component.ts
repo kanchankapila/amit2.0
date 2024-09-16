@@ -490,6 +490,14 @@ export class ShareComponent implements OnInit {
   public primaryYAxispv: Object;
   public primaryXAxis2: Object;
   public primaryYAxis2: Object;
+   public secondaryYAxis:Object;
+  public stocktodaydataValues: Object[] = [];
+  public stocktodayniftydataValues: Object[] = [];
+  public stocktodaydataniftyValues: Object[] = [];
+  public stockhcdatetoday: Array<any> = [];
+  public stockhcdateniftytoday: Array<any> = [];
+  public primaryXAxisstocktoday: Object;
+  public primaryYAxisstocktoday: Object;
   public legendSettingssh: Object;
   public tooltipsh: Object;
   public dataLabelsh: Object;
@@ -1920,70 +1928,239 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
   }
-  getstocktoday1(mcsymbol) {
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
-      const nestedItems1 = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pclose = nestedItems1[2].pclose;
-      this.close = nestedItems1[2].close;
-      this.high = nestedItems1[2].high;
-      this.low = nestedItems1[2].low;
-      this.open = nestedItems1[2].open;
+//   getstocktoday1(mcsymbol) {
+//     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
+//       const nestedItems1 = Object.keys(data5).map(key => {
+//         return data5[key];
+//       });
+//       this.pclose = nestedItems1[2].pclose;
+//       this.close = nestedItems1[2].close;
+//       this.high = nestedItems1[2].high;
+//       this.low = nestedItems1[2].low;
+//       this.open = nestedItems1[2].open;
 
-      this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
-        const nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-        this.dataValues.length = 0;
-        this.stockhcdate1.length = 0;
-        if (nestedItems[6][0].hasOwnProperty('value')) {
-          for (const val in nestedItems[6]) {
+//       this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
+//         const nestedItems = Object.keys(data5).map(key => {
+//           return data5[key];
+//         });
+//         this.dataValues.length = 0;
+//         this.stockhcdate1.length = 0;
+//         if (nestedItems[6][0].hasOwnProperty('value')) {
+//           for (const val in nestedItems[6]) {
             
-           
+//             const timeUTC = nestedItems[6][val]['time'] * 1000;
+//           const timeIST = new Date(timeUTC - (5.5 * 60 * 60 * 1000)); // Add 5 hours 30 minutes for IST
+//           this.stockhcdate1.push({ x: timeIST, y: nestedItems[6][val]['value'] });
 
-            this.stockhcdate1.push({ x: (((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()))), y: (nestedItems[6][val]["value"]) })
-          }
-        } else if (nestedItems[5][0].hasOwnProperty('value')) {
+//             // this.stockhcdate1.push({ x: (((new Date(nestedItems[6][val]['time'] * 1000).toUTCString()))), y: (nestedItems[6][val]["value"]) })
+//           }
+//         } else if (nestedItems[5][0].hasOwnProperty('value')) {
         
-          for (const val in nestedItems[5]) {
+//           for (const val in nestedItems[5]) {
             
-            this.stockhcdate1.push({ x: (new Date(nestedItems[5][val]["time"] * 1000).toUTCString()), y: (nestedItems[5][val]["value"]) }) 
-          }
-        } 
-        this.primaryYAxis2 = {
-          rangePadding: 'None',
-          // minimum: 12000,
-          // maximum: 13000,
-          title: 'Price',
-          lineStyle: { width: 1 },
-          majorTickLines: { width: 0 },
-          minorTickLines: { width: 0 }
-        };
-        this.primaryXAxis2 = {
-          valueType: 'DateTime',
-          // labelFormat: 'hms',
-          intervalType: 'Minutes',
-          edgeLabelPlacement: 'Shift',
-          majorGridLines: { width: 0 }
-        };
-        this.stockhcdate1.map((value: number, index: number) => {
-          if ((Number(value['y'])) < (this.pclose)) {
-            this.dataValues.push({
-              XValue: (value['x']), YValue: Number(value['y']),
-              color: ['red']
-            });
-          }
-          else if (Number(value['y']) > (this.pclose)) {
-            this.dataValues.push({
-              XValue: ((value['x'])), YValue: Number(value['y']),
-              color: ['green']
-            });
-          }
-        });
+//             // this.stockhcdate1.push({ x: (new Date(nestedItems[5][val]["time"] * 1000).toUTCString()), y: (nestedItems[5][val]["value"]) }) 
+//             const timeUTC = nestedItems[5][val]['time'] * 1000;
+//             const timeIST = new Date(timeUTC - (5.5 * 60 * 60 * 1000)); // Add 5 hours 30 minutes for IST
+//             this.stockhcdate1.push({ x: timeIST, y: nestedItems[5][val]['value'] });
+//           }
+//         } 
+//         console.log( this.stockhcdate1)
+//         this.primaryYAxis2 = {
+//           rangePadding: 'None',
+//           // minimum: 12000,
+//           // maximum: 13000,
+//           title: 'Price',
+//           lineStyle: { width: 1 },
+//           majorTickLines: { width: 0 },
+//           minorTickLines: { width: 0 }
+//         };
+//         this.primaryXAxis2 = {
+//           valueType: 'DateTime',
+//           // labelFormat: 'hms',
+//           intervalType: 'Minutes',
+//           edgeLabelPlacement: 'Shift',
+//           majorGridLines: { width: 0 }
+//         };
+//         this.stockhcdate1.map((value: number, index: number) => {
+//           if ((Number(value['y'])) < (this.pclose)) {
+//             this.dataValues.push({
+//               XValue: (value['x']), YValue: Number(value['y']),
+//               color: ['red']
+//             });
+//           }
+//           else if (Number(value['y']) > (this.pclose)) {
+//             this.dataValues.push({
+//               XValue: ((value['x'])), YValue: Number(value['y']),
+//               color: ['green']
+//             });
+//           }
+//         });
+//       });
+//     })
+//     //////////////////////To get Nifty chart////////////////////////////////////
+// this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
+//   const nestedItems = Object.keys(data5).map(key => {
+//     return data5[key];
+//   });
+//   this.stocktodayniftydataValues.length = 0;
+//   this.stockhcdateniftytoday.length = 0;
+  
+
+//     for (const val in nestedItems[1]['values']) {
+//       const timeString =nestedItems[1]['values'][val]['_time']
+//       const [hours, minutes] = timeString.split(":").map(Number);
+
+// // Create a new Date object and set the time
+// const date = new Date();
+// date.setHours(hours, minutes, 0, 0); // Setting hours, minutes, seconds, and milliseconds
+
+
+     
+//       this.stockhcdateniftytoday.push({ x: date, y: nestedItems[1]['values'][val]['_value'] });
+    
+//   }
+//   console.log(this.stockhcdateniftytoday)
+   
+//    this.secondaryYAxis  = {
+//     rangePadding: 'None',
+//     title: 'Price',
+//     lineStyle: { width: 1 },
+//     majorTickLines: { width: 0 },
+//     minorTickLines: { width: 0 }
+//   };
+//   this.primaryXAxisstocktoday = {
+//     valueType: 'DateTime',
+//     intervalType: 'Minutes',
+//     edgeLabelPlacement: 'Shift',
+//     majorGridLines: { width: 0 }
+//   };
+//   this.stockhcdateniftytoday.map((value: number, index: number) => {
+//     if ((Number(value['y'])) < (this.pclose)) {
+//       this.stocktodayniftydataValues.push({
+//         XValue: (value['x']), YValue: Number(value['y']),
+//         color: ['red']
+//       });
+//     }
+//     else if (Number(value['y']) > (this.pclose)) {
+//       this.stocktodayniftydataValues.push({
+//         XValue: ((value['x'])), YValue: Number(value['y']),
+//         color: ['green']
+//       });
+//     }
+  
+//   }
+
+//   )})
+// }
+getstocktoday1(mcsymbol) {
+  // Fetch stock data
+  this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/' + this.mcsymbol + '?field=RSI').subscribe(data5 => {
+    const nestedItems1 = Object.keys(data5).map(key => data5[key]);
+    this.pclose = nestedItems1[2].pclose;
+    this.close = nestedItems1[2].close;
+    this.high = nestedItems1[2].high;
+    this.low = nestedItems1[2].low;
+    this.open = nestedItems1[2].open;
+
+    // Fetch stock chart data
+    this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      this.dataValues.length = 0;
+      this.stockhcdate1.length = 0;
+      
+      if (nestedItems[6][0].hasOwnProperty('value')) {
+        for (const val in nestedItems[6]) {
+          const timeUTC = nestedItems[6][val]['time'] * 1000;
+          const timeIST = new Date(timeUTC - (5.5 * 60 * 60 * 1000)); // IST time adjustment
+          this.stockhcdate1.push({ x: timeIST, y: nestedItems[6][val]['value'] });
+        }
+      } else if (nestedItems[5][0].hasOwnProperty('value')) {
+        for (const val in nestedItems[5]) {
+          const timeUTC = nestedItems[5][val]['time'] * 1000;
+          const timeIST = new Date(timeUTC - (5.5 * 60 * 60 * 1000)); // IST time adjustment
+          this.stockhcdate1.push({ x: timeIST, y: nestedItems[5][val]['value'] });
+        }
+      }
+console.log( this.stockhcdate1)
+      this.primaryYAxis2 = {
+        rangePadding: 'None',
+        title: 'Stock Price',
+        lineStyle: { width: 1 },
+        majorTickLines: { width: 0 },
+        minorTickLines: { width: 0 }
+      };
+
+      this.primaryXAxis2 = {
+        valueType: 'DateTime',
+        intervalType: 'Minutes',
+        edgeLabelPlacement: 'Shift',
+        majorGridLines: { width: 0 }
+      };
+
+      this.stockhcdate1.map((value: number, index: number) => {
+        if (Number(value['y']) < this.pclose) {
+          this.dataValues.push({
+            XValue: value['x'], YValue: Number(value['y']),
+            color: ['red']
+          });
+        } else {
+          this.dataValues.push({
+            XValue: value['x'], YValue: Number(value['y']),
+            color: ['green']
+          });
+        }
       });
-    })
-  }
+    });
+  });
+
+  //////////////////////To get Nifty chart////////////////////////////////////
+  this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
+    const nestedItems = Object.keys(data5).map(key => data5[key]);
+    this.stocktodayniftydataValues.length = 0;
+    this.stockhcdateniftytoday.length = 0;
+    
+    for (const val in nestedItems[1]['values']) {
+      const timeString = nestedItems[1]['values'][val]['_time'];
+      const [hours, minutes] = timeString.split(":").map(Number);
+      const date1 = new Date();
+      
+      date1.setHours(hours, minutes, 0, 0); // Setting time for Nifty data
+
+      this.stockhcdateniftytoday.push({ x: date1, y: nestedItems[1]['values'][val]['_value'] });
+    }
+    console.log( this.stockhcdateniftytoday)
+    this.secondaryYAxis = {
+      rangePadding: 'None',
+      title: 'Nifty Price',
+      lineStyle: { width: 1 },
+      majorTickLines: { width: 0 },
+      minorTickLines: { width: 0 },
+      opposedPosition: true  // Position secondary axis on the opposite side
+    };
+
+    this.primaryXAxisstocktoday = {
+      valueType: 'DateTime',
+      intervalType: 'Minutes',
+      edgeLabelPlacement: 'Shift',
+      majorGridLines: { width: 0 }
+    };
+
+    this.stockhcdateniftytoday.map((value: number, index: number) => {
+      if (Number(value['y']) < this.pclose) {
+        this.stocktodayniftydataValues.push({
+          XValue: value['x'], YValue: Number(value['y']),
+          color: ['red']
+        });
+      } else {
+        this.stocktodayniftydataValues.push({
+          XValue: value['x'], YValue: Number(value['y']),
+          color: ['green']
+        });
+      }
+    });
+  });
+}
+
   async getstocktoday(mcsymbol, eqsymbol) {
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
