@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { DatePipe } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
@@ -24,14 +24,14 @@ const routes : Routes = [
   imports: [
     CommonModule,
     SidebarModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     DropdownModule,
     FormsModule,
     CommonModule,
     Ng2SharedChartModule,
     HttpClientModule,
     ButtonModule,
-    BrowserModule,
+   
     RouterModule.forChild(routes)
    
   ],

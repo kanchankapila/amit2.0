@@ -1,5 +1,6 @@
 
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomPreloadingStrategy } from './custom-preloading-strategy';  // Import your custom strategy
 
@@ -8,17 +9,17 @@ const routes: Routes = [
   { 
     path: 'homepage', 
     loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule),
-    data: { preload: true }  // Preload important routes
+    data: { preload: false }  // Preload important routes
   },
   { 
     path: 'shared', 
     loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule),
-    data: { preload: true }  // Preload important routes
+    data: { preload: false }  // Preload important routes
   },
   { 
     path: 'nifty', 
     loadChildren: () => import('./nifty/nifty.module').then(m => m.NiftyModule),
-    data: { preload: true }  // Preload important routes
+    data: { preload: false }  // Preload important routes
   },
   { 
     path: 'banknifty', 
@@ -39,7 +40,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingStrategy })  // Use custom preloading strategy
+    CommonModule, RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingStrategy })  // Use custom preloading strategy
   ],
   exports: [RouterModule],
 })
