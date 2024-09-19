@@ -1,283 +1,20 @@
-// .scene {
-//   width: 900px;
-//   display: flex;
-//   perspective: 800px;
-//   .card {
-//     position: relative;
-//     width: 125px;
-//     height: 100px;
-//     transition: 1s ease-in-out;
-//     transform-style: preserve-3d;
-//     &:hover {
-//       transform: rotateY(0.5turn);
-//     }
-//     .card-wrapper {
-//       text-align: center;
-//     }
-//     .card__face {
-//       position: absolute;
-//       object-fit: cover;
-//       width: 100%;
-//       height: 100%;
-//       border-radius: 3px;
-//       backface-visibility: hidden;
-//       transition: 1s ease-in-out;
-//       &--back {
-//         transform: rotateY(0.5turn);
-//       }
-//     }
-//   }
-// }
-// .card22 {
-//   position: relative;
-//   width: 370px;
-//   height: 300px;
-//   // text-align:center;
-//   // object-fit: cover;
-//   cursor: pointer;
-//   text-size-adjust: inherit;
-//   transition: 1s ease-in-out;
-//   transform-style: preserve-3d;
-//   &:hover {
-//     transform: rotateY(0.5turn);
-//   }
-//   .card22__face {
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     cursor: pointer;
-//     border-radius: 3px;
-//     backface-visibility: hidden;
-//     transition: 1s ease-in-out;
-//     // object-fit: cover;
-//     // -webkit-box-reflect: below 0
-//     // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-//     &--back {
-//       transform: rotateY(0.5turn);
-//     }
-//   }
-// }
-// .scene1 {
-//   width: 900px;
-//   display: flex;
-//   perspective: 800px;
-//   .card {
-//     position: relative;
-//     width: 125px;
-//     height: 55px;
-//     transition: 1s ease-in-out;
-//     transform-style: preserve-3d;
-//     &:hover {
-//       transform: rotateY(0.5turn);
-//     }
-//     .card-wrapper {
-//       text-align: center;
-//     }
-//     .card__face {
-//       position: absolute;
-//       object-fit: cover;
-//       width: 100%;
-//       height: 100%;
-//       border-radius: 3px;
-//       backface-visibility: hidden;
-//       transition: 1s ease-in-out;
-//       &--back {
-//         transform: rotateY(0.5turn);
-//       }
-//     }
-//   }
-// }
-// .card23 {
-//   position: relative;
-//   width: 370px;
-//   height: 400px;
-//   // text-align:center;
-//   // object-fit: cover;
-//   cursor: pointer;
-//   text-size-adjust: inherit;
-//   transition: 1s ease-in-out;
-//   transform-style: preserve-3d;
-//   &:hover {
-//     transform: rotateY(0.5turn);
-//   }
-//   .card23__face {
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     cursor: pointer;
-//     border-radius: 3px;
-//     backface-visibility: hidden;
-//     transition: 1s ease-in-out;
-//     // object-fit: cover;
-//     // -webkit-box-reflect: below 0
-//     // linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-//     &--back {
-//       transform: rotateY(0.5turn);
-//     }
-//   }
-// }
-// .marginbottom {
-//   margin-bottom: 5px;
-//   margin-left: 5px
-// }
-// .text-center {
-//   text-align: center;
-// }
-// :host ::ng-deep .p-button {
-//   margin: 0 .1rem 0 0;
-//   min-width: 15rem;
-// }
-// p {
-//   margin: 0;
-// }
-// .confirmation-content {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-// :host ::ng-deep .p-dialog .p-button {
-//   min-width: 6rem;
-// }
-// :host ::ng-deep button {
-//   margin-right: .25em;
-// }
-// :host ::ng-deep .p-dropdown {
-//   width: 20rem;
-// }
-// .p-component-overlay-enter {
-//   animation: p-component-overlay-enter-animation 150ms forwards;
-// }
-// .p-component-overlay-leave {
-//   animation: p-component-overlay-leave-animation 150ms forwards;
-// }
-// .p-component-overlay {
-//   @keyframes p-component-overlay-enter-animation {
-//     from {
-//       background-color: transparent;
-//     }
-//     to {
-//       background-color: var(--maskbg);
-//     }
-//   }
-//   @keyframes p-component-overlay-leave-animation {
-//     from {
-//       background-color: var(--maskbg);
-//     }
-//     to {
-//       background-color: transparent;
-//     }
-//   }
-// }
-// :host ::ng-deep .card {
-//   width: auto;
-//   height:auto;
-//   color:black;
-//   font-size: xx-small;
-// }
-// .card-section23 {
-//   width: auto;
-//   height: auto;
-// }
-// .InsideContent {
-//   display: flex;
-//   align-items: flex-start;
-// }
-// .InsideContent1 {
-//   display: block;
-// }
+
 .text-green {
   color: green;
 }
-// .abc {
-//   width: 400px;
-//   ;
-//   height: 420px;
-// }
-// .newscard1 {
-//   width: 400px;
-//   height: 250px;
-// }
-// .container {
-//   margin: 10px;
-//   margin-right: 0px;
-// }
+
 .text-red {
   color: red;
 }
 .text-yellow {
   color: yellow;
 }
-// card12 {
-//   width: 1100px;
-//   height: 200px;
-//   margin-right: 10px;
-//   font-size: small;
-// }
-// .cardbear {
-//   display: flex;
-//   width: auto;
-//   font-size: x-small;
-//   margin-bottom: 10px;
-//   margin-top: 10px;
-// }
-// .cardbear1 {
-//   display: flex;
-//   width: auto;
-//   font-size: x-small;
-//   margin-bottom: 10px;
-//   margin-top: 10px;
-// }
-// .cardbear2 {
-//   display: flex;
-//   width: auto;
-//   font-size: x-small;
-//   margin-bottom: 10px;
-//   margin-top: 10px;
-// }
-// @media (min-width: 424px) {
-//   .card__face.card__face--front {
-//     display: flex;
-//     flex-direction: column;
-//   }
-//   .table-responsive {
-//     overflow-x: auto;
-//   }
-//   // #stockChartDefault {
-//   //   display: inline-block !important;
-//   // }
-//   #StockChartCandle e-stockchart-row {
-//     height: 20%;
-//   }
-//   #StockChartCandle e-stockchart-axis {
-//     height: 10%;
-//   }
-// }
-// .card {
-//   position: relative;
-// }
-// .card .canvas-wrapper {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   opacity: 0.3;
-//   z-index: auto;
-// }
-// @media (max-width: 424px) {
-//   .card {
-//     position: relative;
-//   }
-//   .card .canvas-wrapper {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     opacity: 0.3;
-//     z-index: 1;
-//   }
-// }
+
+.containertop p {
+  display: inline-block;
+  margin-right: 15px; /* Adjust spacing between elements */
+  vertical-align: top; /* Align elements at the top */
+}
 
 //cardstock
 /* Basic scene styling */
@@ -302,6 +39,7 @@
   flex-direction: column;
   // justify-content: center;
   // align-items: center;
+ 
 }
 
 /* Glassmorphism effect */
@@ -321,6 +59,26 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   z-index: 1;
+}
+.cardstock__face--front {
+  position: relative;  /* This ensures the sparkline is positioned relative to the card */
+}
+
+.sparkline-background {
+  position: absolute;   /* Position it behind the text */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;           /* Ensure it's behind other elements */
+  pointer-events: none; /* Prevent interaction with the sparkline */
+}
+
+.cardstock__face--front h4,
+.cardstock__face--front h6,
+.cardstock__face--front .center-text {
+  position: relative;   /* Ensure text is on top */
+  z-index: 1;           /* Ensure text is above the sparkline */
 }
 
 /* Ensure back side is hidden until flipped */
@@ -457,6 +215,7 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s ease;
+  
 }
 
 .cardsmaema__face {
@@ -614,13 +373,13 @@
   display: flex;
   justify-content: flex-start;  /* Align items to the left */
   flex-wrap: wrap;
-  padding-left: 10px;  /* Reduce left padding */
+  // padding-left: 10px;  /* Reduce left padding */
   padding-right: 10px; /* Balance right padding */
 
   .scenesmaema, .scenestocktoday {
     flex: 1 1 48%;  /* Cards will take 48% of the container's width */
     max-width: 600px;
-    min-width: 300px;
+    min-width: 400px;
     display: flex;
     justify-content: flex-start;  /* Shift the cards to the left within their section */
     align-items: center;
@@ -640,6 +399,213 @@
   /* Stack the cards on mobile screens */
   @media (max-width: 360px) {
     .scenesmaema, .scenestocktoday {
+      flex: 1 1 100%;  /* Make each card take 100% of the width on smaller screens */
+      max-width: 100%;
+      margin-bottom: 20px;  /* Add space between stacked cards */
+      margin-right: 0;  /* Remove the right margin to reduce gaps on smaller screens */
+    }
+  }
+}
+//Card Volume
+.sceneprice{
+  display: flex;
+  justify-content: flex-start; /* Aligns card to the left */
+  align-items: center;
+  flex-wrap: wrap;
+  perspective: 1000px;
+  
+}
+
+/* Card container with 3D transform */
+.cardprice {
+  width: 550px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.cardprice__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Front face */
+.cardprice__face--front {
+  z-index: 2;
+}
+
+/* Back face */
+.cardprice__face--back {
+  transform: rotateY(180deg);
+}
+
+/* Flip effect */
+.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sceneprice{
+    flex-direction: column;
+    align-items: flex-start; /* Aligns content to the left on smaller screens */
+    padding-left: 0px; /* Optional: Adjusts left padding on smaller screens */
+  }
+
+  .cardprice {
+    width: 100%;
+    height: 400px;
+  }
+}
+
+.text-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.text-item {
+  white-space: nowrap;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .text-item {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-item {
+    font-size: 0.6rem;
+  }
+}
+//For Volume
+.scenevolume {
+  display: flex;
+  justify-content: flex-start; /* Aligns card to the left */
+  align-items: center;
+  flex-wrap: wrap;
+  perspective: 1000px;
+  
+}
+
+/* Card container with 3D transform */
+.cardvolume {
+  width: 5500px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.cardvolume__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Front face */
+.cardvolume__face--front {
+  z-index: 2;
+}
+
+/* Back face */
+.cardvolume__face--back {
+  transform: rotateY(180deg);
+}
+
+/* Flip effect */
+.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scenevolume {
+    flex-direction: column;
+    align-items: flex-start; /* Aligns content to the left on smaller screens */
+    padding-left: 10px; /* Optional: Adjusts left padding on smaller screens */
+  }
+
+  .cardvolume {
+    width: 100%;
+    height: 400px;
+  }
+}
+
+.text-containervolume {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.text-itemvolume {
+  white-space: nowrap;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .text-itemvolume {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-itemvolume {
+    font-size: 0.6rem;
+  }
+}
+
+
+.containerpricevolume {
+  display: flex;
+  justify-content: flex-start;  /* Align items to the left */
+  flex-wrap: wrap;
+  padding-left: 10px;  /* Reduce left padding */
+  padding-right: 10px; /* Balance right padding */
+
+  .sceneprice, .scenevolume {
+    flex: 1 1 48%;  /* Cards will take 48% of the container's width */
+    max-width: 600px;
+    min-width: 400px;
+    display: flex;
+    justify-content: flex-start;  /* Shift the cards to the left within their section */
+    align-items: center;
+    perspective: 1000px;
+    margin-right: 10px;  /* Reduce margin between cards */
+    margin-left: 0;  /* Ensure no extra margin on the left side of the card */
+  }
+
+  .cardprice, .cardvolume {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+  }
+
+  /* Stack the cards on mobile screens */
+  @media (max-width: 360px) {
+    .sceneprice, .scenevolume {
       flex: 1 1 100%;  /* Make each card take 100% of the width on smaller screens */
       max-width: 100%;
       margin-bottom: 20px;  /* Add space between stacked cards */
