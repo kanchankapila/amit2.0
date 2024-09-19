@@ -1480,6 +1480,15 @@ export class ShareComponent implements OnInit {
   trackByFunctionstockindicators(index: number, item: any): any {
     return item.id; 
   }
+  trackByFunctiontlindexparamvolume(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparampriceinsight(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamprice(index: number, item: any): any {
+    return item.id; 
+  }
   
   trackByFunctionneutral(index: number, item: any): any {
     return item.id; 
