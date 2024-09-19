@@ -99,6 +99,9 @@ getNtStock1Yr(eqsymbol: string) {
 getMmData(stockid: string) {
   return this.http.get(`${this.baseurl}/.netlify/functions/mmdata?stockid=${stockid}`);
 }
+getMmValuation(stockid: string) {
+  return this.http.get(`${this.baseurl}/.netlify/functions/mmvaluation?stockid=${stockid}`);
+}
 //Share Component
 getNtStockDetails(eqsymbol: string) {
   return this.http.get(`${this.baseurl}/.netlify/functions/ntstockdetails?eqsymbol=${eqsymbol}`);

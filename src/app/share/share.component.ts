@@ -675,6 +675,7 @@ export class ShareComponent implements OnInit {
       this.getmcstockrealtime(this.mcsymbol),
       this.getshare1m(this.eqsymbol),
       this.getmmdata(this.stockid),
+      this.getmmvaluation(this.stockid),
       this.getshare6m(this.eqsymbol),
       this.getshare1w(this.eqsymbol),
       // this.getntstock1yr(this.eqsymbol)
@@ -1248,6 +1249,14 @@ export class ShareComponent implements OnInit {
   //     //console.log(nestedItems) explore
   //   });
   // }
+  async getmmvaluation(stockid){
+    this.dataApi.getMmValuation(this.stockid).subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    })
+  }
   async getmmdata(stockid) {
     this.dataApi.getMmData(this.stockid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
@@ -1258,20 +1267,16 @@ export class ShareComponent implements OnInit {
       //     return data5[key];
       //   });
       console.log(nestedItems)
-      this.hmsg = (nestedItems[0]['data'].sectPrice_techScore['header_msg'])
+       this.hmsg = (nestedItems[0]['data'].sectPrice_techScore['header_msg'])
       for (const val in nestedItems[0]['data']['sectPrice_indiScale']) {
         if (nestedItems[0]['data']['sectPrice_indiScale'][val].sid == this.stockid) {
-          this.hmsg.push({ text:nestedItems[0]['data'].sectPrice_techScore['header_msg'], text1: nestedItems[0]['data'].sectPrice_techScore['score'], text2: nestedItems[0]['data'].sectPrice_techScore['tech_text'] })
-          // this.score.push({text1:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_clr,text2:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_points,text3:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_text,text4:nestedItems[0]['data']['sectPrice_indiScale'][val].quality_clr, text5: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_rank, text6: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_text})
           this.fscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_points, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_text })
           this.qscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_rank, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_text })
           this.techscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].tech_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].tech_score, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].tech_text })
           this.vscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_rank, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_text })
         }
       }
-      console.log(this.qscore)
-      console.log(this.vscore)
-      console.log(this.techscore)
+   
       this.lineChartDatamacdm.length = 0;
       this.lineChartDatasignalm.length = 0;
       this.lineChartDatapricemacdm.length = 0;

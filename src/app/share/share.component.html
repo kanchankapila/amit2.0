@@ -103,16 +103,17 @@
                 </p>
                 
             </div>
-            <div *ngFor="let tile of pscore; let i = index; trackBy: trackByFunctionpscore" style="font-weight: bold;">
+            
               <!-- Pitrorski Score -->
-            <p [ngClass]="{
+            <p *ngFor="let tile of pscore; let i = index; trackBy: trackByFunctionpscore" style="font-weight: bold;"
+            [ngClass]="{
               'text-green': tile.text1 === 'positive',
               'text-red': tile.text1 === 'negative',
               'text-yellow': tile.text1 === 'neutral'
             }">
             &nbsp;P Score: {{ tile.text2 }}
           </p>
-        </div>
+        
         <div *ngFor="let tile of fscore;let i = index; trackBy: trackByFunctionfscore" style="font-weight: bold;">
             <p [ngClass]="{
                 'text-green': tile.text === 'Green' || tile.text === 'green',
