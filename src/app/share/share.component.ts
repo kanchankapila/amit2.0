@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 // import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
+import { ChangeDetectorRef } from '@angular/core';
+
 import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
@@ -88,7 +90,10 @@ export interface techscoretile { text: string; text1: string; text2: string; }
 export interface vscoretile { text: string; text1: string; text2: string; }
 export interface fscoretile { text: string; text1: string; text2: string; }
 export interface qscoretile { text: string; text1: string; text2: string; }
-export interface dscoretile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; } export interface volscoretile { text1: any; text2: any; } export interface mscoretile { text1: any; text2: any; } export interface srtile { text1: string; text2: string; text3: string; }
+export interface dscoretile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; } 
+export interface volscoretile { text1: any; text2: any; } 
+export interface mscoretile { text1: any; text2: any; } 
+export interface srtile { text1: string; text2: string; text3: string; }
 export interface beta1tile { text1: string; text2: string; text3: string; }
 export interface ema26tile { text1: string; text2: string; text3: string; }
 export interface ema50tile { text1: string; text2: string; text3: string; }
@@ -110,37 +115,12 @@ export interface stockohlc1dtile { x: any; open: number, high: number, low: numb
 export interface stockohlcvolumetile { x: any; y: number; }
 export interface stockohlc1wtile { c: number; o: number; h: number; l: number; x: number; }
 export interface etstockohlctodaytile { c: number; o: number; h: number; l: number; x: number; }
-export interface brokerrecodowngradetile { text1: string; text2: string; text3: string; }
-export interface brokerrecoupgradetile { text1: string; text2: string; text3: string; }
-export interface brokertargettile { text1: string; text2: string; text3: string; }
 export interface foundContenttile { text1: any; }
-export interface ema_26tile { text1: string; text2: string; text3: string; text4: string; }
-export interface ema_50tile { text1: string; text2: string; text3: string; text4: string; }
-export interface ema_100tile { text1: string; text2: string; text3: string; text4: string; }
-export interface ema_200tile { text1: string; text2: string; text3: string; text4: string; }
-export interface sma_30tile { text1: string; text2: string; text3: string; text4: string; }
-export interface sma_50tile { text1: string; text2: string; text3: string; text4: string; }
-export interface sma_100tile { text1: string; text2: string; text3: string; text4: string; }
-export interface sma_200tile { text1: string; text2: string; text3: string; text4: string; }
-export interface macd1tile { text1: string; text2: string; text3: string; text4: string; }
-export interface macdsignal1tile { text1: string; text2: string; text3: string; text4: string; }
-export interface rsi1tile { text1: string; text2: string; text3: string; text4: string; }
 export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; }
-export interface mfi1tile { text1: string; text2: string; text3: string; text4: string; }
-export interface brokertargetdowngradetile { text1: string; text2: string; text3: string; }
-export interface brokertargetupgradetile { text1: string; text2: string; text3: string; }
-export interface divscoretile { text1: string; text2: string; }
 export interface fnomsg1tile { text1: string; text2: string; }
 export interface dealsmsgtile { text1: string; text2: string; }
 export interface shareholdingmsgtile { text1: string; text2: string; }
-export interface rbsscoretile { text1: string; text2: string; }
-export interface kvscoretile { text1: string; text2: string; }
-export interface kqscoretile { text1: string; text2: string; }
-export interface omrscoretile { text1: string; text2: string; }
-export interface growthscoretile { text1: string; text2: string; }
-export interface healthscoretile { text1: string; text2: string; }
-export interface ppscoretile { text1: string; text2: string; }
-
+export interface pscoretile { text1: string; text2: string; }
 export interface sectorstockstile { text1: string; text2: string; text3: string; }
 export interface stockdetailstile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; }
 export interface sectorstockdetailstile { text1: any; text2: any; text3: any; text4: any; }
@@ -148,6 +128,9 @@ export interface stockpcrtile { text1: any; text2: any; }
 export interface maxpaintile { text1: any; text2: any; }
 export interface tlindexparamtile { text1: string; text2: string; text3: string; }
 export interface tlindexparamemasmatile { text1: string; text2: string; text3: string; text4: string; }
+export interface tlindexparampricetile { text1: string; text2: string; text3: string; text4: string; }
+export interface tlindexparampriceinsighttile { text1: string; text2: string; }
+export interface tlindexparamvolumetile { text1: string; text2: string; text3: string; text4: string;text5: string; }
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -160,12 +143,12 @@ export class ShareComponent implements OnInit {
   displayMaximizableneutral:boolean=false;
   displayMaximizablepositive:boolean=false;
   displayMaximizablenegative:boolean=false;
-  displayMaximizableinsight: boolean=false;
   displayMaximizablestocknews: boolean=false;
   isFlipped = false;
   isFlippedema = false;
   isFlippedstocktoday = false;
   isFlippedvolume = false;
+  isFlippedprice = false;
   sparklineChart: Chart;
   public width: string
   // custom code end
@@ -216,7 +199,7 @@ export class ShareComponent implements OnInit {
   public visible1: Boolean = false;
   public visible2: Boolean = false;
   baseurl: any
-  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
+  constructor(private cd: ChangeDetectorRef,private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
     
     if (window.location.hostname === "localhost") {
       this.baseurl = "http://localhost:8888"
@@ -234,30 +217,6 @@ export class ShareComponent implements OnInit {
         this.onClick.emit(null);
       }
     };
-    // const script = document.createElement('script');
-    // script.async = true;
-    // script.src = 'https://cdn-static.trendlyne.com/static/js/webwidgets/tl-widgets.js';
-    // script.charset = 'utf-8';
-    // this.trendlyneWidget.nativeElement.appendChild(script);
-    // const card18 = document.querySelector('.card18');
-    // card18.addEventListener('click', function() {
-    //   this.classList.toggle('flipped');
-    // });
-    // const script1 = document.createElement('script');
-    // script1.async = true;
-    // script1.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-    // script1.charset = 'utf-8';
-    // script1.text = JSON.stringify({
-    //   "interval": "1m",
-    //   "width": "100%",
-    //   "isTransparent": false,
-    //   "height": "100%",
-    //   "symbol": "NSE:"+this.eqsymbol,
-    //   "showIntervalTabs": true,
-    //   "locale": "in",
-    //   "colorTheme": "light"
-    // });
-    // this.TradingViewWidget.nativeElement.appendChild(script1);
   }
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
@@ -349,6 +308,9 @@ export class ShareComponent implements OnInit {
   public lineChartDatalbandm: Array<number> = [];
   tlindexparam: tlindexparamtile[] = [];
   tlindexparamemasma: tlindexparamemasmatile[] = [];
+  tlindexparamprice: tlindexparampricetile[] = [];
+  tlindexparampriceinsight: tlindexparampriceinsighttile[] = [];
+  tlindexparamvolume: tlindexparamvolumetile[] = [];
   public columnTooltip: boolean = false;
   public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
   public chartAreapv: Object = {
@@ -417,6 +379,9 @@ export class ShareComponent implements OnInit {
   relsector: any;
   previousclose: Array<number> = [];
   pclose: any;
+  npclose: any;
+  nhigh:any;
+  nlow:any;
   high:any;
   close:any;
   low:any;
@@ -426,14 +391,7 @@ export class ShareComponent implements OnInit {
   techscore: techscoretile[] = [];
   score: scoretile[] = [];
   scoret: scorettile[] = [];
-  divscore: divscoretile[] = [];
-  rbsscore: rbsscoretile[] = [];
-  kvscore: kvscoretile[] = [];
-  kqscore: kqscoretile[] = [];
-  ppscore: ppscoretile[] = [];
-  growthscore: growthscoretile[] = [];
-  healthscore: healthscoretile[] = [];
-  omrscore: omrscoretile[] = [];
+  pscore:pscoretile[] = [];
   sectorstocks: sectorstockstile[] = [];
   stockpcr: stockpcrtile[] = [];
   maxpain: maxpaintile[] = [];
@@ -448,26 +406,8 @@ export class ShareComponent implements OnInit {
   fnomsg1: fnomsg1tile[] = [];
   dealsmsg: dealsmsgtile[] = [];
   shareholdingmsg: shareholdingmsgtile[] = [];
-  brokertarget: brokertargettile[] = [];
-  brokertargetdowngrade: brokertargetdowngradetile[] = [];
   mcsymbol1: any;
-  brokerrecoupgrade: brokerrecoupgradetile[] = [];
-  brokerrecodowngrade: brokerrecodowngradetile[] = [];
-  brokertargetupgrade: brokertargetupgradetile[] = [];
-  ema_26: ema_26tile[] = [];
-  ema_50: ema_50tile[] = [];
-  ema_100: ema_100tile[] = [];
-  ema_200: ema_200tile[] = [];
-  sma_30: sma_30tile[] = [];
-  sma_50: sma_50tile[] = [];
-  sma_100: sma_100tile[] = [];
-  sma_200: sma_200tile[] = [];
-  macd1: macd1tile[] = [];
-  macdsignal1: macdsignal1tile[] = [];
-  rsi1: rsi1tile[] = [];
   // rsi:rsitile[] = [];
-  mfi1: mfi1tile[] = [];
-  // mfi:mfitile[] = [];
   nr7: any;
   basicData: any;
   weatherdata: any;
@@ -772,9 +712,7 @@ export class ShareComponent implements OnInit {
     this.displayMaximizablenegative = true;
   }
   
-  showMaximizableDialogInsight() {
-    this.displayMaximizableinsight = true;
-  }
+ 
   
   showMaximizableDialogStocknews() {
     this.displayMaximizablestocknews = true;
@@ -785,16 +723,28 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      // console.log(nestedItems)
+       console.log(nestedItems)
       this.tlindexparam.length = 0;
+      this.tlindexparamprice.length = 0;
+      this.tlindexparampriceinsight.length = 0;
+      this.tlindexparamvolume.length = 0;
       for (const val in nestedItems[0].body.parameters) {
         if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
           this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
+          
         } else { continue; }
       };
-     
-        
-          this.tlindexparamemasma.push({ text1: nestedItems[0].body.parameters['ma_signal']['ema_insight'], text2:nestedItems[0].body.parameters['ma_signal']['ema_insight_color'], text3:nestedItems[0].body.parameters['ma_signal']['sma_insight'],text4:nestedItems[0].body.parameters['ma_signal']['sma_insight_color']  })
+      for (const val in nestedItems[0].body.parameters['price_analysis']) {
+      this.tlindexparamprice.push({ text1: nestedItems[0].body.parameters['price_analysis'][val]['name'], text2:nestedItems[0].body.parameters['price_analysis'][val]['change'], text3:nestedItems[0].body.parameters['price_analysis'][val]['changePercent'],text4:nestedItems[0].body.parameters['price_analysis'][val]['color']  })
+       }
+       for (const val in nestedItems[0].body.parameters['price_insight']) {
+        this.tlindexparampriceinsight.push({ text1: nestedItems[0].body.parameters['price_insight'][val]['color'], text2:nestedItems[0].body.parameters['price_insight'][val]['shorttext']})
+         }
+         for (const val in nestedItems[0].body.parameters['volume_analysis']['tableData']) {
+
+        this.tlindexparamvolume.push({ text1: nestedItems[0].body.parameters['volume_analysis']['tableData'][val][0], text2:nestedItems[0].body.parameters['volume_analysis']['tableData'][val][1], text3:nestedItems[0].body.parameters['volume_analysis']['tableData'][val][2],text4:nestedItems[0].body.parameters['volume_analysis']['tableData'][val][3],text5:nestedItems[0].body.parameters['volume_analysis']['insightColor']  })
+         }
+         this.tlindexparamemasma.push({ text1: nestedItems[0].body.parameters['ma_signal']['ema_insight'], text2:nestedItems[0].body.parameters['ma_signal']['ema_insight_color'], text3:nestedItems[0].body.parameters['ma_signal']['sma_insight'],text4:nestedItems[0].body.parameters['ma_signal']['sma_insight_color']  })
         
       
     })
@@ -813,6 +763,9 @@ export class ShareComponent implements OnInit {
   }
   toggleFlipvolume() {
     this.isFlippedvolume = !this.isFlippedvolume;
+  }
+  toggleFlipprice() {
+    this.isFlippedprice = !this.isFlippedprice;
   }
   async getstocksparkline(mcsymbol) {
     try {
@@ -872,39 +825,6 @@ export class ShareComponent implements OnInit {
   }
   /////////////////////////////// Kotak /////////////////////////////////////////////////
  
-  // async getkotakview(eqsymbol) {
-  //   this.dataApi.getKotakScore(eqsymbol).subscribe(data => {
-  //     const nestedItems = Object.keys(data).map(key => {
-  //       return data[key];
-  //     });
-  //     if (nestedItems[0].length != 0) {
-  //       this.divscore.push({ text1: nestedItems[0][0].DividendScore, text2: "Dividend" })
-  //       this.growthscore.push({ text1: nestedItems[0][0].GrowthScore, text2: "Growth" })
-  //       this.healthscore.push({ text1: nestedItems[0][0].HealthScore, text2: "Health" }),
-  //         this.omrscore.push({ text1: nestedItems[0][0].OverallMarketRank, text2: "Market Rank" }),
-  //         this.kqscore.push({ text1: nestedItems[0][0].QualityScore, text2: "Quality" }),
-  //         this.rbsscore.push({ text1: nestedItems[0][0].RankBySector, text2: "Sector Rank" }),
-  //         this.kvscore.push({ text1: nestedItems[0][0].ValueScore, text2: "Value" }),
-  //         this.ppscore.push({ text1: nestedItems[0][0].PastPerformanceScore, text2: "Past Performance" })
-  //       this.sectorid = nestedItems[0][0].SectorId
-  //     }
-  //     this.dataApi.getKotakSectorView(this.sectorid).subscribe(async data => {
-  //       const nestedItems = Object.keys(data).map(key => {
-  //         return data[key];
-  //       });
-  //       for (const val in nestedItems[0]) {
-  //         if ((this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)).length == 0) {
-  //           continue;
-  //         } else {
-  //           this.mcsymbol1 = (this.stockList.filter(i => i.symbol == nestedItems[0][val].CompanyShortName)[0].mcsymbol)
-  //           await this.getmcstockrealtime1(this.mcsymbol1)
-  //         }
-  //       }
-  //     });
-  //   }, err => {
-  //     console.log(err)
-  //   })
-  // }
   getkotak() {
     this.http.get<any>('https://kayal.trendlyne.com/broker-webview/all-in-one-screener-get/kayal/?perPageCount=25&pageNumber=0&screenpk=82596&groupType=all&groupName=').subscribe(data5 => {
       // let nestedItems = Object.keys(data5).map(key => {
@@ -951,34 +871,30 @@ export class ShareComponent implements OnInit {
   // }
   async getetshareholding(stockid) {
     try {
-      this.http.get("https://www.bqprime.com/next/feapi/stock/" + this.stockid + "/shareholding-snapshot").subscribe(data5 => {
-        const nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-        this.legendSettingssh = {
-          visible: true,
-        };
+      this.http.get("https://www.ndtvprofit.com/next/feapi/stock/" + this.stockid + "/shareholding-snapshot").subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.legendSettingssh = { visible: true };
         this.tooltipsh = {
           enable: true,
           header: '',
           format: '<b>${point.x}</b><br>Browser Share: <b>${point.y}%</b>'
         };
-        //Initializing DataLabel
         this.dataLabelsh = {
           visible: true,
           name: 'DataLabelMappingName',
           position: 'Inside',
-          font: {
-            fontWeight: '100',
-          },
-          connectorStyle: {
-            length: '20px',
-            type: 'Curve'
-          },
+          font: { fontWeight: '100' },
+          connectorStyle: { length: '20px', type: 'Curve' },
         };
+        this.datash.length=0;
         for (const val in nestedItems[0]['chart']) {
-          this.datash.push({ value: nestedItems[0]['chart'][val].value, DataLabelMappingName: nestedItems[0]['chart'][val].label })
+          this.datash.push({
+            value: nestedItems[0]['chart'][val].value,
+            DataLabelMappingName: nestedItems[0]['chart'][val].label
+          });
         }
+  
+        this.cd.detectChanges() // Trigger change detection after data is updated
       });
     } catch (err) {
       console.error(err);
@@ -1023,7 +939,7 @@ export class ShareComponent implements OnInit {
     
       if (response.ok) {
         const insight = await response.json();
-        // console.log(insight)
+        console.log(insight)
         if (insight['data']['insightData']['price'].hasOwnProperty('5')) {
           this.dealsmsg.length = 0;
           this.dealsmsg.push({ text1: insight['data']['insightData']['price'][5]['shortDesc'], text2: insight['data']['insightData']['price'][5]['color'] })
@@ -1069,7 +985,7 @@ export class ShareComponent implements OnInit {
         await this.stockdetails1.push({ text1: result1.data['SC_FULLNM'], text2: result1.data['pricechange'], text3: result1.data['pricepercentchange'], text4: result1.data['pricecurrent'], text5: result1.data['52H'], text6: result1.data['52L'], text7: result1.data['upper_circuit_limit'], text8: result1.data['lower_circuit_limit'] })
       }
       await this.getstocksparkline(this.mcsymbol)
-      await this.gettrendlynestocks2(this.tlid)
+      await this.gettrendlynestocksscores(this.tlid)
     } catch (err) {
       console.error(err);
     }
@@ -1341,10 +1257,11 @@ export class ShareComponent implements OnInit {
       //   let nestedItems = Object.keys(data5).map(key => {
       //     return data5[key];
       //   });
+      console.log(nestedItems)
       this.hmsg = (nestedItems[0]['data'].sectPrice_techScore['header_msg'])
       for (const val in nestedItems[0]['data']['sectPrice_indiScale']) {
         if (nestedItems[0]['data']['sectPrice_indiScale'][val].sid == this.stockid) {
-          //this.hmsg.push({ text:nestedItems[0]['data'].sectPrice_techScore['header_msg'], text1: nestedItems[0]['data'].sectPrice_techScore['score'], text2: nestedItems[0]['data'].sectPrice_techScore['tech_text'] })
+          this.hmsg.push({ text:nestedItems[0]['data'].sectPrice_techScore['header_msg'], text1: nestedItems[0]['data'].sectPrice_techScore['score'], text2: nestedItems[0]['data'].sectPrice_techScore['tech_text'] })
           // this.score.push({text1:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_clr,text2:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_points,text3:nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_text,text4:nestedItems[0]['data']['sectPrice_indiScale'][val].quality_clr, text5: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_rank, text6: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_text})
           this.fscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_points, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].fin_trend_text })
           this.qscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_rank, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].quality_text })
@@ -1352,6 +1269,9 @@ export class ShareComponent implements OnInit {
           this.vscore.push({ text: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_clr, text1: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_rank, text2: nestedItems[0]['data']['sectPrice_indiScale'][val].valuation_text })
         }
       }
+      console.log(this.qscore)
+      console.log(this.vscore)
+      console.log(this.techscore)
       this.lineChartDatamacdm.length = 0;
       this.lineChartDatasignalm.length = 0;
       this.lineChartDatapricemacdm.length = 0;
@@ -1570,72 +1490,24 @@ export class ShareComponent implements OnInit {
   trackByFunctionnegative(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctionbrokertarget(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionbrokertargetupgrade(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionbrokertargetdowngrade(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionbrokerrecodowngrade(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionbrokerrecoupgrade(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionema50(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionema26(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionema100(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionema200(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionsma30(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionsma50(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionsma100(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionsma200(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionmacd1(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionrsi1(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctionmfi1(index: number, item: any): any {
-    return item.id; 
-  }
+  
   trackByFunctionstockpcr(index: number, item: any): any {
     return item.id; 
   }
   trackByFunctionstockdetails1(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctionrbsscore(index: number, item: any): any {
-    return item.id; 
-  }
+  
   trackByFunctiondscore(index: number, item: any): any {
     return item.id; 
   }
   trackByFunctionkvscore(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctionomrscore(index: number, item: any): any {
+  trackByFunctionkvolume(index: number, item: any): any {
     return item.id; 
   }
+  
   trackByFunctiondealmsg(index: number, item: any): any {
     return item.id; 
   }
@@ -1648,15 +1520,13 @@ export class ShareComponent implements OnInit {
   trackByFunctionppscore(index: number, item: any): any {
     return item.id; 
   }
+   trackByFunctionpscore(index: number, item: any): any {
+    return item.id; 
+  }
   trackByFunctionqscore(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctiongrowthscore(index: number, item: any): any {
-    return item.id; 
-  }
-  trackByFunctiondivscore(index: number, item: any): any {
-    return item.id; 
-  }
+  
   trackByFunctionfscore(index: number, item: any): any {
     return item.id; 
   }
@@ -2081,7 +1951,7 @@ getstocktoday1(mcsymbol) {
           this.stockhcdate1.push({ x: timeIST, y: nestedItems[5][val]['value'] });
         }
       }
-console.log( this.stockhcdate1)
+
       this.primaryYAxis2 = {
         rangePadding: 'None',
         title: 'Stock Price',
@@ -2114,8 +1984,22 @@ console.log( this.stockhcdate1)
   });
 
   //////////////////////To get Nifty chart////////////////////////////////////
+   this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      
+      this.npclose=(nestedItems[2]['priceprevclose'])
+      this.nhigh=(nestedItems[2]['HIGH'])
+      this.nlow=(nestedItems[2]['LOW'])
+     
+
+    
+    })
   this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
     const nestedItems = Object.keys(data5).map(key => data5[key]);
+
+
     this.stocktodayniftydataValues.length = 0;
     this.stockhcdateniftytoday.length = 0;
     
@@ -2128,14 +2012,19 @@ console.log( this.stockhcdate1)
 
       this.stockhcdateniftytoday.push({ x: date1, y: nestedItems[1]['values'][val]['_value'] });
     }
-    console.log( this.stockhcdateniftytoday)
+   
     this.secondaryYAxis = {
       rangePadding: 'None',
       title: 'Nifty Price',
       lineStyle: { width: 1 },
       majorTickLines: { width: 0 },
       minorTickLines: { width: 0 },
-      opposedPosition: true  // Position secondary axis on the opposite side
+      labelStyle: { color: '#FF4560' },
+      opposedPosition: true,
+      interval: (this.nhigh - this.nlow) / 10,  // Dynamically adjust interval based on data
+      minimum: this.nlow - 50,  // Slight padding below minimum value
+      maximum: this.nhigh + 50, // Slight padding above maximum value
+      labelFormat: '{value}'
     };
 
     this.primaryXAxisstocktoday = {
@@ -2146,15 +2035,15 @@ console.log( this.stockhcdate1)
     };
 
     this.stockhcdateniftytoday.map((value: number, index: number) => {
-      if (Number(value['y']) < this.pclose) {
+      if (Number(value['y']) < this.npclose) {
         this.stocktodayniftydataValues.push({
           XValue: value['x'], YValue: Number(value['y']),
-          color: ['red']
+          color: ['orange']
         });
       } else {
         this.stocktodayniftydataValues.push({
           XValue: value['x'], YValue: Number(value['y']),
-          color: ['green']
+          color: ['blue']
         });
       }
     });
@@ -2710,48 +2599,14 @@ console.log( this.stockhcdate1)
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      //  console.log(nestedItems)
+       console.log(nestedItems)
       
        this.reln50=nestedItems[0].body['relp_nifty50_qtrChangeP'].value
        this.relsector=nestedItems[0].body['relp_sector_qtrChangeP'].value
+       this.pscore.length=0;
        
-      if (nestedItems[0].body.hasOwnProperty('_avg_target')) {
-        this.brokertarget.push({ text1: nestedItems[0].body['broker_avg_target']['lt1'], text2: nestedItems[0].body['broker_avg_target']['st1'], text3: nestedItems[0].body['broker_avg_target']['color1'] })
-      } if (nestedItems[0].body.hasOwnProperty('ema_26')) {
-        this.ema_26.push({ text1: nestedItems[0].body['ema_26']['lt1'], text2: nestedItems[0].body['ema_26']['st1'], text3: nestedItems[0].body['ema_26']['color1'], text4: nestedItems[0].body['ema_26']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('ema_50')) {
-        this.ema_50.push({ text1: nestedItems[0].body['ema_50']['lt1'], text2: nestedItems[0].body['ema_50']['st1'], text3: nestedItems[0].body['ema_50']['color1'], text4: nestedItems[0].body['ema_50']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('ema_100')) {
-        this.ema_100.push({ text1: nestedItems[0].body['ema_100']['lt1'], text2: nestedItems[0].body['ema_100']['st1'], text3: nestedItems[0].body['ema_100']['color1'], text4: nestedItems[0].body['ema_100']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('ema_200')) {
-        this.ema_200.push({ text1: nestedItems[0].body['ema_200']['lt1'], text2: nestedItems[0].body['ema_100']['st1'], text3: nestedItems[0].body['ema_100']['color1'], text4: nestedItems[0].body['ema_200']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('sma_30')) {
-        this.sma_30.push({ text1: nestedItems[0].body['sma_30']['lt1'], text2: nestedItems[0].body['sma_30']['st1'], text3: nestedItems[0].body['sma_30']['color1'], text4: nestedItems[0].body['sma_30']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('sma_50')) {
-        this.sma_50.push({ text1: nestedItems[0].body['sma_50']['lt1'], text2: nestedItems[0].body['sma_50']['st1'], text3: nestedItems[0].body['sma_50']['color1'], text4: nestedItems[0].body['sma_50']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('sma_100')) {
-        this.sma_100.push({ text1: nestedItems[0].body['sma_100']['lt1'], text2: nestedItems[0].body['sma_100']['st1'], text3: nestedItems[0].body['sma_100']['color1'], text4: nestedItems[0].body['sma_100']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('sma_100')) {
-        this.sma_200.push({ text1: nestedItems[0].body['sma_200']['lt1'], text2: nestedItems[0].body['sma_100']['st1'], text3: nestedItems[0].body['sma_100']['color1'], text4: nestedItems[0].body['sma_200']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('macd')) {
-        this.macd1.push({ text1: nestedItems[0].body['macd']['lt1'], text2: nestedItems[0].body['macd']['st1'], text3: nestedItems[0].body['macd']['color1'], text4: nestedItems[0].body['macd']['value'] })
-      }
-      if (nestedItems[0].body.hasOwnProperty('rsi')) {
-        this.rsi1.push({ text1: nestedItems[0].body['rsi']['lt1'], text2: nestedItems[0].body['rsi']['st1'], text3: nestedItems[0].body['rsi']['color1'], text4: nestedItems[0].body['rsi']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('mfi')) {
-        this.mfi1.push({ text1: nestedItems[0].body['mfi']['lt1'], text2: nestedItems[0].body['mfi']['st1'], text3: nestedItems[0].body['mfi']['color1'], text4: nestedItems[0].body['mfi']['value'] })
-      } if (nestedItems[0].body.hasOwnProperty('broker_recodown_6M')) {
-        this.brokerrecodowngrade.push({ text1: nestedItems[0].body['broker_recodown_6M']['lt1'], text2: nestedItems[0].body['broker_recodown_6M']['st1'], text3: nestedItems[0].body['broker_recodown_6M']['color1'] })
-      }
-      if (nestedItems[0].body.hasOwnProperty('broker_recoup_6M')) {
-        this.brokerrecoupgrade.push({ text1: nestedItems[0].body['broker_recoup_6M']['lt1'], text2: nestedItems[0].body['broker_recoup_6M']['st1'], text3: nestedItems[0].body['broker_recoup_6M']['color1'] })
-      }
-      if (nestedItems[0].body.hasOwnProperty('broker_targetup_6M')) {
-        this.brokertargetupgrade.push({ text1: nestedItems[0].body['broker_targetup_6M']['lt1'], text2: nestedItems[0].body['broker_targetup_6M']['st1'], text3: nestedItems[0].body['broker_targetup_6M']['color1'] })
-      }
-      if (nestedItems[0].body.hasOwnProperty('broker_targetdown_6M')) {
-        this.brokertargetdowngrade.push({ text1: nestedItems[0].body['broker_targetdown_6M']['lt1'], text2: nestedItems[0].body['broker_targetdown_6M']['st1'], text3: nestedItems[0].body['broker_targetdown_6M']['color1'] })
-      }
+        this.pscore.push({text1:nestedItems[0].body['PITROSKI_F'].color1,text2:nestedItems[0].body['PITROSKI_F'].value})
+      
       if (nestedItems[0].body['MCAP_Q']['lt1']) {
         if (nestedItems[0].body['MCAP_Q']['color1'] == 'positive') {
           this.positive.push({ text1: nestedItems[0].body['MCAP_Q']['lt1'], text2: nestedItems[0].body['MCAP_Q']['title'], text3: nestedItems[0].body['MCAP_Q']['value'] })
@@ -2954,7 +2809,7 @@ console.log( this.stockhcdate1)
       console.log(err)
     })
   }
-  gettrendlynestocks2(tlid) {
+  gettrendlynestocksscores(tlid) {
     this.dataApi.getTrendlyne2Fetch(this.tlid).subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
