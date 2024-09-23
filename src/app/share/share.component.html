@@ -23,7 +23,7 @@
                           }"
                           class="text-item"
                         >
-                          <span>{{ tile.text2 }}:{{ tile.text1 }}&nbsp;&nbsp;</span>
+                          <span>{{ stocksentimentstile.text2 }}:{{ stocksentimentstile.text1 }}&nbsp;&nbsp;</span>
                         </p>
                       </div>
             
@@ -108,7 +108,7 @@
                         'text-red': dscoretile.text2 === 'negative',
                         'text-yellow': dscoretile.text2 === 'neutral'
                       }">
-                      &nbsp;Durability: {{ tile.text1 }}
+                      &nbsp;Durability: {{ dscoretile.text1 }}
                   </p>
 
                   <!-- Valuation -->
@@ -117,7 +117,7 @@
                         'text-red': dscoretile.text4 === 'negative',
                         'text-yellow': dscoretile.text4 === 'neutral'
                       }">
-                      &nbsp;Valuation: {{ tile.text3 }}
+                      &nbsp;Valuation: {{ dscoretile.text3 }}
                   </p>
 
                   <!-- Momentum -->
@@ -126,7 +126,7 @@
                         'text-red': dscoretile.text6 === 'negative',
                         'text-yellow': dscoretile.text6 === 'neutral'
                       }">
-                      &nbsp;Momentum: {{ tile.text5 }}
+                      &nbsp;Momentum: {{ dscoretile.text5 }}
                   </p>
                   
               </div>
@@ -138,41 +138,41 @@
                 'text-red': pscoretile.text1 === 'negative',
                 'text-yellow': pscoretile.text1 === 'neutral'
               }">
-              &nbsp;P Score: {{ tile.text2 }}
+              &nbsp;P Score: {{ pscoretile.text2 }}
             </p>
           
           <div *ngFor="let fscoretile of fscore;let i = index; trackBy: trackByFunctionfscore" style="font-weight: bold;">
               <p [ngClass]="{
-                  'text-green': fscoretile.text === 'Green' || tile.text === 'green',
-                  'text-red': fscoretile.text === 'Red' || tile.text === 'red',
-                  'text-yellow': fscoretile.text === 'Yellow' || tile.text ===  'yellow'
+                  'text-green': fscoretile.text === 'Green' || fscoretile.text === 'green',
+                  'text-red': fscoretile.text === 'Red' || fscoretile.text === 'red',
+                  'text-yellow': fscoretile.text === 'Yellow' || fscoretile.text ===  'yellow'
                 }"
               >
-                &nbsp;Financial: {{tile.text1}}
+                &nbsp;Financial: {{fscoretile.text1}}
               </p>
               </div>
               <div *ngFor="let qscoretile of qscore; let i = index;trackBy: trackByFunctionqscore" style="font-weight: bold;">
                 
                 
               <p [ngClass]="{
-                'text-green': qscoretile.text === 'Green' || tile.text === 'green',
-                'text-red': qscoretile.text === 'Red' || tile.text === 'red',
-                'text-yellow': qscoretile.text === 'Yellow' || tile.text === 'yellow'
+                'text-green': qscoretile.text === 'Green' || qscoretile.text === 'green',
+                'text-red': qscoretile.text === 'Red' || qscoretile.text === 'red',
+                'text-yellow': qscoretile.text === 'Yellow' || qscoretile.text === 'yellow'
                 }"
               >
-              &nbsp;Quality:{{ tile.text2 }}&nbsp;&nbsp;{{tile.text1}}
+              &nbsp;Quality:{{ qscoretile.text2 }}&nbsp;&nbsp;{{tile.text1}}
                 </p>
               </div>
               <div
               
                 *ngFor="let techscoretile of techscore; let i = index; trackBy: trackByFunctiontechscore" style="font-weight: bold;">
               <p [ngClass]="{
-                'text-green': techscoretile.text === 'Green' || tile.text === 'green',
-                'text-red': techscoretile.text === 'Red' || tile.text === 'red',
-                'text-yellow': techscoretile.text === 'Yellow' || tile.text === 'yellow'
+                'text-green': techscoretile.text === 'Green' || techscoretile.text === 'green',
+                'text-red': techscoretile.text === 'Red' || techscoretile.text === 'red',
+                'text-yellow': techscoretile.text === 'Yellow' || techscoretile.text === 'yellow'
                 }"
               >
-              &nbsp;Technicals:{{ tile.text2 }}
+              &nbsp;Technicals:{{ techscoretile.text2 }}
                 </p>
               </div>
             
