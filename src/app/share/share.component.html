@@ -11,22 +11,21 @@
           ></button>
          
             
-                    <div class="text-container">
-                        <p
-                          *ngFor="let stocksentimentstile of stocksentiments; trackBy: trackByFunctionstocksentiments" style="font-weight: bold;"
-                          [ngClass]="{
-                            'text-green': stocksentimentstile.text1 === 'Bullish',
-                            'text-green': stocksentimentstile.text1 === 'Very Bullish',
-                            'text-red': stocksentimentstile.text1 === 'Bearish',
-                            'text-red': stocksentimentstile.text1 === 'Very Bearish',
-                            'text-yellow': stocksentimentstile.text1 === 'Neutral'
-                          }"
-                          class="text-item"
-                        >
-                          <span>{{ stocksentimentstile.text2 }}:{{ stocksentimentstile.text1 }}&nbsp;&nbsp;</span>
-                        </p>
-                      </div>
-            
+          <div class="text-container">
+            <p
+              *ngFor="let stocksentimentstile of stocksentiments; trackBy: trackByFunctionstocksentiments" 
+              style="font-weight: bold;"
+              [ngClass]="{
+                'text-green': stocksentimentstile.text1 === 'Bullish' || stocksentimentstile.text1 === 'Very Bullish',
+                'text-red': stocksentimentstile.text1 === 'Bearish' || stocksentimentstile.text1 === 'Very Bearish',
+                'text-yellow': stocksentimentstile.text1 === 'Neutral'
+              }"
+              class="text-item"
+            >
+              <span>{{ stocksentimentstile.text2 }}: {{ stocksentimentstile.text1 }}&nbsp;&nbsp;</span>
+            </p>
+          </div>
+          
           <div class="scenestock">
             <div class="cardstock" 
             
@@ -637,7 +636,7 @@
           
         </div>           
         <div
-        *ngFor="let tile of tlindexparamsrsi; trackBy: trackByFunctiontlindexparamsrsi"
+        *ngFor="let tile of tlindexparamsrsi; trackBy: trackByFunctiontlindexparamrsi"
         [ngClass]="{
           'text-green': ['positive'].includes(tile.text3) ,
           'text-red': ['negative'].includes(tile.text3) ,
