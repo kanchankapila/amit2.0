@@ -1566,7 +1566,7 @@ export class ShareComponent implements OnInit {
   (index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctiontlindexparamsrsi(index: number, item: any): any {
+  trackByFunctiontlindexparamrsi(index: number, item: any): any {
     return item.id; 
   }
 

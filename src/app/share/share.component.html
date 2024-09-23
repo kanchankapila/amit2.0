@@ -13,13 +13,13 @@
             
                     <div class="text-container">
                         <p
-                          *ngFor="let tile of stocksentiments; trackBy: trackByFunctionstocksentiments" style="font-weight: bold;"
+                          *ngFor="let stocksentimentstile of stocksentiments; trackBy: trackByFunctionstocksentiments" style="font-weight: bold;"
                           [ngClass]="{
-                            'text-green': tile.text1 === 'Bullish',
-                            'text-green': tile.text1 === 'Very Bullish',
-                            'text-red': tile.text1 === 'Bearish',
-                            'text-red': tile.text1 === 'Very Bearish',
-                            'text-yellow': tile.text1 === 'Neutral'
+                            'text-green': stocksentimentstile.text1 === 'Bullish',
+                            'text-green': stocksentimentstile.text1 === 'Very Bullish',
+                            'text-red': stocksentimentstile.text1 === 'Bearish',
+                            'text-red': stocksentimentstile.text1 === 'Very Bearish',
+                            'text-yellow': stocksentimentstile.text1 === 'Neutral'
                           }"
                           class="text-item"
                         >
@@ -100,31 +100,31 @@
               }">
               
               <!-- Loop through dscore once and display all values one below the other -->
-              <div *ngFor="let tile of dscore; let i = index; trackBy: trackByFunctiondscore" style="font-weight: bold;">
+              <div *ngFor="let dscoretile of dscore; let i = index; trackBy: trackByFunctiondscore" style="font-weight: bold;">
                   
                   <!-- Durability -->
                   <p [ngClass]="{
-                        'text-green': tile.text2 === 'positive',
-                        'text-red': tile.text2 === 'negative',
-                        'text-yellow': tile.text2 === 'neutral'
+                        'text-green': dscoretile.text2 === 'positive',
+                        'text-red': dscoretile.text2 === 'negative',
+                        'text-yellow': dscoretile.text2 === 'neutral'
                       }">
                       &nbsp;Durability: {{ tile.text1 }}
                   </p>
 
                   <!-- Valuation -->
                   <p [ngClass]="{
-                        'text-green': tile.text4 === 'positive',
-                        'text-red': tile.text4 === 'negative',
-                        'text-yellow': tile.text4 === 'neutral'
+                        'text-green': dscoretile.text4 === 'positive',
+                        'text-red': dscoretile.text4 === 'negative',
+                        'text-yellow': dscoretile.text4 === 'neutral'
                       }">
                       &nbsp;Valuation: {{ tile.text3 }}
                   </p>
 
                   <!-- Momentum -->
                   <p [ngClass]="{
-                        'text-green': tile.text6 === 'positive',
-                        'text-red': tile.text6 === 'negative',
-                        'text-yellow': tile.text6 === 'neutral'
+                        'text-green': dscoretile.text6 === 'positive',
+                        'text-red': dscoretile.text6 === 'negative',
+                        'text-yellow': dscoretile.text6 === 'neutral'
                       }">
                       &nbsp;Momentum: {{ tile.text5 }}
                   </p>
@@ -132,32 +132,32 @@
               </div>
               
                 <!-- Pitrorski Score -->
-              <p *ngFor="let tile of pscore; let i = index; trackBy: trackByFunctionpscore" style="font-weight: bold;"
+              <p *ngFor="let pscoretile of pscore; let i = index; trackBy: trackByFunctionpscore" style="font-weight: bold;"
               [ngClass]="{
-                'text-green': tile.text1 === 'positive',
-                'text-red': tile.text1 === 'negative',
-                'text-yellow': tile.text1 === 'neutral'
+                'text-green': pscoretile.text1 === 'positive',
+                'text-red': pscoretile.text1 === 'negative',
+                'text-yellow': pscoretile.text1 === 'neutral'
               }">
               &nbsp;P Score: {{ tile.text2 }}
             </p>
           
-          <div *ngFor="let tile of fscore;let i = index; trackBy: trackByFunctionfscore" style="font-weight: bold;">
+          <div *ngFor="let fscoretile of fscore;let i = index; trackBy: trackByFunctionfscore" style="font-weight: bold;">
               <p [ngClass]="{
-                  'text-green': tile.text === 'Green' || tile.text === 'green',
-                  'text-red': tile.text === 'Red' || tile.text === 'red',
-                  'text-yellow': tile.text === 'Yellow' || tile.text ===  'yellow'
+                  'text-green': fscoretile.text === 'Green' || tile.text === 'green',
+                  'text-red': fscoretile.text === 'Red' || tile.text === 'red',
+                  'text-yellow': fscoretile.text === 'Yellow' || tile.text ===  'yellow'
                 }"
               >
                 &nbsp;Financial: {{tile.text1}}
               </p>
               </div>
-              <div *ngFor="let tile of qscore; let i = index;trackBy: trackByFunctionqscore" style="font-weight: bold;">
+              <div *ngFor="let qscoretile of qscore; let i = index;trackBy: trackByFunctionqscore" style="font-weight: bold;">
                 
                 
               <p [ngClass]="{
-                'text-green': tile.text === 'Green' || tile.text === 'green',
-                'text-red': tile.text === 'Red' || tile.text === 'red',
-                'text-yellow': tile.text === 'Yellow' || tile.text === 'yellow'
+                'text-green': qscoretile.text === 'Green' || tile.text === 'green',
+                'text-red': qscoretile.text === 'Red' || tile.text === 'red',
+                'text-yellow': qscoretile.text === 'Yellow' || tile.text === 'yellow'
                 }"
               >
               &nbsp;Quality:{{ tile.text2 }}&nbsp;&nbsp;{{tile.text1}}
@@ -165,11 +165,11 @@
               </div>
               <div
               
-                *ngFor="let tile of techscore; let i = index; trackBy: trackByFunctiontechscore" style="font-weight: bold;">
+                *ngFor="let techscoretile of techscore; let i = index; trackBy: trackByFunctiontechscore" style="font-weight: bold;">
               <p [ngClass]="{
-                'text-green': tile.text === 'Green' || tile.text === 'green',
-                'text-red': tile.text === 'Red' || tile.text === 'red',
-                'text-yellow': tile.text === 'Yellow' || tile.text === 'yellow'
+                'text-green': techscoretile.text === 'Green' || tile.text === 'green',
+                'text-red': techscoretile.text === 'Red' || tile.text === 'red',
+                'text-yellow': techscoretile.text === 'Yellow' || tile.text === 'yellow'
                 }"
               >
               &nbsp;Technicals:{{ tile.text2 }}
