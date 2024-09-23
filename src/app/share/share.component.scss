@@ -24,6 +24,7 @@
   justify-content: center;
   align-items: center;
   height: 40vh;
+  margin-top:25px;
 }
 
 /* Card container */
@@ -112,6 +113,7 @@
   .cardstock {
     width: 100%;
     height: 300px;
+    margin-top:25px;
   }
   .canvas {
     position: absolute;  /* Make canvas the background layer */
@@ -247,18 +249,21 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .scenesmaema {
-    flex-direction: column;
-    align-items: flex-start; /* Aligns content to the left on smaller screens */
-    padding-left: 0px; /* Optional: Adjusts left padding on smaller screens */
+    // flex-direction: column;
+    // align-items: flex-start; /* Aligns content to the left on smaller screens */
+     padding-left: 0px;
+    padding-top: 10px; /* Optional: Adjusts left padding on smaller screens */
   }
 
   .cardsmaema {
-    width: 100%;
-    height: 400px;
+    max-width: 350px;
+    max-height: 400px;
+    padding-left: 0px;
   }
 }
+
 
 .text-container {
   display: flex;
@@ -400,7 +405,7 @@
   @media (max-width: 360px) {
     .scenesmaema, .scenestocktoday {
       flex: 1 1 100%;  /* Make each card take 100% of the width on smaller screens */
-      max-width: 100%;
+      max-width: 90%;
       margin-bottom: 20px;  /* Add space between stacked cards */
       margin-right: 0;  /* Remove the right margin to reduce gaps on smaller screens */
     }
@@ -413,6 +418,8 @@
   align-items: center;
   flex-wrap: wrap;
   perspective: 1000px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   
 }
 
@@ -454,16 +461,20 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .sceneprice{
-    flex-direction: column;
-    align-items: flex-start; /* Aligns content to the left on smaller screens */
-    padding-left: 0px; /* Optional: Adjusts left padding on smaller screens */
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding-top: 30px;/* Optional: Adjusts left padding on smaller screens */
   }
 
   .cardprice {
     width: 100%;
-    height: 400px;
+    height: 350px;
+    margin-top:30px;
   }
 }
 
@@ -502,7 +513,7 @@
 
 /* Card container with 3D transform */
 .cardvolume {
-  width: 5500px;
+  width: 500px;
   height: 400px;
   position: relative;
   transform-style: preserve-3d;
