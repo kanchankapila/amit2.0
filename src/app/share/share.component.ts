@@ -90,6 +90,7 @@ export interface techscoretile { text: string; text1: string; text2: string; }
 export interface vscoretile { text: string; text1: string; text2: string; }
 export interface fscoretile { text: string; text1: string; text2: string; }
 export interface qscoretile { text: string; text1: string; text2: string; }
+export interface mmfinparamtile { text1: string; text2: string; }
 export interface dscoretile { text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; } 
 export interface volscoretile { text1: any; text2: any; } 
 export interface mscoretile { text1: any; text2: any; } 
@@ -126,11 +127,29 @@ export interface stockdetailstile { text1: any; text2: any; text3: any; text4: a
 export interface sectorstockdetailstile { text1: any; text2: any; text3: any; text4: any; }
 export interface stockpcrtile { text1: any; text2: any; }
 export interface maxpaintile { text1: any; text2: any; }
-export interface tlindexparamtile { text1: string; text2: string; text3: string; }
+export interface tlindexparamrsitile { text1: string; text2: string; text3:string; }
+export interface tlindexparamsrsitile { text1: string; text2: string; text3:string; }
+export interface tlindexparamsotile { text1: string; text2: string; text3:string;  }
+export interface tlindexparamccitile { text1: string; text2: string; text3:string;  }
+export interface tlindexparamaotile { text1: string; text2: string; text3:string;  }
+export interface tlindexparammotile { text1: string; text2: string; text3:string;  }
+export interface tlindexparammacdtile { text1: string; text2: string; text3:string;  }
+export interface tlindexparamwilliamtile { text1: string; text2: string;text3:string;   }
+export interface tlindexparamuotile { text1: string; text2: string;text3:string;   }
+export interface mcfininsightstile { text1: string; text2: string;text3:string;   }
 export interface tlindexparamemasmatile { text1: string; text2: string; text3: string; text4: string; }
 export interface tlindexparampricetile { text1: string; text2: string; text3: string; text4: string; }
 export interface tlindexparampriceinsighttile { text1: string; text2: string; }
 export interface tlindexparamvolumetile { text1: string; text2: string; text3: string; text4: string;text5: string; }
+export interface tlpibetatile { text1: string; text2: string; }
+export interface tlpimacdtile { text1: string; text2: string; }
+export interface tlpioscilatortile { text1: string; text2: string; }
+export interface tlpimfitile { text1: string; text2: string; }
+export interface tlpiotherparamtile { text1: string; text2: string; }
+export interface tlpipivottile { text1: string; text2: string; }
+export interface tlpirsitile { text1: string; text2: string; }
+export interface tlpitechinstile { text1: string; text2: string; }
+
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -149,6 +168,8 @@ export class ShareComponent implements OnInit {
   isFlippedstocktoday = false;
   isFlippedvolume = false;
   isFlippedprice = false;
+  isFlippedti = false;
+  isFlippedfinancials =false;
   sparklineChart: Chart;
   public width: string
   // custom code end
@@ -305,11 +326,30 @@ export class ShareComponent implements OnInit {
   public lineChartDatalbandw: Array<number> = [];
   public lineChartDatarsim: Array<number> = [];
   public lineChartDataubandm: Array<number> = [];
-  public lineChartDatalbandm: Array<number> = [];
-  tlindexparam: tlindexparamtile[] = [];
+  public lineChartDatalbandm: Array<number> = []
+  tlindexparamrsi: tlindexparamrsitile[] = [];
+  tlindexparamsrsi: tlindexparamsrsitile[] = [];
+  tlindexparamso: tlindexparamsotile[] = [];
+  tlindexparamcci: tlindexparamccitile[] = [];
+  tlindexparamao: tlindexparamaotile[] = [];
+  tlindexparammo: tlindexparammotile[] = [];
+  tlindexparammacd: tlindexparammacdtile[] = [];
+  tlindexparamwilliam: tlindexparamwilliamtile[] = [];
+  tlindexparamuo: tlindexparamuotile[] = [];
+  tlpibeta: tlpibetatile[] = [];
+  tlpirsi: tlpirsitile[] = [];
+  mmfinparam:mmfinparamtile[]=[];
+  tlpimacd: tlpimacdtile[] = [];
+  tlpipivot: tlpipivottile[] = [];
+  tlpimfi: tlpimfitile[] = [];
+  tlpi: tlpibetatile[] = [];
+  tlpioscillator: tlpioscilatortile[]=[];
+  tlpiotherparam:tlpiotherparamtile[]=[];
+  tlpitechins: tlpitechinstile[]=[];
   tlindexparamemasma: tlindexparamemasmatile[] = [];
   tlindexparamprice: tlindexparampricetile[] = [];
   tlindexparampriceinsight: tlindexparampriceinsighttile[] = [];
+  mcfininsights:mcfininsightstile[]=[];
   tlindexparamvolume: tlindexparamvolumetile[] = [];
   public columnTooltip: boolean = false;
   public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
@@ -724,17 +764,36 @@ export class ShareComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-       console.log(nestedItems)
-      this.tlindexparam.length = 0;
-      this.tlindexparamprice.length = 0;
-      this.tlindexparampriceinsight.length = 0;
-      this.tlindexparamvolume.length = 0;
-      for (const val in nestedItems[0].body.parameters) {
-        if (nestedItems[0].body.parameters[val].hasOwnProperty('name')) {
-          this.tlindexparam.push({ text1: nestedItems[0].body.parameters[val].name, text2: nestedItems[0].body.parameters[val].value, text3: nestedItems[0].body.parameters[val].color })
+       
+     
+    
+        
+          this.tlindexparamrsi.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][0].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][0].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][0].color})
+          this.tlindexparamcci.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][2].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][2].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][2].color})
+          this.tlindexparamao.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][3].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][3].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][3].color})
+          this.tlindexparammo.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][4].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][4].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][4].color})
+          this.tlindexparammacd.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][5].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][5].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][5].color})
+          this.tlindexparamsrsi.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][6].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][6].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][6].color})
+          this.tlindexparamwilliam.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][7].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][7].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][7].color})
+          this.tlindexparamuo.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][8].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][8].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][8].color})
+          this.tlindexparamso.push({ text1: nestedItems[0].body.parameters['oscillator_parameter'][1].name, text2: nestedItems[0].body.parameters['oscillator_parameter'][1].value, text3:nestedItems[0].body.parameters['oscillator_parameter'][1].color})
           
-        } else { continue; }
-      };
+       
+       
+      
+      this.tlpibeta.push({
+        text1: nestedItems[0].body.parameters['beta_insight'][0].color, text2: nestedItems[0].body.parameters['beta_insight'][0].longtext
+      })
+      
+      this.tlpimacd.push({text1: nestedItems[0].body.parameters['macd']['insight'].longtext, text2: nestedItems[0].body.parameters['macd'].color})
+      this.tlpioscillator.push({text1: nestedItems[0].body.parameters['oscillator_signal'].color, text2: nestedItems[0].body.parameters['oscillator_signal'].insight})
+      this.tlpimfi.push({text1: nestedItems[0].body.parameters['mfi'].color, text2: nestedItems[0].body.parameters['mfi']['insight'].longtext})
+      this.tlpiotherparam.push({text1: nestedItems[0].body.parameters['otherparam_signal'].color, text2: nestedItems[0].body.parameters['otherparam_signal'].insight})
+      this.tlpipivot.push({text1: nestedItems[0].body.parameters['pivot_insight'][0].color, text2: nestedItems[0].body.parameters['pivot_insight'][0].longtext})
+      this.tlpirsi.push({text1: nestedItems[0].body.parameters['rsi'].color, text2: nestedItems[0].body.parameters['rsi']['insight'].longtext})
+      this.tlpitechins.push({text1: nestedItems[0].body.parameters['technicals_insight'][0].color, text2: nestedItems[0].body.parameters['technicals_insight'][0].longtext})
+
+     
       for (const val in nestedItems[0].body.parameters['price_analysis']) {
       this.tlindexparamprice.push({ text1: nestedItems[0].body.parameters['price_analysis'][val]['name'], text2:nestedItems[0].body.parameters['price_analysis'][val]['change'], text3:nestedItems[0].body.parameters['price_analysis'][val]['changePercent'],text4:nestedItems[0].body.parameters['price_analysis'][val]['color']  })
        }
@@ -759,11 +818,17 @@ export class ShareComponent implements OnInit {
   toggleFlipema() {
     this.isFlippedema = !this.isFlippedema;
   }
+  toggleFlipti() {
+    this.isFlippedti = !this.isFlippedti;
+  }
   toggleFlipstocktoday() {
     this.isFlippedstocktoday = !this.isFlippedstocktoday;
   }
   toggleFlipvolume() {
     this.isFlippedvolume = !this.isFlippedvolume;
+  }
+  toggleFlipfinancials() {
+    this.isFlippedfinancials = !this.isFlippedfinancials;
   }
   toggleFlipprice() {
     this.isFlippedprice = !this.isFlippedprice;
@@ -940,7 +1005,10 @@ export class ShareComponent implements OnInit {
     
       if (response.ok) {
         const insight = await response.json();
-        console.log(insight)
+        // console.log(insight['data']['insightData']['industryComparison'])
+        for (const val in insight['data']['insightData']['industryComparison']) {
+          this.mcfininsights.push({ text1: insight['data']['insightData']['industryComparison'][val]['color'], text2:insight['data']['insightData']['industryComparison'][val]['title'], text3:insight['data']['insightData']['industryComparison'][val]['longDesc']})
+           }
         if (insight['data']['insightData']['price'].hasOwnProperty('5')) {
           this.dealsmsg.length = 0;
           this.dealsmsg.push({ text1: insight['data']['insightData']['price'][5]['shortDesc'], text2: insight['data']['insightData']['price'][5]['color'] })
@@ -1255,6 +1323,12 @@ export class ShareComponent implements OnInit {
         return data5[key];
       });
       console.log(nestedItems)
+      console.log(nestedItems[1]['data']['list'])
+      for (const val in nestedItems[1]['data']['valuation_tbl']['list'] ){
+        this.mmfinparam.push({text1:nestedItems[1]['data']['valuation_tbl']['list'][val].name,text2:nestedItems[1]['data']['valuation_tbl']['list'][val].value})
+      }
+      console.log(this.mmfinparam)
+
     })
   }
   async getmmdata(stockid) {
@@ -1485,6 +1559,56 @@ export class ShareComponent implements OnInit {
   trackByFunctionstockindicators(index: number, item: any): any {
     return item.id; 
   }
+  trackByFunctionmmfinparam(index: number, item: any): any {
+    return item.id; 
+  }
+  
+  
+  trackByFunctiontlindexparamrsi(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamso(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamcci(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamrmo(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamrao(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparammacd(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamwilliam(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamuo(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpibeta(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpimacd(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpimfi(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpirsi(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpioscillator(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpiotherparams(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpitechins(index: number, item: any): any {
+    return item.id; 
+  }
   trackByFunctiontlindexparamvolume(index: number, item: any): any {
     return item.id; 
   }
@@ -1526,6 +1650,9 @@ export class ShareComponent implements OnInit {
     return item.id; 
   }
   trackByFunctionmscore(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctionmcfininsights(index: number, item: any): any {
     return item.id; 
   }
   trackByFunctionvolscore(index: number, item: any): any {
