@@ -1559,24 +1559,33 @@ export class ShareComponent implements OnInit {
   trackByFunctionstockindicators(index: number, item: any): any {
     return item.id; 
   }
+  trackByFunctiontlotherparam(index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlpipivot
+  (index: number, item: any): any {
+    return item.id; 
+  }
+  trackByFunctiontlindexparamsrsi(index: number, item: any): any {
+    return item.id; 
+  }
+
   trackByFunctionmmfinparam(index: number, item: any): any {
     return item.id; 
   }
   
   
-  trackByFunctiontlindexparamrsi(index: number, item: any): any {
-    return item.id; 
-  }
+ 
   trackByFunctiontlindexparamso(index: number, item: any): any {
     return item.id; 
   }
   trackByFunctiontlindexparamcci(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctiontlindexparamrmo(index: number, item: any): any {
+  trackByFunctiontlindexparammo(index: number, item: any): any {
     return item.id; 
   }
-  trackByFunctiontlindexparamrao(index: number, item: any): any {
+  trackByFunctiontlindexparamao(index: number, item: any): any {
     return item.id; 
   }
   trackByFunctiontlindexparammacd(index: number, item: any): any {
