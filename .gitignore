@@ -8,7 +8,7 @@
 /tmp
 /out-tsc
 /.firebase*
-
+/webpack-config.js
 # dependencies
 /node_modules
 

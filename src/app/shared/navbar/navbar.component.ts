@@ -143,9 +143,10 @@ export class NavbarComponent implements OnInit {
   
     this.items = [];
     this.stock = stocks.default.Data;
-    for (const val in this.stock) {
-      this.items.push({ label: this.stock[val].name, value: this.stock[val].isin });
-    }
+    this.items = this.stock.map(stock => ({
+      label: stock.name,
+      value: stock.isin
+    }));
   }
   async ngOnInit() {
     this.today = new Date();
