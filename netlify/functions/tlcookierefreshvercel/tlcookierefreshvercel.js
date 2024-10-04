@@ -2,7 +2,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 exports.handler = async () => {
   try {
-    const response = await fetch('https://stockinsights-vercel-amitkapila1s-projects.vercel.app/trendlynecookie', {
+    const response = await fetch('https://vercel-ruddy-nine.vercel.app/api/trendlynecookie', {
       headers: { Accept: 'application/json' },
     });
 

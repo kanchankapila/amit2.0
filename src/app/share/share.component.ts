@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@an
 // import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
 import { ChangeDetectorRef } from '@angular/core';
-
+import stockData from '../lists/stocklist'; // Import the data
 import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RadioButton } from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
-import * as  stocks from '../lists/stocklist'
+
 import Chart from 'chart.js/auto';
 import { ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from 'ng-apexcharts';
@@ -149,6 +149,9 @@ export interface tlpiotherparamtile { text1: string; text2: string; }
 export interface tlpipivottile { text1: string; text2: string; }
 export interface tlpirsitile { text1: string; text2: string; }
 export interface tlpitechinstile { text1: string; text2: string; }
+const stockMap = new Map(
+  stockData.Data.map(stock => [stock.isin, stock])
+);
 
 @Component({
   selector: 'app-share',
@@ -220,6 +223,7 @@ export class ShareComponent implements OnInit {
   public visible1: Boolean = false;
   public visible2: Boolean = false;
   baseurl: any
+  
   constructor(private cd: ChangeDetectorRef,private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute) {
     
     if (window.location.hostname === "localhost") {
@@ -604,6 +608,7 @@ export class ShareComponent implements OnInit {
       }
     }
   };
+  
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -676,21 +681,22 @@ export class ShareComponent implements OnInit {
     this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
     this.lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
     this.monthLastDay = Math.floor(this.lastDay.getTime() / 1000);
-    this.stockList = stocks.default.Data
-    this.stock = stocks.default.Data
+   
     this.route.queryParams.subscribe(params => {
-      this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
-      this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
+      const stockDetails = stockMap.get(params.stock);
+this.eqsymbol = stockDetails?.symbol || null;
+ this.tlname = stockDetails?.tlname || null;
+ this.tlid = stockDetails?.tlid || null;
+ this.stockname = stockDetails?.name || null;
+ this.stockisin = stockDetails?.isin || null;
+ this.mcsymbol = stockDetails?.mcsymbol || null;
+ this.mcsymbolname = stockDetails?.mcsymbol || null; // Assuming it's the same as mcsymbol
+ this.stockid = stockDetails?.stockid || null;
+ this.companyid = stockDetails?.companyid || null;
+
       this.indexid = this.tlid;
-      this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
-      this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
       this.title = this.stockname;
-      this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin
-      this.mcsymbol = this.stockList.filter(i => i.isin == params.stock)[0].mcsymbol
-      this.mcsymbolname = this.stockList.filter(i => i.isin == params.stock)[0].mcsymbol
-      this.stockid = this.stockList.filter(i => i.isin == params.stock)[0].stockid
-      this.bqnames = this.stockList.filter(i => i.isin == params.stock)[0].bqname
-      this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
+      
     });
     await Promise.all([
       // this.getstocksparkline(this.mcsymbol),
