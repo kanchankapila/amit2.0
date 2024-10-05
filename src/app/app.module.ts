@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { SharedModule } from './shared/shared.module';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SpinnerComponent,
     ContentAnimateDirective,
+    SplashScreenComponent
   ],
   imports: [
     AppRoutingModule,

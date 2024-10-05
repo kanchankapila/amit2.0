@@ -1,0 +1,18 @@
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Set background color to match your app theme */
+    z-index: 9999;
+  }
+  
+  .splash-screen img {
+    width: 100%;
+    max-width: 300px; /* Adjust size according to your needs */
+  }
+  
