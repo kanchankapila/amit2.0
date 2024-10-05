@@ -1,76 +1,41 @@
 <div class="gap-div">
-  <!-- <div class="InsideContent">
-   <br />
-    <p-radioButton
-      name="groupname"
-      value="10"
-      label="10 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-    <p-radioButton
-      name="groupname"
-      value="15"
-      label="15 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-    <p-radioButton
-      name="groupname"
-      value="30"
-      label="30 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-    <p-radioButton
-      name="groupname"
-      value="60"
-      label="60 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-    <p-radioButton
-      name="groupname"
-      value="120"
-      label="120 min"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-    <p-radioButton
-      name="groupname"
-      value="24"
-      label="24 hrs"
-      [(ngModel)]="selectedValue"
-      (onClick)="onClick($event)"
-    ></p-radioButton
-    ><br />
-  </div> -->
+
   
-  
-  <h4 class="text-black text-center">Technical Indicators</h4>
-  <!-- <div class="card-containerii">
+  <h4 class="text-black text-center">Crossover</h4>
+  <div class="card-containerii">
+ 
     <div
-      class="cardii-wrapper"
-      *ngFor="let tile of investingindicators1m; let i = index; trackBy: trackByFunctioninvestingindicators1m"
-    >
-      <div class="card-text">{{ tile.text1 }}</div>
-      <div
-        class="cardii"
-        [ngClass]="{
-          'cardii-green': tile.text1.includes('strong_buy') || tile.text1.includes('buy'),
-          'cardii-red': tile.text1.includes('strong_sell') || tile.text1.includes('sell'),
-          'cardii-yellow': tile.text1.includes('neutral')
-        }"
-      >
-        1 min
-      </div>
-    </div>
-  </div> -->
+    class="cardii"
+    *ngFor="let tile of nifty50crossover; let i = index;
+    trackBy: trackByFunctionnifty50crossover"
+    [ngClass]="{
+      'cardii-green': tile.text3.includes('Bullish') || tile.text3.includes('Oversold')|| tile.text3.includes('Strong Trend')|| tile.text3.includes('High Volatility'),
+      'cardii-red': tile.text3.includes('Bearish') || tile.text3.includes('Overbought')|| tile.text3.includes('Weak Trend')|| tile.text3.includes('Low Volatility'),
+      'cardii-yellow': tile.text3.includes('Neutral')
+    }"
+  >
+  {{ tile.text2 }}<br />
+  {{ tile.text3 }}
+  </div>
+  </div>
+  <h4 class="text-black text-center">Sentiment</h4>
+  <div class="card-containerii">
+ 
+    <div
+    class="cardii"
+    *ngFor="let tile of nifty50sentiments;  let i = index;
+    trackBy: trackByFunctionnifty50sentiments"
+    [ngClass]="{
+      'cardii-green': tile.text1.includes('Bullish') || tile.text1.includes('Oversold')|| tile.text1.includes('Strong Trend')|| tile.text1.includes('High Volatility'),
+      'cardii-red': tile.text1.includes('Bearish') || tile.text1.includes('Overbought')|| tile.text1.includes('Weak Trend')|| tile.text1.includes('Low Volatility'),
+      'cardii-yellow': tile.text1.includes('Neutral')
+    }"
+  >
+  {{ tile.text2 }}<br />
+  {{ tile.text1 }}
+  </div>
+  </div>
+  <h4 class="text-black text-center">Technical Indicators</h4>
   <div class="card-containerii">
     
     <div
@@ -180,209 +145,100 @@
     >1month<br />
       {{ tile.text1 }}
     </div>
-  
-</div>
-  <h4 class="text-black text-center">Daily Technical Indicators</h4>
-  <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
-    <div
-      style="
-        text-transform: uppercase;
-        font-weight: bold;
-        margin: 10px;
-        text-align: center;
-      "
-      fxFlex="10"
-      fxFlex.lg="12%"
-      fxFlex.xs="40"
-      fxFlex.sm="33%"
-      *ngFor="let tile of nifty50indicators;  let i = index;
-      trackBy: trackByFunctionnifty50indicators"
-    >
-      <div class="scene">
-        <div class="card text-center text-white">
-          <div
-            class="card__face card__face--front type1-bold"
-            [ngClass]="{
-              'bg-gradient-bull': tile.text3 === 'Bullish',
-              'bg-gradient-bull1': tile.text3 === 'Oversold',
-              'bg-gradient-bull2': tile.text3 === 'Strong Trend',
-              'bg-gradient-bull3': tile.text3 === 'High Volatility',
-              'bg-gradient-bear': tile.text3 === 'Bearish',
-              'bg-gradient-bear1': tile.text3 === 'Overbought',
-              'bg-gradient-bear2': tile.text3 === 'Weak Trend',
-              'bg-gradient-bear3': tile.text3 === 'Low Volatility',
-              'bg-gradient-warning': tile.text3 === 'Neutral'
-            }"
-          >
-            {{ tile.text2 }}
-          </div>
-          <div
-            class="card__face card__face--back type1-bold"
-            [ngClass]="{
-              'bg-gradient-bull': tile.text3 === 'Bullish',
-              'bg-gradient-bull1': tile.text3 === 'Oversold',
-              'bg-gradient-bull2': tile.text3 === 'Strong Trend',
-              'bg-gradient-bull3': tile.text3 === 'High Volatility',
-              'bg-gradient-bear': tile.text3 === 'Bearish',
-              'bg-gradient-bear1': tile.text3 === 'Overbought',
-              'bg-gradient-bear2': tile.text3 === 'Weak Trend',
-              'bg-gradient-bear3': tile.text3 === 'Low Volatility',
-              'bg-gradient-warning': tile.text3 === 'Neutral'
-            }"
-          >
-            {{ tile.text3 }}
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-  <div fxLayout="row" fxLayout.xs="column">
+  <h4 class="text-black text-center">Daily Technical Indicators</h4>
+  <div class="card-containerii">
+ 
+  <div
+  class="cardii"
+  *ngFor="let tile of nifty50indicators;  let i = index;
+  trackBy: trackByFunctionnifty50indicators"
+  [ngClass]="{
+    'cardii-green': tile.text3.includes('Bullish') || tile.text3.includes('Oversold')|| tile.text3.includes('Strong Trend')|| tile.text3.includes('High Volatility'),
+    'cardii-red': tile.text3.includes('Bearish') || tile.text3.includes('Overbought')|| tile.text3.includes('Weak Trend')|| tile.text3.includes('Low Volatility'),
+    'cardii-yellow': tile.text3.includes('Neutral')
+  }"
+>
+{{ tile.text2 }}<br />
+{{ tile.text3 }}
+</div>
+</div>
+<div class="container">
+  <div class="table-container">
     <div class="col-lg-6 col-xs-4 text-center text-white">
       <div class="content card">
         <div class="block">
-          <h4 class="text-black text-center">Crossover</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid">
-            <div
-              style="
-                text-transform: uppercase;
-                font-weight: bold;
-                text-align: center;
-              "
-              fxFlex="30"
-              fxFlex.xs="33%"
-              fxFlex.sm="33%"
-              *ngFor="let tile of nifty50crossover; let i = index;
-              trackBy: trackByFunctionnifty50crossover"
+          <div class="table-responsive pt-3">
+            <table
+              class="table table-bordered"
+              *ngFor="let tile of niftyema; let i = index; trackBy: trackByFunctionniftyema"
             >
-              <div
-                class="text-blue type1-bold textcenter"
-                [ngClass]="{
-                  'bg-gradient-bull': tile.text3 === 'Bullish',
-                  'bg-gradient-bull1': tile.text3 === 'Oversold',
-                  'bg-gradient-bull2': tile.text3 === 'Strong Trend',
-                  'bg-gradient-bull3': tile.text3 === 'High Volatility',
-                  'bg-gradient-bear': tile.text3 === 'Bearish',
-                  'bg-gradient-bear1': tile.text3 === 'Overbought',
-                  'bg-gradient-bear2': tile.text3 === 'Weak Trend',
-                  'bg-gradient-bear3': tile.text3 === 'Low Volatility',
-                  'bg-gradient-warning': tile.text3 === 'Neutral'
-                }"
-                >{{ tile.text2 }}<br />{{ tile.text3 }}
-                <div style="text-align: center"></div>
-              </div>
-            </div>
-            <div class="table-responsive pt-3">
-              <table
-                class="table table-bordered"
-                *ngFor="let tile of niftyema;  let i = index;
-                trackBy: trackByFunctionniftyema"
-              >
-                <thead>
-                  <tr>
-                    <th>E5</th>
-                    <th>E10</th>
-                    <th>E20</th>
-                    <th>E30</th>
-                    <th>E50</th>
-                    <th>E100</th>
-                    <th>E200</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="table-success">
-                    <td>
-                      {{ tile.text1 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text2 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text3 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text4 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text5 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text6 | number : "1.0-0" }}
-                    </td>
-                    <td>
-                      {{ tile.text7 | number : "1.0-0" }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <thead>
+                <tr>
+                  <th>E5</th>
+                  <th>E10</th>
+                  <th>E20</th>
+                  <th>E30</th>
+                  <th>E50</th>
+                  <th>E100</th>
+                  <th>E200</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success">
+                  <td>{{ tile.text1 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text2 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text3 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text4 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text5 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text6 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text7 | number: '1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+
     <div class="col-lg-6 col-xs-4 text-white text-center">
       <div class="content card">
         <div class="block">
-          <h4 class="text-black text-center">Sentiment</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid">
-            <div
-              style="
-                text-transform: uppercase;
-                font-weight: bold;
-                text-align: center;
-              "
-              fxFlex="30"
-              fxFlex.xs="33%"
-              fxFlex.sm="33%"
-              *ngFor="let tile of nifty50sentiments;  let i = index;
-              trackBy: trackByFunctionnifty50sentiments"
+          <div class="table-responsive pt-3">
+            <table
+              class="table table-bordered"
+              *ngFor="let tile of niftysma; let i = index; trackBy: trackByFunctionniftysma"
             >
-              <div
-                class="type1-bold"
-                [ngClass]="{
-                  'bg-gradient-bull': tile.text1 === 'Bullish',
-                  'bg-gradient-bull1': tile.text1 === 'Very Bullish',
-                  'bg-gradient-bear': tile.text1 === 'Bearish',
-                  'bg-gradient-bear1': tile.text1 === 'Very Bearish',
-                  'bg-gradient-warning': tile.text1 === 'Neutral'
-                }"
-                >{{ tile.text2 }}<br />{{ tile.text1 }}
-              </div>
-            </div>
-            <div class="table-responsive pt-3">
-              <table
-                class="table table-bordered"
-                *ngFor="let tile of niftysma;  let i = index;
-                trackBy: trackByFunctionniftysma"
-              >
-                <thead>
-                  <tr>
-                    <th>S5</th>
-                    <th>S10</th>
-                    <th>S20</th>
-                    <th>S30</th>
-                    <th>S50</th>
-                    <th>S100</th>
-                    <th>S200</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="table-success">
-                    <td>{{ tile.text1 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text2 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text3 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text4 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text5 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text6 | number : "1.0-0" }}</td>
-                    <td>{{ tile.text7 | number : "1.0-0" }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <thead>
+                <tr>
+                  <th>S5</th>
+                  <th>S10</th>
+                  <th>S20</th>
+                  <th>S30</th>
+                  <th>S50</th>
+                  <th>S100</th>
+                  <th>S200</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success">
+                  <td>{{ tile.text1 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text2 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text3 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text4 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text5 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text6 | number: '1.0-0' }}</td>
+                  <td>{{ tile.text7 | number: '1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
   <div class="table-responsive col-lg-13 col-xs-6 grid-margin stretch-card">
     <div class="content card">
       <ejs-chart

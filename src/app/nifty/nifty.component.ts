@@ -2,8 +2,8 @@ import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { ChartType } from 'chart.js';
-// import { ChartAnnotationSettingsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
-import { RadioButton } from 'primeng/radiobutton';
+
+
 import { HttpClient } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import { ChartOptions } from 'chart.js';
@@ -182,14 +182,7 @@ export class NiftyComponent implements OnInit {
     //   //stockhighcharts: StockChart;
   
   ngAfterViewInit() {
-    RadioButton.prototype.select = function () {
-      if (!this.disabled) {
-        this.inputViewChild.nativeElement.checked = true;
-        this.checked = true;
-        this.onModelChange(this.value);
-        this.onClick.emit(null);
-      }
-    }}
+   }
   public stockhcdate: Array<{x:number,y:number}> = [];
   public nifty50data: Array<number> = [];
   public nifty50Labels: Array<number> = [];

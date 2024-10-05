@@ -3,7 +3,7 @@ import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import * as  stocks from '../lists/stocklist'
 import { HttpClient } from '@angular/common/http';
-import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
+
 // import { Browser } from '@syncfusion/ej2-base';
 import { RadioButton } from 'primeng/radiobutton';
 import { ChartType, ChartOptions } from 'chart.js';
@@ -296,12 +296,7 @@ export class PharmaniftyComponent implements OnInit {
   public tooltip: Object = {
     enable: true, shared: true
   };
-  public load(args: ILoadedEventArgs): void {
-    // custom code start
-    let selectedTheme: string = location.hash.split('/')[1];
-    selectedTheme = selectedTheme ? selectedTheme : 'Material';
-    args.chart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
-  }
+ 
   public title: string = ('Pharma');
   getpharmaniftysentiments() {
     this.pharmaniftysentiments.length = 0;
