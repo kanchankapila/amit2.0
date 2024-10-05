@@ -102,18 +102,27 @@ cardpcr {
 }
 
 .cardii-green {
-  background-color: #4caf50; /* Green */
-  color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(191, 240, 152, 0.8),
+    rgba(111, 214, 255, 0.8)
+  );
 }
 
 .cardii-red {
-  background-color: #f44336; /* Red */
-  color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 236, 210, 0.8),
+    rgba(252, 182, 159, 0.6)
+  );
 }
 
 .cardii-yellow {
-  background-color: #ffeb3b; /* Yellow */
-  color: black;
+  background: linear-gradient(
+    135deg,
+    rgba(169, 241, 223, 0.8),
+    rgba(255, 187, 187, 0.6)
+  );
 }
 
 @media (max-width: 1200px) {
@@ -128,9 +137,9 @@ cardpcr {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 360px) {
   .cardii {
-    width: 90%;
+    width: 40%;
   }
 }
 //For stocks
@@ -242,3 +251,27 @@ body {
     font-size: 12px; /* Reduced font size for mobile */
   }
 }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table-container {
+  display: flex;
+  width: 100%;
+}
+
+.table-container > div {
+  width: 50%;
+}
+
+@media (max-width: 360px) {
+  .table-container {
+    flex-direction: column;
+  }
+
+  .table-container > div {
+    width: 80%;
+  }
+}
+

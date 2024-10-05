@@ -5,7 +5,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import stockData from '../lists/stocklist'; // Import the data
 import axios from 'axios';
 import { DataapiService } from '../../dataapi.service'
-import { PeriodsModel } from '@syncfusion/ej2-angular-charts/esm2020/src/chart/annotations.directive.mjs';
+
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -388,26 +388,7 @@ export class ShareComponent implements OnInit {
   };
   
   
-  public periods: PeriodsModel[] = [
-    { intervalType: 'Minutes', interval: 1, text: '1m' },
-    { intervalType: 'Minutes', interval: 15, text: '15m' },
-    { intervalType: 'Minutes', interval: 30, text: '30m' },
-    { intervalType: 'Minutes', interval: 45, text: '45m' },
-    { intervalType: 'Hours', interval: 1, text: '1H' },
-    { intervalType: 'Hours', interval: 2, text: '2H' },
-    { intervalType: 'Hours', interval: 4, text: '4H' },
-    { intervalType: 'Hours', interval: 12, text: '12H', selected: true },
-    { intervalType: 'Auto', text: '1D' }
-  ];
-  public periods1: PeriodsModel[] = [
-    { intervalType: 'Weeks', interval: 1, text: '1w' },
-    { intervalType: 'Months', interval: 1, text: '1M' },
-    { intervalType: 'Months', interval: 3, text: '3M', selected: true },
-    { intervalType: 'Months', interval: 6, text: '6M' },
-    { intervalType: 'Months', interval: 9, text: '9M' },
-    { intervalType: 'Years', interval: 1, text: '1Y' },
-    { intervalType: 'Auto', text: '1W' }
-  ];
+  
   public seriesType: string[] = [];
   public indicatorType: string[] = [];
   public trendlineType: string[] = [];
