@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomPreloadingStrategy } from './custom-preloading-strategy';  // Custom preloading strategy
-
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 const routes: Routes = [
-  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+  { path: '', component: SplashScreenComponent }, 
+  // { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { 
     path: 'homepage', 
     loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule),
@@ -37,6 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  declarations: [SplashScreenComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingStrategy })  // Custom preloading strategy
