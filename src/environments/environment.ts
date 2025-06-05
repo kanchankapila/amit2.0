@@ -5,8 +5,11 @@
 export const environment = {
   production: false,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 =======
+=======
+>>>>>>> Stashed changes
   apiUrl: '/.netlify/functions',
   wsUrl: 'ws://localhost:8888',
   vapidPublicKey: 'YOUR_VAPID_PUBLIC_KEY', // Replace with your VAPID public key

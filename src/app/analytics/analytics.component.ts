@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { Component , ViewEncapsulation, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +7,8 @@ import * as  stocks from '../lists/stocklist'
 import { ChartOptions, ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
 =======
+=======
+>>>>>>> Stashed changes
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -20,6 +23,7 @@ import { TabViewModule } from 'primeng/tabview';
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss'],
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   encapsulation: ViewEncapsulation.None,
  
@@ -266,6 +270,71 @@ export class AnalyticsComponent implements OnInit {
         document.exitFullscreen();
       }
     }
+=======
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    ButtonModule,
+    DialogModule,
+    TabViewModule
+  ]
+})
+export class AnalyticsComponent implements OnInit {
+  loading = true;
+  error = false;
+  displayMaximizable1 = false;
+  displayMaximizable2 = false;
+  displayMaximizable3 = false;
+  displayMaximizable4 = false;
+  displayMaximizable5 = false;
+  displayMaximizable6 = false;
+
+  constructor(private dataApiService: DataApiService) {}
+
+  ngOnInit(): void {
+    this.loadAnalyticsData();
+  }
+
+  private loadAnalyticsData(): void {
+    this.loading = true;
+    this.error = false;
+    this.dataApiService.getAnalyticsData().subscribe({
+      next: () => {
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      }
+    });
+  }
+
+  showMaximizableDialog1() {
+    this.displayMaximizable1 = true;
+  }
+
+  showMaximizableDialog2() {
+    this.displayMaximizable2 = true;
+  }
+
+  showMaximizableDialog3() {
+    this.displayMaximizable3 = true;
+  }
+
+  showMaximizableDialog4() {
+    this.displayMaximizable4 = true;
+  }
+
+  showMaximizableDialog5() {
+    this.displayMaximizable5 = true;
+  }
+
+  showMaximizableDialog6() {
+    this.displayMaximizable6 = true;
+>>>>>>> Stashed changes
   }
  
   async getTtVolume() {

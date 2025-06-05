@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     SharedModule,
 =======
+=======
+>>>>>>> Stashed changes
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,11 +63,15 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     SharedModule,
     CoreModule,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
     }),
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   ],
   providers: [
@@ -74,6 +81,8 @@ import { environment } from '../environments/environment';
 })
 export class AppModule { }
 =======
+=======
+>>>>>>> Stashed changes
     NgxEchartsModule.forRoot({
       echarts
     })
@@ -98,5 +107,9 @@ export class AppModule { }
   ],
   bootstrap: []
 })
+<<<<<<< Updated upstream
+export class AppModule { } 
+>>>>>>> Stashed changes
+=======
 export class AppModule { } 
 >>>>>>> Stashed changes

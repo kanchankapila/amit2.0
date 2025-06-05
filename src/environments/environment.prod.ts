@@ -1,8 +1,11 @@
 export const environment = {
   production: true,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
  };
 =======
+=======
+>>>>>>> Stashed changes
   apiUrl: 'https://api.stockinsights.com/api',
   wsUrl: 'wss://api.stockinsights.com',
   vapidPublicKey: 'YOUR_PRODUCTION_VAPID_PUBLIC_KEY',

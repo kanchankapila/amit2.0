@@ -1,6 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 =======
+=======
+>>>>>>> Stashed changes
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -20,6 +23,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { CardModule } from 'primeng/card';
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 export interface pcrnseniftytile {
@@ -68,10 +74,13 @@ export interface newscardtile {
 @Component({
   selector: 'app-navbar',
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss',],
   providers: []
 =======
+=======
+>>>>>>> Stashed changes
   standalone: true,
   imports: [
     CommonModule,
@@ -90,6 +99,9 @@ export interface newscardtile {
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 })
 export class NavbarComponent {
@@ -115,6 +127,7 @@ export class NavbarComponent {
   // Market data properties
   mcniftyrt: mcniftyrttiles[] = [];
   mcbniftyrt: mcbniftyrttiles[] = [];
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   sectorList: any;
   etstocks: any;
@@ -158,6 +171,8 @@ export class NavbarComponent {
       value: stock.isin
     }));
 =======
+=======
+>>>>>>> Stashed changes
   mcpniftyrt: mcpniftyrttiles[] = [];
   newscard: newscardtile[] = [];
   ttmmi: ttmmitiles[] = [];
@@ -170,6 +185,9 @@ export class NavbarComponent {
   toggleTheme(): void {
     const currentTheme = this.appState.currentState.theme;
     this.appState.setTheme(currentTheme === 'light' ? 'dark' : 'light');
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   }
 
@@ -223,6 +241,7 @@ export class NavbarComponent {
   trackByFunctionnewscardnav(index: number): number {
     return index;
   }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   getbniftytlbuildup(tlidbnifty) {
     this.tlidbnifty = '1898'
@@ -422,6 +441,8 @@ export class NavbarComponent {
 
   }
   
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 }

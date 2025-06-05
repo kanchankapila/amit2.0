@@ -142,7 +142,11 @@ export class BankniftyComponent implements OnInit {
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
+=======
+  constructor(private http: HttpClient, private dataApi: DataApiService, private primengConfig: PrimeNGConfig) {
+>>>>>>> Stashed changes
 =======
   constructor(private http: HttpClient, private dataApi: DataApiService, private primengConfig: PrimeNGConfig) {
 >>>>>>> Stashed changes

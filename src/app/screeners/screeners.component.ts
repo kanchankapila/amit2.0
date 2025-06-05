@@ -16,6 +16,9 @@ export interface NtScreenerOptions {
   [key: string]: boolean | number | string;
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 export interface screenerstockstile {
   text1: number; text2: number; text3: number; text4: number; text5: number; text6: number; text7: number; text8: number; text9: number;
@@ -66,6 +69,9 @@ export class ScreenersComponent implements OnInit {
 =======
 
   constructor(private dataApi: DataApiService, private http: HttpClient, private _formBuilder: FormBuilder) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     this.SMA = this._formBuilder.group({
       "_20_day_sma_below": false,
