@@ -1,11 +1,29 @@
 import { Component, ViewChild, ElementRef, OnInit, } from '@angular/core';
-import { DataapiService } from '../../dataapi.service';
+import { DataApiService } from '../services/data-api.service';
 import { RadioButton } from 'primeng/radiobutton';
 import { PrimeNGConfig } from 'primeng/api';
 import { ChartType } from 'chart.js';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import { ChartOptions } from 'chart.js';
+<<<<<<< Updated upstream
+=======
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { TabViewModule } from 'primeng/tabview';
+import { ChartModule } from 'primeng/chart';
+import { ChartModule as SyncfusionChartModule, AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
+import { CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+>>>>>>> Stashed changes
 export interface bankniftystockstiles {
   text1: string;
   text2: string;
@@ -87,12 +105,47 @@ export interface bniftysmatile {
 @Component({
   selector: 'app-banknifty',
   templateUrl: './banknifty.component.html',
+<<<<<<< Updated upstream
   styleUrls: ['./banknifty.component.scss']
+=======
+  styleUrls: ['./banknifty.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+    RadioButtonModule,
+    TabViewModule,
+    ChartModule,
+    SyncfusionChartModule,
+    AccumulationChartModule,
+    BaseChartDirective,
+    TableModule,
+    DialogModule,
+    ButtonModule,
+    CardModule,
+    NgApexchartsModule
+  ],
+  providers: [
+    CategoryService,
+    LegendService,
+    TooltipService,
+    DataLabelService,
+    LineSeriesService,
+    DataApiService,
+    provideCharts(withDefaultRegisterables())
+  ]
+>>>>>>> Stashed changes
 })
 export class BankniftyComponent implements OnInit {
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
+<<<<<<< Updated upstream
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
+=======
+  constructor(private http: HttpClient, private dataApi: DataApiService, private primengConfig: PrimeNGConfig) {
+>>>>>>> Stashed changes
   }
   selectedValue: string;
   ngAfterViewInit() {

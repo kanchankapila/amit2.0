@@ -1,28 +1,35 @@
+<<<<<<< Updated upstream
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+=======
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { AppStateService } from '../../core/state/app.state';
+import { AuthService } from '../../core/services/auth.service';
+import { map } from 'rxjs/operators';
+import { inject } from '@angular/core';
 
-import * as stocks from '../../lists/stocklist';
-import { DatePipe } from '@angular/common';
-import { SelectItem } from 'primeng/api';
-import Chart from 'chart.js/auto';
-import { PrimeNGConfig } from 'primeng/api';
-import { DataapiService } from '../../../dataapi.service';
-import { HttpClient } from '@angular/common/http';
+// PrimeNG Imports
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
+import { CardModule } from 'primeng/card';
+>>>>>>> Stashed changes
+
 export interface pcrnseniftytile {
   text1: number;
 }
+
 export interface ttmmitiles {
   text1: any;
 }
-export interface pcrnsebniftytile {
-  text1: number;
-}
-export interface newscardtile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
+
 export interface mcniftyrttiles {
   text1: string;
   text2: string;
@@ -31,6 +38,7 @@ export interface mcniftyrttiles {
   text5: string;
   text6: string;
 }
+
 export interface mcpniftyrttiles {
   text1: string;
   text2: string;
@@ -39,6 +47,7 @@ export interface mcpniftyrttiles {
   text5: string;
   text6: string;
 }
+
 export interface mcbniftyrttiles {
   text1: string;
   text2: string;
@@ -47,6 +56,7 @@ export interface mcbniftyrttiles {
   text5: string;
   text6: string;
 }
+
 export interface newscardtile {
   text1: string;
   text2: string;
@@ -54,58 +64,58 @@ export interface newscardtile {
   text4: string;
   text5: string;
 }
-export interface pcrnsebniftytile {
-  text1: number;
-}
+
 @Component({
   selector: 'app-navbar',
+<<<<<<< Updated upstream
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss',],
   providers: []
+=======
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDividerModule,
+    DropdownModule,
+    ButtonModule,
+    SidebarModule,
+    CardModule
+  ],
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+>>>>>>> Stashed changes
 })
-export class NavbarComponent implements OnInit {
-  @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
-  @ViewChild('sparklineChart1') sparklineChartRef1: ElementRef;
-  @ViewChild('sparklineChart2') sparklineChartRef2: ElementRef;
-  sparklineChart: Chart;
-  sparklineChart1: Chart;
-  sparklineChart2: Chart;
-  stock: any
-  data: any
-  pcrnsebnifty: pcrnsebniftytile[] = [];
-  pcrnsenifty: pcrnseniftytile[] = [];
-  datetoday: any
-  stock_isin: any
-  newscard: newscardtile[] = [];
-  stock1: any;
-  fnostock: any;
-  stockid = [];
-  mcsectorsymbol = [];
-  items: SelectItem[];
-  ttmmi: ttmmitiles[] = [];
-  item: string;
-  eqsymbol1 = [];
-  tlid = [];
-  n50optionssupport: any;
-  n50optionsresistance: any;
-  bnoptionssupport: any;
-  bnoptionsresistance: any;
-  companyid = [];
-  mcsymbol = [];
-  mcsymbol1 = [];
-  optionwc = [];
-  optionwp = [];
-  optionbwc = [];
-  optionbwp = [];
-  mcadvvalue: any
-  mcdecvalue: any
-  mcadvvalue1: any
-  mcdecvalue1: any
-  mcpadvvalue: any
-  mcpdecvalue: any
+export class NavbarComponent {
+  @Input() isAuthenticated = false;
+  @Input() user: any = null;
+  @Output() toggleSidenav = new EventEmitter<void>();
+
+  isDarkTheme$ = inject(AppStateService).state$.pipe(map(state => state.theme === 'dark'));
+  private appState = inject(AppStateService);
+  private authService = inject(AuthService);
+
+  // Dropdown properties
+  items: any[] = [];
+  item: any;
+
+  // Sidebar visibility states
+  visibleSidebar1: boolean = false;
+  visibleSidebar2: boolean = false;
+  visibleSidebar3: boolean = false;
+  visibleSidebar4: boolean = false;
+  visibleSidebar5: boolean = false;
+
+  // Market data properties
   mcniftyrt: mcniftyrttiles[] = [];
-  mcpniftyrt: mcpniftyrttiles[] = [];
   mcbniftyrt: mcbniftyrttiles[] = [];
+<<<<<<< Updated upstream
   sectorList: any;
   etstocks: any;
   bqsymbol = [];
@@ -147,142 +157,73 @@ export class NavbarComponent implements OnInit {
       label: stock.name,
       value: stock.isin
     }));
+=======
+  mcpniftyrt: mcpniftyrttiles[] = [];
+  newscard: newscardtile[] = [];
+  ttmmi: ttmmitiles[] = [];
+  pcrnsenifty1: string = '';
+  pcrnsebnifty1: string = '';
+  tlniftybuildup: string = '';
+  tlniftybuildup5: string = '';
+  tlbniftybuildup: string = '';
+
+  toggleTheme(): void {
+    const currentTheme = this.appState.currentState.theme;
+    this.appState.setTheme(currentTheme === 'light' ? 'dark' : 'light');
+>>>>>>> Stashed changes
   }
-  async ngOnInit() {
-    this.today = new Date();
-    this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
-    this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
-    this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
-    this.date5 = this.today.setDate(this.today.getDate() - 5)
-    this.stock = stocks.default.Data
-    this.item = stocks.default.Data['name']
-    this.primengConfig.ripple = true;
-    this.data = this.stock
-    this.tlidnifty = '1887'
-    this.tlidbnifty = '1898'
-    { setInterval(() => { this.getniftypcr() }, 30000); }
-    { setInterval(() => { this.getbankniftypcr() }, 30000); }
-    { setInterval(() => { this.getmcniftyrealtime() }, 5000); }
-    { setInterval(() => { this.getmcbankniftyrealtime() }, 5000); }
-    { setInterval(() => { this.getmcpharmaniftyrealtime() }, 5000); }
-    { setInterval(() => { this.getttmmi() }, 60000); }
-    await Promise.all([
-      this.getniftytlbuildup(this.tlidnifty),
-      // this.getniftytlbuildup5(),
-      // this.getbniftytlbuildup(this.tlidbnifty),
-      // this.getpniftytlbuildup('1905'),
-      this.getniftysparkline(),
-      this.getbniftysparkline(),
-      this.getpniftysparkline(),
-      this.getmcniftyrealtime(),
-      this.getniftypcr(),
-      this.getbankniftypcr(),
-      this.getmcbankniftyrealtime(),
-      this.getttmmi(),
-      this.getmcpharmaniftyrealtime(),
-      this.toggleSidebar(),
-    ])
+
+  logout(): void {
+    this.authService.logout();
   }
-  keyword = 'name';
-  selectEvent(stock_isin) {
-    window.open('/Share?stock=' + stock_isin)
+
+  // Navigation methods
+  navigateanalytics(): void {
+    // TODO: Implement navigation
   }
-  onChangeSearch(val: string) {
+
+  navigateinsights(): void {
+    // TODO: Implement navigation
   }
-  onFocused(abc) {
-    // do something when input is focused
+
+  navigatescreeners(): void {
+    // TODO: Implement navigation
   }
-  async getttmmi() {
-    try {
-      this.dataApi.getTtmmi().subscribe(data5 => {
-        const nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-        this.ttmmi.length = 0;
-        this.ttmmi.push({ text1: nestedItems[0]['data'].currentValue })
-      })
-    } catch (err) {
-      console.error(err);
-    }
+
+  navigatenifty(): void {
+    // TODO: Implement navigation
   }
-  // toggle sidebar in small devices
-  toggleOffcanvas() {
-    document.querySelector('.sidebar-offcanvas').classList.toggle('active');
+
+  navigatebanknifty(): void {
+    // TODO: Implement navigation
   }
-  // toggle sidebar
-  toggleSidebar() {
-    const body = document.querySelector('body');
-    if ((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
-      this.iconOnlyToggled = !this.iconOnlyToggled;
-      if (this.iconOnlyToggled) {
-        body.classList.add('sidebar-icon-only');
-      } else {
-        body.classList.remove('sidebar-icon-only');
-      }
-    } else {
-      this.sidebarToggled = !this.sidebarToggled;
-      if (this.sidebarToggled) {
-        body.classList.add('sidebar-hidden');
-      } else {
-        body.classList.remove('sidebar-hidden');
-      }
-    }
+
+  navigatepnifty(): void {
+    // TODO: Implement navigation
   }
- 
-  trackByFunctionmcniftyrt(index: number, item: any): any {
-    return item.id; 
-  } 
-  trackByFunctionmcbniftyrt(index: number, item: any): any {
-    return item.id; 
-  } 
-  trackByFunctionmcpniftyrt(index: number, item: any): any {
-    return item.id; 
-  } 
-  trackByFunctionnewscardnav(index: number, item: any): any {
-    return item.id; 
+
+  // Event handlers
+  selectEvent(item: any): void {
+    // TODO: Implement selection handling
   }
-  getniftypcr() {
-    this.dataApi.getNtNiftyPcrDetails().subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pcrnsenifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
-      this.pcrnsenifty1 = nestedItems[0]['resultData']['data'][this.pcrnsenifty1length].pcr
-    })
+
+  // Track by functions for ngFor
+  trackByFunctionmcniftyrt(index: number): number {
+    return index;
   }
-  getbankniftypcr() {
-    this.dataApi.getNtBankNiftyPcrDetails().subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pcrnsebnifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
-      this.pcrnsebnifty1 = nestedItems[0]['resultData']['data'][this.pcrnsebnifty1length].pcr
-    })
+
+  trackByFunctionmcbniftyrt(index: number): number {
+    return index;
   }
-  getniftytlbuildup(tlidnifty) {
-    this.tlidnifty = '1887'
-    this.dataApi.getTlBuildup(this.tlidnifty).subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.tlniftybuildup = (nestedItems[0]['data_v2'][0]['buildup'])
-      // console.log(this.tlniftybuildup)
-    });
+
+  trackByFunctionmcpniftyrt(index: number): number {
+    return index;
   }
-  getniftytlbuildup5() {
-    this.tlidnifty = '1887'
-    this.dataApi.getTlBuildup5().subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      // this.tlniftybuildup5=(nestedItems[0]['data_v2'][0]['buildup'])
-      for (const val in nestedItems[0]['all']['series']) {
-        if (nestedItems[0]['all']['series'][val].code == "NIFTY50") {
-          this.tlniftybuildup5 = nestedItems[0]['all']['series'][val].builtup_str
-        }
-      }
-    });
+
+  trackByFunctionnewscardnav(index: number): number {
+    return index;
   }
+<<<<<<< Updated upstream
   getbniftytlbuildup(tlidbnifty) {
     this.tlidbnifty = '1898'
     this.dataApi.getTlBuildup(this.tlidbnifty).subscribe(data5 => {
@@ -481,4 +422,6 @@ export class NavbarComponent implements OnInit {
 
   }
   
+=======
+>>>>>>> Stashed changes
 }

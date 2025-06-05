@@ -18,14 +18,20 @@
     "stats": "webpack-bundle-analyzer /dist/stats.json"
   },
   "engines": {
+<<<<<<< Updated upstream
     "node": "20.15.0",
     "npm": "10.8.1"
+=======
+    "node": "v22.16.0",
+    "npm": "11.4.1"
+>>>>>>> Stashed changes
   },
   "resolutions": {
     "uglify-es": "npm:terser"
   },
   "private": true,
   "dependencies": {
+<<<<<<< Updated upstream
     "@angular/animations": "^18.0.6",
     "@angular/cdk": "^18.0.6",
     "@angular/common": "^18.0.6",
@@ -39,6 +45,21 @@
     "@angular/pwa": "^18.0.7",
     "@angular/router": "^18.0.6",
     "@angular/service-worker": "^18.0.6",
+=======
+    "@angular/animations": "^17.2.0",
+    "@angular/cdk": "^17.2.0",
+    "@angular/common": "^17.2.0",
+    "@angular/compiler": "^17.2.0",
+    "@angular/core": "^17.2.0",
+    "@angular/flex-layout": "^15.0.0-beta.42",
+    "@angular/forms": "^17.2.0",
+    "@angular/material": "^17.2.0",
+    "@angular/platform-browser": "^17.2.0",
+    "@angular/platform-browser-dynamic": "^17.2.0",
+    "@angular/pwa": "^17.2.0",
+    "@angular/router": "^17.2.0",
+    "@angular/service-worker": "^17.2.0",
+>>>>>>> Stashed changes
     "@mdi/font": "^7.4.47",
     "@netlify/functions": "^2.8.1",
     "@popperjs/core": "^2.11.8",
@@ -86,6 +107,7 @@
     "autoprefixer": "10.4.7"
   },
   "devDependencies": {
+<<<<<<< Updated upstream
     "@angular-builders/custom-webpack": "^18.0.0",
     "@angular-devkit/build-angular": "^18.0.7",
     "@angular-eslint/builder": "18.1.0",
@@ -96,7 +118,20 @@
     "@angular/cli": "^18.0.7",
     "@angular/compiler-cli": "^18.0.6",
     "@angular/localize": "^18.0.6",
+=======
+    "@angular-builders/custom-webpack": "^17.0.0",
+    "@angular-devkit/build-angular": "^17.2.0",
+    "@angular-eslint/builder": "17.2.0",
+    "@angular-eslint/eslint-plugin": "17.2.0",
+    "@angular-eslint/eslint-plugin-template": "17.2.0",
+    "@angular-eslint/schematics": "17.2.0",
+    "@angular-eslint/template-parser": "17.2.0",
+    "@angular/cli": "^17.2.0",
+    "@angular/compiler-cli": "^17.2.0",
+    "@angular/localize": "^17.2.0",
+>>>>>>> Stashed changes
     "@sparticuz/chromium": "^106.0.2",
+    "@types/angular-route": "^1.7.6",
     "@types/jquery": "^3.5.30",
     "@typescript-eslint/eslint-plugin": "7.15.0",
     "@typescript-eslint/parser": "7.15.0",

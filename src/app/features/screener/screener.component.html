@@ -1,0 +1,161 @@
+<div class="screener-container">
+  <h1>Stock Screener</h1>
+  <!-- Filters Card -->
+  <mat-card class="filters-card">
+    <mat-card-header>
+      <mat-card-title>Stock Screener</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="filterForm">
+        <!-- Price Range -->
+        <div class="filter-row">
+          <mat-form-field>
+            <mat-label>Min Price</mat-label>
+            <input matInput type="number" formControlName="minPrice">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Max Price</mat-label>
+            <input matInput type="number" formControlName="maxPrice">
+          </mat-form-field>
+        </div>
+
+        <!-- Market Cap Range -->
+        <div class="filter-row">
+          <mat-form-field>
+            <mat-label>Min Market Cap (Cr)</mat-label>
+            <input matInput type="number" formControlName="minMarketCap">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Max Market Cap (Cr)</mat-label>
+            <input matInput type="number" formControlName="maxMarketCap">
+          </mat-form-field>
+        </div>
+
+        <!-- Volume Range -->
+        <div class="filter-row">
+          <mat-form-field>
+            <mat-label>Min Volume</mat-label>
+            <input matInput type="number" formControlName="minVolume">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Max Volume</mat-label>
+            <input matInput type="number" formControlName="maxVolume">
+          </mat-form-field>
+        </div>
+
+        <!-- P/E Ratio Range -->
+        <div class="filter-row">
+          <mat-form-field>
+            <mat-label>Min P/E</mat-label>
+            <input matInput type="number" formControlName="minPE">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Max P/E</mat-label>
+            <input matInput type="number" formControlName="maxPE">
+          </mat-form-field>
+        </div>
+
+        <!-- Sector Selection -->
+        <mat-form-field class="full-width">
+          <mat-label>Sectors</mat-label>
+          <mat-select formControlName="sectors" multiple>
+            <mat-option *ngFor="let sector of sectors" [value]="sector">
+              {{ sector }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Industry Selection -->
+        <mat-form-field class="full-width">
+          <mat-label>Industries</mat-label>
+          <mat-select formControlName="industries" multiple>
+            <mat-option *ngFor="let industry of industries" [value]="industry">
+              {{ industry }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="actions">
+          <button mat-raised-button color="primary" (click)="applyFilters()">
+            Apply Filters
+          </button>
+          <button mat-button (click)="resetFilters()">
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Results Table -->
+  <mat-card class="results-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="filteredStocks" matSort (matSortChange)="sortData($event)">
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.symbol }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.name }} </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.price | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Change Column -->
+        <ng-container matColumnDef="change">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Change </th>
+          <td mat-cell *matCellDef="let stock" [class.up]="stock.change > 0" [class.down]="stock.change < 0">
+            {{ stock.change > 0 ? '+' : ''}}{{ stock.change | number:'1.2-2' }}%
+          </td>
+        </ng-container>
+
+        <!-- Volume Column -->
+        <ng-container matColumnDef="volume">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Volume </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.volume | number }} </td>
+        </ng-container>
+
+        <!-- Market Cap Column -->
+        <ng-container matColumnDef="marketCap">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Market Cap (Cr) </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.marketCap | number:'1.0-0' }} </td>
+        </ng-container>
+
+        <!-- P/E Column -->
+        <ng-container matColumnDef="pe">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> P/E </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.pe | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Sector Column -->
+        <ng-container matColumnDef="sector">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sector </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.sector }} </td>
+        </ng-container>
+
+        <!-- Industry Column -->
+        <ng-container matColumnDef="industry">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Industry </th>
+          <td mat-cell *matCellDef="let stock"> {{ stock.industry }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="totalResults"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 25, 50, 100]"
+                     (page)="onPageChange($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div> 

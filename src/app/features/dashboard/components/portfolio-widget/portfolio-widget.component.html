@@ -1,0 +1,15 @@
+<div class="portfolio-widget">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Portfolio</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="loading-spinner" *ngIf="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      <div class="portfolio-data" *ngIf="!loading">
+        <!-- Portfolio data content will go here -->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

@@ -1,0 +1,78 @@
+@import "variables";
+
+// Set variables before Bootstrap imports
+$theme-colors: $theme-colors !default;
+$theme-colors-text: $theme-colors-text !default;
+$theme-colors-bg-subtle: $theme-colors-bg-subtle !default;
+$enable-rounded: true !default;
+
+// 1. Include functions first
+@import "bootstrap/scss/functions";
+
+// 2. Include variables and maps
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+
+// 3. Include remainder of required parts
+@import "bootstrap/scss/mixins";
+
+// 4. Define root variables
+:root {
+  @each $color, $value in $theme-colors {
+    --#{$prefix}theme-color-#{$color}: #{$value};
+  }
+  @each $color, $value in $theme-colors-bg-subtle {
+    --#{$prefix}theme-color-bg-subtle-#{$color}: #{$value};
+  }
+}
+
+// 5. Include optional components
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/helpers";
+
+// 6. Include utilities API last
+@import "bootstrap/scss/utilities/api";
+
+// Import the main Bootstrap file - this will include all necessary partials
+// (mixins, root, reboot, components, utilities, etc.) in the correct order,
+// using the variable overrides defined above.
+@import "bootstrap/scss/bootstrap";
+
+// Import Bootstrap components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api"; 

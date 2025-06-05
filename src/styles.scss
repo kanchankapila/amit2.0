@@ -1,60 +1,112 @@
-// /* You can add global styles to this file, and also import other style files */
-@import "./assets/scss/style.scss";
-// @import "~bootstrap/scss/functions";
-// @import "~bootstrap/scss/variables";
-// @import './assets/scss/variables';
-// @import "~compass-mixins/lib/compass";
-// @import "~compass-mixins/lib/animate"
-// @import "~bootstrap/scss/bootstrap";
-// @import "./assets/scss/functions";
-// @import '~bootstrap/dist/css/bootstrap.css';
-// @import "~@mdi/font/scss/materialdesignicons";
-//  @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@use '@angular/material' as mat;
+@use 'assets/scss/variables' as vars;
+@use 'assets/scss/bootstrap' as bs;
+@use 'assets/scss/style' as style;
 
-// /* === Template mixins === */
-// @import "./assets/scss/mixins/animation";
-// @import "./assets/scss/mixins/badges";
-// @import "./assets/scss/mixins/buttons";
-// @import "./assets/scss/mixins/misc";
-// @import "./assets/scss/mixins/color-functions";
-// @import "./assets/scss/mixins/cards";
-// @import "./assets/scss/mixins/blockqoute";
-// @import "./assets/scss/mixins/popovers";
-// @import "./assets/scss/mixins/tooltips";
+// Import Angular Material theme
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-// /* === Core Styles === */
-// @import "./assets/scss/background";
-// @import "./assets/scss/typography";
-// @import "./assets/scss/reset";
-// @import "./assets/scss/responsive";
-// @import "./assets/scss/misc";
-// @import "./assets/scss/utilities";
-// @import "./assets/scss/demo";
-// @import "./assets/scss/spinner";
+// Define the palettes for your theme using the Material Design palettes
+$primary-palette: mat.define-palette(mat.$blue-palette);
+$accent-palette: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$warn-palette: mat.define-palette(mat.$red-palette);
 
-// /* === Components === */
-// @import "./assets/scss/components/forms";
-// @import "./assets/scss/components/checkbox-radio";
- 
-// @import "./assets/scss/components/tables";
-// @import "./assets/scss/components/accordions";
-// @import "./assets/scss/components/buttons";
-// @import "./assets/scss/components/breadcrumbs";
-// @import "./assets/scss/components/badges";
-// @import "./assets/scss/components/cards";
-// @import "./assets/scss/components/preview";
-// @import "./assets/scss/components/tooltips";
-// @import "./assets/scss/components/popovers";
-// @import "./assets/scss/components/lists";
-// @import "./assets/scss/components/bootstrap-progress";
-// @import "./assets/scss/components/bootstrap-alerts";
-// @import "./assets/scss/components/tabs";
-// @import "./assets/scss/components/dropdowns"; 
+// Create the theme object
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
 
-// @import "./assets/scss/components/portfolio";
-// //@import "./assets/scss/components/todo-list";
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
 
-// //@import "./assets/scss/components/landing-screens/auth";
+// Apply the light theme by default
+@include mat.all-component-themes($light-theme);
 
-// /* === Layout === */
-// @import "./assets/scss/layout";
+// Apply the dark theme only when the user prefers dark themes
+@media (prefers-color-scheme: dark) {
+  @include mat.all-component-colors($dark-theme);
+}
+
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: var(--mat-app-background-color);
+  color: var(--mat-app-text-color);
+}
+
+// Custom utility classes
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.text-center { text-align: center; }
+.mt-4 { margin-top: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+.p-4 { padding: 1rem; }
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Snackbar styles
+.success-snackbar { background: #43a047; color: white; }
+.error-snackbar { background: #d32f2f; color: white; }
+.info-snackbar { background: #1976d2; color: white; }
+
+// Animation classes
+.fade-in { animation: fadeIn 0.3s ease-in; }
+.slide-in { animation: slideIn 0.3s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

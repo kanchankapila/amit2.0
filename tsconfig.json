@@ -20,6 +20,7 @@
       "node_modules/@types",
       "node"
     ],
+    "types": ["jasmine", "node"],
     "lib": [
       "es2020",
       "dom"

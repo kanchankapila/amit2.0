@@ -2,7 +2,7 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <div class="cardnew col-lg-15 col-xs-6">
-  <div fxLayout="row" fxLayout.xs="column">
+  <div class="layout-container">
     <div class="button-container">
       <p-dropdown
         [options]="items"
@@ -438,3 +438,51 @@
     <h1 style="font-weight: normal">Full Screen Sidebar</h1>
   </p-sidebar>
 </div>
+
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <a mat-button routerLink="/" class="brand">
+    <img src="assets/stockinsights.png" alt="Stock Insights" class="brand-logo">
+    <span class="brand-text">Stock Insights</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <!-- Theme Toggle -->
+  <button mat-icon-button (click)="toggleTheme()" class="theme-toggle">
+    <mat-icon>{{ (isDarkTheme$ | async) ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <!-- User Menu -->
+  <ng-container *ngIf="isAuthenticated; else loginButton">
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ user?.name }}</span>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+
+  <ng-template #loginButton>
+    <button mat-button routerLink="/auth/login">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </ng-template>
+</mat-toolbar>

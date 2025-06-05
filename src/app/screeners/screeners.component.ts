@@ -1,9 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { DataapiService } from '../../dataapi.service'
+import { DataApiService } from '../services/data-api.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import * as  stocks from '../lists/stocklist'
 import { Chart } from 'chart.js';
+<<<<<<< Updated upstream
+=======
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+
+export interface NtScreenerOptions {
+  [key: string]: boolean | number | string;
+}
+
+>>>>>>> Stashed changes
 export interface screenerstockstile {
   text1: number; text2: number; text3: number; text4: number; text5: number; text6: number; text7: number; text8: number; text9: number;
   text10: number; text11: number; text12: number;
@@ -48,7 +61,12 @@ export class ScreenersComponent implements OnInit {
     console.log('selectedOption: ', selectedOption);
   }
   screenerstocks: screenerstockstile[] = [];
+<<<<<<< Updated upstream
   constructor(private dataApi: DataapiService, private http: HttpClient, private _formBuilder: FormBuilder, private window: Window) {
+=======
+
+  constructor(private dataApi: DataApiService, private http: HttpClient, private _formBuilder: FormBuilder) {
+>>>>>>> Stashed changes
     this.SMA = this._formBuilder.group({
       "_20_day_sma_below": false,
       "_20_day_sma_above": false,
@@ -241,16 +259,15 @@ export class ScreenersComponent implements OnInit {
     });
   }
   templateForm(value: any) {
-    //  let data = (value)
-    let object = {};
+    let options: NtScreenerOptions = {};
     for (let val in value) {
-      if (value[val] == 'true') {
-        object[val] = value[val]
+      if (value[val] === 'true') {
+        options[val] = true;
       }
     }
-    this.ntoptions = (object)
-    console.log(this.ntoptions)
-    this.getnteodscreeners(this.ntoptions)
+    this.ntoptions = options;
+    console.log(this.ntoptions);
+    this.getnteodscreeners(this.ntoptions);
   }
   ngOnInit(): void {
     this.stockList = stocks.default.Data
@@ -419,16 +436,31 @@ export class ScreenersComponent implements OnInit {
       console.error(err);
     }
   }
-  getnteodscreeners(SMA1: string) {
-    this.dataApi.getNteodScreeners(SMA1).subscribe(data5 => {
+  getnteodscreeners(options: NtScreenerOptions) {
+    this.dataApi.getNteodScreeners(options).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       this.screenerstocks.length = 0;
-      console.log(SMA1)
-      console.log(this.SMA)
-      console.log(nestedItems)
-      for (let val in nestedItems[0]['resultData']) { this.screenerstocks.push({ text1: nestedItems[0]['resultData'][val].symbol, text2: nestedItems[0]['resultData'][val].priceChange, text3: nestedItems[0]['resultData'][val].t0_20avgVolume, text4: nestedItems[0]['resultData'][val].t0_volume, text5: nestedItems[0]['resultData'][val].t0_close, text6: nestedItems[0]['resultData'][val].t0_date, text7: nestedItems[0]['resultData'][val].t0_deliveryPercentage, text8: nestedItems[0]['resultData'][val].t0_high, text9: nestedItems[0]['resultData'][val].t0_low, text10: nestedItems[0]['resultData'][val].t0_open, text11: nestedItems[0]['resultData'][val].t0_rsi, text12: nestedItems[0]['resultData'][val]._52week_range }) }
+      console.log(options);
+      console.log(this.SMA);
+      console.log(nestedItems);
+      for (let val in nestedItems[0]['resultData']) { 
+        this.screenerstocks.push({ 
+          text1: nestedItems[0]['resultData'][val].symbol, 
+          text2: nestedItems[0]['resultData'][val].priceChange, 
+          text3: nestedItems[0]['resultData'][val].t0_20avgVolume, 
+          text4: nestedItems[0]['resultData'][val].t0_volume, 
+          text5: nestedItems[0]['resultData'][val].t0_close, 
+          text6: nestedItems[0]['resultData'][val].t0_date, 
+          text7: nestedItems[0]['resultData'][val].t0_deliveryPercentage, 
+          text8: nestedItems[0]['resultData'][val].t0_high, 
+          text9: nestedItems[0]['resultData'][val].t0_low, 
+          text10: nestedItems[0]['resultData'][val].t0_open, 
+          text11: nestedItems[0]['resultData'][val].t0_rsi, 
+          text12: nestedItems[0]['resultData'][val]._52week_range 
+        });
+      }
     });
   }
   toggleFullscreen(element) {

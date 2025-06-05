@@ -1,0 +1,111 @@
+<div class="dashboard-container">
+  <!-- Global Markets Section -->
+  <section class="markets-section">
+    <h2>Global Markets</h2>
+    <cdk-virtual-scroll-viewport [itemSize]="itemSize" class="virtual-scroll-viewport">
+      <div class="grid-container">
+        <div class="card" 
+             *cdkVirtualFor="let tile of globalMarket(); trackBy: trackByGlobalMarket"
+             [class.positive]="tile.text3 > 0"
+             [class.negative]="tile.text3 < 0">
+          <div class="card-content">
+            <div class="market-name">{{ tile.text2 }}</div>
+            <div class="symbol">{{ tile.text1 }}</div>
+            <div class="change" [class.up]="tile.text3 > 0" [class.down]="tile.text3 < 0">
+              {{ tile.text3 }}%
+            </div>
+            <div class="value">{{ tile.text4 }}</div>
+          </div>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </section>
+
+  <!-- Charts Section -->
+  <section class="charts-section">
+    <div class="chart-grid">
+      <!-- Market Overview Chart -->
+      <div class="chart-container" *ngIf="chartOptions()">
+        <h3>Market Overview</h3>
+        <apx-chart
+          [series]="chartOptions().series"
+          [chart]="chartOptions().chart"
+          [xaxis]="chartOptions().xaxis"
+          [yaxis]="chartOptions().yaxis"
+          [tooltip]="chartOptions().tooltip"
+          [stroke]="chartOptions().stroke"
+          [grid]="chartOptions().grid"
+          [theme]="chartOptions().theme">
+        </apx-chart>
+      </div>
+
+      <!-- Sector Performance Chart -->
+      <div class="chart-container" *ngIf="chartOptions6()">
+        <h3>Sector Performance</h3>
+        <apx-chart
+          [series]="chartOptions6().series"
+          [chart]="chartOptions6().chart"
+          [dataLabels]="chartOptions6().dataLabels"
+          [plotOptions]="chartOptions6().plotOptions"
+          [xaxis]="chartOptions6().xaxis"
+          [stroke]="chartOptions6().stroke"
+          [grid]="chartOptions6().grid"
+          [theme]="chartOptions6().theme">
+        </apx-chart>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screeners Section -->
+  <section class="screeners-section">
+    <h2>Market Screeners</h2>
+    <div class="screener-controls">
+      <p-radioButton
+        *ngFor="let option of [
+          { value: 'moversvolume', label: 'Active by Volume' },
+          { value: 'moversvalue', label: 'Active by Value' },
+          { value: 'onlybuyer', label: 'Only Buyers' },
+          { value: 'onlyseller', label: 'Only Sellers' },
+          { value: 'fallfromhigh', label: 'Fall from High' },
+          { value: 'recoveryfromlow', label: 'Rise from Low' }
+        ]"
+        [name]="'screener'"
+        [value]="option.value"
+        [label]="option.label"
+        [(ngModel)]="selectedValue()"
+        (onClick)="onScreenerValueChange($event)">
+      </p-radioButton>
+    </div>
+
+    <cdk-virtual-scroll-viewport [itemSize]="itemSize" class="virtual-scroll-viewport">
+      <div class="screener-grid">
+        <div class="screener-card" 
+             *cdkVirtualFor="let stock of filteredScreener(); trackBy: trackByScreener"
+             [class.positive]="stock.text2 > 0"
+             [class.negative]="stock.text2 < 0">
+          <div class="stock-info">
+            <h4>{{ stock.text1 }}</h4>
+            <div class="price-change">
+              <span class="current">₹{{ stock.text3 }}</span>
+              <span class="change" [class.up]="stock.text2 > 0" [class.down]="stock.text2 < 0">
+                {{ stock.text2 }}%
+              </span>
+            </div>
+            <div class="volume">Volume: {{ stock.text11 }}K</div>
+          </div>
+          <div class="stock-details">
+            <div class="range">
+              <span>52w High: {{ stock.text4 }}</span>
+              <span>52w Low: {{ stock.text5 }}</span>
+            </div>
+            <div class="recommendations">
+              <span class="buy">Buy: {{ stock.text6 }}</span>
+              <span class="hold">Hold: {{ stock.text8 }}</span>
+              <span class="sell">Sell: {{ stock.text7 }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </section>
+</div> 

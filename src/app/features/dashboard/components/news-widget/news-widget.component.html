@@ -1,0 +1,15 @@
+<div class="news-widget">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Market News</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="loading-spinner" *ngIf="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      <div class="news-data" *ngIf="!loading">
+        <!-- News data content will go here -->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

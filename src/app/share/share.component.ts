@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 // import { Browser } from '@syncfusion/ej2-base';
 import jsonp from 'jsonp-modernized';
@@ -12,6 +13,17 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RadioButton } from 'primeng/radiobutton';
 import { HttpClient } from '@angular/common/http';
+=======
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { Router, RouterModule } from '@angular/router';
+>>>>>>> Stashed changes
 
 import Chart from 'chart.js/auto';
 import { ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
@@ -157,10 +169,24 @@ const stockMap = new Map(
   selector: 'app-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
+<<<<<<< Updated upstream
   encapsulation: ViewEncapsulation.None,
+=======
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterModule
+  ]
+>>>>>>> Stashed changes
 })
-@Injectable()
 export class ShareComponent implements OnInit {
+<<<<<<< Updated upstream
   @ViewChild('sparklineChart') sparklineChartRef: ElementRef;
   displayMaximizableneutral:boolean=false;
   displayMaximizablepositive:boolean=false;
@@ -2986,4 +3012,34 @@ getstocktoday1(mcsymbol) {
     }
     )
   }
+=======
+  shareForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {
+    this.shareForm = this.formBuilder.group({
+      recipient: ['', [Validators.required, Validators.email]],
+      message: ['']
+    });
+  }
+
+  ngOnInit(): void {
+    // Initialization logic here
+  }
+
+  onSubmit(): void {
+    if (this.shareForm.valid) {
+      // Handle form submission
+      console.log('Form submitted:', this.shareForm.value);
+      this.snackBar.open('Shared successfully!', 'Close', {
+        duration: 3000
+      });
+      // Navigate back to dashboard after successful share
+      this.router.navigate(['/dashboard']);
+    }
+  }
+>>>>>>> Stashed changes
 }

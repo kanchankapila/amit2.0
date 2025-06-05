@@ -4,7 +4,24 @@
 
 export const environment = {
   production: false,
+<<<<<<< Updated upstream
 
+=======
+  apiUrl: '/.netlify/functions',
+  wsUrl: 'ws://localhost:8888',
+  vapidPublicKey: 'YOUR_VAPID_PUBLIC_KEY', // Replace with your VAPID public key
+  appName: 'Stock Website',
+  version: '1.0.0',
+  apiTimeout: 30000, // 30 seconds
+  cacheTTL: 300000, // 5 minutes
+  logLevel: 'debug',
+  features: {
+    enablePWA: true,
+    enableAnalytics: true,
+    enableNotifications: true,
+    darkMode: true
+  }
+>>>>>>> Stashed changes
 };
 
 /*

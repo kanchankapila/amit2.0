@@ -1,91 +1,77 @@
 ////////// COLOR SYSTEM //////////
 
-$blue: #5E50F9;
-$indigo: #6610f2;
-$purple: #6a008a;
-$pink: #E91E63;
-$red: #f96868;
-$orange: #f2a654;
-$yellow: #f6e84e;
-$dark-yellow:rgb(243, 243, 130);
-$green: #46c35f;
-$teal: #58d8a3;
-$cyan: #57c7d4;
-$black: #000;
-$white: #ffffff;
-$white-smoke: #f2f7f8;
-$violet: #41478a;
-$darkslategray : #2e383e;
-$dodger-blue : #3498db;
-
-
-$blue: #5E50F9;
-$indigo: #6610f2;
-$purple: #6a008a;
-$pink: #E91E63;
-$red: #f96868;
-$orange: #f2a654;
-$yellow: #f6e84e;
-$dark-yellow: rgb(243, 243, 130);
-$green: #46c35f;
-$teal: #58d8a3;
-$cyan: #57c7d4;
-$black: #000;
-$white: #ffffff;
-$white-smoke: #f2f7f8;
-$violet: #41478a;
-$darkslategray: #2e383e;
-$dodger-blue: #3498db;
+$blue: #5E50F9 !default;
+$indigo: #6610f2 !default;
+$purple: #6a008a !default;
+$pink: #E91E63 !default;
+$red: #f96868 !default;
+$orange: #f2a654 !default;
+$yellow: #f6e84e !default;
+$dark-yellow: rgb(243, 243, 130) !default;
+$green: #46c35f !default;
+$teal: #58d8a3 !default;
+$cyan: #57c7d4 !default;
+$black: #000 !default;
+$white: #ffffff !default;
+$white-smoke: #f2f7f8 !default;
+$violet: #41478a !default;
+$darkslategray: #2e383e !default;
+$dodger-blue: #3498db !default;
 
 $theme-colors: (
-  primary: #b66dff,
-  secondary: #c3bdbd,
-  success: #1bcfb4,
-  info: #198ae3,
-  neutral: orange,
-  warning: #fed713,
-  danger: #fe7c96,
-  light: #f8f9fa,
-  dark: #3e4b5b
+  "primary": #b66dff,
+  "secondary": #c3bdbd,
+  "success": #1bcfb4,
+  "info": #198ae3,
+  "warning": #fed713,
+  "danger": #fe7c96,
+  "light": #f8f9fa,
+  "dark": #3e4b5b
+) !default;
+
+$primary: #b66dff !default;
+$secondary: #c3bdbd !default;
+$success: #1bcfb4 !default;
+$info: #198ae3 !default;
+$warning: #fed713 !default;
+$danger: #fe7c96 !default;
+$light: #f8f9fa !default;
+$dark: #3e4b5b !default;
+$neutral: orange !default;
+
+$theme-colors-text: (
+  "primary": #b66dff,
+  "secondary": #c3bdbd,
+  "success": #1bcfb4,
+  "info": #198ae3,
+  "warning": #fed713,
+  "danger": #fe7c96,
+  "light": #f8f9fa,
+  "dark": #3e4b5b
+) !default;
+
+$theme-colors-bg-subtle: (
+  "primary": #cfe2ff,
+  "secondary": #e2e3e5,
+  "success": #d1e7dd,
+  "info": #cff4fc,
+  "warning": #fff3cd,
+  "danger": #f8d7da,
+  "light": #fcfcfd,
+  "dark": #ced4da
+) !default;
+
+$theme-gradient-colors: (
+  "primary": linear-gradient(to right, #da8cff, #9a55ff),
+  "secondary": linear-gradient(to right, #e7ebf0, #868e96),
+  "success": linear-gradient(to right, #84d9d2, #07cdae),
+  "info": linear-gradient(to right, #90caf9, #047edf 99%),
+  "warning": linear-gradient(to right, #f6e384, #ffd500),
+  "danger": linear-gradient(to right, #ffbf96, #fe7096),
+  "light": linear-gradient(to bottom, #f4f4f4, #e4e4e9),
+  "dark": linear-gradient(89deg, #5e7188, #3e4b5b),
+  "neutral": linear-gradient(to right, orange, #edfe70)
 );
-
-  $primary: #b66dff;
-  $secondary: #c3bdbd;
-  $success: #1bcfb4;
-  $info: #198ae3;
-  $warning: #fed713;
-  $danger: #fe7c96;
-  $light: #f8f9fa;
-  $dark: #3e4b5b;
-  $neu:orange;
-
-$theme-gradient-colors: (primary: linear-gradient(to right, #da8cff, #9a55ff),
-secondary: linear-gradient(to right, #e7ebf0, #868e96),
-success: linear-gradient(to right, #84d9d2, #07cdae),
-info: linear-gradient(to right, #90caf9, #047edf 99%),
-warning: linear-gradient(to right, #f6e384, #ffd500),
-danger: linear-gradient(to right, #ffbf96, #fe7096),
-neu:linear-gradient(to right, orange, #edfe70),
-light: linear-gradient(to bottom, #f4f4f4, #e4e4e9),
-dark: linear-gradient(89deg, #5e7188, #3e4b5b),
-fair:linear-gradient(to right,#f2f7f2, #dff6f8),
-bull:         linear-gradient(to right,#9bf49b, #75e5ef),
-bull1:        linear-gradient(to right,#9bf49b, #75e5ef),
-bull2:         linear-gradient(to right,#9bf49b, #75e5ef),
-bull3:         linear-gradient(to right,#9bf49b, #75e5ef),
-bull4:         linear-gradient(to right,#9bf49b, #75e5ef),
-bull5:        linear-gradient(to right,#9bf49b, #75e5ef),
-bear:         linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-bear1:        linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-bear2:         linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-bear3:        linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-bear4:         linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-bear5:          linear-gradient(to right, #f7a0a0, rgb(213, 243, 248)) ,
-
-neutral:         linear-gradient( 109.6deg, rgba(176,237,244,1) 31.4%, rgba(250,185,235,1) 68% )
-);
-
-
 
 // ////////// COLOR SYSTEM //////////
 
@@ -105,19 +91,19 @@ neutral:         linear-gradient( 109.6deg, rgba(176,237,244,1) 31.4%, rgba(250,
 
 // ////////// FONTS//
 $type-1: 'roboto',
-sans-serif;
-$type-2: $type-1;
+sans-serif !default;
+$type-2: $type-1 !default;
 $type1-light: 'ubuntu-light',
-sans-serif;
+sans-serif !default;
 $type1-regular: 'ubuntu-regular',
-sans-serif;
+sans-serif !default;
 $type1-medium: 'ubuntu-medium',
-sans-serif;
+sans-serif !default;
 $type1-bold: 'ubuntu-bold',
-sans-serif;
+sans-serif !default;
 
-$default-font-size: .875rem; // 14px as base font size
-$small-font-size: .45rem;
+$default-font-size: .875rem !default; // 14px as base font size
+$small-font-size: .45rem !default;
 // $text-muted: #9c9fa6;
 // $body-color: #343a40;
 
@@ -126,9 +112,9 @@ $small-font-size: .45rem;
 // ///////// CARD ////////
 
 
- $card-description-color: #76838f;
+ $card-description-color: #76838f !default;
 // $card-title-color: $body-color;
-$card-bg-varient: #fff;
+$card-bg-varient: #fff !default;
 // ///////// CARD ////////
 
 // //////// TABLES ////////
@@ -147,7 +133,7 @@ $card-bg-varient: #fff;
 
 // ///////// NAVBAR ////////
 // $navbar-bg: #fff;
- $navbar-height: 180px;
+ $navbar-height: 180px !default;
 // $navbar-menu-color: #9c9fa6;
 // $navbar-font-size: .875rem;
 // $navbar-icon-font-size: 1.25rem;
@@ -167,9 +153,9 @@ $card-bg-varient: #fff;
 // $sidebar-menu-arrow-color: #9e9da0;
 // $sidebar-menu-border-color: #f2edf3;
 
-$sidebar-menu-font-size: $default-font-size;
-$sidebar-menu-padding-y: .5rem;
-$sidebar-menu-padding-x: 2.25rem;
+$sidebar-menu-font-size: $default-font-size !default;
+$sidebar-menu-padding-y: .5rem !default;
+$sidebar-menu-padding-x: 2.25rem !default;
 
 // $sidebar-submenu-font-size: .8125rem;
 // $sidebar-submenu-item-padding: .75rem 2rem .75rem 2rem;
@@ -266,16 +252,16 @@ $sidebar-menu-padding-x: 2.25rem;
 
 
 ////////// MEASUREMENT AND PROPERTY VARIABLES //////////
-$border-color:white;
-$boxed-container-width: 1200px;
-$border-property: 1px solid $border-color;
-$card-spacing-y: 0.5rem;
-$card-padding-y: 0.5rem;
-$card-padding-x: 0.5rem;
-$card-border-radius: .3125rem;
-$grid-gutter-width: 60px;
-$action-transition-duration: 0.25s;
-$action-transition-timing-function: ease;
+$border-color:white !default;
+$boxed-container-width: 1200px !default;
+$border-property: 1px solid $border-color !default;
+$card-spacing-y: 1rem !default;
+$card-padding-y: 0.5rem !default;
+$card-padding-x: 0.5rem !default;
+$card-border-radius: .3125rem !default;
+$grid-gutter-width: 60px !default;
+$action-transition-duration: 0.25s !default;
+$action-transition-timing-function: ease !default;
 ////////// OTHER VARIABLES //////////
 
 ////////// BREAD CRUMBS VARIABLES //////////
@@ -355,9 +341,9 @@ $action-transition-timing-function: ease;
 
 
 ////////// SIDEBAR ////////
-$sidebar-width-lg: 260px;
-$sidebar-width-mini: 185px;
-$sidebar-width-icon: 70px;
+$sidebar-width-lg: 260px !default;
+$sidebar-width-mini: 185px !default;
+$sidebar-width-icon: 70px !default;
 
 // $sidebar-light-bg: white;
 // $sidebar-light-menu-color: #3e4b5b;
@@ -371,7 +357,7 @@ $sidebar-width-icon: 70px;
 // $sidebar-light-menu-arrow-color: #9e9da0;
 // $sidebar-light-menu-border-color: #f2edf3;
 
-$sidebar-menu-font-size: $default-font-size;
+$sidebar-menu-font-size: $default-font-size !default;
 // $sidebar-menu-padding-y: 1.125rem;
 // $sidebar-menu-padding-x: 2.25rem;
 
@@ -396,3 +382,45 @@ $sidebar-menu-font-size: $default-font-size;
 
 // // $bullet-line-list-shape-bg: color(white) !default;
 // $buy-nowbanner-padding-top:80px;
+
+// Theme colors
+$theme-colors-text: (
+  "primary": #007bff,
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+
+// Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+// Container max widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+// Spacing
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3
+) !default;

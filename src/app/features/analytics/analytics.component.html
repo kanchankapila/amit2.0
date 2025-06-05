@@ -1,0 +1,64 @@
+<div class="analytics-container">
+  <!-- Stock Selection -->
+  <mat-card class="selection-card">
+    <mat-card-content>
+      <mat-form-field class="stock-select">
+        <mat-label>Select Stock</mat-label>
+        <input matInput [matAutocomplete]="auto" [(ngModel)]="selectedStock" (ngModelChange)="onStockChange()">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let stock of stockSuggestions" [value]="stock">
+            {{ stock }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-button-toggle-group [(ngModel)]="selectedTimeframe" (change)="onTimeframeChange()">
+        <mat-button-toggle value="1D">1D</mat-button-toggle>
+        <mat-button-toggle value="1W">1W</mat-button-toggle>
+        <mat-button-toggle value="1M">1M</mat-button-toggle>
+        <mat-button-toggle value="3M">3M</mat-button-toggle>
+        <mat-button-toggle value="1Y">1Y</mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading$ | async" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Charts and Analysis -->
+  <mat-card class="analysis-card" *ngIf="!(loading$ | async)">
+    <mat-card-content>
+      <mat-tab-group>
+        <!-- Price Chart -->
+        <mat-tab label="Price Chart">
+          <div echarts [options]="priceChartOptions" class="chart"></div>
+        </mat-tab>
+
+        <!-- Technical Indicators -->
+        <mat-tab label="Technical Indicators">
+          <div class="indicators-grid">
+            <mat-card *ngFor="let indicator of technicalIndicators" class="indicator-card"
+                     [class.buy]="indicator.signal === 'buy'"
+                     [class.sell]="indicator.signal === 'sell'"
+                     [class.neutral]="indicator.signal === 'neutral'">
+              <mat-card-header>
+                <mat-card-title>{{ indicator.name }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="indicator-value">{{ indicator.value | number:'1.2-2' }}</div>
+                <div class="indicator-signal">Signal: {{ indicator.signal | titlecase }}</div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <!-- Volume Analysis -->
+        <mat-tab label="Volume Analysis">
+          <div echarts [options]="volumeChartOptions" class="chart"></div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div> 

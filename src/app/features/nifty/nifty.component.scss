@@ -1,0 +1,70 @@
+.nifty-container {
+  padding: 20px;
+
+  mat-card {
+    margin-bottom: 20px;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+
+  .chart-container {
+    height: 400px;
+    margin: 20px 0;
+
+    .chart {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .market-data {
+    margin: 20px 0;
+
+    .data-item {
+      text-align: center;
+
+      .label {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.54);
+        margin-bottom: 5px;
+      }
+
+      .value {
+        font-size: 24px;
+        font-weight: 500;
+
+        &.positive {
+          color: #4caf50;
+        }
+
+        &.negative {
+          color: #f44336;
+        }
+      }
+    }
+  }
+
+  .additional-data {
+    margin-top: 20px;
+
+    mat-tab-group {
+      min-height: 300px;
+    }
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .nifty-container {
+    .data-item {
+      .label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+} 

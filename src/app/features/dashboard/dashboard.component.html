@@ -1,0 +1,25 @@
+<div class="dashboard-container">
+  <div class="grid-container">
+    <mat-grid-list [cols]="cols" rowHeight="350px" gutterSize="16px">
+      <!-- Market Overview -->
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <app-market-overview class="widget"></app-market-overview>
+      </mat-grid-tile>
+
+      <!-- Watchlist -->
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <app-watchlist-widget class="widget"></app-watchlist-widget>
+      </mat-grid-tile>
+
+      <!-- News -->
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <app-news-widget class="widget"></app-news-widget>
+      </mat-grid-tile>
+
+      <!-- Portfolio -->
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <app-portfolio-widget class="widget"></app-portfolio-widget>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div> 

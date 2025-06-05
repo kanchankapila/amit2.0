@@ -1,9 +1,23 @@
+<!-- Loading spinner -->
+<div *ngIf="isLoading()" class="loading-overlay">
+  <mat-spinner></mat-spinner>
+</div>
 
-<br />
-<div class="grid-wrapper">
-  
+<!-- Error message -->
+<div *ngIf="error()" class="error-message">
+  <mat-card>
+    <mat-card-content>
+      <p>{{ error() }}</p>
+      <button mat-button color="primary" (click)="setupDataStreams()">Retry</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Rest of your existing template code -->
+<div class="grid-wrapper" *ngIf="!isLoading() && !error()">
+  <div class="grid-wrapper">
     <div class="grid-container">
-      <div class="card" *ngFor="let tile of globalmarket; let i = index; trackBy: trackByFunctionglobalmarket" 
+      <div class="card" *ngFor="let tile of globalMarket(); let i = index; trackBy: trackByGlobalMarket" 
            [ngClass]="{
              'bg-gradient-bull': tile.text3 > 0,
              'bg-gradient-bear': tile.text3 < 0,
@@ -15,41 +29,38 @@
         </div>
       </div>
     </div>
-  
-  
-</div>
+  </div>
 
-<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="cardnew">
-    <h4 class="mb-4">Global Markets</h4>
-    <div fxLayout="row wrap" fxLayoutGap="30px">
-      <div
-        fxFlex="calc(100% / 6)"
-        fxFlex.md="calc(100% / 4)"
-        fxFlex.sm="calc(100% / 3)"
-        fxFlex.xs="100%" 
-        *ngFor="let tile of globalmarket; let i = index; trackBy: trackByFunctionglobalmarket"
-      >
-        <mat-card
-          class="text-blue type1-bold cardnew text-center"
-          [ngClass]="{
-            'bg-gradient-bull': tile.text3 > 0,
-            'bg-gradient-bear': tile.text3 < 0,
-            'bg-gradient-warning': tile.text3 === 0
-          }"
+  <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="cardnew">
+      <h4 class="mb-4">Global Markets</h4>
+      <div fxLayout="row wrap" fxLayoutGap="30px">
+        <div
+          fxFlex="calc(100% / 6)"
+          fxFlex.md="calc(100% / 4)"
+          fxFlex.sm="calc(100% / 3)"
+          fxFlex.xs="100%" 
+          *ngFor="let tile of globalmarket; let i = index; trackBy: trackByFunctionglobalmarket"
         >
-          &nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text1 }}<br />&nbsp;{{ tile.text3 }}%<br />&nbsp;{{ tile.text4 }}
-        </mat-card>
+          <mat-card
+            class="text-blue type1-bold cardnew text-center"
+            [ngClass]="{
+              'bg-gradient-bull': tile.text3 > 0,
+              'bg-gradient-bear': tile.text3 < 0,
+              'bg-gradient-warning': tile.text3 === 0
+            }"
+          >
+            &nbsp;{{ tile.text2 }}<br />&nbsp;{{ tile.text1 }}<br />&nbsp;{{ tile.text3 }}%<br />&nbsp;{{ tile.text4 }}
+          </mat-card>
+        </div>
       </div>
     </div>
-  </div>
-</div> -->
+  </div> -->
 
 
-<div class="card-containeradvdec">
-  <div class="card-columnadvdec">
-    <div class="cardnew">
-      <div class="card-body">
+  <div class="card-containeradvdec">
+    <div class="card-columnadvdec">
+      <div class="cardnew">
         <div class="table-responsive">
           <canvas
             baseChart
@@ -60,121 +71,119 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="card-columnadvdec">
-    <div class="cardnew">
-      <div id="chart" *ngIf="chartOptions5">
-        <apx-chart
-          [series]="chartOptions5.series"
-          [chart]="chartOptions5.chart"
-          [dataLabels]="chartOptions5.dataLabels"
-          [plotOptions]="chartOptions5.plotOptions"
-          [title]="chartOptions5.title"
-          [legend]="chartOptions5.legend"
-        ></apx-chart>
+    <div class="card-columnadvdec">
+      <div class="cardnew">
+        <div id="chart" *ngIf="chartOptions5()">
+          <apx-chart
+            [series]="chartOptions5().series"
+            [chart]="chartOptions5().chart"
+            [dataLabels]="chartOptions5().dataLabels"
+            [plotOptions]="chartOptions5().plotOptions"
+            [title]="chartOptions5().title"
+            [legend]="chartOptions5().legend"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 card-column">
+      <div class="cardnew">
+        <div class="chart2" id="chart2"></div>
       </div>
     </div>
   </div>
-  <div class="col-md-4 col-sm-6 col-xs-12 card-column">
-    <div class="cardnew">
-      <div class="chart2" id="chart2"></div>
-    </div>
-  </div>
-</div>
 
-<div class="containercard">
-  <div class="col">
-    <div class="cardnew">
-      <div id="chart" class="chart1" *ngIf="chartOptions6">
-        <apx-chart
-          [series]="chartOptions6.series"
-          [chart]="chartOptions6.chart"
-          [dataLabels]="chartOptions6.dataLabels"
-          [plotOptions]="chartOptions6.plotOptions"
-          [xaxis]="chartOptions6.xaxis"
-          [stroke]="chartOptions6.stroke"
-          [fill]="chartOptions6.fill"
-          [yaxis]="chartOptions6.yaxis"
-          [title]="chartOptions6.title"
-          [tooltip]="chartOptions6.tooltip"
-        ></apx-chart>
+  <div class="containercard">
+    <div class="col">
+      <div class="cardnew">
+        <div id="chart" class="chart1" *ngIf="chartOptions6()">
+          <apx-chart
+            [series]="chartOptions6().series"
+            [chart]="chartOptions6().chart"
+            [dataLabels]="chartOptions6().dataLabels"
+            [plotOptions]="chartOptions6().plotOptions"
+            [xaxis]="chartOptions6().xaxis"
+            [stroke]="chartOptions6().stroke"
+            [fill]="chartOptions6().fill"
+            [yaxis]="chartOptions6().yaxis"
+            [title]="chartOptions6().title"
+            [tooltip]="chartOptions6().tooltip"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="cardnew">
+        <div class="chart1" id="chart1" *ngIf="chartOptions1()">
+          <apx-chart
+            [series]="chartOptions1().series"
+            [chart]="chartOptions1().chart"
+            [dataLabels]="chartOptions1().dataLabels"
+            [plotOptions]="chartOptions1().plotOptions"
+            [xaxis]="chartOptions1().xaxis"
+            [stroke]="chartOptions1().stroke"
+            [fill]="chartOptions1().fill"
+            [yaxis]="chartOptions1().yaxis"
+            [title]="chartOptions1().title"
+            [tooltip]="chartOptions1().tooltip"
+          ></apx-chart>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="cardnew">
-      <div class="chart1" id="chart1" *ngIf="chartOptions1">
-        <apx-chart
-          [series]="chartOptions1.series"
-          [chart]="chartOptions1.chart"
-          [dataLabels]="chartOptions1.dataLabels"
-          [plotOptions]="chartOptions1.plotOptions"
-          [xaxis]="chartOptions1.xaxis"
-          [stroke]="chartOptions1.stroke"
-          [fill]="chartOptions1.fill"
-          [yaxis]="chartOptions1.yaxis"
-          [title]="chartOptions1.title"
-          [tooltip]="chartOptions1.tooltip"
-        ></apx-chart>
-      </div>
-    </div>
+  <p>ET Screeners</p>
+  <div class="button-container">
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="moversvolume"
+      label="Active by Volume"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="moversvalue"
+      label="Active by Value"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="onlybuyer"
+      label="Only Buyers"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="onlyseller"
+      label="Only Sellers"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="fallfromhigh"
+      label="Fall from High"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="recoveryfromlow"
+      label="Rise from Low"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick6($event)"
+    ></p-radioButton>
   </div>
-</div>
-<p>ET Screeners</p>
-<div class="button-container">
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="moversvolume"
-    label="Active by Volume"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="moversvalue"
-    label="Active by Value"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="onlybuyer"
-    label="Only Buyers"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="onlyseller"
-    label="Only Sellers"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="fallfromhigh"
-    label="Fall from High"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="recoveryfromlow"
-    label="Rise from Low"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick6($event)"
-  ></p-radioButton>
-</div>
-<div class="grid-wrapper">
-  
+  <div class="grid-wrapper">
     <div class="grid-container">
-      <div class="card" *ngFor="let tile of screener; let i = index; trackBy: trackByFunctionscreener" 
+      <div class="card" *ngFor="let tile of screener(); let i = index; trackBy: trackByScreener" 
            [ngClass]="{
              'bg-gradient-bull': tile.text4 > 0,
              'bg-gradient-bear': tile.text4 < 0,
@@ -188,34 +197,63 @@
         </div>
       </div>
     </div>
-  
-  
-</div>
-<!-- <div class="grid-wrapperets">
-  <div class="grid-containerets">
-    <div
-      class="cardets"
-      *ngFor="let tile of screener; let i = index; trackBy: trackByFunctionscreener"
-    >
-      <div class="card-innerets">
-        <div class="card-frontets">
+  </div>
+  <!-- <div class="grid-wrapperets">
+    <div class="grid-containerets">
+      <div
+        class="cardets"
+        *ngFor="let tile of screener; let i = index; trackBy: trackByFunctionscreener"
+      >
+        <div class="card-innerets">
+          <div class="card-frontets">
+            <div
+              class="text-center text-black type1-regular grid-margin"
+              (click)="dialogVisible[i] = true"
+              [ngClass]="{
+                'bg-gradient-bull text-black': tile.text4 > 0,
+                'bg-gradient-bear': 0 > tile.text4,
+                'bg-gradient-warning': tile.text4 === 0
+              }"
+            >
+              {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{tile.text4}})%<br />Volume:{{ tile.text11 }}K
+              <div style="text-align: center"></div>
+            </div>
+          </div>
+          <div class="card-backets">
+            <div
+              class="text-center text-black type1-regular"
+              (click)="dialogVisible[i] = true"
+              [ngClass]="{
+                'bg-gradient-bull text-black': tile.text4 > 0,
+                'bg-gradient-bear': 0 > tile.text4,
+                'bg-gradient-warning': tile.text4 === 0
+              }"
+            >
+              52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
+              <div style="text-align: center"></div>
+            </div>
+          </div>
+        </div>
+        <p-dialog
+          header="{{ tile.text1 }}"
+          [(visible)]="dialogVisible[i]"
+          [style]="{ width: '100vw', height: '100vh' }"
+        >
           <div
-            class="text-center text-black type1-regular grid-margin"
-            (click)="dialogVisible[i] = true"
+            class="text-black bg-gradient-bull type1-regular text-center grid-margin"
             [ngClass]="{
               'bg-gradient-bull text-black': tile.text4 > 0,
               'bg-gradient-bear': 0 > tile.text4,
               'bg-gradient-warning': tile.text4 === 0
             }"
           >
-            {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{tile.text4}})%<br />Volume:{{ tile.text11 }}K
+            {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{
+            tile.text4
+            }})%<br />Volume:{{ tile.text11 }}K
             <div style="text-align: center"></div>
           </div>
-        </div>
-        <div class="card-backets">
           <div
-            class="text-center text-black type1-regular"
-            (click)="dialogVisible[i] = true"
+            class="text-black type1-regular bg-gradient-bull text-center"
             [ngClass]="{
               'bg-gradient-bull text-black': tile.text4 > 0,
               'bg-gradient-bear': 0 > tile.text4,
@@ -225,702 +263,501 @@
             52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
             <div style="text-align: center"></div>
           </div>
+          <p-footer>
+            <button
+              type="button"
+              pButton
+              (click)="dialogVisible[i] = false"
+              label="Close"
+            ></button>
+            <button
+              type="button"
+              pButton
+              (click)="maximizeDialog(i)"
+              icon="pi pi-window-maximize"
+              iconPos="right"
+            ></button>
+          </p-footer>
+        </p-dialog>
+      </div>
+    </div>
+  </div> -->
+
+
+  <p>Pre-Defined Filters</p>
+  <div class="button-container">
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="VALUE_STOCKS,marketCapValue,desc"
+      label="Value Stocks"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="HIGH_DIVIDEND_YIELD,dividendYield,desc"
+      label="High Dividend Yield"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="MID_CAP_GROWTH_STOCKS,marketCapValue,desc"
+      label="Mid-cap Growth Stocks"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="ATTRACTIVE_BLUECHIPS,marketCapValue,desc"
+      label="Attractive Bluechips"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="FII_BUYING,percentageScrrFiiChange,desc"
+      label="Stocks with FII Buying"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="DII_BUYING,percentageScrrDiiChange,desc"
+      label="Stocks with DII Buying"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="FII_SELLING,percentageScrrFiiChange,desc"
+      label="Stocks with FII Selling"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="DII_SELLING,percentageScrrFiiChange,desc"
+      label="Stocks with DII Selling"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="GARP,marketCapValue,desc"
+      label="Growth at Reasonable Price"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick4($event)"
+    ></p-radioButton>
+  </div>
+
+
+  <div class="grid-wrapper">
+    <div class="grid-container">
+      <div class="card" *ngFor="let tile of pdstocks(); let i = index; trackBy: trackByPdStocks" 
+           [ngClass]="{
+             'bg-gradient-bull': tile.text2 > 0,
+             'bg-gradient-bear': 0 > tile.text2 ,
+             'bg-gradient-warning': tile.text2 === 0
+           }">
+        <div class="card-inner">
+          <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
+          <div style="text-align: center"></div>
+        
+          </div>
+                  <div class="card-back">  Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+                  }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{
+                    tile.text4
+                  }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
+                    tile.text6
+                  }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
+                  <div style="text-align: center"></div>
+         
         </div>
       </div>
-      <p-dialog
-        header="{{ tile.text1 }}"
-        [(visible)]="dialogVisible[i]"
-        [style]="{ width: '100vw', height: '100vh' }"
-      >
-        <div
-          class="text-black bg-gradient-bull type1-regular text-center grid-margin"
-          [ngClass]="{
-            'bg-gradient-bull text-black': tile.text4 > 0,
-            'bg-gradient-bear': 0 > tile.text4,
-            'bg-gradient-warning': tile.text4 === 0
-          }"
-        >
-          {{ tile.text1 }}<br />&nbsp;&nbsp;&nbsp;{{ tile.text2 }}&nbsp;({{
-          tile.text4
-          }})%<br />Volume:{{ tile.text11 }}K
-          <div style="text-align: center"></div>
-        </div>
-        <div
-          class="text-black type1-regular bg-gradient-bull text-center"
-          [ngClass]="{
-            'bg-gradient-bull text-black': tile.text4 > 0,
-            'bg-gradient-bear': 0 > tile.text4,
-            'bg-gradient-warning': tile.text4 === 0
-          }"
-        >
-          52wk High:{{ tile.text5 }}<br />52wk Low:{{ tile.text6 }}
-          <div style="text-align: center"></div>
-        </div>
-        <p-footer>
-          <button
-            type="button"
-            pButton
-            (click)="dialogVisible[i] = false"
-            label="Close"
-          ></button>
-          <button
-            type="button"
-            pButton
-            (click)="maximizeDialog(i)"
-            icon="pi pi-window-maximize"
-            iconPos="right"
-          ></button>
-        </p-footer>
-      </p-dialog>
+      </div>
     </div>
+
+
   </div>
-</div> -->
-
-
-<p>Pre-Defined Filters</p>
-<div class="button-container">
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="VALUE_STOCKS,marketCapValue,desc"
-    label="Value Stocks"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="HIGH_DIVIDEND_YIELD,dividendYield,desc"
-    label="High Dividend Yield"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="MID_CAP_GROWTH_STOCKS,marketCapValue,desc"
-    label="Mid-cap Growth Stocks"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="ATTRACTIVE_BLUECHIPS,marketCapValue,desc"
-    label="Attractive Bluechips"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="FII_BUYING,percentageScrrFiiChange,desc"
-    label="Stocks with FII Buying"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="DII_BUYING,percentageScrrDiiChange,desc"
-    label="Stocks with DII Buying"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="FII_SELLING,percentageScrrFiiChange,desc"
-    label="Stocks with FII Selling"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="DII_SELLING,percentageScrrFiiChange,desc"
-    label="Stocks with DII Selling"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="GARP,marketCapValue,desc"
-    label="Growth at Reasonable Price"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick4($event)"
-  ></p-radioButton>
-</div>
-
-
-<div class="grid-wrapper">
-  
-  <div class="grid-container">
-    <div class="card" *ngFor="let tile of pdstocks;let i = index;trackBy: trackByFunctionpdstocks" 
-         [ngClass]="{
-           'bg-gradient-bull': tile.text2 > 0,
-           'bg-gradient-bear': 0 > tile.text2 ,
-           'bg-gradient-warning': tile.text2 === 0
-         }">
-      <div class="card-inner">
-        <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
-        <div style="text-align: center"></div>
-      
-        </div>
-                <div class="card-back">  Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+  <!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div
+          fxFlex="20"
+          fxFlex.lg="12%"
+          fxFlex.xs="50"
+          fxFlex.sm="33%"
+          *ngFor="
+            let tile of pdstocks;
+            let i = index;
+            trackBy: trackByFunctionpdstocks
+          "
+        >
+          <div class="scene">
+            <div class="card">
+              <div
+                class="card__face card__face--front cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
+                (click)="dialogVisible[i] = true"
+              >
+                {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
+                  tile.text3
+                }}<br />Change:{{ tile.text2 }}%
+                <div style="text-align: center"></div>
+              </div>
+              <div
+                class="card__face card__face--back cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
+                (click)="dialogVisible[i] = true"
+              >
+                Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
                 }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{
                   tile.text4
                 }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
                   tile.text6
                 }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
                 <div style="text-align: center"></div>
-       
-      </div>
-    </div>
-    </div>
-  </div>
-
-
-</div>
-<!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-  <div class="content card textcenter">
-    <div fxLayout="row wrap" fxLayoutGap="5px grid">
-      <div
-        fxFlex="20"
-        fxFlex.lg="12%"
-        fxFlex.xs="50"
-        fxFlex.sm="33%"
-        *ngFor="
-          let tile of pdstocks;
-          let i = index;
-          trackBy: trackByFunctionpdstocks
-        "
-      >
-        <div class="scene">
-          <div class="card">
+              </div>
+            </div>
+          </div>
+          <p-dialog
+            header="{{ tile.text1 }}"
+            [(visible)]="dialogVisible[i]"
+            [style]="{ width: '100vw', height: '100vh' }"
+          >
             <div
-              class="card__face card__face--front cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
+              class="text-black bg-gradient-bull cardnew type1-regular text-center grid-margin"
             >
               {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
                 tile.text3
               }}<br />Change:{{ tile.text2 }}%
-              <div style="text-align: center"></div>
             </div>
             <div
-              class="card__face card__face--back cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
+              class="text-black type1-regular cardnew bg-gradient-bull text-center grid-margin"
             >
               Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
-              }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{
-                tile.text4
+              }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{ tile.text4
               }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
                 tile.text6
               }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
-              <div style="text-align: center"></div>
             </div>
-          </div>
+            <p-footer>
+              <button
+                type="button"
+                pButton
+                (click)="dialogVisible[i] = false"
+                label="Close"
+              ></button>
+              <button
+                type="button"
+                pButton
+                (click)="maximizeDialog(i)"
+                icon="pi pi-window-maximize"
+                iconPos="right"
+              ></button>
+            </p-footer>
+          </p-dialog>
         </div>
-        <p-dialog
-          header="{{ tile.text1 }}"
-          [(visible)]="dialogVisible[i]"
-          [style]="{ width: '100vw', height: '100vh' }"
-        >
-          <div
-            class="text-black bg-gradient-bull cardnew type1-regular text-center grid-margin"
-          >
-            {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
-              tile.text3
-            }}<br />Change:{{ tile.text2 }}%
-          </div>
-          <div
-            class="text-black type1-regular cardnew bg-gradient-bull text-center grid-margin"
-          >
-            Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
-            }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{ tile.text4
-            }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
-              tile.text6
-            }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
-          </div>
-          <p-footer>
-            <button
-              type="button"
-              pButton
-              (click)="dialogVisible[i] = false"
-              label="Close"
-            ></button>
-            <button
-              type="button"
-              pButton
-              (click)="maximizeDialog(i)"
-              icon="pi pi-window-maximize"
-              iconPos="right"
-            ></button>
-          </p-footer>
-        </p-dialog>
       </div>
     </div>
+  </div> -->
+  <p>Stock Score Filters</p>
+  <div class="button-container">
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="SCORE_DOWNGRADE,avgScoreChange1m,desc"
+      label="Score Downgrade"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="SCORE_UPGRADE,rvScore,desc"
+      label="Score Upgrade"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="TOP_SCORE_COMPANIES,analystScore,desc"
+      label="Top Score Companies"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="SCORE_IMPROVEMENT,avgScoreChange1m,desc"
+      label="Score Improvement"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="HIGH_UPSIDE_POTENTIAL,rvScore,desc"
+      label="High Upside Potential"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="LOW_SCORE_COMPANIES,rvScore,desc"
+      label="Low Score Companies"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="HIGH_DOWNSIDE_STOCKS,rvScore,desc"
+      label="High Downside Stocks"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-danger"
+      name="groupname"
+      value="DII_SELLING,percentageScrrFiiChange,desc"
+      label="Stocks with DII Selling"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
+    <p-radioButton
+      class="btn btn-responsive btn-outline-success"
+      name="groupname"
+      value="STRONG_MOMENTUM_STOCKS,rvScore,desc"
+      label="Strong Momentum Stocks"
+      [(ngModel)]="selectedValue"
+      (onClick)="onClick5($event)"
+    ></p-radioButton>
   </div>
-</div> -->
-<p>Stock Score Filters</p>
-<div class="button-container">
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="SCORE_DOWNGRADE,avgScoreChange1m,desc"
-    label="Score Downgrade"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="SCORE_UPGRADE,rvScore,desc"
-    label="Score Upgrade"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="TOP_SCORE_COMPANIES,analystScore,desc"
-    label="Top Score Companies"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="SCORE_IMPROVEMENT,avgScoreChange1m,desc"
-    label="Score Improvement"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="HIGH_UPSIDE_POTENTIAL,rvScore,desc"
-    label="High Upside Potential"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="LOW_SCORE_COMPANIES,rvScore,desc"
-    label="Low Score Companies"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="HIGH_DOWNSIDE_STOCKS,rvScore,desc"
-    label="High Downside Stocks"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-danger"
-    name="groupname"
-    value="DII_SELLING,percentageScrrFiiChange,desc"
-    label="Stocks with DII Selling"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-  <p-radioButton
-    class="btn btn-responsive btn-outline-success"
-    name="groupname"
-    value="STRONG_MOMENTUM_STOCKS,rvScore,desc"
-    label="Strong Momentum Stocks"
-    [(ngModel)]="selectedValue"
-    (onClick)="onClick5($event)"
-  ></p-radioButton>
-</div>
 
 
-<!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
-  <div class="content card textcenter">
-    <div fxLayout="row wrap" fxLayoutGap="5px grid">
-      <div
-        fxFlex="20"
-        fxFlex.lg="12%"
-        fxFlex.xs="50"
-        fxFlex.sm="33%"
-        *ngFor="
-          let tile of ssstocks;
-          let i = index;
-          trackBy: trackByFunctionssstocks
-        "
-      >
-        <div class="scene">
-          <div class="card">
-            <div
-              class="card__face card__face--front cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
-            >
-              {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
-                tile.text3
-              }}<br />Change:{{ tile.text2 }}%
-              <div style="text-align: center"></div>
-            </div>
-            <div
-              class="card__face card__face--back cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
-              (click)="dialogVisible[i] = true"
-            >
-              Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
-              }}<br />Target High:{{ tile.text4 }}<br />Target Low:{{
-                tile.text5
-              }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
-              }}<br />Hold:{{ tile.text8 }}
-              <div style="text-align: center"></div>
-            </div>
-          </div>
-        </div>
-        <p-dialog
-          header="{{ tile.text1 }}"
-          [(visible)]="dialogVisible[i]"
-          [style]="{ width: '100vw', height: '100vh' }"
+  <!-- <div class="col-lg-13 col-xs-5 grid-margin stretch-card">
+    <div class="content card textcenter">
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div
+          fxFlex="20"
+          fxFlex.lg="12%"
+          fxFlex.xs="50"
+          fxFlex.sm="33%"
+          *ngFor="
+            let tile of ssstocks;
+            let i = index;
+            trackBy: trackByFunctionssstocks
+          "
         >
-          <div
-            class="text-black bg-gradient-bull cardnew type1-regular text-center grid-margin"
-          >
-            {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
-              tile.text3
-            }}<br />Change:{{ tile.text2 }}%
-          </div>
-          <div
-            class="text-black type1-regular cardnew bg-gradient-bull text-center grid-margin"
-          >
-            Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
-            }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{ tile.text4
-            }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
-              tile.text6
-            }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
-          </div>
-          <p-footer>
-            <button
-              type="button"
-              pButton
-              (click)="dialogVisible[i] = false"
-              label="Close"
-            ></button>
-            <button
-              type="button"
-              pButton
-              (click)="maximizeDialog(i)"
-              icon="pi pi-window-maximize"
-              iconPos="right"
-            ></button>
-          </p-footer>
-        </p-dialog>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="grid-wrapper">
-  
-  <div class="grid-container">
-    <div class="card" *ngFor="let tile of ssstocks;let i = index;trackBy: trackByFunctionssstocks" 
-         [ngClass]="{
-           'bg-gradient-bull': tile.text2 > 0,
-           'bg-gradient-bear': 0 > tile.text2 ,
-           'bg-gradient-warning': tile.text2 === 0
-         }">
-      <div class="card-inner">
-        <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
-        
-        <div style="text-align: center"></div>
-      
-        </div>
-                <div class="card-back">   Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+          <div class="scene">
+            <div class="card">
+              <div
+                class="card__face card__face--front cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
+                (click)="dialogVisible[i] = true"
+              >
+                {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
+                  tile.text3
+                }}<br />Change:{{ tile.text2 }}%
+                <div style="text-align: center"></div>
+              </div>
+              <div
+                class="card__face card__face--back cardnew bg-gradient-bull text-center text-black type1-regular grid-margin"
+                (click)="dialogVisible[i] = true"
+              >
+                Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
                 }}<br />Target High:{{ tile.text4 }}<br />Target Low:{{
                   tile.text5
                 }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
                 }}<br />Hold:{{ tile.text8 }}
                 <div style="text-align: center"></div>
-       
+              </div>
+            </div>
+          </div>
+          <p-dialog
+            header="{{ tile.text1 }}"
+            [(visible)]="dialogVisible[i]"
+            [style]="{ width: '100vw', height: '100vh' }"
+          >
+            <div
+              class="text-black bg-gradient-bull cardnew type1-regular text-center grid-margin"
+            >
+              {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{
+                tile.text3
+              }}<br />Change:{{ tile.text2 }}%
+            </div>
+            <div
+              class="text-black type1-regular cardnew bg-gradient-bull text-center grid-margin"
+            >
+              Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+              }}<br />Risk Score:{{ tile.text10 }}<br />Target High:{{ tile.text4
+              }}<br />Target Low:{{ tile.text5 }}<br />Strong Buy:({{
+                tile.text6
+              }})<br />Sell:{{ tile.text7 }}<br />Hold:{{ tile.text8 }}
+            </div>
+            <p-footer>
+              <button
+                type="button"
+                pButton
+                (click)="dialogVisible[i] = false"
+                label="Close"
+              ></button>
+              <button
+                type="button"
+                pButton
+                (click)="maximizeDialog(i)"
+                icon="pi pi-window-maximize"
+                iconPos="right"
+              ></button>
+            </p-footer>
+          </p-dialog>
+        </div>
       </div>
     </div>
+  </div> -->
+  <div class="grid-wrapper">
+    <div class="grid-container">
+      <div class="card" *ngFor="let tile of ssstocks(); let i = index; trackBy: trackBySsStocks" 
+           [ngClass]="{
+             'bg-gradient-bull': tile.text2 > 0,
+             'bg-gradient-bear': 0 > tile.text2 ,
+             'bg-gradient-warning': tile.text2 === 0
+           }">
+        <div class="card-inner">
+          <div class="card-front"> {{ tile.text1 }}<br />{{ tile.text9 }}<br />Current Price:{{tile.text3}}<br />Change:{{ tile.text2 }}%
+          
+          <div style="text-align: center"></div>
+        
+          </div>
+                  <div class="card-back">   Tech Score:{{ tile.text11 }}<br />Analyst Score:{{ tile.text12
+                  }}<br />Target High:{{ tile.text4 }}<br />Target Low:{{
+                    tile.text5
+                  }}<br />Strong Buy:({{ tile.text6 }})<br />Sell:{{ tile.text7
+                  }}<br />Hold:{{ tile.text8 }}
+                  <div style="text-align: center"></div>
+         
+        </div>
+      </div>
+      </div>
     </div>
-  </div>
 
 
-</div>
-<div class="containertable">
-  <div class="page-content">
-    <h2 style="color: green">Top Gainers</h2>
-    <div class="bg-gradient-bull shadow-sm p-3">
-      <p-radioButton
-        name="groupname"
-        value="gainers,intraday,desc,1d"
-        label="1 Day"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="gainers,7days,desc,1w"
-        label="1 Week"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="gainers,1month,desc,1m"
-        label="1 Month"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="gainers,3month,desc,3m"
-        label="3 Month"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="gainers,6month,desc,6m"
-        label="6 Month"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="gainers,1year,desc,1y"
-        label="1 year"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,09-00,10-00"
-        label="9-10"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,10-00,11-00"
-        label="10-11"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,11-00,12-00"
-        label="11-12"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,12-00,13-00"
-        label="12-13"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,13-00,14-00"
-        label="13-14"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,14-00,15-00"
-        label="14-15"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers,15-00,16-00"
-        label="15-16"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-      <p-radioButton
-        name="groupname"
-        value="hourlygainers,desc,gainers"
-        label="Current Hour"
-        [(ngModel)]="selectedValueGainers"
-        (onClick)="onClick1($event)"
-      ></p-radioButton>
-    </div>
-    <p-table
-      [value]="tableDataGainers"
-      [scrollable]="true"
-      scrollWidth="flex"
-      scrollHeight="flex"
-      class="p-datatable"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th pSortableColumn="text1">
-            Company Name <p-sortIcon field="text1"></p-sortIcon>
-            <p-columnFilter
-              type="text"
-              field="text1"
-              display="menu"
-            ></p-columnFilter>
-          </th>
-          <th pSortableColumn="text2">
-            Current Price <p-sortIcon field="text2"></p-sortIcon>
-          </th>
-          <th pSortableColumn="text3">
-            open <p-sortIcon field="text3"></p-sortIcon>
-          </th>
-          <th pSortableColumn="text4">
-            Change% <p-sortIcon field="text4"></p-sortIcon>
-          </th>
-          <th pSortableColumn="text5">
-            52 high <p-sortIcon field="text5"></p-sortIcon>
-          </th>
-          <th pSortableColumn="text6">
-            52 low <p-sortIcon field="text6"></p-sortIcon>
-          </th>
-          <th pSortableColumn="text11">
-            Volume <p-sortIcon field="text11"></p-sortIcon>
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template
-        pTemplate="body"
-        let-rowData="rowData"
-        let-Gainers
-        sortMode="multiple"
-      >
-        <tr>
-          <td class="bg-gradient-bull">
-            {{ Gainers.text1 }}
-          </td>
-          <td class="bg-gradient-bull">
-            {{ Gainers.text2 }}
-          </td>
-          <td class="bg-gradient-bull">
-            {{ Gainers.text3 }}
-          </td>
-          <td class="bg-gradient-bull">{{ Gainers.text4 }}%</td>
-          <td class="bg-gradient-bull">
-            {{ Gainers.text5 }}
-          </td>
-          <td class="bg-gradient-bull">
-            {{ Gainers.text6 }}
-          </td>
-          <td class="bg-gradient-bull">{{ Gainers.text11 }}K</td>
-        </tr>
-      </ng-template>
-    </p-table>
   </div>
-  <div class="table-container">
+  <div class="containertable">
     <div class="page-content">
-      <h2 style="color: red">Top Losers</h2>
-      <div class="bg-gradient-bear shadow-sm p-3">
+      <h2 style="color: green">Top Gainers</h2>
+      <div class="bg-gradient-bull shadow-sm p-3">
         <p-radioButton
           name="groupname"
-          value="losers,intraday,asc,1d"
+          value="gainers,intraday,desc,1d"
           label="1 Day"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="losers,7days,asc,1w"
+          value="gainers,7days,desc,1w"
           label="1 Week"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="losers,1month,asc,1m"
+          value="gainers,1month,desc,1m"
           label="1 Month"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="losers,3month,asc,3m"
+          value="gainers,3month,desc,3m"
           label="3 Month"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="losers,6month,asc,6m"
+          value="gainers,6month,desc,6m"
           label="6 Month"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="losers,1year,asc,1y"
+          value="gainers,1year,desc,1y"
           label="1 year"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick2($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,09-00,10-00"
+          value="hourlygainers,desc,gainers,09-00,10-00"
           label="9-10"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,10-00,11-00"
+          value="hourlygainers,desc,gainers,10-00,11-00"
           label="10-11"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,11-00,12-00"
+          value="hourlygainers,desc,gainers,11-00,12-00"
           label="11-12"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,12-00,13-00"
+          value="hourlygainers,desc,gainers,12-00,13-00"
           label="12-13"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,13-00,14-00"
+          value="hourlygainers,desc,gainers,13-00,14-00"
           label="13-14"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,14-00,15-00"
+          value="hourlygainers,desc,gainers,14-00,15-00"
           label="14-15"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers,15-00,16-00"
+          value="hourlygainers,desc,gainers,15-00,16-00"
           label="15-16"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
         <p-radioButton
           name="groupname"
-          value="hourlylosers,asc,losers"
+          value="hourlygainers,desc,gainers"
           label="Current Hour"
-          [(ngModel)]="selectedValueLosers"
-          (onClick)="onClick3($event)"
+          [(ngModel)]="selectedValueGainers"
+          (onClick)="onClick1($event)"
         ></p-radioButton>
       </div>
       <p-table
-        [value]="tableDataLosers"
+        [value]="tableDataGainers"
         [scrollable]="true"
         scrollWidth="flex"
         scrollHeight="flex"
@@ -959,30 +796,199 @@
         <ng-template
           pTemplate="body"
           let-rowData="rowData"
-          let-Losers
+          let-Gainers
           sortMode="multiple"
         >
           <tr>
-            <td class="bg-gradient-bear">
-              {{ Losers.text1 }}
+            <td class="bg-gradient-bull">
+              {{ Gainers.text1 }}
             </td>
-            <td class="bg-gradient-bear">
-              {{ Losers.text2 }}
+            <td class="bg-gradient-bull">
+              {{ Gainers.text2 }}
             </td>
-            <td class="bg-gradient-bear">
-              {{ Losers.text3 }}
+            <td class="bg-gradient-bull">
+              {{ Gainers.text3 }}
             </td>
-            <td class="bg-gradient-bear">{{ Losers.text4 }}%</td>
-            <td class="bg-gradient-bear">
-              {{ Losers.text5 }}
+            <td class="bg-gradient-bull">{{ Gainers.text4 }}%</td>
+            <td class="bg-gradient-bull">
+              {{ Gainers.text5 }}
             </td>
-            <td class="bg-gradient-bear">
-              {{ Losers.text6 }}
+            <td class="bg-gradient-bull">
+              {{ Gainers.text6 }}
             </td>
-            <td class="bg-gradient-bear">{{ Losers.text11 }}K</td>
+            <td class="bg-gradient-bull">{{ Gainers.text11 }}K</td>
           </tr>
         </ng-template>
       </p-table>
+    </div>
+    <div class="table-container">
+      <div class="page-content">
+        <h2 style="color: red">Top Losers</h2>
+        <div class="bg-gradient-bear shadow-sm p-3">
+          <p-radioButton
+            name="groupname"
+            value="losers,intraday,asc,1d"
+            label="1 Day"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="losers,7days,asc,1w"
+            label="1 Week"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="losers,1month,asc,1m"
+            label="1 Month"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="losers,3month,asc,3m"
+            label="3 Month"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="losers,6month,asc,6m"
+            label="6 Month"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="losers,1year,asc,1y"
+            label="1 year"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick2($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,09-00,10-00"
+            label="9-10"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,10-00,11-00"
+            label="10-11"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,11-00,12-00"
+            label="11-12"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,12-00,13-00"
+            label="12-13"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,13-00,14-00"
+            label="13-14"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,14-00,15-00"
+            label="14-15"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers,15-00,16-00"
+            label="15-16"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+          <p-radioButton
+            name="groupname"
+            value="hourlylosers,asc,losers"
+            label="Current Hour"
+            [(ngModel)]="selectedValueLosers"
+            (onClick)="onClick3($event)"
+          ></p-radioButton>
+        </div>
+        <p-table
+          [value]="tableDataLosers"
+          [scrollable]="true"
+          scrollWidth="flex"
+          scrollHeight="flex"
+          class="p-datatable"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="text1">
+                Company Name <p-sortIcon field="text1"></p-sortIcon>
+                <p-columnFilter
+                  type="text"
+                  field="text1"
+                  display="menu"
+                ></p-columnFilter>
+              </th>
+              <th pSortableColumn="text2">
+                Current Price <p-sortIcon field="text2"></p-sortIcon>
+              </th>
+              <th pSortableColumn="text3">
+                open <p-sortIcon field="text3"></p-sortIcon>
+              </th>
+              <th pSortableColumn="text4">
+                Change% <p-sortIcon field="text4"></p-sortIcon>
+              </th>
+              <th pSortableColumn="text5">
+                52 high <p-sortIcon field="text5"></p-sortIcon>
+              </th>
+              <th pSortableColumn="text6">
+                52 low <p-sortIcon field="text6"></p-sortIcon>
+              </th>
+              <th pSortableColumn="text11">
+                Volume <p-sortIcon field="text11"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-rowData="rowData"
+            let-Losers
+            sortMode="multiple"
+          >
+            <tr>
+              <td class="bg-gradient-bear">
+                {{ Losers.text1 }}
+              </td>
+              <td class="bg-gradient-bear">
+                {{ Losers.text2 }}
+              </td>
+              <td class="bg-gradient-bear">
+                {{ Losers.text3 }}
+              </td>
+              <td class="bg-gradient-bear">{{ Losers.text4 }}%</td>
+              <td class="bg-gradient-bear">
+                {{ Losers.text5 }}
+              </td>
+              <td class="bg-gradient-bear">
+                {{ Losers.text6 }}
+              </td>
+              <td class="bg-gradient-bear">{{ Losers.text11 }}K</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 </div>

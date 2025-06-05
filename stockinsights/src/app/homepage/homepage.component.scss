@@ -1,0 +1,222 @@
+.dashboard-container {
+  padding: 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+// Virtual Scroll Viewport
+.virtual-scroll-viewport {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+}
+
+// Grid Layouts
+.grid-container,
+.screener-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+// Cards
+.card,
+.screener-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  will-change: transform;
+  transform: translateZ(0);
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+  
+  &.positive {
+    border-left: 4px solid #4caf50;
+  }
+  
+  &.negative {
+    border-left: 4px solid #f44336;
+  }
+}
+
+// Card Content
+.card-content {
+  display: grid;
+  gap: 0.5rem;
+  
+  .market-name {
+    font-weight: 500;
+  }
+  
+  .change {
+    font-weight: 500;
+    
+    &.up {
+      color: #4caf50;
+    }
+    
+    &.down {
+      color: #f44336;
+    }
+  }
+}
+
+// Charts Section
+.charts-section {
+  margin: 2rem 0;
+  
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// Screener Controls
+.screener-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  :host ::ng-deep {
+    .p-radiobutton {
+      .p-radiobutton-box {
+        background: white;
+        border: 2px solid #e0e0e0;
+        transition: all 0.2s ease;
+        
+        &.p-highlight {
+          background: #1976d2;
+          border-color: #1976d2;
+        }
+      }
+    }
+  }
+}
+
+// Stock Info
+.stock-info {
+  h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .price-change {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .current {
+      font-weight: 500;
+    }
+    
+    .change {
+      &.up {
+        color: #4caf50;
+      }
+      
+      &.down {
+        color: #f44336;
+      }
+    }
+  }
+}
+
+// Stock Details
+.stock-details {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  
+  .range,
+  .recommendations {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+  
+  .recommendations {
+    .buy {
+      color: #4caf50;
+    }
+    
+    .sell {
+      color: #f44336;
+    }
+    
+    .hold {
+      color: #ff9800;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0.5rem;
+  }
+  
+  .charts-section .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-container,
+  .screener-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .screener-controls {
+    flex-direction: column;
+  }
+}
+
+// Performance Optimizations
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card,
+.screener-card,
+.chart-container {
+  contain: content;
+  backface-visibility: hidden;
+} 

@@ -8,7 +8,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Ng2SharedChartModule } from '../ng2-shared-chart/ng2-shared-chart.module';
 import { MatCardModule } from '@angular/material/card';
 import { DialogModule } from 'primeng/dialog';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
@@ -21,7 +20,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
   imports: [
     CommonModule,
     AnalyticsRoutingModule,
-    FlexLayoutModule,
     ButtonModule,
     // NgbModule,
     MatCardModule,

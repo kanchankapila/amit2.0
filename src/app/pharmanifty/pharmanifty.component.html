@@ -58,13 +58,10 @@
     ><br />
   </div>
   <h4 class="text-black text-center">Technical Indicators</h4>
-  <div fxLayout="row wrap" fxLayoutGap="5px grid" class="col-lg-13 col-xs-3">
+  <div class="grid-container grid-gap-5">
     <div
+      class="grid-item"
       style="text-transform: uppercase; font-weight: bold; margin: 10px"
-      fxFlex="13"
-      fxFlex.lg="12%"
-      fxFlex.xs="30%"
-      fxFlex.sm="33%"
       *ngFor="let tile of tlindexparam; let i = index;
       trackBy: trackByFunctiontlindexparam"
     >
@@ -95,14 +92,11 @@
     </div>
   </div>
   <h4 class="text-black text-center">Daily Technical Indicators</h4>
-  <div fxLayout="row wrap" fxLayoutGap="10px grid" class="col-lg-13 col-xs-3">
+  <div class="grid-container grid-gap-10">
     <div
+      class="grid-item"
       style="text-transform: uppercase; font-weight: bold; margin: 10px"
-      fxFlex="10"
-      fxFlex.lg="12%"
-      fxFlex.xs="30"
-      fxFlex.sm="33%"
-      *ngFor="let tile of pharmaniftyindicators;  let i = index;
+      *ngFor="let tile of pharmaniftyindicators; let i = index;
       trackBy: trackByFunctionpharmaniftyindicators"
     >
       <div class="scene">
@@ -143,26 +137,17 @@
       </div>
     </div>
   </div>
-  <div fxLayout="row" fxLayout.xs="column">
+  <div class="flex-container">
     <div class="col-lg-6 col-xs-4">
       <div class="content card text-white text-card">
         <div class="block">
           <h4 class="text-black text-center">Crossover</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+          <div class="grid-container grid-gap-10">
             <div
-              style="
-                text-transform: uppercase;
-                font-weight: bold;
-                text-align: center;
-              "
-              fxFlex="30"
-              fxFlex.xs="33%"
-              fxFlex.sm="33%"
-              *ngFor="
-                let tile of pharmaniftycrossover;
-                let i = index;
-          trackBy: trackByFunctionpharmaniftycrossover
-              "
+              class="grid-item"
+              style="text-transform: uppercase; font-weight: bold; text-align: center"
+              *ngFor="let tile of pharmaniftycrossover; let i = index;
+              trackBy: trackByFunctionpharmaniftycrossover"
             >
               <mat-card
                 class="text-blue type1-bold"
@@ -232,21 +217,12 @@
       <div class="content card">
         <div class="block">
           <h4 class="text-black text-center">Sentiment</h4>
-          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+          <div class="grid-container grid-gap-10">
             <div
-              style="
-                text-transform: uppercase;
-                font-weight: bold;
-                text-align: center;
-              "
-              fxFlex="30"
-              fxFlex.xs="33%"
-              fxFlex.sm="33%"
-              *ngFor="
-                let tile of pharmaniftysentiments;
-                let i = index;
-                trackBy: trackByFunctionpharmaniftysentiments
-              "
+              class="grid-item"
+              style="text-transform: uppercase; font-weight: bold; text-align: center"
+              *ngFor="let tile of pharmaniftysentiments; let i = index;
+              trackBy: trackByFunctionpharmaniftysentiments"
             >
               <mat-card
                 class="text-blue type1-bold"

@@ -1,0 +1,66 @@
+<div class="pharmanifty-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>PHARMA NIFTY</mat-card-title>
+      <mat-card-subtitle>Real-time Market Data</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Loading Spinner -->
+      <div *ngIf="loading$ | async" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <!-- Main Content -->
+      <div *ngIf="!(loading$ | async)">
+        <!-- Price Chart -->
+        <div class="chart-container">
+          <div echarts [options]="chartOptions" class="chart"></div>
+        </div>
+
+        <!-- Market Data -->
+        <div class="market-data" *ngIf="pharmaNiftyData$ | async as data">
+          <mat-grid-list cols="3" rowHeight="100px">
+            <mat-grid-tile>
+              <div class="data-item">
+                <div class="label">Price</div>
+                <div class="value" [ngClass]="{'positive': data[0].change > 0, 'negative': data[0].change < 0}">
+                  {{data[0].price | number:'1.2-2'}}
+                </div>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="data-item">
+                <div class="label">Change</div>
+                <div class="value" [ngClass]="{'positive': data[0].change > 0, 'negative': data[0].change < 0}">
+                  {{data[0].change | number:'1.2-2'}}
+                </div>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="data-item">
+                <div class="label">Volume</div>
+                <div class="value">{{data[0].volume | number}}</div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+
+        <!-- Additional Market Data -->
+        <div class="additional-data">
+          <mat-tab-group>
+            <mat-tab label="PCR Data">
+              <!-- PCR Data Content -->
+            </mat-tab>
+            <mat-tab label="TTMMI">
+              <!-- TTMMI Content -->
+            </mat-tab>
+            <mat-tab label="Market Breadth">
+              <!-- Market Breadth Content -->
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

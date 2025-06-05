@@ -1,6 +1,7 @@
-/* Navbar */
-@import '../../../assets/scss/style.scss';
+@use '../../../assets/scss/variables' as vars;
+@use '../../../assets/scss/bootstrap' as bs;
 
+/* Navbar */
 :host ::ng-deep .p-dropdown {
   width: 14rem;
 }
@@ -18,6 +19,9 @@
 
 .card {
   position: relative;
+  background: vars.$white;
+  border: 0;
+  margin-top: 1rem;
 }
 
 .card .canvas-wrapper {
@@ -46,33 +50,23 @@
   }
 }
 
+.layout-container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 599px) {
+  .layout-container {
+    flex-direction: column;
+  }
+}
+
 .button-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  /* Adjust the gap between buttons as needed */
 }
 
-// .row {
-//   display: flex;
-//   flex-wrap: wrap;
-// }
-// .col-md-6 {
-//   flex: 0 0 30%;
-//   max-width: 30%;
-// }
-// .col-xs-12 {
-//   flex: 0 0 100%;
-//   max-width: 100%;
-// }
-// @media(max-width:424px){
-// //   .cardnew{
-// //     width: 10%
-// //   }
-// //   }
-// // .cardnew{
-// //   width: 100%
-// // }
 /* General styles */
 body {
   font-family: Arial, sans-serif;
@@ -81,15 +75,15 @@ body {
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Gap between buttons */
+  gap: 10px;
   padding: 20px;
 }
 
 /* Button styles */
 .responsive-button {
-  flex: 1 1 auto; /* Allow buttons to grow and shrink */
+  flex: 1 1 auto;
   padding: 10px;
-  font-size: 1em; /* Use relative units for font size */
+  font-size: 1em;
   border: none;
   border-radius: 5px;
   background-color: #007BFF;
@@ -101,19 +95,20 @@ body {
 /* Adjust button size and font size for larger screens */
 @media (min-width: 768px) {
   .responsive-button {
-      font-size: 1.2em; /* Larger font size on bigger screens */
-      padding: 15px;
+    font-size: 1.2em;
+    padding: 15px;
   }
 }
 
 /* Adjust button size and font size for smaller screens */
 @media (max-width: 767px) {
   .responsive-button {
-      font-size: 0.9em; /* Smaller font size on smaller screens */
-      padding: 8px;
+    font-size: 0.9em;
+    padding: 8px;
   }
 }
-//For Nifty Cards
+
+/* For Nifty Cards */
 .card-containertopcards {
   display: flex;
   flex-wrap: wrap;
@@ -129,10 +124,104 @@ body {
 @media (max-width: 768px) {
   .card-wrappertopcards {
     flex: 1 1 100%;
-    font-size: 0.8em; /* Reduce font size for mobile */
+    font-size: 0.8em;
   }
 
   .card-bodytopcards {
-    font-size: 0.8em; /* Reduce font size for mobile */
+    font-size: 0.8em;
+  }
+}
+
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.brand {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.brand-logo {
+  height: 32px;
+  width: auto;
+}
+
+.brand-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.theme-toggle {
+  margin-right: 8px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 599px) {
+  .brand-text {
+    display: none;
+  }
+  
+  .brand-logo {
+    height: 24px;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    margin-right: 16px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      &.active {
+        color: #1976d2;
+      }
+    }
   }
 }

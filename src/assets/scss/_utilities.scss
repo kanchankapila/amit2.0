@@ -1,4 +1,6 @@
 /* Utilities */
+@use 'variables' as *;
+@use 'functions' as *;
 
 .grid-margin {
   margin-bottom: $card-spacing-y;

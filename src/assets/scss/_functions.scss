@@ -1,6 +1,11 @@
 // Functions
 
+// Custom Functions
+@use 'variables' as *;
 
-@function theme-gradient-color($key: "primary") {
-  @return map-get($theme-gradient-colors, $key);
+@function theme-gradient-color($color) {
+  @if map-has-key($theme-gradient-colors, $color) {
+    @return map-get($theme-gradient-colors, $color);
+  }
+  @return null;
 }

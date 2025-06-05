@@ -1,0 +1,40 @@
+<div class="market-overview">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Market Overview</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="loading-spinner" *ngIf="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      <div class="market-data" *ngIf="!loading">
+        <div class="market-grid">
+          <div class="market-item" *ngFor="let index of indices">
+            <div class="index-name">{{ index.name }}</div>
+            <div class="index-price" [ngClass]="{'positive': index.change > 0, 'negative': index.change < 0}">
+              {{ index.price | number:'1.2-2' }}
+            </div>
+            <div class="index-change" [ngClass]="{'positive': index.change > 0, 'negative': index.change < 0}">
+              {{ index.change > 0 ? '+' : '' }}{{ index.change | number:'1.2-2' }}
+              ({{ index.changePercent | number:'1.2-2' }}%)
+            </div>
+          </div>
+        </div>
+        <div class="market-stats">
+          <div class="stat-item">
+            <div class="stat-label">Advances</div>
+            <div class="stat-value positive">{{ marketStats.advances }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Declines</div>
+            <div class="stat-value negative">{{ marketStats.declines }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Unchanged</div>
+            <div class="stat-value">{{ marketStats.unchanged }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

@@ -1,4 +1,15 @@
 /* Cards */
+@use "sass:map";
+@use "../variables" as *;
+@use "bootstrap/scss/mixins/border-radius" as border-radius;
+
+// Default values for variables that can be overridden
+$card-bg: $white !default;
+$theme-colors: () !default;
+$theme-colors-text: () !default;
+$theme-colors-bg-subtle: () !default;
+$enable-rounded: true !default;
+
 .InsideContent2{
   display:block;
 }
@@ -51,19 +62,19 @@
     font-family: $type1-regular;
   }
   &.card-outline-success {
-    border: 1px solid theme-color("success");
+    border: 1px solid map.get($theme-colors, "success");
   }
   &.card-outline-primary {
-    border: 1px solid theme-color("primary");
+    border: 1px solid map.get($theme-colors, "primary");
   }
   &.card-outline-warning {
-    border: 1px solid theme-color("warning");
+    border: 1px solid map.get($theme-colors, "warning");
   }
   &.card-outline-danger {
-    border: 1px solid theme-color("danger");
+    border: 1px solid map.get($theme-colors, "danger");
   }
   &.card-rounded {
-    @include border-radius(5px);
+    border-radius: 5px;
   }
 
   &.card-faded {
@@ -159,7 +170,9 @@
 }
 @each $color, $value in $theme-colors {
   .card-inverse-#{$color} {
-    @include card-inverse-variant(rgba($value, .2), theme-color-level($value, 1), theme-color-level($value, 3));
+    background: rgba($value, .2);
+    border: 1px solid rgba($value, .3);
+    color: darken($value, 10%);
   }
 }
 .gap-div{
