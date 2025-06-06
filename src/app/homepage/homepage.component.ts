@@ -24,32 +24,6 @@ import { ChartOptions } from '../core/models/chart.interface';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DataApiService } from '../core/services/data-api.service';
-import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from '@angular/forms';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { ChartModule } from 'primeng/chart';
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { Subject, takeUntil, catchError, EMPTY, combineLatest } from 'rxjs';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { GlobalMarketData, ScreenerData, StockData } from '../core/models/market.interface';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatButtonModule } from '@angular/material/button';
-import { ChartOptions } from '../core/models/chart.interface';
-
-@Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
   standalone: true,
   imports: [

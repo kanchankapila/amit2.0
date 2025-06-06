@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { CacheService } from './cache.service';
 import { LoadingService } from './loading.service';
-import { LoggingService } from '../../services/logging.service';
+import { LoggingService } from './logging.service';
 
 export interface ApiOptions {
   headers?: HttpHeaders;

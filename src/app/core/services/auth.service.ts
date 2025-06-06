@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { LoggingService } from '../../services/logging.service';
+import { LoggingService } from './logging.service';
 import { AppStateService } from '../state/app.state';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';

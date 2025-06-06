@@ -5,7 +5,7 @@ import { catchError, tap, retry, shareReplay, timeout, finalize, switchMap, retr
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { environment } from '../../../environments/environment';
 import { CacheService } from './cache.service';
-import { LoggingService } from '../../services/logging.service';
+import { LoggingService } from './logging.service';
 import { LoadingService } from './loading.service';
 import { GlobalMarketData, ScreenerData, StockData, IndexData, SectorData, ScreenerCriteria } from '../models/market.interface';
 

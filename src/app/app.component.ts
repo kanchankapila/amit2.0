@@ -12,19 +12,6 @@ import { LoadingService } from './core/services/loading.service';
 
 @Component({
   selector: 'app-root',
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LoadingService } from './core/services/loading.service';
-
-@Component({
-  selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
@@ -135,5 +122,4 @@ import { LoadingService } from './core/services/loading.service';
 export class AppComponent {
   private readonly loadingService = inject(LoadingService);
   readonly isLoading$ = this.loadingService.isLoading$;
-
 }
