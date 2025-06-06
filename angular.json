@@ -123,10 +123,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "amit2.0:build:production",
-              "customWebpackConfig": {
-              "path": "./webpack.config.js" 
-            }
+              "browserTarget": "amit2.0:build:production"
             }
           }
         },
