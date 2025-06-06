@@ -1,9 +1,9 @@
-<div class="container-scroller" fxLayout="column" fxLayoutFill>
+<div class="container-scroller">
   <app-navbar *ngIf="showNavbar"></app-navbar>
-  <div class="container-fluid page-body-wrapper" fxLayout="row" fxLayout.lt-md="column">
+  <div class="container-fluid page-body-wrapper">
 
     <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
-      <div class="content-wrapper" fxFlex>
+      <div class="content-wrapper">
         <app-spinner *ngIf="isLoading"></app-spinner>
         <div contentAnimate *ngIf="!isLoading" class="h-100">
           <router-outlet></router-outlet>

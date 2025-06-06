@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  /**
-   * Google Analytics tracking ID used by AnalyticsService.
-   * Replace with your own ID when deploying.
-   */
-  analyticsTrackingId: 'G-XXXXXXX'
+
 };
 
 /*
