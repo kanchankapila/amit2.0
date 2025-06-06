@@ -1,4 +1,4 @@
-import { Component, OnInit, isDevMode, HostListener } from '@angular/core';
+import { Component, OnInit, isDevMode, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import {
   SwPush,
@@ -9,11 +9,13 @@ import {
 } from '@angular/service-worker';
 import { PUBLIC_VAPID_KEY_OF_SERVER } from './app.constants';
 import { NotificationService } from './notifications.service';
+import { AnalyticsService } from './analytics.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
- 
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   notificationData = '{}';
@@ -23,8 +25,14 @@ export class AppComponent implements OnInit {
   showSidebar = true;
   showNavbar = true;
   isLoading: boolean;
-  constructor(private router: Router, private updateService: SwUpdate,
-    private pushService: SwPush, private notificationService: NotificationService) {
+  constructor(private router: Router,
+    private updateService: SwUpdate,
+    private pushService: SwPush,
+    private notificationService: NotificationService,
+    private analytics: AnalyticsService,
+    private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => this.showSidebar = !result.matches);
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -58,6 +66,7 @@ export class AppComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.analytics.initialize();
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
     if (isDevMode()) {
