@@ -1,5 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+
+const SECRET = 'your-very-secret-key'; // Change to a secure value in production
 
 const usersFile = 'j:/Stock Website/amit2.0/users.json';
 
@@ -60,8 +63,12 @@ exports.handler = async function(event, context) {
   console.log('Loaded users:', users);
   const user = users.find(u => u.email === email && u.password === password);
   if (user) {
-    // Simulate a JWT token
-    const token = 'mock-jwt-token';
+    // Generate a real JWT token
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      SECRET,
+      { expiresIn: '1h' }
+    );
     console.log('Login successful for:', email);
     return {
       statusCode: 200,
