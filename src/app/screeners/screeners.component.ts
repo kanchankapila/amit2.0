@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import * as  stocks from '../lists/stocklist'
 import { Chart } from 'chart.js';
-<<<<<<< Updated upstream
-=======
+
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,10 +15,7 @@ export interface NtScreenerOptions {
   [key: string]: boolean | number | string;
 }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 export interface screenerstockstile {
   text1: number; text2: number; text3: number; text4: number; text5: number; text6: number; text7: number; text8: number; text9: number;
   text10: number; text11: number; text12: number;
@@ -64,15 +60,10 @@ export class ScreenersComponent implements OnInit {
     console.log('selectedOption: ', selectedOption);
   }
   screenerstocks: screenerstockstile[] = [];
-<<<<<<< Updated upstream
-  constructor(private dataApi: DataapiService, private http: HttpClient, private _formBuilder: FormBuilder, private window: Window) {
-=======
+
 
   constructor(private dataApi: DataApiService, private http: HttpClient, private _formBuilder: FormBuilder) {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     this.SMA = this._formBuilder.group({
       "_20_day_sma_below": false,
       "_20_day_sma_above": false,

@@ -2,12 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { DataApiService } from '../services/data-api.service';
 import { PrimeNGConfig } from 'primeng/api';
 import * as  stocks from '../lists/stocklist'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { HttpClient } from '@angular/common/http';
-=======
-=======
->>>>>>> Stashed changes
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -24,10 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { NgApexchartsModule } from 'ng-apexcharts';
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 // import { Browser } from '@syncfusion/ej2-base';
 import { RadioButton } from 'primeng/radiobutton';
@@ -113,9 +105,7 @@ export interface pniftysmatile {
 @Component({
   selector: 'app-pharmanifty',
   templateUrl: './pharmanifty.component.html',
-<<<<<<< Updated upstream
-  styleUrls: ['./pharmanifty.component.scss']
-=======
+
   styleUrls: ['./pharmanifty.component.scss'],
   standalone: true,
   imports: [
@@ -144,20 +134,13 @@ export interface pniftysmatile {
     DataLabelService,
     LineSeriesService
   ]
->>>>>>> Stashed changes
 })
 export class PharmaniftyComponent implements OnInit {
   @ViewChild('TradingViewWidget', { static: true }) TradingViewWidget: ElementRef;
   @ViewChild('trendlyneWidget', { static: true }) trendlyneWidget: ElementRef;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig) {
-=======
+
   constructor(private http: HttpClient, private dataApi: DataApiService, private primengConfig: PrimeNGConfig) {
->>>>>>> Stashed changes
-=======
   constructor(private http: HttpClient, private dataApi: DataApiService, private primengConfig: PrimeNGConfig) {
->>>>>>> Stashed changes
   }
   selectedValue: string;
   ngAfterViewInit() {

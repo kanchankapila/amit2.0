@@ -18,40 +18,16 @@
     "stats": "webpack-bundle-analyzer /dist/stats.json"
   },
   "engines": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    "node": "20.15.0",
-    "npm": "10.8.1"
-=======
-=======
->>>>>>> Stashed changes
+
     "node": "v22.16.0",
     "npm": "11.4.1"
->>>>>>> Stashed changes
   },
   "resolutions": {
     "uglify-es": "npm:terser"
   },
   "private": true,
   "dependencies": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    "@angular/animations": "^18.0.6",
-    "@angular/cdk": "^18.0.6",
-    "@angular/common": "^18.0.6",
-    "@angular/compiler": "^18.0.6",
-    "@angular/core": "^18.0.6",
-    "@angular/flex-layout": "^14.0.0-beta.40",
-    "@angular/forms": "^18.0.6",
-    "@angular/material": "^18.0.6",
-    "@angular/platform-browser": "^18.0.6",
-    "@angular/platform-browser-dynamic": "^18.0.6",
-    "@angular/pwa": "^18.0.7",
-    "@angular/router": "^18.0.6",
-    "@angular/service-worker": "^18.0.6",
-=======
-=======
->>>>>>> Stashed changes
+
     "@angular/animations": "^17.2.0",
     "@angular/cdk": "^17.2.0",
     "@angular/common": "^17.2.0",
@@ -65,10 +41,7 @@
     "@angular/pwa": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/service-worker": "^17.2.0",
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     "@mdi/font": "^7.4.47",
     "@netlify/functions": "^2.8.1",
     "@popperjs/core": "^2.11.8",
@@ -116,21 +89,7 @@
     "autoprefixer": "10.4.7"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    "@angular-builders/custom-webpack": "^18.0.0",
-    "@angular-devkit/build-angular": "^18.0.7",
-    "@angular-eslint/builder": "18.1.0",
-    "@angular-eslint/eslint-plugin": "18.1.0",
-    "@angular-eslint/eslint-plugin-template": "18.1.0",
-    "@angular-eslint/schematics": "18.1.0",
-    "@angular-eslint/template-parser": "18.1.0",
-    "@angular/cli": "^18.0.7",
-    "@angular/compiler-cli": "^18.0.6",
-    "@angular/localize": "^18.0.6",
-=======
-=======
->>>>>>> Stashed changes
+
     "@angular-builders/custom-webpack": "^17.0.0",
     "@angular-devkit/build-angular": "^17.2.0",
     "@angular-eslint/builder": "17.2.0",
@@ -141,10 +100,7 @@
     "@angular/cli": "^17.2.0",
     "@angular/compiler-cli": "^17.2.0",
     "@angular/localize": "^17.2.0",
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     "@sparticuz/chromium": "^106.0.2",
     "@types/angular-route": "^1.7.6",
     "@types/jquery": "^3.5.30",
