@@ -1,197 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { Component, OnInit, ViewChild } from '@angular/core';
-// import * as schedule from "node-schedule";
-import { DataapiService } from '../../dataapi.service'
-import { HttpClient } from "@angular/common/http";
-interface Gainers {
-  text1?: string;
-  text2?: string;
-  text3?: string;
-  text4?: string;
-  text5?: string;
-  text6?: string;
-  text7?: string;
-  text8?: string;
-  text9?: string;
-  text10?: string;
-  text11?: string;
-}
-import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-  ApexXAxis,
-  ApexStroke,
-  ApexYAxis,
-  ApexTooltip,
-  ApexFill,
-  ApexAxisChartSeries,
-  ApexTitleSubtitle,
-  ApexDataLabels,
-  ApexChart,
-  ApexPlotOptions,
-  ApexLegend,
-  ChartComponent
-} from "ng-apexcharts";
-export type ChartOptions1 = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
-  yaxis: ApexYAxis;
-  stroke: ApexStroke;
-  title: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  fill: ApexFill;
-  legend: ApexLegend;
-};
-export type ChartOptions2 = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  fill: ApexFill;
-  responsive: ApexResponsive[];
-  labels: any;
-  colors: string[];
-};
-export interface globalmarkettiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
-interface Losers {
-  text1?: string;
-  text2?: string;
-  text3?: string;
-  text4?: string;
-  text5?: string;
-  text6?: string;
-  text7?: string;
-  text8?: string;
-  text9?: string;
-  text10?: string;
-  text11?: string;
-}
-import { ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
-import { RadioButton } from 'primeng/radiobutton';
-import ApexCharts from 'apexcharts';
-export type ChartOptions5 = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  title: ApexTitleSubtitle;
-  plotOptions: ApexPlotOptions;
-  legend: ApexLegend;
-};
-export interface dealsdatatile { text1: string; text2: string; text3: string; text4: string, text5: string, text6: any; }
-export interface globalmarkettiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
-export interface screenerGainerstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  // text7:string;
-  // text8:string;
-  // text9:string;
-  // text10:string;
-  text11: string;
-}
-export interface screenerLoserstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  // text7:string;
-  // text8:string;
-  // text9:string;
-  // text10:string;
-  text11: string;
-}
-export interface screenertiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  // text7:string;
-  // text8:string;
-  // text9:string;
-  // text10:string;
-  text11: string;
-}
-export interface pdstockstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-  text8: string;
-  text9: string;
-  text10: string;
-  text11: string;
-  text12: string;
-}
-export interface ssstockstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-  text8: string;
-  text9: string;
-  text10: string;
-  text11: string;
-  text12: string;
-}
-export interface screenerhourlyGainerstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  // text7:string;
-  // text8:string;
-  // text9:string;
-  // text10:string;
-  text11: string;
-}
-export interface screenerhourlyLoserstiles {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  // text7:string;
-  // text8:string;
-  // text9:string;
-  // text10:string;
-  text11: string;
-}
-export interface sectortiles {
-  x: string;
-  y: any;
-}
-//TreeMap.Inject(TreeMapTooltip, TreeMapLegend);
-=======
+
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -214,12 +21,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { ChartOptions } from '../core/models/chart.interface';
 
->>>>>>> Stashed changes
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
-=======
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -267,10 +72,7 @@ import { ChartOptions } from '../core/models/chart.interface';
   ],
   providers: [DataApiService, provideCharts(withDefaultRegisterables())],
   changeDetection: ChangeDetectionStrategy.OnPush
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

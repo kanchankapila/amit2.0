@@ -1,33 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { CustomPreloadingStrategy } from './custom-preloading-strategy';
-import { AppComponent } from './app.component';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
-import { SharedModule } from './shared/shared.module';
 
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    SpinnerComponent,
-    ContentAnimateDirective
-    
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    SharedModule,
-=======
-=======
->>>>>>> Stashed changes
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,26 +34,12 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     SharedModule,
     CoreModule,
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
     }),
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  ],
-  providers: [
-    { provide: Window, useValue: window },CustomPreloadingStrategy
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-=======
-=======
->>>>>>> Stashed changes
+
     NgxEchartsModule.forRoot({
       echarts
     })
@@ -107,9 +64,5 @@ export class AppModule { }
   ],
   bootstrap: []
 })
-<<<<<<< Updated upstream
+
 export class AppModule { } 
->>>>>>> Stashed changes
-=======
-export class AppModule { } 
->>>>>>> Stashed changes
