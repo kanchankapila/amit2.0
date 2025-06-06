@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const usersFile = path.join(__dirname, 'users.json');
+const usersFile = path.resolve(__dirname, '../../../users.json');
 
 function getUsers() {
   if (!fs.existsSync(usersFile)) return [];

@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
 
-  apiUrl: 'https://api.stockinsights.com/api',
+  apiUrl:'/.netlify/functions', 
+  // 'https://api.stockinsights.com/api',
   wsUrl: 'wss://api.stockinsights.com',
   vapidPublicKey: 'YOUR_PRODUCTION_VAPID_PUBLIC_KEY',
   appName: 'Stock Website',
