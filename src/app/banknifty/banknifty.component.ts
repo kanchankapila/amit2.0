@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, } from '@angular/core';
-import { DataApiService } from '../services/data-api.service';
+import { DataApiService } from '../core/services/data-api.service';
 import { RadioButton } from 'primeng/radiobutton';
 import { PrimeNGConfig } from 'primeng/api';
 import { ChartType } from 'chart.js';

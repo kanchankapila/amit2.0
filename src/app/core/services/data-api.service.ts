@@ -53,7 +53,7 @@ export class DataApiService {
 
   private setBaseUrl(): void {
     this.baseUrl = window.location.hostname === "localhost" 
-      ? "http://localhost:9999"
+      ? "http://localhost:8888"
       : "https://stockinsights.netlify.app";
   }
 
