@@ -325,7 +325,7 @@
       </ejs-chart>
     </div>
   </div>
-  <div fxLayout="row" fxLayout.xs="column">
+  <div class="row g-2">
     <div class="col-lg-6 col-xs-5 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
@@ -366,7 +366,7 @@
   <p-tabView>
     <p-tabPanel header="5 days">
       <h4 class="text-black text-center">Weekly Technical Indicators</h4>
-      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div class="d-flex flex-wrap gap-2">
         <div
           style="
             text-transform: uppercase;
@@ -374,10 +374,10 @@
             margin: 10px;
             text-align: center;
           "
-          fxFlex="10"
-          fxFlex.lg="12%"
-          fxFlex.xs="40"
-          fxFlex.sm="33%"
+          
+          
+          
+          
           *ngFor="let tile of nifty50indicatorsw; let i = index;
           trackBy: trackByFunctionnifty50indicatorsw"
         >
@@ -419,21 +419,21 @@
           </div>
         </div>
       </div>
-      <div fxLayout="row" fxLayout.xs="column">
+      <div  >
         <div class="col-lg-6 col-xs-4 text-center text-white">
           <div class="content card">
             <div class="block">
               <h4 class="text-black text-center">Crossover</h4>
-              <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div  >
                 <div
                   style="
                     text-transform: uppercase;
                     font-weight: bold;
                     text-align: center;
                   "
-                  fxFlex="30"
-                  fxFlex.xs="33%"
-                  fxFlex.sm="33%"
+                  
+                  
+                  
                   *ngFor="
                     let tile of nifty50crossoverw;
                     let i = index;
@@ -482,8 +482,8 @@
     <p-tabPanel header="1 month">
       <h4 class="text-black text-center">Monthly Technical Indicators</h4>
       <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px grid"
+        
+        
         class="content card textcenter"
       >
         <div
@@ -493,10 +493,10 @@
             margin: 10px;
             text-align: center;
           "
-          fxFlex="10"
-          fxFlex.lg="12%"
-          fxFlex.xs="40"
-          fxFlex.sm="33%"
+          
+          
+          
+          
           *ngFor="let tile of nifty50indicatorsm;  let i = index;
           trackBy: trackByFunctionnifty50indicatorsm"
         >
@@ -538,21 +538,21 @@
           </div>
         </div>
       </div>
-      <div fxLayout="row" fxLayout.xs="column">
+      <div  >
         <div class="col-lg-6 col-xs-4 text-center text-white">
           <div class="content card">
             <div class="block">
               <h4 class="text-black text-center">Crossover</h4>
-              <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div  >
                 <div
                   style="
                     text-transform: uppercase;
                     font-weight: bold;
                     text-align: center;
                   "
-                  fxFlex="30"
-                  fxFlex.xs="33%"
-                  fxFlex.sm="33%"
+                  
+                  
+                  
                   *ngFor="
                     let tile of nifty50crossoverm;
                     let i = index;
@@ -663,12 +663,12 @@
   <!-- <div class="col-lg-15 col-xs-6">
     <div class="content card">
       <h4 class="card-title text-black text-center">NIFTY 50 STOCKS</h4>
-      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div  >
         <div
           style="text-transform: uppercase; font-weight: bold"
-          fxFlex="15"
-          fxFlex.xs="30"
-          fxFlex.sm="50%"
+          
+          
+          
           class="text-center"
           *ngFor="let tile of nifty50Stocks;let i = index;
           trackBy: trackByFunctionnifty50Stocks"
