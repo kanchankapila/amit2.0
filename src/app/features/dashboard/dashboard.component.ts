@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 
 // Import widget components
 import { MarketOverviewComponent } from './components/market-overview/market-overview.component';
+import { MarketOverviewChartComponent } from './components/market-overview-chart/market-overview-chart.component';
 import { WatchlistWidgetComponent } from './components/watchlist-widget/watchlist-widget.component';
 import { NewsWidgetComponent } from './components/news-widget/news-widget.component';
 import { PortfolioWidgetComponent } from './components/portfolio-widget/portfolio-widget.component';
@@ -27,6 +28,7 @@ import { PortfolioWidgetComponent } from './components/portfolio-widget/portfoli
     MatIconModule,
     MatButtonModule,
     MarketOverviewComponent,
+    MarketOverviewChartComponent,
     WatchlistWidgetComponent,
     NewsWidgetComponent,
     PortfolioWidgetComponent

@@ -52,6 +52,10 @@ export class DataApiService {
   }
 
   private setBaseUrl(): void {
+    // Use the API URL defined in the environment configuration so
+    // that the service works in both local development and the
+    // deployed Netlify environment.
+    
     this.baseUrl = window.location.hostname === "localhost" 
       ? "http://localhost:8888"
       : "https://stockinsights.netlify.app";
@@ -285,6 +289,16 @@ export class DataApiService {
 
   getNtGlobal(): Observable<GlobalMarketData[]> {
     return this.get('/api/nt/global');
+  }
+
+  /**
+   * Fetch overall market statistics such as index levels and
+   * advances/declines. The API is served via the Netlify function
+   * defined in `netlify/functions/api.ts` under the
+   * `market/overview` route.
+   */
+  getMarketOverview(): Observable<any> {
+    return this.get('/api/market/overview');
   }
 
   getTlBuildup(tlid: string): Observable<any> {
