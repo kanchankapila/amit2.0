@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataApiService } from '../services/data-api.service';
+import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import * as  stocks from '../lists/stocklist'
@@ -62,7 +62,9 @@ export class ScreenersComponent implements OnInit {
   screenerstocks: screenerstockstile[] = [];
 
 
-  constructor(private dataApi: DataApiService, private http: HttpClient, private _formBuilder: FormBuilder) {
+  window: Window;
+  constructor(private dataApi: DataapiService, private http: HttpClient, private _formBuilder: FormBuilder) {
+    this.window = window;
 
     this.SMA = this._formBuilder.group({
       "_20_day_sma_below": false,

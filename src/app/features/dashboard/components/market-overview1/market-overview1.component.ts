@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DataapiService } from '../../../../dataapi.service';
+// import { DataapiService } from '../../../../dataapi.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IndexData } from '../../../../core/models/market.interface';
@@ -35,7 +35,9 @@ export class MarketOverviewComponent implements OnInit, OnDestroy {
     unchanged: 0
   };
 
-  constructor(private dataApiService: DataapiService) {}
+  constructor(
+    // private dataApiService: DataapiService
+    ) {}
 
   ngOnInit(): void {
     this.loadMarketData();
@@ -50,50 +52,50 @@ export class MarketOverviewComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     // Load Nifty data
-    this.dataApiService.getNiftyData().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (data) => {
-        this.indices.push({
-          ...data,
-          name: 'NIFTY 50'
-        });
-        this.updateMarketStats();
-      },
-      error: (error) => console.error('Error loading Nifty data:', error)
-    });
+    // this.dataApiService.getNiftyData().pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe({
+    //   next: (data) => {
+    //     this.indices.push({
+    //       ...data,
+    //       name: 'NIFTY 50'
+    //     });
+    //     this.updateMarketStats();
+    //   },
+    //   error: (error) => console.error('Error loading Nifty data:', error)
+    // });
 
     // Load Bank Nifty data
-    this.dataApiService.getBankNiftyData().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (data) => {
-        this.indices.push({
-          ...data,
-          name: 'BANK NIFTY'
-        });
-        this.updateMarketStats();
-      },
-      error: (error) => console.error('Error loading Bank Nifty data:', error)
-    });
+    // this.dataApiService.getBankNiftyData().pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe({
+    //   next: (data) => {
+    //     this.indices.push({
+    //       ...data,
+    //       name: 'BANK NIFTY'
+    //     });
+    //     this.updateMarketStats();
+    //   },
+    //   error: (error) => console.error('Error loading Bank Nifty data:', error)
+    // });
 
     // Load Pharma Nifty data
-    this.dataApiService.getPharmaNiftyData().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (data) => {
-        this.indices.push({
-          ...data,
-          name: 'PHARMA NIFTY'
-        });
-        this.updateMarketStats();
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error loading Pharma Nifty data:', error);
-        this.loading = false;
-      }
-    });
+    // this.dataApiService.getPharmaNiftyData().pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe({
+    //   next: (data) => {
+    //     this.indices.push({
+    //       ...data,
+    //       name: 'PHARMA NIFTY'
+    //     });
+    //     this.updateMarketStats();
+    //     this.loading = false;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error loading Pharma Nifty data:', error);
+    //     this.loading = false;
+    //   }
+    // });
   }
 
   private updateMarketStats(): void {

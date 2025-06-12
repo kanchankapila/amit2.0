@@ -30,23 +30,23 @@ export class MarketOverviewChartComponent implements OnInit {
     // });
   }
 
-  private buildChart(data: any): void {
-    if (!data) { return; }
+  // private buildChart(data: any): void {
+  //   if (!data) { return; }
 
-    const labels: string[] = [];
-    const values: number[] = [];
+  //   const labels: string[] = [];
+  //   const values: number[] = [];
 
-    Object.keys(data).forEach(key => {
-      const value = Number(data[key]);
-      if (!isNaN(value)) {
-        labels.push(key);
-        values.push(value);
-      }
-    });
+  //   Object.keys(data).forEach(key => {
+  //     const value = Number(data[key]);
+  //     if (!isNaN(value)) {
+  //       labels.push(key);
+  //       values.push(value);
+  //     }
+  //   });
 
-    this.chartData = {
-      labels,
-      datasets: [{ data: values, label: 'Index Value' }]
-    };
+    // this.chartData = {
+    //   labels,
+    //   datasets: [{ data: values, label: 'Index Value' }]
+    // };
   }
-}
+

@@ -7,14 +7,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxEchartsModule } from 'ngx-echarts';
 
-import { BankNiftyComponent } from './banknifty.component';
+import { BankniftyComponent } from './banknifty.component';
 
 const routes: Routes = [
-  { path: '', component: BankNiftyComponent }
+  { path: '', component: BankniftyComponent }
 ];
 
 @NgModule({
-  declarations: [],
+  // declarations: [BankniftyComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -22,8 +22,7 @@ const routes: Routes = [
     MatGridListModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    NgxEchartsModule,
-    BankNiftyComponent
+    NgxEchartsModule
   ]
 })
-export class BankNiftyModule { } 
+export class BankniftyModule { }

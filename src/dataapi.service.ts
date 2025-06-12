@@ -8,6 +8,30 @@ export class DataapiService {
   public href: string = "";
   baseurl: string;
 
+  // --- STUBS FOR LEGACY API METHODS ---
+  // Add these to support legacy component calls after refactor
+  getNiftyData() {
+    // Replace with actual implementation or HTTP call
+    return this.http.get<any>(`${this.baseurl}/.netlify/functions/nifty`);
+  }
+  getBankNiftyData() {
+    return this.http.get<any>(`${this.baseurl}/.netlify/functions/banknifty`);
+  }
+  getPharmaNiftyData() {
+    return this.http.get<any>(`${this.baseurl}/.netlify/functions/pharmanifty`);
+  }
+  getScreenerResults(criteria: any) {
+    // Replace with actual implementation or HTTP call
+    return this.http.post<any>(`${this.baseurl}/.netlify/functions/ntscreeners`, criteria);
+  }
+  getSectorsData() {
+    return this.http.get<any>(`${this.baseurl}/.netlify/functions/sectors`);
+  }
+  getStockData(type: string) {
+    // Dummy implementation for homepage.component.ts
+    return this.http.get<any>(`${this.baseurl}/.netlify/functions/stockdata?type=${type}`);
+  }
+
   constructor(private http: HttpClient) {
     this.setBaseUrl(); // Initialize baseurl based on hostname
   }

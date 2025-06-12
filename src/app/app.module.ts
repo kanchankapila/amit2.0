@@ -9,10 +9,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 
-import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { DataApiService } from './core/services/data-api.service';
+import { DataapiService } from '../dataapi.service';
 import { LoadingService } from './core/services/loading.service';
 import { CacheService } from './core/services/cache.service';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
@@ -31,7 +30,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AppRoutingModule,
+    // AppRoutingModule removed for standalone bootstrap
     SharedModule,
     CoreModule,
 
@@ -58,7 +57,7 @@ import { environment } from '../environments/environment';
       useClass: CacheInterceptor,
       multi: true
     },
-    DataApiService,
+    DataapiService,
     LoadingService,
     CacheService
   ],

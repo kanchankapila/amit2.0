@@ -1,4 +1,8 @@
 [[redirects]]
+from = "/api/nifty"
+to = "/.netlify/functions/nifty"
+status = 200
+[[redirects]]
 from = "/api/banknifty"
 to = "/.netlify/functions/banknifty"
 status = 200

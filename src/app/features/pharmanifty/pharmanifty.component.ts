@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, distinctUntilChanged, shareReplay, map } from 'rxjs/operators';
-import { DataApiService } from '../../core/services/data-api.service';
+import { DataapiService } from '../../../dataapi.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { IndexData } from '../../core/models/market.interface';
 import type { EChartsOption } from 'echarts';
@@ -77,7 +77,7 @@ export class PharmaNiftyComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private dataApiService: DataApiService,
+    private dataApiService: DataapiService,
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef
   ) {

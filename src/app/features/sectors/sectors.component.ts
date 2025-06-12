@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DataApiService } from '../../core/services/data-api.service';
+import { DataapiService } from '../../../dataapi.service';
 import { LoadingService } from '../../core/services/loading.service';
 import type { EChartsOption } from 'echarts';
 
@@ -176,7 +176,7 @@ export class SectorsComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private dataApiService: DataApiService,
+    private dataApiService: DataapiService,
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef
   ) {}

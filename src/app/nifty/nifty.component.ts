@@ -701,24 +701,92 @@ export class NiftyComponent implements OnInit {
       );
   }
   getnifty1yr() {
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (const val in nestedItems[1].values) {
-        this.nifty501yrdata.push(nestedItems[1].values[val]["_value"])
-        this.nifty501yrLabels.push(nestedItems[1].values[val]["_time"])
+    // Fetch resistance/support values first
+    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/Y/in%3BNSX?field=RSI').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      // Get Nifty 1 year Resistances and Indicators
+      const r1 = nestedItems[2]['pivotLevels'][0].pivotLevel.r1;
+      const r2 = nestedItems[2]['pivotLevels'][0].pivotLevel.r2;
+      const r3 = nestedItems[2]['pivotLevels'][0].pivotLevel.r3;
+      const s1 = nestedItems[2]['pivotLevels'][0].pivotLevel.s1;
+      const s2 = nestedItems[2]['pivotLevels'][0].pivotLevel.s2;
+      const s3 = nestedItems[2]['pivotLevels'][0].pivotLevel.s3;
+      this.nifty50crossoverm = [];
+      for (const val in nestedItems[2]['crossover']) {
+        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
       }
-      this.lineChart1yrData = [{
-        label: 'Price',
-        data: this.nifty501yrdata,
-        borderWidth: 1,
-        fill: false
-      }];
-      this.lineChart1yrLabels = this.nifty501yrLabels;
+      this.nifty50indicatorsm = [];
+      for (const val1 in nestedItems[2]['indicators']) {
+        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
+        }
+      }
+      // Now fetch price and build chart data
+      this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.nifty501yrdata = [];
+        this.nifty501yrLabels = [];
+        for (const val in nestedItems[1].values) {
+          this.nifty501yrdata.push(nestedItems[1].values[val]["_value"]);
+          this.nifty501yrLabels.push(nestedItems[1].values[val]["_time"]);
+        }
+        this.lineChart1yrData = [
+          {
+            label: 'Price',
+            data: this.nifty501yrdata,
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty501yrdata.length).fill(r1),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty501yrdata.length).fill(r2),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty501yrdata.length).fill(r3),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty501yrdata.length).fill(s1),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty501yrdata.length).fill(s2),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty501yrdata.length).fill(s3),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChart1yrLabels = this.nifty501yrLabels;
+      }, err => {
+        console.log(err);
+      });
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   trackByFunctionnifty50Stocks(index: number, item: any): any {
     return item.id; 
@@ -779,228 +847,353 @@ export class NiftyComponent implements OnInit {
   }
  
   getnifty6m() {
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (const val in nestedItems[1].values) {
-        this.nifty506mdata.push(nestedItems[1].values[val]["_value"])
-        this.nifty506mLabels.push(nestedItems[1].values[val]["_time"])
+    // Fetch resistance/support values first
+    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M6/in%3BNSX?field=RSI').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      // Get Nifty 6 month Resistances and Indicators
+      const r1 = nestedItems[2]['pivotLevels'][0].pivotLevel.r1;
+      const r2 = nestedItems[2]['pivotLevels'][0].pivotLevel.r2;
+      const r3 = nestedItems[2]['pivotLevels'][0].pivotLevel.r3;
+      const s1 = nestedItems[2]['pivotLevels'][0].pivotLevel.s1;
+      const s2 = nestedItems[2]['pivotLevels'][0].pivotLevel.s2;
+      const s3 = nestedItems[2]['pivotLevels'][0].pivotLevel.s3;
+      this.nifty50crossoverm = [];
+      for (const val in nestedItems[2]['crossover']) {
+        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
       }
-      this.lineChart6mData = [{
-        label: 'Price',
-        data: this.nifty506mdata,
-        borderWidth: 1,
-        fill: false
-      }];
-      this.lineChart6mLabels = this.nifty506mLabels;
+      this.nifty50indicatorsm = [];
+      for (const val1 in nestedItems[2]['indicators']) {
+        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
+        }
+      }
+      // Now fetch price and build chart data
+      this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.nifty506mdata = [];
+        this.nifty506mLabels = [];
+        for (const val in nestedItems[1].values) {
+          this.nifty506mdata.push(nestedItems[1].values[val]["_value"]);
+          this.nifty506mLabels.push(nestedItems[1].values[val]["_time"]);
+        }
+        this.lineChart6mData = [
+          {
+            label: 'Price',
+            data: this.nifty506mdata,
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty506mdata.length).fill(r1),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty506mdata.length).fill(r2),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty506mdata.length).fill(r3),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty506mdata.length).fill(s1),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty506mdata.length).fill(s2),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty506mdata.length).fill(s3),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChart6mLabels = this.nifty506mLabels;
+      }, err => {
+        console.log(err);
+      });
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   getnifty3m() {
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (const val in nestedItems[1].values) {
-        this.nifty503mdata.push(nestedItems[1].values[val]["_value"])
-        this.nifty503mLabels.push(nestedItems[1].values[val]["_time"])
+    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      // Get Nifty 3 month Resistances and Indicators
+      const r1 = nestedItems[2]['pivotLevels'][0].pivotLevel.r1;
+      const r2 = nestedItems[2]['pivotLevels'][0].pivotLevel.r2;
+      const r3 = nestedItems[2]['pivotLevels'][0].pivotLevel.r3;
+      const s1 = nestedItems[2]['pivotLevels'][0].pivotLevel.s1;
+      const s2 = nestedItems[2]['pivotLevels'][0].pivotLevel.s2;
+      const s3 = nestedItems[2]['pivotLevels'][0].pivotLevel.s3;
+      this.nifty50crossoverm = [];
+      for (const val in nestedItems[2]['crossover']) {
+        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
       }
-      this.lineChart3mData = [{
-        label: 'Price',
-        data: this.nifty503mdata,
-        borderWidth: 1,
-        fill: false
-      }];
-      this.lineChart3mLabels = this.nifty503mLabels;
+      this.nifty50indicatorsm = [];
+      for (const val1 in nestedItems[2]['indicators']) {
+        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
+        }
+      }
+      // Now fetch price and build chart data
+      this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.nifty503mdata = [];
+        this.nifty503mLabels = [];
+        for (const val in nestedItems[1].values) {
+          this.nifty503mdata.push(nestedItems[1].values[val]["_value"]);
+          this.nifty503mLabels.push(nestedItems[1].values[val]["_time"]);
+        }
+        this.lineChart3mData = [
+          {
+            label: 'Price',
+            data: this.nifty503mdata,
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty503mdata.length).fill(r1),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty503mdata.length).fill(r2),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty503mdata.length).fill(r3),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty503mdata.length).fill(s1),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty503mdata.length).fill(s2),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty503mdata.length).fill(s3),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChart3mLabels = this.nifty503mLabels;
+      }, err => {
+        console.log(err);
+      });
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   getnifty5d() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      ////////////To get Nifty 5day Resistances and Indicators/////////////
-      let val5 = 0;
-      while (val5 != 2400) {
-        val5 = val5 + 1
-        this.lineChartDatan50snrr1w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
-          this.lineChartDatan50snrs3w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
-          this.lineChartDatan50snrs2w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
-          this.lineChartDatan50snrs1w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
-      }
-      this.nifty50crossoverw.length = 0;
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      // Get Nifty 5 day Resistances and Indicators
+      const r1 = nestedItems[2]['pivotLevels'][0].pivotLevel.r1;
+      const r2 = nestedItems[2]['pivotLevels'][0].pivotLevel.r2;
+      const r3 = nestedItems[2]['pivotLevels'][0].pivotLevel.r3;
+      const s1 = nestedItems[2]['pivotLevels'][0].pivotLevel.s1;
+      const s2 = nestedItems[2]['pivotLevels'][0].pivotLevel.s2;
+      const s3 = nestedItems[2]['pivotLevels'][0].pivotLevel.s3;
+      this.nifty50crossoverw = [];
       for (const val in nestedItems[2]['crossover']) {
-        this.nifty50crossoverw.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
+        this.nifty50crossoverw.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
       }
-      this.nifty50indicatorsw.length = 0;
+      this.nifty50indicatorsw = [];
       for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicatorsw.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+          this.nifty50indicatorsw.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
         }
       }
-    }, err => {
-      console.log(err)
-    })
-    ////////////To get Nifty 1 week Price///////////////////////
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
+      // Now fetch price and build chart data
+      this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.nifty505ddata = [];
+        this.nifty505dLabels = [];
+        for (const val in nestedItems[1].values) {
+          this.nifty505ddata.push(nestedItems[1].values[val]["_value"]);
+          this.nifty505dLabels.push(nestedItems[1].values[val]["_time"].slice(0, 6));
+        }
+        this.lineChart5dData = [
+          {
+            label: 'Price',
+            data: this.nifty505ddata,
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty505ddata.length).fill(r1),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty505ddata.length).fill(r2),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty505ddata.length).fill(r3),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty505ddata.length).fill(s1),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty505ddata.length).fill(s2),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty505ddata.length).fill(s3),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChart5dLabels = this.nifty505dLabels;
+      }, err => {
+        console.log(err);
       });
-      this.nifty505ddata.length = 0;
-      this.nifty505dLabels.length = 0;
-      for (const val in nestedItems[1].values) {
-        this.nifty505ddata.push(nestedItems[1].values[val]["_value"])
-        this.nifty505dLabels.push(nestedItems[1].values[val]["_time"].slice(0, 6))
-      }
-      this.lineChart5dData = [{
-        label: 'Price',
-        data: this.nifty505ddata,
-        borderWidth: 1,
-        fill: false
-      }, {
-        label: 'R1',
-        data: this.lineChartDatan50snrr1w,
-        borderWidth: 1,
-        bordercolor: '#d3766c',
-        fill: false
-      },
-      {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2w,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-        fill: false
-      }
-        , {
-        label: 'R3',
-        data: this.lineChartDatan50snrr3w,
-        borderWidth: 1,
-        borderColor: '#c84343',
-        fill: false
-      }, {
-        label: 'S1',
-        data: this.lineChartDatan50snrs1w,
-        borderWidth: 1,
-        borderColor: '#90b590',
-        fill: false
-      }, {
-        label: 'S2',
-        data: this.lineChartDatan50snrs2w,
-        borderWidth: 1,
-        borderColor: '#09c51b',
-        fill: false
-      }, {
-        label: 'S3',
-        data: this.lineChartDatan50snrs3w,
-        borderWidth: 1,
-        borderColor: '#375f00',
-        fill: false
-      }];
-      this.lineChart5dLabels = this.nifty505dLabels;
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   getnifty1m() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      ////////////To get Nifty 1 month Resistances and Indicators/////////////
-      this.lineChartDatan50snrr1m.length = 0;
-      this.lineChartDatan50snrr2m.length = 0;
-      this.lineChartDatan50snrr3m.length = 0;
-      this.lineChartDatan50snrs1m.length = 0;
-      this.lineChartDatan50snrs2m.length = 0;
-      this.lineChartDatan50snrs3m.length = 0;
-      let val5 = 0;
-      while (val5 != 2000) {
-        val5 = val5 + 1
-        this.lineChartDatan50snrr1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
-          this.lineChartDatan50snrs3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
-          this.lineChartDatan50snrs2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
-          this.lineChartDatan50snrs1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
-      }
-      this.nifty50crossoverm.length = 0;
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      // Get Nifty 1 month Resistances and Indicators
+      this.lineChartDatan50snrr1m = [nestedItems[2]['pivotLevels'][0].pivotLevel.r1];
+      this.lineChartDatan50snrr2m = [nestedItems[2]['pivotLevels'][0].pivotLevel.r2];
+      this.lineChartDatan50snrr3m = [nestedItems[2]['pivotLevels'][0].pivotLevel.r3];
+      this.lineChartDatan50snrs1m = [nestedItems[2]['pivotLevels'][0].pivotLevel.s1];
+      this.lineChartDatan50snrs2m = [nestedItems[2]['pivotLevels'][0].pivotLevel.s2];
+      this.lineChartDatan50snrs3m = [nestedItems[2]['pivotLevels'][0].pivotLevel.s3];
+      this.nifty50crossoverm = [];
       for (const val in nestedItems[2]['crossover']) {
-        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
+        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
       }
-      this.nifty50indicatorsm.length = 0;
+      this.nifty50indicatorsm = [];
       for (const val1 in nestedItems[2]['indicators']) {
         if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
         }
       }
-    }, err => {
-      console.log(err)
-    })
-    ////////////To get Nifty 1 month Price///////////////////////
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
+      // Now fetch price and build chart data
+      this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        this.nifty501mdata = [];
+        this.nifty501mLabels = [];
+        for (const val in nestedItems[1].values) {
+          this.nifty501mdata.push(nestedItems[1].values[val]["_value"]);
+          this.nifty501mLabels.push(nestedItems[1].values[val]["_time"]);
+        }
+        this.lineChart1mData = [
+          {
+            label: 'Price',
+            data: this.nifty501mdata,
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrr1m[0]),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrr2m[0]),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrr3m[0]),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrs1m[0]),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrs2m[0]),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty501mdata.length).fill(this.lineChartDatan50snrs3m[0]),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChart1mLabels = this.nifty501mLabels;
+      }, err => {
+        console.log(err);
       });
-      this.nifty501mdata.length = 0;
-      this.nifty501mLabels.length = 0;
-      for (const val in nestedItems[1].values) {
-        this.nifty501mdata.push(nestedItems[1].values[val]["_value"])
-        this.nifty501mLabels.push(nestedItems[1].values[val]["_time"])
-      }
-      this.lineChart1mData = [{
-        label: 'Price',
-        data: this.nifty501mdata,
-        borderWidth: 1,
-        fill: false
-      }, {
-        label: 'R1',
-        data: this.lineChartDatan50snrr1m,
-        borderWidth: 1,
-        bordercolor: '#d3766c',
-        fill: false
-      },
-      {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2m,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-        fill: false
-      }
-        , {
-        label: 'R3',
-        data: this.lineChartDatan50snrr3m,
-        borderWidth: 1,
-        borderColor: '#c84343',
-        fill: false
-      }, {
-        label: 'S1',
-        data: this.lineChartDatan50snrs1m,
-        borderWidth: 1,
-        borderColor: '#90b590',
-        fill: false
-      }, {
-        label: 'S2',
-        data: this.lineChartDatan50snrs2m,
-        borderWidth: 1,
-        borderColor: '#09c51b',
-        fill: false
-      }, {
-        label: 'S3',
-        data: this.lineChartDatan50snrs3m,
-        borderWidth: 1,
-        borderColor: '#375f00',
-        fill: false
-      }];
-      this.lineChart1mLabels = this.nifty501mLabels;
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   getniftytoday1() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
@@ -1060,100 +1253,94 @@ export class NiftyComponent implements OnInit {
   getniftytoday() {
     ////////////To get Nifty Today Price///////////////////////
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.nifty50data.length = 0;
-      this.nifty50Labels.length = 0;
+      const nestedItems = Object.keys(data5).map(key => data5[key]);
+      this.nifty50data = [];
+      this.nifty50Labels = [];
+      this.stockhcdate = [];
       for (const val in nestedItems[1].values) {
-        this.nifty50data.push(nestedItems[1].values[val]["_value"])
-        this.nifty50Labels.push((nestedItems[1].values[val]["_time"]))
-        this.stockhcdate.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
+        this.nifty50data.push(nestedItems[1].values[val]["_value"]);
+        this.nifty50Labels.push(nestedItems[1].values[val]["_time"]);
+        this.stockhcdate.push({ x: nestedItems[1].values[val]["_time"], y: nestedItems[1].values[val]["_value"] });
       }
-    }, err => {
-      console.log(err)
-    })
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
-      const nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      ////////////To get Nifty Today Resistances and Indicators/////////////
-      this.lineChartDatan50snrr1.length = 0;
-      this.lineChartDatan50snrr2.length = 0;
-      this.lineChartDatan50snrr3.length = 0;
-      this.lineChartDatan50snrs1.length = 0;
-      this.lineChartDatan50snrs2.length = 0;
-      this.lineChartDatan50snrs3.length = 0;
-      let val = 0;
-      while (val != 400) {
-        val = val + 1
-        this.lineChartDatan50snrr1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
-          this.lineChartDatan50snrs3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
-          this.lineChartDatan50snrs2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
-          this.lineChartDatan50snrs1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
-      }
-      this.nifty50indicators.length = 0;
-      this.nifty50crossover.length = 0;
-      for (const val in nestedItems[2]['crossover']) {
-        this.nifty50crossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
-      }
-      for (const val1 in nestedItems[2]['indicators']) {
-        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+      // Fetch resistances/supports and indicators
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
+        const nestedItems = Object.keys(data5).map(key => data5[key]);
+        // Only push one value per resistance/support
+        this.lineChartDatan50snrr1 = [nestedItems[2]['pivotLevels'][0].pivotLevel.r1];
+        this.lineChartDatan50snrr2 = [nestedItems[2]['pivotLevels'][0].pivotLevel.r2];
+        this.lineChartDatan50snrr3 = [nestedItems[2]['pivotLevels'][0].pivotLevel.r3];
+        this.lineChartDatan50snrs1 = [nestedItems[2]['pivotLevels'][0].pivotLevel.s1];
+        this.lineChartDatan50snrs2 = [nestedItems[2]['pivotLevels'][0].pivotLevel.s2];
+        this.lineChartDatan50snrs3 = [nestedItems[2]['pivotLevels'][0].pivotLevel.s3];
+        this.nifty50indicators = [];
+        this.nifty50crossover = [];
+        for (const val in nestedItems[2]['crossover']) {
+          this.nifty50crossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] });
         }
-      }
-      this.lineChartData = [{
-        label: 'Price',
-        data: this.nifty50data,
-        pointColorMapping: 'color',
-        borderWidth: 1,
-        fill: false
-      },
-      {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-        fill: false
-      },
-      {
-        label: 'R1',
-        data: this.lineChartDatan50snrr1,
-        borderWidth: 1,
-        bordercolor: '#d3766c',
-        fill: false
-      }
-        , {
-        label: 'R3',
-        data: this.lineChartDatan50snrr3,
-        borderWidth: 1,
-        borderColor: '#c84343',
-        fill: false
-      }, {
-        label: 'S1',
-        data: this.lineChartDatan50snrs1,
-        borderWidth: 1,
-        borderColor: '#90b590',
-        fill: false
-      }, {
-        label: 'S2',
-        data: this.lineChartDatan50snrs2,
-        borderWidth: 1,
-        borderColor: '#09c51b',
-        fill: false
-      }, {
-        label: 'S3',
-        data: this.lineChartDatan50snrs3,
-        borderWidth: 1,
-        borderColor: '#375f00',
-        fill: false
-      }];
-      this.lineChartLabels = this.nifty50Labels;
+        for (const val1 in nestedItems[2]['indicators']) {
+          if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+            this.nifty50indicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value });
+          }
+        }
+        // Build chart data for today: price and single resistance/support lines
+        this.lineChartData = [
+          {
+            label: 'Price',
+            data: this.nifty50data,
+            pointColorMapping: 'color',
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'R1',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrr1[0]),
+            borderWidth: 1,
+            borderColor: '#d3766c',
+            fill: false
+          },
+          {
+            label: 'R2',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrr2[0]),
+            borderWidth: 1,
+            borderColor: '#e3256b',
+            fill: false
+          },
+          {
+            label: 'R3',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrr3[0]),
+            borderWidth: 1,
+            borderColor: '#c84343',
+            fill: false
+          },
+          {
+            label: 'S1',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrs1[0]),
+            borderWidth: 1,
+            borderColor: '#90b590',
+            fill: false
+          },
+          {
+            label: 'S2',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrs2[0]),
+            borderWidth: 1,
+            borderColor: '#09c51b',
+            fill: false
+          },
+          {
+            label: 'S3',
+            data: Array(this.nifty50data.length).fill(this.lineChartDatan50snrs3[0]),
+            borderWidth: 1,
+            borderColor: '#375f00',
+            fill: false
+          }
+        ];
+        this.lineChartLabels = this.nifty50Labels;
+      }, err => {
+        console.log(err);
+      });
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
   changestockpage(symbol) {
     this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin

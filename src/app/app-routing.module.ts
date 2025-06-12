@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard, publicGuard } from './core/guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'nifty',
     loadChildren: () => import('./features/nifty/nifty.module').then(m => m.NiftyModule),
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'banknifty',
-    loadChildren: () => import('./features/banknifty/banknifty.module').then(m => m.BankNiftyModule),
+    loadChildren: () => import('./features/banknifty/banknifty.module').then(m => m.BankniftyModule),
     canActivate: [authGuard]
   },
   {

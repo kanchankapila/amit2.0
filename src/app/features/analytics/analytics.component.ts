@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { takeUntil, distinctUntilChanged, shareReplay } from 'rxjs/operators';
-import { DataApiService } from '../../core/services/data-api.service';
+import { DataapiService } from '../../../dataapi.service';
 import { LoadingService } from '../../core/services/loading.service';
 import type { EChartsOption } from 'echarts';
 import * as stockList from '../../lists/stocklist';
@@ -129,7 +129,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private dataApiService: DataApiService,
+    private dataApiService: DataapiService,
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef
   ) {

@@ -5,7 +5,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { DataApiService } from '../../core/services/data-api.service';
+import { DataapiService } from '../../../dataapi.service';
 import { IndexData } from '../../core/models/market.interface';
 
 @Component({
@@ -26,7 +26,7 @@ export class NiftyComponent implements OnInit, OnDestroy {
   niftyData: IndexData | null = null;
   private destroy$ = new Subject<void>();
 
-  constructor(private dataApi: DataApiService) {}
+  constructor(private dataApi: DataapiService) {}
 
   ngOnInit(): void {
     this.loadNiftyData();

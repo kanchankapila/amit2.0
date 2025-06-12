@@ -9,8 +9,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
 // Import widget components
-import { MarketOverviewComponent } from './components/market-overview/market-overview.component';
-import { MarketOverviewChartComponent } from './components/market-overview-chart/market-overview-chart.component';
+// import { MarketOverviewComponent } from './components/market-overview1/market-overview.componentt';
+// import { MarketOverviewChartComponent } from './components/market-overview1-chart/market-overview-chart.component';
 import { WatchlistWidgetComponent } from './components/watchlist-widget/watchlist-widget.component';
 import { NewsWidgetComponent } from './components/news-widget/news-widget.component';
 import { PortfolioWidgetComponent } from './components/portfolio-widget/portfolio-widget.component';
@@ -27,8 +27,8 @@ import { PortfolioWidgetComponent } from './components/portfolio-widget/portfoli
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MarketOverviewComponent,
-    MarketOverviewChartComponent,
+    // MarketOverviewComponent,
+    // MarketOverviewChartComponent,
     WatchlistWidgetComponent,
     NewsWidgetComponent,
     PortfolioWidgetComponent

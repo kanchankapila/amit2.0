@@ -6,7 +6,7 @@ import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DataApiService } from '../../core/services/data-api.service';
+import { DataapiService } from '../../../dataapi.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { StockData, ScreenerCriteria } from '../../core/models/market.interface';
 import { MaterialModule } from '../../shared/material.module';
@@ -63,7 +63,7 @@ export class ScreenerComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private dataApiService: DataApiService,
+    private dataApiService: DataapiService,
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef
   ) {

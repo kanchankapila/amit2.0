@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { DataApiService } from '../core/services/data-api.service';
+import { DataapiService } from '../../dataapi.service';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -44,13 +44,13 @@ import { ChartOptions } from '../core/models/chart.interface';
     MatProgressSpinnerModule,
     MatButtonModule
   ],
-  providers: [DataApiService, provideCharts(withDefaultRegisterables())],
+  providers: [DataapiService, provideCharts(withDefaultRegisterables())],
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
-  private dataApi = inject(DataApiService);
+  private dataApi = inject(DataapiService);
   private snackBar = inject(MatSnackBar);
   private refreshInterval?: number;
 
@@ -141,8 +141,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe({
       next: ([globalData, screenerData]) => {
-        this.globalMarket.set(globalData);
-        this.screener.set(screenerData);
+        // Defensive: ensure arrays, fallback to []
+        this.globalMarket.set(Array.isArray(globalData) ? globalData : []);
+        this.screener.set(Array.isArray(screenerData) ? screenerData : []);
         this.updateCharts();
         this.isLoading.set(false);
       },
@@ -165,7 +166,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
         return EMPTY;
       })
     ).subscribe(data => {
-      this.pdstocks.set(data);
+      this.pdstocks.set(Array.isArray(data) ? data : []);
     });
 
     this.dataApi.getStockData('ss').pipe(
@@ -175,7 +176,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
         return EMPTY;
       })
     ).subscribe(data => {
-      this.ssstocks.set(data);
+      this.ssstocks.set(Array.isArray(data) ? data : []);
     });
   }
 
@@ -277,7 +278,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
-          this.screener.set(data);
+          this.screener.set(Array.isArray(data) ? data : []);
           this.isLoading.set(false);
         },
         error: (error) => {
