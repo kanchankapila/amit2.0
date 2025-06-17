@@ -19,7 +19,7 @@ import { ResponsiveService } from './shared/responsive.service';
 export class AppComponent implements OnInit {
   notificationData = '{}';
   title = 'demo1';
-  isHandset$;
+  isHandset$ = this.responsiveService.isHandset$;
   showSidebar = true;
   showNavbar = true;
   isLoading: boolean;
@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
     private pushService: SwPush,
     private notificationService: NotificationService,
     private responsiveService: ResponsiveService) {
-    this.isHandset$ = this.responsiveService.isHandset$;
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
