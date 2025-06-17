@@ -1,4 +1,4 @@
-import { Component, OnInit, isDevMode, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, isDevMode, HostListener } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import {
   SwPush,
@@ -9,25 +9,22 @@ import {
 } from '@angular/service-worker';
 import { PUBLIC_VAPID_KEY_OF_SERVER } from './app.constants';
 import { NotificationService } from './notifications.service';
-import { ResponsiveService } from './shared/responsive.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./app.component.scss']
+ 
 })
 export class AppComponent implements OnInit {
   notificationData = '{}';
   title = 'demo1';
-  isHandset$ = this.responsiveService.isHandset$;
+  public getScreenWidth:number;
+  public getScreenHeight: number;
   showSidebar = true;
   showNavbar = true;
   isLoading: boolean;
-  constructor(private router: Router,
-    private updateService: SwUpdate,
-    private pushService: SwPush,
-    private notificationService: NotificationService,
-    private responsiveService: ResponsiveService) {
+  constructor(private router: Router, private updateService: SwUpdate,
+    private pushService: SwPush, private notificationService: NotificationService) {
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -61,6 +58,8 @@ export class AppComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
     if (isDevMode()) {
       console.log('Development!');
     } else {
@@ -81,6 +80,11 @@ export class AppComponent implements OnInit {
     console.log('AppComponent.ngOnInit: Service Worker is enabled');
     this.handleUpdates();
     this.handleNotifications();
+  }
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
   }
   unsubscribe() {
     this.pushService.unsubscribe().then(() => {
