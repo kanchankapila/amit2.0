@@ -283,6 +283,7 @@ export class HomepageComponent implements OnInit {
       this.getadvdec(),
       this.opstrafiidii(),
       this.getsectors(),
+      this.gettlrefresh(),
       this.selectedValueGainers = "gainers,intraday,desc,1d",
       this.selectedValueLosers = "losers,intraday,desc,1d",
       this.getetscreenersGainers(this.selectedValueGainers),
