@@ -21,6 +21,8 @@ package = "netlify-plugin-chromium"
 
 [functions]
   node_bundler = "esbuild"
+  included_files = [ "node_modules/@sparticuz/chromium/bin/**" ]
+  external_node_modules = ["@sparticuz/chromium", "puppeteer-core", "@netlify/blobs"]
 
 
 [functions."tlcookierefreshvercel"]
