@@ -59,6 +59,10 @@ export class DataapiService {
   getTlIndexParams(tlid: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/trendlyneindex?tlid=${tlid}`);
   }
+  //Homepage Component
+  getTlrefresh() {
+    return this.http.get(`${this.baseurl}/.netlify/functions/tlrefresh`);
+  }
 //Nifty Component
   getInvestingIndicators(indexid: string, duration: string) {
     return this.http.get(`${this.baseurl}/.netlify/functions/investingindicators?indexid=${indexid}&duration=${duration}`);

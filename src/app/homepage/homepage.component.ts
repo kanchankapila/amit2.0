@@ -377,6 +377,12 @@ export class HomepageComponent implements OnInit {
     dialog.style.margin = '0';
     dialog.style.borderRadius = '0';
   }
+  gettlrefresh(){
+    this.dataApi.getTlrefresh().subscribe(data => {
+      // Handle the response data
+      console.log('Tl Refreshed')
+    });
+  }
   getadvdec1() {
     this.http.get<any>('https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true').subscribe(data5 => {
       const nestedItems = Object.keys(data5).map(key => {
