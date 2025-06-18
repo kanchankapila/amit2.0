@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   { 
     path: 'insights', 
-    loadChildren: () => import('./insights/insights.module').then(m => m.InsightsModule),
+    loadChildren: () => import('./Insights/Insights.module').then(m => m.InsightsModule),
     data: { preload: false }  // Load only when needed
   },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
