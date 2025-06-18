@@ -26,6 +26,11 @@ const routes: Routes = [
     loadChildren: () => import('./banknifty/banknifty.module').then(m => m.BankniftyModule),
     data: { preload: false }  // Load only when needed
   },
+  { 
+    path: 'insights', 
+    loadChildren: () => import('./insights/insights.module').then(m => m.InsightsModule),
+    data: { preload: false }  // Load only when needed
+  },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
   { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
