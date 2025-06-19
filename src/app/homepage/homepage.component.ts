@@ -284,6 +284,7 @@ export class HomepageComponent implements OnInit {
       this.opstrafiidii(),
       this.getsectors(),
       this.gettlrefresh(),
+      
       this.selectedValueGainers = "gainers,intraday,desc,1d",
       this.selectedValueLosers = "losers,intraday,desc,1d",
       this.getetscreenersGainers(this.selectedValueGainers),
@@ -422,6 +423,14 @@ export class HomepageComponent implements OnInit {
   //     }
   //   })
   // }
+  gettoken(){
+    this.dataApi.getToken().subscribe(data => {
+      const nestedItems = Object.keys(data).map(key => {
+        return data[key];
+      });
+      console.log(nestedItems)
+    });
+  }
   getetindices() {
     this.dataApi.getEtIndicesData().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {

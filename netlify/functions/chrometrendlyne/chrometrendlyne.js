@@ -1,8 +1,10 @@
-const { get, set } = require('@netlify/blobs');
+// const { get, set } = require('@netlify/blobs');
+
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const trendlyne = async (tlid, tlname, eqsymbol) => {
   try {
+    const { get, set } = await import('@netlify/blobs').then(mod => mod);
     // ⬇️ Retrieve csrf and trnd from Netlify Blob storage
     const csrf = await get('trendlyne/csrf', { type: 'text' });
     const trnd = await get('trendlyne/trnd', { type: 'text' });
@@ -27,8 +29,9 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
     }
 
     const data = await response.json();
+    
     let compressedData = JSON.stringify({ data }).replace(/\s/g, "");
-
+console.log(compressedData);l
     // ⬇️ Store response in blob
     const blobKey = `trendlyne/metrics_${tlid}_${eqsymbol}`;
     await set(blobKey, compressedData);
