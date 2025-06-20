@@ -423,14 +423,16 @@ export class HomepageComponent implements OnInit {
   //     }
   //   })
   // }
-  gettoken(){
+  gettoken() {
     this.dataApi.getToken().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
-      console.log(nestedItems)
-    });
-  }
+  // Add your logic here, for example:
+  console.log(nestedItems);
+  // You can add your token refresh logic here
+})}
+ 
   getetindices() {
     this.dataApi.getEtIndicesData().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {

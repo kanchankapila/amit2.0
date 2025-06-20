@@ -13,7 +13,8 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
       throw new Error('Missing CSRF or TRND token in blob storage.');
     }
 
-    const response = await fetch(`https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
+
+    const response = await fetch(`https://cors-anywhere.herokuapp.com/https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
       headers: {
         "accept": "application/json, text/javascript, */*; q=0.01",
         "accept-language": "en-US,en;q=0.9",

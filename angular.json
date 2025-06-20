@@ -116,20 +116,17 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "amit2.0:build:development"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "amit2.0:build:production",
-              "customWebpackConfig": {
-              "path": "./webpack.config.js" 
-            }
-            }
-          }
-        },
+       "serve": {
+  "builder": "@angular-builders/custom-webpack:dev-server",
+  "options": {
+    "browserTarget": "amit2.0:build:development"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "amit2.0:build:production"
+    }
+  }
+},
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {

@@ -1,11 +1,12 @@
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
+const { getStore } = require('@netlify/blobs');
 
 exports.handler = async function (event, context) {
   let browser = null;
 
   try {
-    const { set } = await import('@netlify/blobs').then(mod => mod);
+    const store = getStore("trendlyne");
 
     const executablePath = await chromium.executablePath;
 
@@ -34,17 +35,30 @@ exports.handler = async function (event, context) {
       if (cookie.name === 'csrftoken') csrf = cookie.value;
     });
 
-    await set('trendlyne/trnd', trnd);
-    await set('trendlyne/csrf', csrf);
+    // Set blobs
+    await store.set('trnd', trnd, { type: 'text' });
+    await store.set('csrf', csrf, { type: 'text' });
+
+    // Get blobs after set
+    const savedTrnd = await store.get('trnd', { type: 'text' });
+    const savedCsrf = await store.get('csrf', { type: 'text' });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Cookies saved', trnd, csrf }),
+      body: JSON.stringify({
+        message: 'Cookies saved and retrieved successfully',
+        tokens: {
+          set: { trnd, csrf },
+          retrieved: { trnd: savedTrnd, csrf: savedCsrf }
+        }
+      }),
+      headers: { 'Content-Type': 'application/json' }
     };
   } catch (error) {
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
+      headers: { 'Content-Type': 'application/json' }
     };
   } finally {
     if (browser) await browser.close();
