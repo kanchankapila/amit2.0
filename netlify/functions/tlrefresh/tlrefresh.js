@@ -1,8 +1,8 @@
-const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
-const { getStore } = require('@netlify/blobs');
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
+import { getStore } from '@netlify/blobs';
 
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
   let browser = null;
 
   try {
@@ -35,11 +35,9 @@ exports.handler = async function (event, context) {
       if (cookie.name === 'csrftoken') csrf = cookie.value;
     });
 
-    // Set blobs
     await store.set('trnd', trnd, { type: 'text' });
     await store.set('csrf', csrf, { type: 'text' });
 
-    // Get blobs after set
     const savedTrnd = await store.get('trnd', { type: 'text' });
     const savedCsrf = await store.get('csrf', { type: 'text' });
 
@@ -63,4 +61,4 @@ exports.handler = async function (event, context) {
   } finally {
     if (browser) await browser.close();
   }
-};
+}
