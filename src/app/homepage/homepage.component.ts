@@ -279,6 +279,7 @@ export class HomepageComponent implements OnInit {
     await Promise.all([
       
       this.initblob(),
+      this.blobtest(),
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -438,7 +439,15 @@ export class HomepageComponent implements OnInit {
   console.log(nestedItems);
   // You can add your token refresh logic here
 })}
- 
+blobtest(){
+  this.dataApi.blobtest().subscribe(data => {
+    const nestedItems = Object.keys(data).map(key => {
+      return data[key];
+    });
+    console.log(nestedItems);
+  });
+}
+
   getetindices() {
     this.dataApi.getEtIndicesData().subscribe(data => {
       const nestedItems = Object.keys(data).map(key => {

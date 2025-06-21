@@ -124,6 +124,9 @@ getToken() {
 initblob() {
   return this.http.get(`${this.baseurl}/.netlify/functions/initblob`);
 }
+blobtest() {
+  return this.http.get(`${this.baseurl}/.netlify/functions/blobtest`);
+}
 //Share Component
 getTrendlyne2Fetch(tlid: string) {
   return this.http.get(`${this.baseurl}/.netlify/functions/trendlyne2?tlid=${tlid}`);
