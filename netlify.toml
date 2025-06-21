@@ -24,6 +24,14 @@ package = "netlify-plugin-chromium"
   included_files = [ "node_modules/@sparticuz/chromium/bin/**" ]
   external_node_modules = ["@sparticuz/chromium", "puppeteer-core", "@netlify/blobs"]
 
+[functions."chrometrendlyne"]
+  blob_permissions = "read-write"
+
+[functions."tlrefresh"]
+  blob_permissions = "read-write"
+
+[functions."initTokens"]
+  blob_permissions = "read-write"
 
 [functions."tlcookierefreshvercel"]
 schedule = "@daily"

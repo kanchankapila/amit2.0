@@ -278,7 +278,7 @@ export class HomepageComponent implements OnInit {
   async ngOnInit() {
     await Promise.all([
       
-      
+      this.initblob(),
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -383,6 +383,12 @@ export class HomepageComponent implements OnInit {
     this.dataApi.getTlrefresh().subscribe(data => {
       // Handle the response data
       console.log('Tl Refreshed')
+    });
+  }
+  initblob(){
+    this.dataApi.initblob().subscribe(data => {
+      // Handle the response data
+      console.log('Blob Initialized')
     });
   }
   getadvdec1() {

@@ -121,6 +121,9 @@ getTrendlyne3Fetch(tlid: string, tlname: string, eqsymbol: string) {
 getToken() {
   return this.http.get(`${this.baseurl}/.netlify/functions/get-token`);
 }
+initblob() {
+  return this.http.get(`${this.baseurl}/.netlify/functions/initblob`);
+}
 //Share Component
 getTrendlyne2Fetch(tlid: string) {
   return this.http.get(`${this.baseurl}/.netlify/functions/trendlyne2?tlid=${tlid}`);
