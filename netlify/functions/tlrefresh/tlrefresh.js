@@ -1,8 +1,8 @@
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
-import { getStore } from '@netlify/blobs';
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
+const { getStore } = require('@netlify/blobs');
 
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
   let browser = null;
 
   try {
