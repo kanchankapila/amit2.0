@@ -75,7 +75,7 @@ const collection = 'cookie';
 const dataSource = 'Cluster0'; // Replace with your MongoDB cluster name if different
 
 // Helper to detect local dev
-const isLocal = !process.env.NETLIFY || process.env.NETLIFY_LOCAL === 'true';
+const isLocal = process.env.NETLIFY !== 'true';
 
 export const handler = async function (event, context) {
   let browser = null;
