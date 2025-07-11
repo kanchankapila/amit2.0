@@ -2,7 +2,7 @@ const handler = async function () {
   try {
     const fetch = await import('node-fetch').then(module => module.default);
 
-    const response = await fetch('https://services.niftytrader.in/webapi/usstock/global-market', {
+    const response = await fetch('https://webapi.niftytrader.in/webapi/usstock/global-market', {
       headers: { Accept: 'application/json' },
     });
 

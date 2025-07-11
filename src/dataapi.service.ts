@@ -116,6 +116,7 @@ getNtStockPcrDetails(eqsymbol: string) {
 }
 //Share Component
 getTrendlyne3Fetch(tlid: string, tlname: string, eqsymbol: string) {
+  console.log(tlid,tlname,eqsymbol)
   return this.http.get(`${this.baseurl}/.netlify/functions/chrometrendlyne?tlid=${tlid}&tlname=${tlname}&eqsymbol=${eqsymbol}`);
 }
 getToken() {

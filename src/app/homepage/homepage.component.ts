@@ -278,8 +278,7 @@ export class HomepageComponent implements OnInit {
   async ngOnInit() {
     await Promise.all([
       
-      this.initblob(),
-      this.blobtest(),
+     
       this.getglobal(),
       this.getadvdec(),
       this.opstrafiidii(),
@@ -290,7 +289,7 @@ export class HomepageComponent implements OnInit {
       this.selectedValueLosers = "losers,intraday,desc,1d",
       this.getetscreenersGainers(this.selectedValueGainers),
       this.getetscreenersLosers(this.selectedValueLosers),
-      this.getglobal(),
+     
       this.getadvdec1(),
       this.getetindices(),
       this.getetsectors()])
@@ -301,7 +300,7 @@ export class HomepageComponent implements OnInit {
     setInterval(() => { this.getsectors() }, 30000);
     setInterval(() => { this.getetindices() }, 30000);
     setInterval(() => { this.getetsectors() }, 30000);
-    setInterval(() => { this.getglobal() }, 30000);
+   
     setInterval(() => { this.getadvdec() }, 30000);
    
     //  this.getetscreeners(this.selectedValue)
@@ -779,6 +778,7 @@ blobtest(){
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       // this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {
       this.globalmarket.length = 0;
       for (const val in nestedItems[0]['resultData']) {

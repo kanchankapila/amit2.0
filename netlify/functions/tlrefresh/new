@@ -1,0 +1,177 @@
+// const chromium = require('@sparticuz/chromium');
+// const puppeteer = require('puppeteer-core');
+// const { getStore } = require('@netlify/blobs');
+
+// exports.handler = async function(event, context) {
+//   let browser = null;
+
+//   try {
+//     const store = getStore("trendlyne");
+
+//     const executablePath = await chromium.executablePath;
+
+//     browser = await puppeteer.launch({
+//       args: chromium.args,
+//       executablePath,
+//       headless: chromium.headless,
+//       ignoreHTTPSErrors: true,
+//     });
+
+//     const page = await browser.newPage();
+//     await page.goto('https://trendlyne.com/visitor/loginmodal/', {
+//       waitUntil: 'domcontentloaded',
+//     });
+
+//     await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+//     await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+//     await page.click('form button[type="submit"]');
+//     await page.waitForTimeout(5000);
+
+//     const cookies = await page.cookies();
+
+//     let trnd = '', csrf = '';
+//     cookies.forEach(cookie => {
+//       if (cookie.name === '.trendlyne') trnd = cookie.value;
+//       if (cookie.name === 'csrftoken') csrf = cookie.value;
+//     });
+
+//     await store.set('trnd', trnd, { type: 'text' });
+//     await store.set('csrf', csrf, { type: 'text' });
+
+//     const savedTrnd = await store.get('trnd', { type: 'text' });
+//     const savedCsrf = await store.get('csrf', { type: 'text' });
+
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify({
+//         message: 'Cookies saved and retrieved successfully',
+//         tokens: {
+//           set: { trnd, csrf },
+//           retrieved: { trnd: savedTrnd, csrf: savedCsrf }
+//         }
+//       }),
+//       headers: { 'Content-Type': 'application/json' }
+//     };
+//   } catch (error) {
+//     return {
+//       statusCode: 500,
+//       body: JSON.stringify({ error: error.message }),
+//       headers: { 'Content-Type': 'application/json' }
+//     };
+//   } finally {
+//     if (browser) await browser.close();
+//   }
+// }
+import puppeteer from 'puppeteer-core';
+import axios from 'axios';
+
+const apiUrl = process.env.mongoapiurl;
+const apiKey = process.env.mongoapikey; // Your MongoDB Data API key
+const database = 'Trendlynecookie';
+const collection = 'cookie';
+const dataSource = 'Cluster0'; // Replace with your MongoDB cluster name if different
+
+const browserlessWSEndpoint = process.env.BROWSERLESS_WS_ENDPOINT; // e.g. wss://chrome.browserless.io?token=YOUR_TOKEN
+
+export const handler = async function (event, context) {
+  let browser = null;
+
+  try {
+    console.log('Connecting to Browserless...');
+    browser = await puppeteer.connect({
+      browserWSEndpoint: browserlessWSEndpoint,
+    });
+
+    console.log('Opening new page...');
+    const page = await browser.newPage();
+    // Set user agent and viewport to look less like a bot
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    await page.setViewport({ width: 1280, height: 800 });
+
+    console.log('Navigating to Trendlyne login page...');
+    await page.goto('https://trendlyne.com/visitor/loginmodal/?next=/features/', {
+      timeout: 15000,
+      waitUntil: 'domcontentloaded',
+    });
+
+   
+    // Wait for login modal and #id_login
+    console.log('Waiting for #id_login...');
+    try {
+      await page.waitForSelector('#id_login', { timeout: 15000 });
+      console.log('Typing email...');
+      await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+    } catch (e) {
+      console.log('Could not find #id_login. Page content:', await page.content());
+      throw e;
+    }
+
+    console.log('Waiting for #id_password...');
+    await page.waitForSelector('#id_password', { timeout: 10000 });
+    console.log('Typing password...');
+    await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+    await new Promise(res => setTimeout(res, 3000));
+    console.log('Clicking Login button...');
+    // const [loginButton] = await page.$x("//button[contains(., 'Login')]");
+    // if (loginButton) {
+    //   await loginButton.click();
+    // } else {
+    //   throw new Error("Login button with text 'Login' not found");
+    // }
+
+    console.log('Extracting cookies...');
+    const cookies = await page.cookies();
+    console.log('Cookies:', cookies);
+
+    let trnd = '', csrf = '';
+    cookies.forEach(cookie => {
+      if (cookie.name === '.trendlyne') trnd = cookie.value;
+      if (cookie.name === 'csrftoken') csrf = cookie.value;
+    });
+    console.log('Extracted cookies:', { trnd, csrf });
+
+    // Insert trnd and csrf into MongoDB using Data API
+    const insertPayload = {
+      collection,
+      database,
+      dataSource,
+      document: {
+        trnd,
+        csrf,
+        time: new Date().toISOString(),
+      },
+    };
+
+    console.log('Inserting cookies into MongoDB...');
+    const mongoResponse = await axios.post(
+      `${apiUrl}/insertOne`,
+      insertPayload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': apiKey,
+        },
+      }
+    );
+    console.log('MongoDB insert response:', mongoResponse.data);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Cookies saved to MongoDB successfully',
+        tokens: { trnd, csrf },
+        mongoResult: mongoResponse.data,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    };
+  } catch (error) {
+    console.error('Error in handler:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+      headers: { 'Content-Type': 'application/json' },
+    };
+  } finally {
+    if (browser) await browser.close();
+  }
+};

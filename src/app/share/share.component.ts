@@ -681,6 +681,7 @@ this.eqsymbol = stockDetails?.symbol || null;
     });
     await Promise.all([
       // this.getstocksparkline(this.mcsymbol),
+      this.gettrendlyne3fetch(this.tlid, this.eqsymbol, this.tlname),
       this.getopstrastockpcr(this.eqsymbol),
       this.getHtmlFromApi(this.tlid),
       this.getHtmlFromApi1(),
@@ -697,7 +698,7 @@ this.eqsymbol = stockDetails?.symbol || null;
       // this.getkotak(),
       this.gettlstockparams(this.tlid),
       // this.gettrendlynestocksti(this.tlid),
-      // this.getkotakview(this.eqsymbol),
+      // // this.getkotakview(this.eqsymbol),
       this.getmcstockinsight(this.mcsymbol),
       this.getmcstockrealtime(this.mcsymbol),
       this.getshare1m(this.eqsymbol),
@@ -712,9 +713,10 @@ this.eqsymbol = stockDetails?.symbol || null;
       this.getntstockpcrdetails(this.eqsymbol),
       this.getstocktoday1(this.mcsymbol),
       this.getstocksentiments(this.mcsymbol),
-      this.getntstockdetails(this.eqsymbol),
+      
+      ]
       // this.gettrendlynestocks1(this.tlid, this.eqsymbol, this.tlname)
-      this.gettrendlyne3fetch(this.tlid, this.eqsymbol, this.tlname)]
+     
     )
     //  this.getmcstocktodayohlc(this.mcsymbol)
     // this.getetsharetoday(this.eqsymbol)
@@ -2951,7 +2953,7 @@ getstocktoday1(mcsymbol) {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      
+      console.log(nestedItems)
       this.dscore.length=0;
       this.volscore.length=0;
       this.mscore.length=0;

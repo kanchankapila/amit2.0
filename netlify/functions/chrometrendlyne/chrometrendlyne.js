@@ -1,74 +1,51 @@
-// // const { get, set } = require('@netlify/blobs');
-
-// const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-
-// const trendlyne = async (tlid, tlname, eqsymbol) => {
-//   try {
-//     const { get, set } = await import('@netlify/blobs').then(mod => mod);
-//     // ⬇ Retrieve csrf and trnd from Netlify Blob storage
-//     const csrf = await get('trendlyne/csrf', { type: 'text' });
-//     const trnd = await get('trendlyne/trnd', { type: 'text' });
-
-//     if (!csrf || !trnd) {
-//       throw new Error('Missing CSRF or TRND token in blob storage.');
-//     }
-
-
-//     const response = await fetch(`https://cors-anywhere.herokuapp.com/https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
-//       headers: {
-//         "accept": "application/json, text/javascript, */*; q=0.01",
-//         "accept-language": "en-US,en;q=0.9",
-//         "x-requested-with": "XMLHttpRequest",
-//         "cookie": `_gid=GA1.2.437560219.1668751717;.trendlyne=${trnd}; csrftoken=${csrf}; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.1847322061.1668751717; _gat=1`,
-//       },
-//       referrer: `https://trendlyne.com/equity/${tlid}/${eqsymbol}/${tlname}/`,
-//       method: "GET",
-//     });
-
-//     if (!response.ok) {
-//       return { statusCode: response.status, body: response.statusText };
-//     }
-
-//     const data = await response.json();
-    
-//     let compressedData = JSON.stringify({ data }).replace(/\s/g, "");
-// console.log(compressedData);
-//     //  Store response in blob
-//     const blobKey = `trendlyne/metrics_${tlid}_${eqsymbol}`;
-//     await set(blobKey, compressedData);
-
-//     return {
-//       statusCode: 200,
-//       body: compressedData,
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     return {
-//       statusCode: 500,
-//       body: JSON.stringify({ msg: error.message }),
-//     };
-//   }
-// };
-
-// const handler = async (event) => {
-//   const { tlid, tlname, eqsymbol } = event.queryStringParameters;
-//   return await trendlyne(tlid, tlname, eqsymbol);
-// };
-
-// module.exports = { handler };
 import fetch from 'node-fetch';
-import { getStore } from '@netlify/blobs';
 
-const trendlyne = async (tlid, tlname, eqsymbol) => {
-  const store = getStore("trendlyne");
-  const csrf = await store.get("csrf", { type: "text" });
-  const trnd = await store.get("trnd", { type: "text" });
+const apiUrl = process.env.MONGOAPIURL; // MongoDB Data API endpoint (should end with /action/find)
+const apiKey = process.env.MONGOAPIKEY; // MongoDB Data API key
+const database = 'Trendlynecookie';
+const collection = 'cookie';
 
-  if (!csrf || !trnd) {
-    throw new Error("Missing CSRF or TRND token in blob storage.");
+async function getTokensFromMongoDataAPI() {
+  const query = {
+    collection,
+    database,
+    dataSource: 'Cluster0', // Replace with your actual data source/cluster name
+    filter: {},
+    sort: { time: -1 },
+    limit: 1
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'api-key': apiKey,
+    },
+    body: JSON.stringify(query),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`MongoDB Data API error: ${text}`);
   }
 
-  const response = await fetch(`https://cors-anywhere.herokuapp.com/https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`, {
+  const data = await response.json();
+  const doc = data.documents && data.documents[0];
+  if (!doc || !doc.csrf || !doc.trnd) {
+    throw new Error('Missing CSRF or TRND token in MongoDB Data API response.');
+  }
+  console.log('Extracted csrf:', doc.csrf, 'trnd:', doc.trnd);
+  return { csrf: doc.csrf, trnd: doc.trnd };
+}
+
+const trendlyne = async (tlid, tlname, eqsymbol) => {
+  const { csrf, trnd } = await getTokensFromMongoDataAPI();
+  console.log('Using tokens:', csrf, trnd);
+
+  const url = `https://trendlyne.com/equity/getStockMetricParameterList/${tlid}`;
+  console.log('Fetching:', url);
+
+  const response = await fetch(url, {
     headers: {
       accept: "application/json, text/javascript, */*; q=0.01",
       "x-requested-with": "XMLHttpRequest",
@@ -78,14 +55,15 @@ const trendlyne = async (tlid, tlname, eqsymbol) => {
     method: "GET",
   });
 
+  console.log('Trendlyne response status:', response.status);
+
   if (!response.ok) {
-    return { statusCode: response.status, body: response.statusText };
+    const text = await response.text();
+    console.log('Trendlyne error response:', text);
+    return { statusCode: response.status, body: text };
   }
 
   const data = await response.json();
-  const blobKey = `trendlyne/metrics_${tlid}_${eqsymbol}`;
-  await store.set(blobKey, JSON.stringify({ data }).replace(/\s/g, ""), { type: "text" });
-
   return {
     statusCode: 200,
     body: JSON.stringify(data),

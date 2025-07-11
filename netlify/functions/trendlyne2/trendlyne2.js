@@ -24,6 +24,7 @@ const trendlyne2 = async (tlid) => {
   });
 
   const { documents } = response.data;
+  console.log(response.data)
   const { csrf, time, trnd } = documents[0]; // Assuming you have at least one document
 
 const fetchResponse  = await axios.get(`https://trendlyne.com/mapp/v1/stock/chart-data/${tlid}/SMA/`, {
@@ -55,10 +56,16 @@ const fetchResponse  = await axios.get(`https://trendlyne.com/mapp/v1/stock/char
       body: process.env.trendlyneindx2,
     };
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
+    if (error.response) {
+      console.error('Error response:', error.response);
+      if (error.response.data) {
+        console.error('Error response data:', error.response.data);
+      }
+    }
     return {
       statusCode: 500,
-      body: JSON.stringify({ msg: error.message }),
+      body: JSON.stringify({ msg: error.message, details: error.response?.data }),
     };
   }
 };
