@@ -778,14 +778,17 @@ blobtest(){
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+    
       // this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {
       this.globalmarket.length = 0;
       for (const val in nestedItems[0]['resultData']) {
-        for (const val1 in nestedItems[0]['resultData'][val]['data']) {
-          this.globalmarket.push({ text1: nestedItems[0]['resultData'][val]['data'][val1].symbol, text2: nestedItems[0]['resultData'][val]['data'][val1].country, text3: nestedItems[0]['resultData'][val]['data'][val1].change_per, text4: nestedItems[0]['resultData'][val]['data'][val1].change_value, text5: nestedItems[0]['resultData'][val]['data'][val1].timestamp })
-        }
-      }
+        
+        // for (const val1 in nestedItems[0]['resultData'][val]) {
+          // console.log(val1)
+         
+          this.globalmarket.push({ text1: nestedItems[0]['resultData'][val].symbol, text2: nestedItems[0]['resultData'][val].country, text3: nestedItems[0]['resultData'][val].change_per, text4: nestedItems[0]['resultData'][val].change_value, text5: nestedItems[0]['resultData'][val].timestamp })
+        // }
+       }
     })
   }
   getsectors() {

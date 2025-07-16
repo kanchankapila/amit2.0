@@ -24,7 +24,7 @@ const trendlyne2 = async (tlid) => {
   });
 
   const { documents } = response.data;
-  console.log(response.data)
+  
   const { csrf, time, trnd } = documents[0]; // Assuming you have at least one document
 
 const fetchResponse  = await axios.get(`https://trendlyne.com/mapp/v1/stock/chart-data/${tlid}/SMA/`, {
@@ -49,6 +49,7 @@ const fetchResponse  = await axios.get(`https://trendlyne.com/mapp/v1/stock/char
   
 
   const dataindx = fetchResponse.data;
+  console.log(dataindx)
     process.env.trendlyneindx2 = JSON.stringify({ dataindx });
 
     return {

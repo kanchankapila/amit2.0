@@ -8,6 +8,7 @@ const opstra = async (eqsymbol) => {
     await client1.connect();
     const jsessionid = await client1.db('Opstracookie').collection('cookie').findOne({}, { projection: { _id: 0, jsessionid: 1 } });
     console.log(jsessionid)
+    const dsessionid = await client1.db('Opstracookie').collection('cookie').findOne({}, { projection: { _id: 0, dsessionid: 1 } });
     const response = await fetch(`https://opstra.definedge.com/api/futures/pcr/chart/${eqsymbol}`, {
       headers: {
         accept: 'application/json, text/plain, */*',
@@ -18,8 +19,8 @@ const opstra = async (eqsymbol) => {
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
-        'cookie': "_ga=GA1.1.809222793.1724492013; _ga_50VZ2CLHRH=GS1.1.1724575021.1.1.1724575050.0.0.0; DSESSIONID=29DF04B8339ECA7A878603CA29109EF1; JSESSIONID=976CF73C34E8D71C1163B73662EC42C4; _ga_6D0ZQ437SD=GS1.1.1726029893.7.1.1726029945.0.0.0",
-        // `_ga=GA1.2.747701652.1663270048; _gid=GA1.2.422693227.1669215741; JSESSIONID=${jsessionid.jsessionid}; _gat=1;`,
+        'cookie': '_ga=GA1.1.185892821.1752692522; DSESSIONID=${dsessionid.dsessionid}; _ga_6D0ZQ437SD=GS2.1.s1752692521$o1$g1$t1752693310$j60$l0$h0; JSESSIONID=${jsessionid.jsessionid}'
+        // `_ga=GA1.2.747701652.1663270048;DSESSIONID=${dsessionid.dsessionid}; _gid=GA1.2.422693227.1669215741; JSESSIONID=${jsessionid.jsessionid}; _gat=1;`,
       },
       method: 'GET',
       body: null,

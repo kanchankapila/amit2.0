@@ -246,8 +246,8 @@ export class NavbarComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      this.pcrnsenifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
-      this.pcrnsenifty1 = nestedItems[0]['resultData']['data'][this.pcrnsenifty1length].pcr
+      this.pcrnsenifty1length = (((nestedItems[0]['resultData']['oiDatas']).length) - 1)
+      this.pcrnsenifty1 = nestedItems[0]['resultData']['oiDatas'][this.pcrnsenifty1length].pcr
     })
   }
   getbankniftypcr() {
@@ -255,8 +255,8 @@ export class NavbarComponent implements OnInit {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      this.pcrnsebnifty1length = (((nestedItems[0]['resultData']['data']).length) - 1)
-      this.pcrnsebnifty1 = nestedItems[0]['resultData']['data'][this.pcrnsebnifty1length].pcr
+      this.pcrnsebnifty1length = (((nestedItems[0]['resultData']['oiDatas']).length) - 1)
+      this.pcrnsebnifty1 = nestedItems[0]['resultData']['oiDatas'][this.pcrnsebnifty1length].pcr
     })
   }
   getniftytlbuildup(tlidnifty) {

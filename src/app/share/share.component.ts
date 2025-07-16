@@ -647,6 +647,7 @@ export class ShareComponent implements OnInit {
     }
   };
   async ngOnInit() {
+    console.log('TEST LOG - ngOnInit');
     this.primengConfig.ripple = true;
     this.today = new Date();
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
@@ -691,7 +692,7 @@ this.eqsymbol = stockDetails?.symbol || null;
       this.getstocktoday(this.mcsymbol, this.eqsymbol),
       this.getmcpricevolume(this.mcsymbol),
       this.getetshareholding(this.stockid),
-      // this.gettrendlynestocks2(this.tlid),
+      this. gettrendlynestocksscores(this.tlid),
       //this.gettrendlynestocks3(this.tlid)
       this.getshare3m(this.eqsymbol),
       // this.getzerodha(),
@@ -2734,10 +2735,14 @@ getstocktoday1(mcsymbol) {
     })
   }
   gettrendlyne3fetch(tlid, eqsymbol, tlname) {
+    console.log('TEST LOG - gettrendlyne3fetch');
+    console.log('gettrendlyne3fetch called', tlid, eqsymbol, tlname);
     this.dataApi.getTrendlyne3Fetch(this.tlid, this.eqsymbol, this.tlname).subscribe(data5 => {
+      console.log('HTTP response received', data5);
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log('nestedItems', nestedItems);
        console.log(nestedItems)
       
        this.reln50=nestedItems[0].body['relp_nifty50_qtrChangeP'].value
@@ -2953,7 +2958,7 @@ getstocktoday1(mcsymbol) {
       const nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+
       this.dscore.length=0;
       this.volscore.length=0;
       this.mscore.length=0;
